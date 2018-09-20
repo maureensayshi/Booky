@@ -10,10 +10,11 @@ main .key-visual>.visual-book{
     flex: none;
     width: 128px;
     height: auto;
-    padding: 10px;
+    padding: 13px;
     margin: 50px 20px;
     background-color: white;
     border-radius: 15px;
+    box-shadow: 5px 5px 10px #999999;
     align-self: center;
 }
 
