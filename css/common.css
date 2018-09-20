@@ -31,6 +31,8 @@ header{
 header .btn_menu{
     flex: auto;
     width: 50%;
+    cursor: pointer;
+    outline: 0;
 }
 
 header .btn_logo{
@@ -41,13 +43,13 @@ header .btn_logo{
     justify-content: center;
 }
 
-header .btn_feature{
+header .btn_search{
     flex: auto;
     width: 50%;
     display: flex;
     justify-content: flex-end;
 }
-header .btn_feature input{
+header .btn_search input{
     flex: none;
     padding: 8px 10px;
     padding-right: 40px;
@@ -61,9 +63,4 @@ header .btn_feature input{
     background-position: top;
     cursor: pointer;
     outline: 0;
-}
-
-header .btn_feature .btn_member img{
-    width: 60px;
-    height: 60px;
 }
