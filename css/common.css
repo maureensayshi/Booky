@@ -42,18 +42,17 @@ header .btn_menu{
     width: 50%;
     cursor: pointer;
     outline: 0;
-    border: 1px solid red;
 }
 
 header .btn_menu img{
     width: auto;
     height: 30px;
+    margin: 5px 0 0 10px;
 }
 
 header .btn_logo{
     flex: none;
     margin: -20px 30px 0 30px;
-    border: 1px solid red;
 }
 
 header .btn_logo img{
@@ -66,7 +65,6 @@ header .btn_search{
     width: 50%;
     display: flex;
     justify-content: flex-end;
-    border: 1px solid red;
 }
 header .btn_search input{
     flex: none;
@@ -81,5 +79,4 @@ header .btn_search input{
     background-position: top;
     cursor: pointer;
     outline: 0;
-    border: 1px solid red;
 }
