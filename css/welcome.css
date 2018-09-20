@@ -29,3 +29,69 @@ main .introduce{
     align-items: center;
     letter-spacing: 2px;
 }
+
+main .steps{
+    width: 100%;
+    padding: 40px 0;
+    margin: 30px 0;
+    background-color: rgba(255, 255, 255, .5);    
+    display: flex;
+    justify-content: center;
+}
+
+main .stepsBox{
+    flex: none;
+    width: 1100px;
+    display: flex;
+    justify-content: space-between;
+}
+
+main .step{
+    flex: none;
+    width: 128px;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 20px;
+}
+main .step>div{
+    width: 110px;
+    height: 110px;
+    background-color: white;
+    border-radius: 50%;
+    background-position: center center;    
+    background-repeat: no-repeat;
+    background-size: 50%;
+}
+
+main .step:nth-child(1)>div{
+    background-image: url("../img/user.svg");
+}
+
+main .step:nth-child(2)>div{
+    background-image: url("../img/bar.svg");
+}
+
+main .step:nth-child(3)>div{
+    background-image: url("../img/book.svg");
+}
+
+main .step:nth-child(4)>div{
+    background-image: url("../img/bookshelf.svg");
+}
+
+main .step:nth-child(5)>div{
+    background-image: url("../img/clock.svg");
+}
+
+main .loginDiv{
+    display: flex;
+    justify-content: center;
+}
+main .login{
+    width: 200px; height: 50px; align-self: center; letter-spacing: 3px; padding-left: 80px; border-radius: 5px; border:none;
+    margin: 6px; font-size: 14px; cursor: pointer; font-family: "微軟正黑體";
+    background: url("../img/google.svg") no-repeat 20px #8556B7;
+	color: white; -webkit-box-shadow: none; -moz-box-shadow: none; box-shadow: none;
+}
