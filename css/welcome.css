@@ -1,0 +1,30 @@
+main .key-visual{
+    display: flex;
+    width: 100%;
+    overflow: auto;
+    flex-wrap: nowrap;
+    justify-content: space-evenly;
+}
+
+main .key-visual>.visual-book{
+    flex: none;
+    width: 128px;
+    height: auto;
+    padding: 10px;
+    margin: 50px 20px;
+    background-color: white;
+    border-radius: 15px;
+    align-self: center;
+}
+
+main .key-visual>.visual-book:nth-child(3){
+   width: 150px;
+}
+
+main .introduce{
+    display: flex;
+    flex-direction: column;
+    margin: 20px;
+    align-items: center;
+    letter-spacing: 2px;
+}

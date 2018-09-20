@@ -28,6 +28,10 @@ input,select,img{
     vertical-align:middle;
 }
 
+img{
+    width: 100%;
+}
+
 /* header */
 
 header{
@@ -79,4 +83,12 @@ header .btn_search input{
     background-position: top;
     cursor: pointer;
     outline: 0;
+}
+
+/* main */
+
+main .view{
+    width: 100%;
+    max-width: 1200px;
+    margin: 0px auto;
 }
