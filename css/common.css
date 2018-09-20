@@ -10,7 +10,13 @@ html, body{
 body{
 	font-size:16px;
 	font-family:"Noto Sans TC", "微軟正黑體", arial, sans-serif;
-	color:#3f3a3a;
+    color:#3f3a3a;
+    width: 100vw;
+    height: 100vh;
+    background-image: url("../img/background.jpg");
+    background-position: bottom center;    
+    background-repeat: no-repeat;
+    background-size: 60%;
 }
 form{
 	margin:0px;padding:0px;
@@ -22,10 +28,13 @@ input,select,img{
     vertical-align:middle;
 }
 
+/* header */
+
 header{
     display: flex;
     justify-content: space-around;
     padding: 60px 60px 30px;
+    border: 1px solid red;
 }
 
 header .btn_menu{
@@ -33,14 +42,23 @@ header .btn_menu{
     width: 50%;
     cursor: pointer;
     outline: 0;
+    border: 1px solid red;
+}
+
+header .btn_menu img{
+    width: auto;
+    height: 30px;
 }
 
 header .btn_logo{
     flex: none;
-    width: 400px;
-    margin: -30px 30px 0 30px;
-    display: flex;
-    justify-content: center;
+    margin: -20px 30px 0 30px;
+    border: 1px solid red;
+}
+
+header .btn_logo img{
+    max-width: 150px;
+    height: auto;
 }
 
 header .btn_search{
@@ -48,6 +66,7 @@ header .btn_search{
     width: 50%;
     display: flex;
     justify-content: flex-end;
+    border: 1px solid red;
 }
 header .btn_search input{
     flex: none;
@@ -55,12 +74,12 @@ header .btn_search input{
     padding-right: 40px;
     width: 0px;
     border-width: 0px;
-    margin-right: 0px;
     border-radius: 15px;
     background-image: url("../img/search.png");
     background-repeat: no-repeat;
-    background-size: 55px 55px;
+    background-size: 80%;
     background-position: top;
     cursor: pointer;
     outline: 0;
+    border: 1px solid red;
 }
