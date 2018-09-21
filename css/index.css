@@ -130,7 +130,10 @@ main .container-two .result{
 main .container-two .result .result-book{
     flex: none;
     display: flex;
-    margin: 20px;
+    padding: 10px 0 0 80px;
+    border-bottom: 1px solid #BBBBBB;
+    width: 512px;
+    /* justify-content: center; */
 }
 
 main .container-two>.result>.result-book>.result-book-img{
@@ -138,14 +141,39 @@ main .container-two>.result>.result-book>.result-book-img{
     width: 128px;
     height: 179px;
     padding: 13px;
-    margin: 30px 50px;
+    margin: 30px 20px;
     background-color: white;
     border-radius: 15px;
     box-shadow: 5px 5px 10px #999999;
 }
 
-main .result-book-info{
-    margin: 30px 15px;
+main .container-two>.result>.result-book>.result-book-info{
+    width: 128px;
+    margin: 30px 20px;
+}
+
+main .container-two>.result>.result-book>.result-book-info>p{
+    width: 256px;
+    margin: 4px 0 15px 0;
+    letter-spacing: 1px;  
+}
+
+main .container-two .result-book-info button{
+    width: 120px;
+    height: 35px;
+    letter-spacing: 3px;
+    text-align: center;
+    border-radius: 10px;
+    border: none;
+    margin: 10px 0;
+    font-size: 14px;
+    cursor: pointer;
+    font-family: "微軟正黑體";
+    background: #B690DF;
+    color: white;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
 }
 
 
