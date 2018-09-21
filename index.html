@@ -18,7 +18,7 @@
             <a><img src="img/logo.PNG" /></a>
         </div>
         <div class="btn_search">
-            <input type="text" />
+            <input type="search" />
         </div>
     </header>
     <main>
@@ -40,6 +40,74 @@
                     <img src="./img/sample5.PNG" />
                 </div>
             </div>
+        </div>
+        <div class="container">
+            <div>
+                <h2>新增書籍</h2>
+                <div class="add">
+                    <!-- 搜尋加入 -->
+                    <div class="search-add">
+                        <h3>搜尋關鍵字</h3>
+                        <form action="./" method="GET">
+                            <p>
+                                <label for="search-type">選擇搜尋方式 : </label>
+                                <select name="search-option" id="search-type">
+                                    <option name="search-title">書名</option>
+                                    <option name="search-author">作者</option>
+                                    <option name="search-isbn">ISBN 書碼</option>
+                                </select>
+                            </p>
+                            <p>
+                                <label for="keyword">請輸入關鍵字 : </label>
+                                <input id="keyword" type="text" />
+                            </p>
+                            <button type="button" id="keyin-search">開始搜尋</button>
+                        </form>
+                    </div>
+                    <!-- 掃描加入 -->
+                    <div class="scan-add">
+                        <h3>掃描書碼</h3>
+                        <form action="./" method="GET">
+                            <p>點擊啟動相機的預留位置</p>
+                            <p>
+                                <label for="keyword">ISBN 條碼 : </label>
+                                <input id="keyword" type="text" />
+                            </p>
+                            <button type="button" id="scan-search">開始搜尋</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container-two">
+            <h2>搜尋結果</h2>
+            <!-- all result -->
+            <div class="result">
+                <!-- one book -->
+                <div class="result-book">
+                    <div class="result-book-img"><img src="./img/sample1.PNG" /></div>
+                    <div>
+                        <p>書名 : <span>CEREAL雜誌</span></p>
+                        <p>作者 : <span>王珉瑄</span></p>
+                        <p>出版商 : <span>之初出版社</span></p>
+                        <p>ISBN : <span>978-986-476-412-9</span></p>
+                        <button type="button">加到總書櫃</button>
+                    </div>
+                </div>
+                <!-- second book -->
+                <div class="result-book">
+                    <div class="result-book-img"><img src="./img/sample1.PNG" /></div>
+                    <div class="result-book-info">
+                        <p>書名 : <span>CEREAL雜誌</span></p>
+                        <p>作者 : <span>王珉瑄</span></p>
+                        <p>出版商 : <span>之初出版社</span></p>
+                        <p>ISBN : <span>978-986-476-412-9</span></p>
+                        <button type="button">加到總書櫃</button>
+                    </div>
+                </div>
+            </div>
+        </div>
         </div>
     </main>
     <footer>
