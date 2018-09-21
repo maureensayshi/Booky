@@ -1,21 +1,37 @@
+/* reset */
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, font, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	outline: 0;
+	font-weight: inherit;
+	font-style: inherit;
+	font-size: 100%;
+	font-family: inherit;
+	vertical-align: baseline;
+}
+/* remember to define focus styles! */
+:focus {
+	outline: 0;
+}
+
 * {
     box-sizing: border-box;
     line-height: 16px;
 }
 
-html, body{
-	margin:0px;
-}
 body{
 	font-size:16px;
 	font-family:"Noto Sans TC", "微軟正黑體", arial, sans-serif;
-    color:#3f3a3a;
-    width: 100vw;
-    height: 100vh;
-    background-image: url("../img/background.jpg");
-    background-position: bottom center;    
-    background-repeat: no-repeat;
-    background-size: 60%;
+    color:#3f3a3a;   
     background-color: #F1F1F3;
 }
 form{
@@ -91,3 +107,21 @@ main .view{
     max-width: 1200px;
     margin: 0px auto;
 }
+
+/* footer */
+
+footer .background-img{
+    padding: 13%;
+    background-image: url("../img/background.jpg");
+    background-repeat: no-repeat;
+    background-size: 60%;
+    background-position: bottom center;
+}
+
+footer .footer{
+    padding: 20px;
+    background-color: #E5E5E5;
+    display: flex;
+    justify-content: center;    
+    letter-spacing: 1px;
+}       
