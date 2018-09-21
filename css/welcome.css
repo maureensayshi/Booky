@@ -1,9 +1,14 @@
+main .view{
+    display: flex;
+    justify-content: center;
+}
+
 main .key-visual{
     display: flex;
-    width: 100%;
     overflow: auto;
     flex-wrap: nowrap;
-    justify-content: space-evenly;
+    justify-content: space-between;  
+    align-items: center;
 }
 
 main .key-visual>.visual-book{
@@ -15,7 +20,6 @@ main .key-visual>.visual-book{
     background-color: white;
     border-radius: 15px;
     box-shadow: 5px 5px 10px #999999;
-    align-self: center;
 }
 
 main .key-visual>.visual-book:nth-child(3){
@@ -40,12 +44,10 @@ main .steps{
     background-color: rgba(255, 255, 255, .5);    
     display: flex;
     justify-content: center;
-    /* overflow: auto; */
 }
 
 main .stepsBox{
     flex: none;
-    width: 1100px;
     display: flex;
     justify-content: space-between;
 }
@@ -75,11 +77,7 @@ main .step:nth-child(3)>div{background-image: url("../img/book.svg");}
 main .step:nth-child(4)>div{background-image: url("../img/bookshelf.svg");}
 main .step:nth-child(5)>div{background-image: url("../img/clock.svg");}
 
-main .step:nth-child(1) p { line-height: 1; padding-top: 13px;}
-main .step:nth-child(2) p { line-height: 1; padding-top: 13px;}
-main .step:nth-child(3) p { line-height: 1; padding-top: 13px;}
-main .step:nth-child(4) p { line-height: 1; padding-top: 13px;}
-main .step:nth-child(5) p { line-height: 1; padding-top: 13px;}
+main .step p { line-height: 1; padding-top: 13px;}
 
 
 main .loginDiv{ display: flex; justify-content: center;}
@@ -88,4 +86,52 @@ main .login{
     margin: 6px; font-size: 14px; cursor: pointer; font-family: "微軟正黑體";
     background: url("../img/google.svg") no-repeat 20px #8556B7;
 	color: white; -webkit-box-shadow: none; -moz-box-shadow: none; box-shadow: none;
+}
+
+/* RWD */
+
+@media (max-width: 1200px) and (min-width: 980px){
+    main .key-visual>.visual-book{
+        width: 110px;
+        height: 157px;
+        padding: 13px;
+        margin: 40px 15px;        
+    }
+
+    main .key-visual>.visual-book:nth-child(3){
+        width: 140px;
+        height: auto;
+     }
+    
+    main .step{width:120px; margin: 0 15px;}
+}
+
+@media (max-width: 980px) and (min-width: 640px){
+    main .key-visual>.visual-book{
+        width: 90px;
+        height: 128px;
+        padding: 8px;
+        margin: 40px 10px;     
+    }
+
+    main .key-visual>.visual-book:nth-child(3){
+        width: 100px;
+        height: auto;
+     }
+
+    main .introduce{letter-spacing: 1px;}
+    main .introduce p{line-height: 2;}
+    
+    main .step{width:90px; margin: 0 10px;}
+    main .step>div{width: 85px; height: 85px;}
+    main .step p{ font-size: 12px;}
+}
+
+@media (max-width: 640px) and (min-width: 320px){
+    main .key-visual>.visual-book{overflow: auto;}
+    main .introduce{margin: 40px;}
+    main .introduce p {font-size: 14px; line-height: 2; text-align: center;}
+    main .steps{margin: 20px 0 10px 0;padding: 20px 0;}
+    main .stepsBox{flex-direction: column;}
+    main .step{margin: 20px 20px;}
 }
