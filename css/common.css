@@ -190,6 +190,10 @@ footer .footer{
         padding: 18px;
         font-size: 16px;
     }
+    header{
+        padding: 60px 0px 20px;
+    }
+    header .btn_logo img{max-width: 120px;}
     footer .background-img{padding: 30%;background-size: 100%;}
     footer .footer{padding: 10px;}
 }
