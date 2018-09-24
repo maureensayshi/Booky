@@ -7,7 +7,7 @@ main .view{
 
 main .key-visual{
     display: flex;
-    overflow: auto;
+    /* overflow: auto; */
     flex-wrap: nowrap;
     justify-content: space-between;  
     align-items: center;
@@ -49,6 +49,7 @@ main .container-two h2 {
 main .container .add{
     display: flex;
     justify-content: space-around;
+    width: 70%;
 }
 
 main .container .search-add,
@@ -133,7 +134,6 @@ main .container-two .result .result-book{
     padding: 10px 0 0 80px;
     border-bottom: 1px solid #BBBBBB;
     width: 512px;
-    /* justify-content: center; */
 }
 
 main .container-two>.result>.result-book>.result-book-img{
@@ -153,7 +153,8 @@ main .container-two>.result>.result-book>.result-book-info{
 }
 
 main .container-two>.result>.result-book>.result-book-info>p{
-    width: 256px;
+    width: 230px;
+    line-height: 1.5;   
     margin: 4px 0 15px 0;
     letter-spacing: 1px;  
 }
@@ -203,8 +204,153 @@ main .container-two .result-book-info button{
         width: 100px;
         height: auto;
      }
+
+    main .container h2,
+    main .container-two h2 {
+        font-size: 20px;
+        padding: 40px 240px 20px 240px;
+        text-align: center;
+    }
+
+    main .container .add{
+        max-width: 600px;
+        width: 100%;
+    }
+
+    main .container .add .search-add form p,
+    main .container .add .scan-add form p{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    main .container .add .search-add form p label,
+    main .container .add .scan-add form p label{
+        margin-bottom: 10px;
+    }
 }
 
-@media (max-width: 640px) and (min-width: 320px){
+@media (max-width: 640px) and (min-width: 480px){
     main .key-visual>.visual-book{overflow: auto;}
+
+    main .container, main .container-two{
+        width: 100%;
+    max-width: 400px;
+    }
+
+    main .container h2,
+    main .container-two h2 {
+        font-size: 20px;
+        padding: 40px 150px 20px 150px;
+        text-align: center;
+    }
+
+    main .container .add{
+        max-width: 300px;
+        width: 100%;
+        flex-direction: column;
+    }
+
+    main .container .search-add, main .container .scan-add{
+        width: 100%;
+    }
+
+    main .container .add .search-add form p,
+    main .container .add .scan-add form p{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    main .container-two .result .result-book{
+        flex-direction: column;
+        align-items: center;
+        padding: 0;
+        width: 400px;
+    }
+
+    main .container-two>.result>.result-book>.result-book-info{
+        width: 250px;
+        margin: 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    main .container-two>.result>.result-book>.result-book-info>p{
+        width: 100%;
+    }
+
+    main .container-two .result-book-info button{
+        width: 150px;
+        margin: 10px;   
+    }
+}
+
+@media (max-width: 480px) and (min-width: 320px){
+    header{
+        padding: 60px 0px 20px;
+    }
+
+    header .btn_logo img{max-width: 120px;}
+    main .key-visual>.visual-book{overflow: auto;}
+
+    main .container, main .container-two{
+        width: 100%;
+        max-width: 250px;
+    }
+
+    main .container h2,
+    main .container-two h2 {
+        font-size: 20px;
+        padding: 40px 80px 20px 80px;
+    }
+
+    main .container .add{
+        max-width: 230px;
+        width: 100%;
+        flex-direction: column;
+    }
+
+    main .container .search-add, main .container .scan-add{
+        width: 100%;
+        padding: 0 0 50px 0;
+        margin:20px 5px;
+    }
+
+    main .container .add .search-add form p,
+    main .container .add .scan-add form p{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    main .container .add .search-add form label,
+    main .container .add .scan-add form label{
+        margin: 10px;
+    }
+
+    main .container-two .result .result-book{
+        flex-direction: column;
+        align-items: center;
+        padding: 0;
+        width: 400px;
+    }
+
+    main .container-two>.result>.result-book>.result-book-info{
+        width: 180px;
+        margin: 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    main .container-two>.result>.result-book>.result-book-info>p{
+        width: 100%;
+    }
+
+    main .container-two .result-book-info button{
+        width: 150px;
+        margin: 10px;   
+    }
 }
