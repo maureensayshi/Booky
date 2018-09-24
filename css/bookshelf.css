@@ -21,34 +21,33 @@ main .wrapper{
     grid-template-columns: repeat(4, 1fr);
     grid-gap: 10px;
     grid-auto-rows: minmax(350px, auto);
-    /* align-items: center; */
+    align-items: center;
+    justify-items: center;
 }
 
+main .wrapper div{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 80%;  
+}
+
+
 main .wrapper .visual-book{
+    
     width: 128px;
     height: 179px;
     padding: 13px;
-    margin: 30px 20px;
+    margin: 30px 10px;
     background-color: white;
     border-radius: 15px;
     box-shadow: 5px 5px 10px #999999;
 }
 
-main .wrapper div{
-    width: 100px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-main .wrapper .visual-book div:nth-child(2){
-    margin: 40px 0 10px 0;
-    align-self: center;
-}
-
-main .wrapper .visual-book div:nth-child(4){
-    margin-top: 20px;
-    align-self: center;
+main .wrapper .book-title{
+    height: 33px;
+    margin: 5px 0 5px 0;
+    overflow: hidden;
 }
 
 main .progressbar {
@@ -56,13 +55,20 @@ main .progressbar {
     border-radius: 13px;
     /* (height of inner div) / 2 + padding */
     padding: 1px;
-    margin-top: 20px;
+    margin-top: 5px;
   }
   
-main .progressbar>div {
+main .progress {
+    align-self: flex-start;
     background-color: rgba(182, 144, 223, 0.8);
     height: 10px;  
     border-radius: 10px;
     /* Adjust with JavaScript */    
     width: 80%;
   }
+
+main .progress-title{
+    margin-top: 10px;
+}
+
+
