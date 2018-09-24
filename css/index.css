@@ -176,9 +176,6 @@ main .container-two .result-book-info button{
     box-shadow: none;
 }
 
-
-
-
 /* RWD */
 @media (max-width: 1200px) and (min-width: 980px){
     main .key-visual>.visual-book{
