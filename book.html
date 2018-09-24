@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Booky 單本設定</title>
+    <link rel="stylesheet" type="text/css" href="css/book.css" media="all" />
+</head>
+
+<body>
+    <div class="menu">
+        <img class="close-menu" src="img/cancel.svg" />
+        <div><a href="/bookshelf.html">總書櫃</a></div>
+        <div><a>工作用書</a></div>
+        <div><a>睡前讀物</a></div>
+        <div><a>值得二讀</a></div>
+        <div><a>已讀完</a></div>
+        <div><a>出借的書</a></div>
+        <div><a>帳號管理</a></div>
+    </div>
+    <header>
+        <div class="btn_menu">
+            <img src="img/menu.svg" />
+        </div>
+        <div class="btn_logo">
+            <a href="/"><img src="img/Booky.png" /></a>
+        </div>
+        <div class="btn_search">
+            <input type="search" />
+        </div>
+    </header>
+    <main>
+        <div class="view">
+            <div class="visual-book">
+                <img src="./img/sample1.PNG" />
+            </div>
+            <div class="line"></div>
+            <div class="book-detail-wrapper">
+                <!-- EDIT -->
+                <div class="book-detail">
+                    <div class="move-book-detail">
+                        <div>書名  : <span>古物雜誌古物雜誌五物茶至</span></div>
+                        <div>作者  : <span>王珉瑄, 王珉瑄, 王珉瑄, 王珉瑄, 潘國育</span></div>
+                        <div>出版社 : <span>呱呱叫出版社呱呱呱呱呱呱呱</span></div>
+                        <div class="book-place"><img src="./img/map.svg"><input type="text" placeholder="請輸入放置地點..." /></div>
+                        <div class="book-bookshelf">所屬書櫃 :
+                            <select>
+                                <option>所有書櫃</option>
+                                <option>值得二讀</option>
+                            </select>
+                        </div>
+                        <div class="book-progress">
+                            閱讀進度 :
+                            <span>
+                                <input type="text" placeholder="當前閱讀頁數" />
+                                <span>/</span>
+                                <span>360</span>
+                                <span>頁</span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <!-- button -->
+                <div class="book-button">
+                    <input type="button" value="儲存修改" />
+                    <input type="button" value="刪除書籤" />
+                    <input type="button" value="加到 Google 日曆" />
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <div class="background-img"></div>
+        <div class="footer">&copy; 2018 Booky</div>
+    </footer>
+</body>
+<script src="js/common.js"></script>
+
+</html>
