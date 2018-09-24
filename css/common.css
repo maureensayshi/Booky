@@ -32,7 +32,8 @@ body{
 	font-size:16px;
 	font-family:"Noto Sans TC", "微軟正黑體", arial, sans-serif;
     color:#3f3a3a;   
-    background-color: #F1F1F3;
+    /* background-color: #F1F1F3; */
+    background-image: linear-gradient(rgba(182,144,223, .4),rgba(182,144,223, .2), #F1F1F3);
 }
 form{
 	margin:0px;padding:0px;
