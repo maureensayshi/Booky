@@ -10,6 +10,16 @@
 </head>
 
 <body>
+    <div class="menu">
+        <img src="img/cancel.svg"/>
+        <div>總書櫃</div>
+        <div>工作用書</div>
+        <div>睡前讀物</div>
+        <div>值得二讀</div>
+        <div>已讀完</div>
+        <div>出借的書</div>
+        <div>帳號管理</div>
+    </div>
     <header>
         <div class="btn_menu">
             <img src="img/menu.svg" />
@@ -42,40 +52,40 @@
             </div>
         </div>
         <div class="container">
-                <h2>新增書籍</h2>
-                <div class="add">
-                    <!-- 搜尋加入 -->
-                    <div class="search-add">
-                        <h3>搜尋關鍵字</h3>
-                        <form action="./" method="GET">
-                            <p>
-                                <label for="search-type">選擇搜尋方式 : </label>
-                                <select name="search-option" id="search-type">
-                                    <option name="search-title">書名</option>
-                                    <option name="search-author">作者</option>
-                                    <option name="search-isbn">ISBN 書碼</option>
-                                </select>
-                            </p>
-                            <p>
-                                <label for="keyword">請輸入關鍵字 : </label>
-                                <input id="keyword" type="text" />
-                            </p>
-                            <button type="button" id="keyin-search">開始搜尋</button>
-                        </form>
-                    </div>
-                    <!-- 掃描加入 -->
-                    <div class="scan-add">
-                        <h3>掃描書碼</h3>
-                        <form action="./" method="GET">
-                            <p>點擊啟動相機的預留位置</p>
-                            <p>
-                                <label for="keyword">ISBN 條碼 : </label>
-                                <input id="keyword" type="text" />
-                            </p>
-                            <button type="button" id="scan-search">開始搜尋</button>
-                        </form>
-                    </div>
+            <h2>新增書籍</h2>
+            <div class="add">
+                <!-- 搜尋加入 -->
+                <div class="search-add">
+                    <h3>搜尋關鍵字</h3>
+                    <form action="./" method="GET">
+                        <p>
+                            <label for="search-type">選擇搜尋方式 : </label>
+                            <select name="search-option" id="search-type">
+                                <option name="search-title">書名</option>
+                                <option name="search-author">作者</option>
+                                <option name="search-isbn">ISBN 書碼</option>
+                            </select>
+                        </p>
+                        <p>
+                            <label for="keyword">請輸入關鍵字 : </label>
+                            <input id="keyword" type="text" />
+                        </p>
+                        <button type="button" id="keyin-search">開始搜尋</button>
+                    </form>
                 </div>
+                <!-- 掃描加入 -->
+                <div class="scan-add">
+                    <h3>掃描書碼</h3>
+                    <form action="./" method="GET">
+                        <p>點擊啟動相機的預留位置</p>
+                        <p>
+                            <label for="keyword">ISBN 條碼 : </label>
+                            <input id="keyword" type="text" />
+                        </p>
+                        <button type="button" id="scan-search">開始搜尋</button>
+                    </form>
+                </div>
+            </div>
         </div>
 
         <div class="container-two">

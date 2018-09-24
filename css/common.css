@@ -49,6 +49,45 @@ img{
     width: 100%;
 }
 
+/* menu */
+
+.menu{
+    position: fixed;
+    width: 500px;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background-color: rgba(182,144,223, 1);
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 3px 3px 3px #bcbcbc;
+}
+
+.menu img{
+    fleX: none;
+    align-self: flex-start;
+    width: auto;
+    height: 30px;
+    margin: 65px 0 0 70px;
+}
+
+.menu div:nth-child(2){
+    margin-top: 50px;
+}
+
+.menu div{
+    width: 70%;
+    padding: 35px;
+    border-bottom: 1px solid white;    
+    color: white;
+    font-size: 20px;
+    text-align: center;
+}
+
 /* header */
 
 header{
