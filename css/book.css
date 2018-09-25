@@ -39,11 +39,20 @@ main .book-detail{
 main .move-book-detail>div{
     margin: 30px;
     line-height: 1.25;
+    display: flex;
+    align-items: center;
 }
 
 main .move-book-detail>div>span{
-   margin-left: 5px;
+   display: flex;
+   padding: 0 10px;
 }
+
+main .move-book-detail>div:nth-child(6)>span,
+main .move-book-detail>div:nth-child(7)>span,
+main .move-book-detail>div:nth-child(8)>span{padding: 0 3px;}
+
+main .move-book-detail>div>span>span{margin-right: 20px;}
 
 main .book-place{
     display: flex;
@@ -66,7 +75,7 @@ main .lend-to input{
     background-color: white;
     border: solid 1px #BBBBBB;
     padding: 0px 6px;
-    margin: 0 20px;
+    margin: 0 10px;
     font-size: 14px;
     font-family: "微軟正黑體";
 }
@@ -88,6 +97,10 @@ main .lend-or-not>input{
 main .book-progress{
     display: flex;
     height: 30px; 
+    align-items: center;
+}
+
+main .book-progress>span{
     align-items: center;
 }
 
@@ -128,17 +141,17 @@ main .book-button input:nth-child(3){ background: url(../img/calendar.svg) no-re
     main .view .line{width: 500px;}
 }
 
-@media (max-width: 640px) and (min-width: 320px){
+@media (max-width: 640px) and (min-width: 480px){
     main .visual-book{
         width: 128px;
         height: 179px;
         padding: 13px;
         margin: 30px 10px;
     }
-    main .view .line{width: 250px;}
-    main .book-detail-wrapper{width: 280px;}
+    main .view .line{width: 400px;}
+    main .book-detail-wrapper{width: 400px;}
     main .book-detail{margin-left: 0;}
-    main .move-book-detail{width: 280px;}
+    main .move-book-detail{width: 400px;}
     main .book-bookshelf select{
         width:100px; margin: 0 10px;
     }
@@ -149,7 +162,55 @@ main .book-button input:nth-child(3){ background: url(../img/calendar.svg) no-re
     main .book-progress input,
     main .lend-to input{
         width: 120px;
-        margin: 10px 0;
+        margin: 10px;
+    }
+
+    main .book-progress>span{
+        display: flex;
+        align-items: center;
+        margin-left: -10px;
+    }
+    main .book-button{
+        margin-top: 10px;
+    }
+    main .book-button input{
+        width: 230px;
+    }
+}
+
+@media (max-width: 480px) and (min-width: 320px){
+    main .visual-book{
+        width: 128px;
+        height: 179px;
+        padding: 13px;
+        margin: 30px 10px;
+    }
+    main .view .line{width: 280px;}
+    main .book-detail-wrapper{width: 280px;}
+    main .book-detail{margin-left: 0;}
+    main .move-book-detail{width: 280px;}
+    main .move-book-detail>div{flex-direction: column;line-height: 2;}
+ 
+    main .move-book-detail>div:nth-child(6)>span{
+        padding: 4px 3px;
+    }
+    main .book-bookshelf select{
+        width:100px; margin: 0 10px;
+    }
+    main .book-place{ height: 45px;}
+    main .book-place input{
+        width: 200px; margin: 10px; padding: 10px;
+    }
+    .multiselect-wrapper{
+        align-self: flex-start
+    }
+    .multiselect-input-div input{margin: 0;}
+    .multiselect-wrapper .multiselect-list{margin-top: -5px;margin-left: 0;}
+    
+    main .book-progress input,
+    main .lend-to input{
+        width: 120px;
+        margin: 10px;
     }
     main .book-progress{
         flex-direction: column;
@@ -161,6 +222,7 @@ main .book-button input:nth-child(3){ background: url(../img/calendar.svg) no-re
         margin-top: 30px;
         margin-left: -10px;
     }
+    
     main .book-button{
         margin-top: 40px;
     }
