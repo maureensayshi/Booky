@@ -46,9 +46,12 @@
                         <div>出版社 : <span>呱呱叫出版社呱呱呱呱呱呱呱</span></div>
                         <div class="book-place"><img src="./img/map.svg"><input type="text" placeholder="ex. 台北家、美國家" /></div>
                         <div class="book-bookshelf">所屬書櫃 :
-                            <select>
-                                <option>所有書櫃</option>
-                                <option>值得二讀</option>
+                            <select id="testSelect1" multiple>
+                                <option value="1">Item 1</option>
+                                <option value="2">Item 2</option>
+                                <option value="3">Item 3</option>
+                                <option value="4">Item 4</option>
+                                <option value="5">Item 5</option>
                             </select>
                         </div>
                         <div class="lend-or-not">
@@ -89,6 +92,8 @@
         <div class="footer">&copy; 2018 Booky</div>
     </footer>
 </body>
+
+<script src="js/multiselect.min.js"></script>
 <script src="js/common.js"></script>
 
 </html>

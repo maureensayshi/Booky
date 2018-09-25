@@ -1,4 +1,5 @@
 @import "./common.css";
+@import "./multiselect.css";
 
 main .view{
     display: flex;
