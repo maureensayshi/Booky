@@ -1,0 +1,49 @@
+@import "./common.css";
+
+main .view{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 50px;
+    margin-bottom: 150px;
+}
+
+main .member-img{
+    width: 110px;
+    height: 110px;
+    background-color: white;
+    border-radius: 50%;
+    background-position: center center;    
+    background-repeat: no-repeat;
+    background-size: 50%;
+    background-image: url("../img/user.svg");
+}
+
+main .member-info{
+    margin-top: 50px;
+}
+
+main .member-info>div{
+    margin-top: 20px;
+}
+
+main .view button{
+    width: 130px;
+    height: 35px;
+    align-self: center;
+    letter-spacing: 3px;
+    padding-left: 40px;
+    border-radius: 10px;
+    border: none;
+    margin: 40px 20px;
+    font-size: 14px;
+    cursor: pointer;
+    font-family: "微軟正黑體";
+    background: url(../img/logout.svg) no-repeat 35px #B690DF;
+    background-size: 10%;
+    color: white;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+}
+
