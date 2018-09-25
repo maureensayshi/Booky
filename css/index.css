@@ -17,7 +17,7 @@ main .key-visual>.visual-book{
     flex: none;
     width: 200px;
     height: 288px;
-    padding: 13px;
+    padding: 15px;
     margin: 110px 30px;
     background-color: white;
     border-radius: 15px;
@@ -194,22 +194,34 @@ main .container-two .result-book-info button{
         margin: 40px 15px;        
     }
 
+    main .key-visual>.visual-book:nth-child(2),
+    main .key-visual>.visual-book:nth-child(4){
+        width: 150px;
+        height: 214px;
+     }
+
     main .key-visual>.visual-book:nth-child(3){
-        width: 140px;
+        width: 200px;
         height: auto;
      }
 }
 
 @media (max-width: 980px) and (min-width: 640px){
     main .key-visual>.visual-book{
-        width: 90px;
-        height: 128px;
-        padding: 8px;
-        margin: 40px 10px;     
+        width: 80px;
+        height: 114px;
+        padding: 10px;
+        margin: 40px 15px;        
     }
 
-    main .key-visual>.visual-book:nth-child(3){
+    main .key-visual>.visual-book:nth-child(2),
+    main .key-visual>.visual-book:nth-child(4){
         width: 100px;
+        height: 142px;
+     }
+
+    main .key-visual>.visual-book:nth-child(3){
+        width: 130px;
         height: auto;
      }
 
@@ -239,7 +251,14 @@ main .container-two .result-book-info button{
 }
 
 @media (max-width: 640px) and (min-width: 480px){
-    main .key-visual>.visual-book{overflow: auto;}
+    main .key-visual>.visual-book:nth-child(odd),
+    main .key-visual>.visual-book:nth-child(even){
+        overflow: hidden;
+        width: 150px;
+        height: 214px;
+        padding: 10px;
+        margin: 40px 15px;        
+    }
 
     main .container, main .container-two{
         width: 100%;
@@ -296,7 +315,14 @@ main .container-two .result-book-info button{
 }
 
 @media (max-width: 480px) and (min-width: 320px){  
-    main .key-visual>.visual-book{overflow: auto;}
+    main .key-visual>.visual-book:nth-child(odd),
+    main .key-visual>.visual-book:nth-child(even){
+        overflow: hidden;
+        width: 150px;
+        height: 214px;
+        padding: 10px;
+        margin: 40px 15px;        
+    }
 
     main .container, main .container-two{
         width: 100%;
