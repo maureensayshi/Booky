@@ -107,9 +107,9 @@ main .step:nth-child(5)>div{background-image: url("../img/clock.svg");}
 main .step p { line-height: 1; padding-top: 13px;}
 
 
-main .loginDiv{ display: flex; justify-content: center;}
-main .login{
-    width: 200px; height: 50px; align-self: center; letter-spacing: 3px; padding-left: 80px; border-radius: 5px; border:none;
+main .signinDiv{ display: flex; justify-content: center; margin: 50px;}
+main .signin{
+    width: 250px; height: 50px; align-self: center; letter-spacing: 3px; padding-left: 80px; border-radius: 5px; border:none;
     margin: 6px; font-size: 14px; cursor: pointer; font-family: "微軟正黑體";
     background: url("../img/google.svg") no-repeat 20px #8556B7;
 	color: white; -webkit-box-shadow: none; -moz-box-shadow: none; box-shadow: none;
