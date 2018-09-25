@@ -6,6 +6,7 @@
 // });
 
 // initialize app structure
+
 let app = {
     // cst:{
     // 	API_HOST:"https://appworks-school-stylish.firebaseapp.com"
@@ -27,8 +28,8 @@ app.createElement = function (tagName, class_Name, text_Content, parentElement) 
     return obj;
 };
 
-// menu open / close
-app.menu_open = function(){
+// menu open and close
+app.menu_open = function () {
     let menu_btn = app.get(".btn_menu");
     let menu = app.get(".menu");
     menu_btn.onclick = function () {
@@ -37,7 +38,7 @@ app.menu_open = function(){
     };
 };
 
-app.menu_close = function(){
+app.menu_close = function () {
     let menu_btn = app.get(".btn_menu");
     let menu = app.get(".menu");
     let close_menu = app.get(".close-menu");
@@ -47,12 +48,7 @@ app.menu_close = function(){
     };
 };
 
-// equipped with multi-options
-document.multiselect("#testSelect1");
-
-
-
-
+export {app};
 
 
 

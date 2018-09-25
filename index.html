@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Booky</title>
     <link rel="stylesheet" type="text/css" href="css/index.css" media="all" />
+    <script src="https://apis.google.com/js/api.js"></script>
 </head>
 
 <body>
@@ -62,8 +63,8 @@
                             <label for="search-type">選擇搜尋方式 : </label>
                             <select name="search-option" id="search-type">
                                 <option name="search-title">書名</option>
-                                <option name="search-author">作者</option>
                                 <option name="search-isbn">ISBN 書碼</option>
+                                <option name="search-author">作者</option>
                             </select>
                         </p>
                         <p>
@@ -123,6 +124,6 @@
         <div class="footer">&copy; 2018 Booky</div>
     </footer>
 </body>
-<script src="js/common.js"></script>
-<script src="js/index.js"></script>
+<script type="module" src="js/index.js"></script>
+
 </html>
