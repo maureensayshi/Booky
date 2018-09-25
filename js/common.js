@@ -47,6 +47,10 @@ app.menu_close = function(){
     };
 };
 
+// equipped with multi-options
+document.multiselect("#testSelect1");
+
+
 
 
 
