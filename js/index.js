@@ -1,9 +1,14 @@
-import { app } from "../js/common.js";
-
 app.init = function () {
     app.menu_open();
     app.menu_close();
     app.keyin_search();
+};
+
+app.searchKeyWord = function () {
+    let keyWord;
+    keyWord = app.get("#keyword").value;
+    app.search_book(keyWord);
+    console.log(keyWord);
 };
 
 app.keyin_search = function () {
@@ -14,13 +19,11 @@ app.keyin_search = function () {
     // 4. 依據使用者選擇的搜尋方式，將關鍵字丟入 fetch
     let searchType = app.get("#search-type");
     let clickKeyInSearch = app.get("#keyin-search");
-    let keyWord;
+
     clickKeyInSearch.onclick = function () {
-        keyWord = app.get("#keyword").value;
-        app.search_book(keyWord);
-        console.log(keyWord);
+        app.searchKeyWord();
     };
-    console.log(keyWord);
+
     app.search_book = function (keyWord) {
         switch (searchType.value) {
         case "search-title":
@@ -89,19 +92,13 @@ app.googleBooks_author = function (bookAuthor) {
 
 app.getBookData = function (data) {
     // 抓到需要的不同資料
-    // 1. 書名
-    // 2. 作者
-    // 3. 出版社
-    // 4. ISBN-13
-    // 5. 總頁數
-    // 6. 書封照片
     for (let i = 0; i < data.items.length; i++) {
-        let bookTitle;
-        let bookAuthor;
-        let bookPublisher;
-        let bookISBN;
-        let bookMaxPage;
-        let bookCover;
+        let bookTitle;  // 1. 書名
+        let bookAuthor;  // 2. 作者
+        let bookPublisher; // 3. 出版社
+        let bookISBN;  // 4. ISBN-13
+        let bookMaxPage; // 5. 總頁數
+        let bookCover; // 6. 書封照片
         // console.log(data.items[i]);
         console.log(data.items[i].volumeInfo);
         //書名
@@ -139,7 +136,7 @@ app.getBookData = function (data) {
                 bookISBN = "暫無資料";  // console.log("印出無 ISBN 13 碼");
             }
         } else if (isbn == null) {
-            bookISBN = "暫無 ISBN-13 書碼"; // console.log("印出無 ISBN 13 碼");
+            bookISBN = "暫無資料"; // console.log("印出無 ISBN 13 碼");
         }
         // 最大頁數 pageCount
         let maxPage = data.items[i].volumeInfo.pageCount;
@@ -162,13 +159,13 @@ app.getBookData = function (data) {
 };
 
 app.showBookResult = function (bookTitle, bookAuthor, bookPublisher, bookISBN, bookMaxPage, bookCover) {
+    app.get("main .container-two").style.display = "flex";
     let booksParent = app.get(".result");
-
     //each book
     let bookParent = app.createElement("div", "result-book", "", "", "", booksParent);
     let ImageParent = app.createElement("div", "result-book-img", "", "", "", bookParent);
     let showImage = app.createElement("img", "", "", "src", bookCover, ImageParent);
-
+    // each book info
     let bookInfoParent = app.createElement("div", "result-book-info", "", "", "", bookParent);
     let TitleParent = app.createElement("p", "", "書名：", "", "", bookInfoParent);
     let showTitle = app.createElement("span", "", bookTitle, "", "", TitleParent);
@@ -179,18 +176,6 @@ app.showBookResult = function (bookTitle, bookAuthor, bookPublisher, bookISBN, b
     let ISBNParent = app.createElement("p", "", "ISBN-13：", "", "", bookInfoParent);
     let showISBN = app.createElement("span", "", bookISBN, "", "", ISBNParent);
     let addButton = app.createElement("button", "", "加入總書櫃", "", "", bookInfoParent);
-
-
-    console.log(bookTitle, bookAuthor, bookPublisher, bookISBN, bookMaxPage, bookCover);
 };
 
 window.addEventListener("DOMContentLoaded", app.init);
-
-// app.createElement = function (tagName, class_Name, text_Content, attr, attrText, parentElement) {
-//     let obj = document.createElement(tagName);
-//     obj.className = class_Name;
-//     obj.textContent = text_Content;
-//     obj[attr] = attrText;
-//     if (parentElement instanceof Element) { parentElement.appendChild(obj); }
-//     return obj;
-// };

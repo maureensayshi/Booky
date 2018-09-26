@@ -54,7 +54,5 @@ app.multiSelect = function () {
     document.multiselect("#testSelect1");
 };
 
-export { app };
-
 
 

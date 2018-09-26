@@ -8,6 +8,7 @@
     <title>Booky</title>
     <link rel="stylesheet" type="text/css" href="css/index.css" media="all" />
     <script src="https://apis.google.com/js/api.js"></script>
+    <script src="js/common.js"></script>
 </head>
 
 <body>
@@ -58,7 +59,7 @@
                 <!-- 搜尋加入 -->
                 <div class="search-add">
                     <h3>搜尋關鍵字</h3>
-                    <form action="./" method="GET">
+                    <form action="./" method="GET" onsubmit="app.searchKeyWord(); return false;">
                         <p>
                             <label for="search-type">選擇搜尋方式 : </label>
                             <select name="search-option" id="search-type">
@@ -113,6 +114,6 @@
         <div class="footer">&copy; 2018 Booky</div>
     </footer>
 </body>
-<script type="module" src="js/index.js"></script>
+<script src="js/index.js"></script>
 
 </html>
