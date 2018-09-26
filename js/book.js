@@ -2,8 +2,7 @@
 import { app } from "./common.js";
 
 app.init = function () {
-    app.menu_open();
-    app.menu_close();
+    app.menu();
     app.multiSelect();
 };
 

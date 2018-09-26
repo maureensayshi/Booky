@@ -52,9 +52,10 @@ img{
 /* menu */
 
 .menu{
-    display: none;
+    /* display: none; */
+    visibility: hidden;
     position: fixed;
-    width: 500px;
+    width: 0px;
     height: 100%;
     top: 0;
     left: 0;
@@ -65,7 +66,11 @@ img{
     flex-direction: column;
     align-items: center;
     box-shadow: 3px 3px 3px #bcbcbc;
+    -webkit-transition: width 1s; 
+    transition: width 1s;
 }
+
+
 
 .menu img{
     fleX: none;
@@ -74,6 +79,8 @@ img{
     height: 30px;
     margin: 65px 0 0 70px;
     cursor: pointer;
+    -webkit-transition: height 1s; 
+    transition: height 1s;
 }
 
 .menu div:nth-child(2){
@@ -81,13 +88,16 @@ img{
 }
 
 .menu div{
-    width: 70%;
+    visibility: hidden;
+    width: 150px;
     padding: 35px;
     border-bottom: 1px solid white;    
     color: white;
     font-size: 20px;
     text-align: center;
     cursor: pointer;
+    -webkit-transition: width 1s; 
+    transition: width 1s;
 }
 
 /* header */
@@ -112,12 +122,13 @@ header .btn_menu img{
 }
 
 header .btn_logo{
-    flex: none;
+    flex: none;    
 }
 
 header .btn_logo img{
     max-width: 150px;
     height: auto;
+    cursor: pointer;
 }
 
 header .btn_search{
@@ -169,11 +180,11 @@ footer .footer{
 }       
 
 @media (max-width: 1200px) and (min-width: 980px){
-    .menu{width: 380px;}
+    .menu{width: 70px;}
 }
 
 @media (max-width: 980px) and (min-width: 480px){
-    .menu{width: 280px;}
+    .menu{width: 50px;}
     .menu div {
         width: 60%;
         padding: 25px;
@@ -182,7 +193,7 @@ footer .footer{
 }
 
 @media (max-width: 480px) and (min-width: 320px){
-    .menu{width: 200px;}
+    .menu{width: 10px;}
     .menu img{margin: 65px 0 0 15px;}
     .menu div:nth-child(2){margin-top: 25px;}
     .menu div {

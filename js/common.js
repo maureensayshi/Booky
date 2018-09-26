@@ -31,22 +31,51 @@ app.createElement = function (tagName, class_Name, text_Content, attr, attrText,
 };
 
 // menu open and close
-app.menu_open = function () {
+app.menu = function () {
     let menu_btn = app.get(".btn_menu");
     let menu = app.get(".menu");
+    let menuList = app.getAll(".menu div");
+    let close_menu = app.get(".close-menu");
+
     menu_btn.onclick = function () {
         menu.style.display = "flex";
+        if (window.innerWidth > 1200) {
+            menu.style.width = "500px";
+        } else if (window.innerWidth < 1200 && window.innerWidth > 980) {
+            menu.style.width = "380px";
+        } else if (window.innerWidth < 980 && window.innerWidth > 480) {
+            menu.style.width = "280px";
+        } else if (window.innerWidth < 480 && window.innerWidth > 320) {
+            menu.style.width = "200px";
+        }
+        menu.style.visibility = "visible";
         menu_btn.style.visibility = "hidden";
-    };
-};
+        close_menu.style.height = "30px";
 
-app.menu_close = function () {
-    let menu_btn = app.get(".btn_menu");
-    let menu = app.get(".menu");
-    let close_menu = app.get(".close-menu");
+        setTimeout(function () {
+            for (let i = 0; i < menuList.length; i++) {
+                if (window.innerWidth > 1200) {
+                    menuList[i].style.width = "350px";
+                } else if (window.innerWidth < 1200 && window.innerWidth > 980) {
+                    menuList[i].style.width = "266px";
+                } else if (window.innerWidth < 980 && window.innerWidth > 480) {
+                    menuList[i].style.width = "197px";
+                } else if (window.innerWidth < 480 && window.innerWidth > 320) {
+                    menuList[i].style.width = "140px";
+                }
+                menuList[i].style.visibility = "visible";
+            }
+        }, 300);
+
+    };
+
     close_menu.onclick = function () {
-        menu.style.display = "none";
-        menu_btn.style.visibility = "";
+        menu.style.width = "0px";
+        menu_btn.style.visibility = "visible";
+        close_menu.style.height = "0px";
+        for (let i = 0; i < menuList.length; i++) {
+            menuList[i].style.visibility = "hidden";
+        }
     };
 };
 
