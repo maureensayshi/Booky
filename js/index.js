@@ -1,5 +1,4 @@
 "use strict";
-console.log("index.js");
 
 import { app } from "./common.js";
 
@@ -8,13 +7,6 @@ app.init = function () {
     app.menu_close();
     app.keyin_search();
 };
-
-// app.searchKeyWord = function () {
-//     let keyWord;
-//     keyWord = app.get("#keyword").value;
-//     app.search_book(keyWord);
-//     console.log(keyWord);
-// };
 
 app.searchKeyWord = function () {
     let keyWord;
@@ -29,13 +21,25 @@ app.keyin_search = function () {
     // 2. 使用者填入關鍵字
     // 3. 使用者點擊送出按鈕
     // 4. 依據使用者選擇的搜尋方式，將關鍵字丟入 fetch
-    let searchType = app.get("#search-type");
-    let clickKeyInSearch = app.get("#keyin-search");
 
+    // 直接按 Enter 搜尋
+    let formSearch = app.get("#searchForm");
+    formSearch.onsubmit = function () {
+        let booksParent = app.get(".result");
+        booksParent.innerHTML = "";
+        app.searchKeyWord();
+        return false;
+    };
+
+    // 點擊搜尋鍵搜尋
+    let clickKeyInSearch = app.get("#keyin-search");
     clickKeyInSearch.onclick = function () {
+        let booksParent = app.get(".result");
+        booksParent.innerHTML = "";
         app.searchKeyWord();
     };
 
+    let searchType = app.get("#search-type");
     app.search_book = function (keyWord) {
         switch (searchType.value) {
         case "search-title":
@@ -56,7 +60,6 @@ app.keyin_search = function () {
 
 // 找書名
 app.googleBooks_title = function (bookTitle) {
-
     fetch("https://www.googleapis.com/books/v1/volumes?q=intitle:" + bookTitle + "&maxResults=40&key=AIzaSyAIhKztMyiZescidKArwy41HAZirttLUHg")
         .then(function (response) {
             return response.json();
@@ -67,12 +70,14 @@ app.googleBooks_title = function (bookTitle) {
         })
         .catch(function (error) {
             console.log("error : can't fetch to google books API" + error);
+            app.get("main .container-two").style.display = "flex";
+            app.get(".result").textContent = "無搜尋結果";
+            app.get(".result").style.margin = "50px";
         });
 };
 
 // 找 ISBN
 app.googleBooks_isbn = function (bookISBN) {
-
     fetch("https://www.googleapis.com/books/v1/volumes?q=isbn:" + bookISBN + "&maxResults=40&key=AIzaSyAIhKztMyiZescidKArwy41HAZirttLUHg")
         .then(function (response) {
             return response.json();
@@ -83,12 +88,14 @@ app.googleBooks_isbn = function (bookISBN) {
         })
         .catch(function (error) {
             console.log("error : can't fetch to google books API" + error);
+            app.get("main .container-two").style.display = "flex";
+            app.get(".result").textContent = "無搜尋結果";
+            app.get(".result").style.margin = "50px";
         });
 };
 
 // 找作者
 app.googleBooks_author = function (bookAuthor) {
-
     fetch("https://www.googleapis.com/books/v1/volumes?q=inauthor:" + bookAuthor + "&maxResults=40&key=AIzaSyAIhKztMyiZescidKArwy41HAZirttLUHg")
         .then(function (response) {
             return response.json();
@@ -99,6 +106,9 @@ app.googleBooks_author = function (bookAuthor) {
         })
         .catch(function (error) {
             console.log("error : can't fetch to google books API" + error);
+            app.get("main .container-two").style.display = "flex";
+            app.get(".result").textContent = "無搜尋結果";
+            app.get(".result").style.margin = "50px";
         });
 };
 
