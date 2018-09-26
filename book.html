@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Booky 單本設定</title>
+    <link rel="stylesheet" type="text/css" href="css/book.css" media="all" />
+</head>
+
+<body>
+    <div class="menu">
+        <img class="close-menu" src="img/cancel.svg" />
+        <div><a href="/bookshelf.html">總書櫃</a></div>
+        <div value="work"><a>工作用書</a></div>
+        <div value="sleep"><a>睡前讀物</a></div>
+        <div value="twice"><a>值得二讀</a></div>
+        <div value="readed"><a>已讀完</a></div>
+        <div value="lended"><a>出借的書</a></div>
+        <div><a href="/member.html">帳號管理</a></div>
+    </div>
+    <header>
+        <div class="btn_menu">
+            <img src="img/menu.svg" />
+        </div>
+        <div class="btn_logo">
+            <a href="/"><img src="img/Booky.png" /></a>
+        </div>
+        <div class="btn_search">
+            <input type="search" />
+        </div>
+    </header>
+    <main>
+        <div class="view">
+            <div class="visual-book">
+                <img src="./img/sample1.PNG" />
+            </div>
+            <div class="line"></div>
+            <div class="book-detail-wrapper">
+                <!-- EDIT -->
+                <div class="book-detail">
+                    <div class="move-book-detail">
+                        <div>書名 : <span>古物雜誌古物雜誌五物茶至</span></div>
+                        <div>作者 : <span>王珉瑄, 王珉瑄, 王珉瑄, 王珉瑄, 潘國育</span></div>
+                        <div>出版社 : <span>呱呱叫出版社呱呱呱呱呱呱呱</span></div>
+                        <div class="book-place"><img src="./img/map.svg"><input type="text" placeholder="ex. 台北家、美國家" /></div>
+                        <div class="book-bookshelf">所屬書櫃 :
+                            <select id="testSelect1" multiple>
+                                <option value="work">工作用書</option>
+                                <option value="sleep">睡前讀物</option>
+                                <option value="twice">值得二讀</option>
+                                <option value="readed">已讀完</option>
+                            </select>
+                        </div>
+                        <div class="lend-or-not">
+                            <span>是否出借 : </span>
+                            <span>
+                                <input type="radio" value="lended">
+                                <span>是</span>
+                                <input type="radio" value="not-lended">
+                                <span>否</span>
+                            </span>
+                        </div>
+                        <div class="lend-to">
+                            <span>出借對象 : </span>
+                            <input type="text" / placeholder="ex. 王小明"">
+                        </div>
+                        <div class="
+                                book-progress">
+                            <span>閱讀進度 :</span>
+                            <span>
+                                <input type="text" placeholder="ex. 100"" />
+                                    <span>/</span>
+                                    <span>360</span>
+                                    <span>頁</span>
+                                </span>
+                        </div>
+                    </div>
+                </div>
+                <!-- button -->
+                <div class="
+                                    book-button">
+                                <input type="button" value="儲存修改" />
+                                <input type="button" value="刪除書籤" />
+                                <input type="button" value="加到 Google 日曆" />
+                        </div>
+                    </div>
+                </div>
+    </main>
+    <footer>
+        <div class="background-img"></div>
+        <div class="footer">&copy; 2018 Booky</div>
+    </footer>
+</body>
+<script src="js/multiselect.min.js"></script>
+<script type="module" src="js/book.js"></script>
+
+
+</html>

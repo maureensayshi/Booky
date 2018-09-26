@@ -1,0 +1,394 @@
+@import "./common.css";
+
+main .view{
+    display: flex;
+    justify-content: center;
+}
+
+main .key-visual{
+    display: flex;
+    /* overflow: auto; */
+    flex-wrap: nowrap;
+    justify-content: space-between;  
+    align-items: center;
+}
+
+main .key-visual>.visual-book{
+    flex: none;
+    width: 200px;
+    height: 288px;
+    padding: 15px;
+    margin: 110px 30px;
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: 5px 5px 10px #999999;
+}
+
+
+main .key-visual>.visual-book:nth-child(2),
+main .key-visual>.visual-book:nth-child(4){
+    width: 250px;
+    height: 357px;
+}
+
+main .key-visual>.visual-book:nth-child(3){
+   width: 350px;
+   height: auto;
+}
+
+
+main .container,
+main .container-two{
+    width: 100%;
+    max-width: 1100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 auto;
+}
+
+main .container-two{
+    display: none;
+}
+
+main .container h2,
+main .container-two h2 {
+    font-size: 24px; 
+    padding: 40px 350px 20px 350px;
+    border-bottom: 1px solid #3f3a3a;
+}
+
+main .container .add{
+    display: flex;
+    justify-content: space-around;
+    width: 70%;
+}
+
+main .container .search-add,
+main .container .scan-add{
+    flex: none;
+    width: 42%;
+    padding: 0 0 90px 0;
+    border-radius: 10px;
+    margin: 30px 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgba(255, 255, 255, .6)
+}
+
+main .container .search-add h3,
+main .container .scan-add h3{
+    width: 100%;
+    font-size: 20px;
+    font-weight: bold;
+    padding: 20px 0 20px 0;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+    margin-bottom: 15px;
+    background-color: rgba(182, 144, 223, .5);    
+    text-align: center;
+  
+    
+}
+main .container .search-add select,
+main .container #keyword{
+    width: 170px;
+    height: 25px;
+    border-radius: 8px;
+    background-color: white;
+    border: solid 1px #BBBBBB;
+    padding: 0px 4px;
+    margin: 5px;
+    font-size: 14px;
+    font-family: "微軟正黑體";   
+}
+
+main .container .search-add select{cursor: pointer;}
+main .container #keyword{cursor: text;}
+
+main .container .add .search-add form,
+main .container .add .scan-add form{
+    display: flex;
+    flex-direction: column;
+}
+
+main .container .add .search-add form p{margin: 12px;}
+
+main .container .add form button{
+    width: 150px;
+    height: 35px;
+    align-self: center;
+    letter-spacing: 3px;
+    padding-left: 50px;
+    border-radius: 10px;
+    border: none;
+    margin: 20px;
+    font-size: 14px;
+    cursor: pointer;
+    font-family: "微軟正黑體";
+    background: url(../img/search-white.svg) no-repeat 35px #B690DF;
+    background-size: 10%;
+    color: white;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+}
+
+main .container-two .result{
+    display: flex;
+    flex-direction: column;
+} 
+
+main .container-two .result .result-book{
+    flex: none;
+    display: flex;
+    padding: 10px 0 0 80px;
+    border-bottom: 1px solid #BBBBBB;
+    width: 512px;
+}
+
+main .container-two>.result>.result-book>.result-book-img{
+    flex: none;
+    width: 128px;
+    height: 190px;
+    padding: 13px;
+    margin: 30px 20px;
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: 5px 5px 10px #999999;
+}
+
+main .container-two>.result>.result-book>.result-book-info{
+    width: 128px;
+    margin: 30px 20px;
+}
+
+main .container-two>.result>.result-book>.result-book-info>p{
+    width: 230px;
+    line-height: 1.5;   
+    margin: 4px 0 15px 0;
+    letter-spacing: 1px;  
+    font-weight: 600;
+}
+
+main .container-two>.result>.result-book>.result-book-info>p>span{
+    font-weight: normal;
+}
+
+main .container-two .result-book-info button{
+    width: 120px;
+    height: 35px;
+    letter-spacing: 3px;
+    text-align: center;
+    border-radius: 10px;
+    border: none;
+    margin: 10px 0;
+    font-size: 14px;
+    cursor: pointer;
+    font-family: "微軟正黑體";
+    background: #B690DF;
+    color: white;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+}
+
+/* RWD */
+@media (max-width: 1200px) and (min-width: 980px){
+    main .key-visual>.visual-book{
+        width: 110px;
+        height: 157px;
+        padding: 13px;
+        margin: 40px 15px;        
+    }
+
+    main .key-visual>.visual-book:nth-child(2),
+    main .key-visual>.visual-book:nth-child(4){
+        width: 150px;
+        height: 214px;
+     }
+
+    main .key-visual>.visual-book:nth-child(3){
+        width: 200px;
+        height: auto;
+     }
+}
+
+@media (max-width: 980px) and (min-width: 640px){
+    main .key-visual>.visual-book{
+        width: 80px;
+        height: 114px;
+        padding: 10px;
+        margin: 40px 15px;        
+    }
+
+    main .key-visual>.visual-book:nth-child(2),
+    main .key-visual>.visual-book:nth-child(4){
+        width: 100px;
+        height: 142px;
+     }
+
+    main .key-visual>.visual-book:nth-child(3){
+        width: 130px;
+        height: auto;
+     }
+
+    main .container h2,
+    main .container-two h2 {
+        font-size: 20px;
+        padding: 40px 240px 20px 240px;
+        text-align: center;
+    }
+
+    main .container .add{
+        max-width: 600px;
+        width: 100%;
+    }
+
+    main .container .add .search-add form p,
+    main .container .add .scan-add form p{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    main .container .add .search-add form p label,
+    main .container .add .scan-add form p label{
+        margin-bottom: 10px;
+    }
+}
+
+@media (max-width: 640px) and (min-width: 480px){
+    main .key-visual>.visual-book:nth-child(odd),
+    main .key-visual>.visual-book:nth-child(even){
+        overflow: hidden;
+        width: 150px;
+        height: 214px;
+        padding: 10px;
+        margin: 40px 15px;        
+    }
+
+    main .container, main .container-two{
+        width: 100%;
+    max-width: 400px;
+    }
+
+    main .container h2,
+    main .container-two h2 {
+        font-size: 20px;
+        padding: 40px 150px 20px 150px;
+        text-align: center;
+    }
+
+    main .container .add{
+        max-width: 300px;
+        width: 100%;
+        flex-direction: column;
+    }
+
+    main .container .search-add, main .container .scan-add{
+        width: 100%;
+    }
+
+    main .container .add .search-add form p,
+    main .container .add .scan-add form p{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    main .container-two .result .result-book{
+        flex-direction: column;
+        align-items: center;
+        padding: 0;
+        width: 400px;
+    }
+
+    main .container-two>.result>.result-book>.result-book-info{
+        width: 250px;
+        margin: 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    main .container-two>.result>.result-book>.result-book-info>p{
+        width: 100%;
+    }
+
+    main .container-two .result-book-info button{
+        width: 150px;
+        margin: 10px;   
+    }
+}
+
+@media (max-width: 480px) and (min-width: 320px){  
+    main .key-visual>.visual-book:nth-child(odd),
+    main .key-visual>.visual-book:nth-child(even){
+        overflow: hidden;
+        width: 150px;
+        height: 214px;
+        padding: 10px;
+        margin: 40px 15px;        
+    }
+
+    main .container, main .container-two{
+        width: 100%;
+        max-width: 250px;
+    }
+
+    main .container h2,
+    main .container-two h2 {
+        font-size: 20px;
+        padding: 40px 80px 20px 80px;
+    }
+
+    main .container .add{
+        max-width: 230px;
+        width: 100%;
+        flex-direction: column;
+    }
+
+    main .container .search-add, main .container .scan-add{
+        width: 100%;
+        padding: 0 0 50px 0;
+        margin:20px 5px;
+    }
+
+    main .container .add .search-add form p,
+    main .container .add .scan-add form p{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    main .container .add .search-add form label,
+    main .container .add .scan-add form label{
+        margin: 10px;
+    }
+
+    main .container-two .result .result-book{
+        flex-direction: column;
+        align-items: center;
+        padding: 0;
+        width: 400px;
+    }
+
+    main .container-two>.result>.result-book>.result-book-info{
+        width: 180px;
+        margin: 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    main .container-two>.result>.result-book>.result-book-info>p{
+        width: 100%;
+    }
+
+    main .container-two .result-book-info button{
+        width: 150px;
+        margin: 10px;   
+    }
+}

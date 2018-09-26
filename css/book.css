@@ -1,0 +1,233 @@
+@import "./multiselect.css";
+@import "./common.css";
+
+
+main .view{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+main .visual-book{
+    flex: none;
+    width: 256px;
+    height: 358px;
+    padding: 13px;
+    margin: 50px 20px;
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: 5px 5px 10px #999999;
+}
+
+main .view .line{
+    width: 800px;
+    border: 0.5px solid #BBBBBB;
+}
+
+/* 書的資訊的區塊 */
+
+main .book-detail-wrapper{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 600px;
+}
+
+main .book-detail{
+    display: flex;
+    margin-left: 20%;
+}
+
+main .move-book-detail>div{
+    margin: 30px;
+    line-height: 1.25;
+    display: flex;
+    align-items: center;
+}
+
+main .move-book-detail>div>span{
+   display: flex;
+   padding: 0 10px;
+}
+
+main .move-book-detail>div:nth-child(6)>span,
+main .move-book-detail>div:nth-child(7)>span,
+main .move-book-detail>div:nth-child(8)>span{padding: 0 3px;}
+
+main .move-book-detail>div>span>span{margin-right: 20px;}
+
+main .book-place{
+    display: flex;
+    height: 25px; 
+    align-items: center;
+}
+
+main .book-place img{
+    width: 5%;
+    margin-right: 10px;
+}
+
+main .book-bookshelf select,
+main .book-place input,
+main .book-progress input,
+main .lend-to input{
+    width: 170px;
+    height: 30px;
+    border-radius: 8px;
+    background-color: white;
+    border: solid 1px #BBBBBB;
+    padding: 0px 6px;
+    margin: 0 10px;
+    font-size: 14px;
+    font-family: "微軟正黑體";
+}
+
+main .lend-or-not{
+    display: flex;
+    align-items: center;
+}
+
+main .lend-or-not>span:nth-child(1),
+main .lend-to>span:nth-child(1){
+    margin-left: 0;
+}
+
+main .lend-or-not>input{
+  margin-left: 30px;
+}
+
+main .book-progress{
+    display: flex;
+    height: 30px; 
+    align-items: center;
+}
+
+main .book-progress>span{
+    align-items: center;
+}
+
+main .book-progress>span>span{
+    margin-left: 10px;
+}
+
+main .book-button{
+    display: flex;
+    flex-direction: column;
+}
+
+main .book-button input{
+    width: 240px;
+    height: 35px;
+    align-self: center;
+    letter-spacing: 2px;
+    padding-left: 70px;
+    border-radius: 10px;
+    border: none;
+    margin: 10px;
+    font-size: 14px;
+    cursor: pointer;
+    font-family: "微軟正黑體";
+    color: white;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+}
+
+main .book-button input:nth-child(1){ padding-left: 0;background: url(../img/edit.svg) no-repeat 35px #B690DF; background-size: 10%;}
+main .book-button input:nth-child(2){ padding-left: 0;background: url(../img/delete.svg) no-repeat 35px #B690DF; background-size: 10%;}
+main .book-button input:nth-child(3){ background: url(../img/calendar.svg) no-repeat 35px #B690DF; background-size: 10%;}
+
+/* RWD */
+
+@media (max-width: 980px) and (min-width: 640px){
+    main .view .line{width: 500px;}
+}
+
+@media (max-width: 640px) and (min-width: 480px){
+    main .visual-book{
+        width: 128px;
+        height: 179px;
+        padding: 13px;
+        margin: 30px 10px;
+    }
+    main .view .line{width: 400px;}
+    main .book-detail-wrapper{width: 400px;}
+    main .book-detail{margin-left: 0;}
+    main .move-book-detail{width: 400px;}
+    main .book-bookshelf select{
+        width:100px; margin: 0 10px;
+    }
+    main .book-place input{
+        width: 200px; margin: 0 10px;
+    }
+    
+    main .book-progress input,
+    main .lend-to input{
+        width: 120px;
+        margin: 10px;
+    }
+
+    main .book-progress>span{
+        display: flex;
+        align-items: center;
+        margin-left: -10px;
+    }
+    main .book-button{
+        margin-top: 10px;
+    }
+    main .book-button input{
+        width: 230px;
+    }
+}
+
+@media (max-width: 480px) and (min-width: 320px){
+    main .visual-book{
+        width: 128px;
+        height: 179px;
+        padding: 13px;
+        margin: 30px 10px;
+    }
+    main .view .line{width: 280px;}
+    main .book-detail-wrapper{width: 280px;}
+    main .book-detail{margin-left: 0;}
+    main .move-book-detail{width: 280px;}
+    main .move-book-detail>div{flex-direction: column;line-height: 2;}
+ 
+    main .move-book-detail>div:nth-child(6)>span{
+        padding: 4px 3px;
+    }
+    main .book-bookshelf select{
+        width:100px; margin: 0 10px;
+    }
+    main .book-place{ height: 45px;}
+    main .book-place input{
+        width: 200px; margin: 10px; padding: 10px;
+    }
+    .multiselect-wrapper{
+        align-self: flex-start
+    }
+    .multiselect-input-div input{margin: 0;}
+    .multiselect-wrapper .multiselect-list{margin-top: -5px;margin-left: 0;}
+    
+    main .book-progress input,
+    main .lend-to input{
+        width: 120px;
+        margin: 10px;
+    }
+    main .book-progress{
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    main .book-progress>span{
+        display: flex;
+        align-items: center;
+        margin-top: 30px;
+        margin-left: -10px;
+    }
+    
+    main .book-button{
+        margin-top: 40px;
+    }
+    main .book-button input{
+        width: 230px;
+    }
+}

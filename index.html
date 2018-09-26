@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Booky</title>
+    <link rel="stylesheet" type="text/css" href="css/index.css" media="all" />
+    <script src="https://apis.google.com/js/api.js"></script>
+</head>
+
+<body>
+    <div class="menu">
+        <img class="close-menu" src="img/cancel.svg" />
+        <div><a href="/bookshelf.html">總書櫃</a></div>
+        <div><a>工作用書</a></div>
+        <div><a>睡前讀物</a></div>
+        <div><a>值得二讀</a></div>
+        <div><a>已讀完</a></div>
+        <div><a>出借的書</a></div>
+        <div><a href="/member.html">帳號管理</a></div>
+    </div>
+    <header>
+        <div class="btn_menu">
+            <img src="img/menu.svg" />
+        </div>
+        <div class="btn_logo">
+            <a href="/"><img src="img/Booky.png" /></a>
+        </div>
+        <div class="btn_search">
+            <input type="search" />
+        </div>
+    </header>
+    <main>
+        <div class="view">
+            <div class="key-visual">
+                <div class="visual-book">
+                    <img src="./img/sample1.PNG" />
+                </div>
+                <div class="visual-book">
+                    <img src="./img/sample2.PNG" />
+                </div>
+                <div class="visual-book">
+                    <img src="./img/sample3.PNG" />
+                </div>
+                <div class="visual-book">
+                    <img src="./img/sample4.PNG" />
+                </div>
+                <div class="visual-book">
+                    <img src="./img/sample5.PNG" />
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <!-- <h2>新增書籍</h2> -->
+            <div class="add">
+                <!-- 搜尋加入 -->
+                <div class="search-add">
+                    <h3>搜尋關鍵字</h3>
+                    <form action="./" method="GET" id="searchForm">
+                        <p>
+                            <label for="search-type">選擇搜尋方式 : </label>
+                            <select name="search-option" id="search-type">
+                                <option value="search-title" selected="selected">書名</option>
+                                <option value="search-isbn">ISBN 書碼</option>
+                                <option value="search-author">作者</option>
+                            </select>
+                        </p>
+                        <p>
+                            <label for="keyword">請輸入關鍵字 : </label>
+                            <input id="keyword" type="text" />
+                        </p>
+                        <button type="button" id="keyin-search">開始搜尋</button>
+                    </form>
+                </div>
+                <!-- 掃描加入 -->
+                <div class="scan-add">
+                    <h3>掃描書碼</h3>
+                    <form action="./" method="GET">
+                        <p>點擊啟動相機的預留位置</p>
+                        <p>
+                            <label for="keyword">ISBN 條碼 : </label>
+                            <input id="keyword" type="text" />
+                        </p>
+                        <button type="button" id="scan-search">開始搜尋</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="container-two">
+            <h2>搜尋結果</h2>
+            <!-- all result -->
+            <div class="result">
+                <!-- one book -->
+                <!-- <div class="result-book">
+                    <div class="result-book-img"><img src="./img/sample1.PNG" /></div>
+                    <div class="result-book-info">
+                        <p>書名 : <span>CEREAL雜誌CEREAL雜誌CEREAL雜誌CEREAL雜誌</span></p>
+                        <p>作者 : <span>王珉瑄</span></p>
+                        <p>出版商 : <span>之初出版社</span></p>
+                        <p>ISBN : <span id="hi"></span></p>
+                        <button>加入總書櫃</button>
+                    </div>
+                </div> -->
+            </div>
+        </div>
+        </div>
+    </main>
+    <footer>
+        <div class="background-img"></div>
+        <div class="footer">&copy; 2018 Booky</div>
+    </footer>
+</body>
+<script type="module" src="js/index.js"></script>
+
+</html>
