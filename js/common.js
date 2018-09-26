@@ -48,7 +48,11 @@ app.menu_close = function () {
     };
 };
 
-export {app};
+app.multiSelect = function () {
+    document.multiselect("#testSelect1");
+};
+
+export { app };
 
 
 
