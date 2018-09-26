@@ -8,22 +8,16 @@ app.init = function () {
 
 
 app.keyin_search = function () {
-    // 設定不同的搜尋方法
-    let searchType = app.get("#search-type");
-    // let searchTitle = app.get("#search-title");
-    // let searchIsbn = app.get("#search-isbn");
-    // let searchAuthor = app.get("#search-author");
-
+    // 設定不同的搜尋方法   
     // 1. 選擇搜尋方式
     // 2. 使用者填入關鍵字
     // 3. 使用者點擊送出按鈕
     // 4. 依據使用者選擇的搜尋方式，將關鍵字丟入 fetch
-
+    let searchType = app.get("#search-type");
     let clickKeyInSearch = app.get("#keyin-search");
     let keyWord;
     clickKeyInSearch.onclick = function () {
         keyWord = app.get("#keyword").value;
-        console.log(keyWord);
         app.search_book(keyWord);
     };
     console.log(keyWord);
@@ -56,6 +50,12 @@ app.googleBooks_title = function (bookTitle) {
         .then(function (data) {
             console.log(data);
             // 抓到需要的不同資料
+            for (let i = 0; i < data.items.length; i++) {
+                console.log(data.items[i].volumeInfo);
+                let title = data.items[i].volumeInfo.title;
+                console.log(title);
+
+            }
         })
         .catch(function (error) {
             console.log("error : can't fetch to google books API" + error);
