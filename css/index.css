@@ -147,7 +147,7 @@ main .container-two .result .result-book{
 main .container-two>.result>.result-book>.result-book-img{
     flex: none;
     width: 128px;
-    height: 179px;
+    height: 190px;
     padding: 13px;
     margin: 30px 20px;
     background-color: white;
@@ -165,6 +165,11 @@ main .container-two>.result>.result-book>.result-book-info>p{
     line-height: 1.5;   
     margin: 4px 0 15px 0;
     letter-spacing: 1px;  
+    font-weight: 600;
+}
+
+main .container-two>.result>.result-book>.result-book-info>p>span{
+    font-weight: normal;
 }
 
 main .container-two .result-book-info button{

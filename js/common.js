@@ -20,10 +20,11 @@ app.getAll = function (selector) {
     return document.querySelectorAll(selector);
 };
 
-app.createElement = function (tagName, class_Name, text_Content, parentElement) {
+app.createElement = function (tagName, class_Name, text_Content, attr, attrText, parentElement) {
     let obj = document.createElement(tagName);
     obj.className = class_Name;
     obj.textContent = text_Content;
+    obj[attr] = attrText;
     if (parentElement instanceof Element) { parentElement.appendChild(obj); }
     return obj;
 };
@@ -48,6 +49,7 @@ app.menu_close = function () {
     };
 };
 
+// choose multi-bookshelf in book.html
 app.multiSelect = function () {
     document.multiselect("#testSelect1");
 };
