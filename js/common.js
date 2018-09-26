@@ -1,3 +1,4 @@
+"use strict";
 // initialize firebase
 // firebase.initializeApp({
 // 	apiKey: "AIzaSyB8bXw1Xco2dzjTwI1RvjJsMalLXtr8gYo",
@@ -53,6 +54,8 @@ app.menu_close = function () {
 app.multiSelect = function () {
     document.multiselect("#testSelect1");
 };
+
+export { app };
 
 
 

@@ -1,8 +1,20 @@
+"use strict";
+console.log("index.js");
+
+import { app } from "./common.js";
+
 app.init = function () {
     app.menu_open();
     app.menu_close();
     app.keyin_search();
 };
+
+// app.searchKeyWord = function () {
+//     let keyWord;
+//     keyWord = app.get("#keyword").value;
+//     app.search_book(keyWord);
+//     console.log(keyWord);
+// };
 
 app.searchKeyWord = function () {
     let keyWord;
