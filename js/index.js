@@ -127,56 +127,32 @@ app.getBookData = function (data) {
         //書名
         let title = data.items[i].volumeInfo.title;
         bookTitle = title; //存取書名       
-
         //作者 or 作者群
         let authors = data.items[i].volumeInfo.authors;
-        if (authors != null) {
-            bookAuthor = authors.join("、"); //存取作者
-        }
-        else if (authors == null) {
-            bookAuthor = "暫無資料";
-        }
+        bookAuthor = (authors != null) ? authors.join("、") : "暫無資料";
         //出版社
         let publisher = data.items[i].volumeInfo.publisher;
-        if (publisher != null) {
-            bookPublisher = publisher;
-        } else if (publisher == null) {
-            bookPublisher = "暫無資料";
-        }
+        bookPublisher = (publisher != null) ? publisher : "暫無資料";
         // ISBN
         let isbn = data.items[i].volumeInfo.industryIdentifiers;
         if (isbn != null) {
-            console.log(isbn);
+            // console.log(isbn);
             let tmpISBN;
             for (let i = 0; i < isbn.length; i++) {
-                if (isbn[i].type == "ISBN_13") {
+                if (isbn[i].type == "ISBN_13")
                     tmpISBN = isbn[i].identifier;  //console.log(isbn[i].identifier); 
-                }
             }
-            if (tmpISBN != "" && tmpISBN != null) {
-                bookISBN = tmpISBN;  // console.log("顯示 ISBN 13 碼");
-            } else {
-                bookISBN = "暫無資料";  // console.log("印出無 ISBN 13 碼");
-            }
+            bookISBN = (tmpISBN != "" && tmpISBN != null) ? tmpISBN : "暫無資料";
         } else if (isbn == null) {
             bookISBN = "暫無資料"; // console.log("印出無 ISBN 13 碼");
         }
         // 最大頁數 pageCount
         let maxPage = data.items[i].volumeInfo.pageCount;
-        if (maxPage != null) {
-            bookMaxPage = maxPage; // console.log(maxPage);
-        }
-        else if (maxPage == null) {
-            bookMaxPage = "請輸入總頁數";
-        }
+        bookMaxPage = (maxPage != null) ? maxPage : "請輸入總頁數";
+        console.log(bookMaxPage);
         // 書封照片
         let cover = data.items[i].volumeInfo.imageLinks;
-        if (cover != null) {
-            bookCover = cover.thumbnail;
-        }
-        else if (cover == null) {
-            bookCover = "https://bit.ly/2ObFgq5";
-        }
+        bookCover = (cover != null) ? cover.thumbnail :  "https://bit.ly/2ObFgq5";
         app.showBookResult(bookTitle, bookAuthor, bookPublisher, bookISBN, bookMaxPage, bookCover);
     }
 };
