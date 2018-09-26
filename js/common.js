@@ -54,15 +54,15 @@ app.menu = function () {
 
         setTimeout(function () {
             for (let i = 0; i < menuList.length; i++) {
-                if (window.innerWidth > 1200) {
-                    menuList[i].style.width = "350px";
-                } else if (window.innerWidth < 1200 && window.innerWidth > 980) {
-                    menuList[i].style.width = "266px";
-                } else if (window.innerWidth < 980 && window.innerWidth > 480) {
-                    menuList[i].style.width = "197px";
-                } else if (window.innerWidth < 480 && window.innerWidth > 320) {
-                    menuList[i].style.width = "140px";
-                }
+                // if (window.innerWidth > 1200) {
+                //     menuList[i].style.width = "350px";
+                // } else if (window.innerWidth < 1200 && window.innerWidth > 980) {
+                //     menuList[i].style.width = "266px";
+                // } else if (window.innerWidth < 980 && window.innerWidth > 480) {
+                //     menuList[i].style.width = "197px";
+                // } else if (window.innerWidth < 480 && window.innerWidth > 320) {
+                //     menuList[i].style.width = "140px";
+                // }
                 menuList[i].style.visibility = "visible";
             }
         }, 300);
@@ -73,9 +73,11 @@ app.menu = function () {
         menu.style.width = "0px";
         menu_btn.style.visibility = "visible";
         close_menu.style.height = "0px";
+        // setTimeout(function () {
         for (let i = 0; i < menuList.length; i++) {
             menuList[i].style.visibility = "hidden";
         }
+        // }, 350);
     };
 };
 
