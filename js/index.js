@@ -27,6 +27,7 @@ app.keyin_search = function () {
     formSearch.onsubmit = function () {
         let booksParent = app.get(".result");
         booksParent.innerHTML = "";
+        booksParent.style.margin = "0px";
         app.searchKeyWord();
         return false;
     };
@@ -36,6 +37,7 @@ app.keyin_search = function () {
     clickKeyInSearch.onclick = function () {
         let booksParent = app.get(".result");
         booksParent.innerHTML = "";
+        booksParent.style.margin = "0px";
         app.searchKeyWord();
     };
 
