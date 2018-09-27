@@ -90,9 +90,9 @@ app.menu = function () {
 };
 
 // choose multi-bookshelf in book.html
-app.multiSelect = function () {
-    document.multiselect("#testSelect1");
-};
+// app.multiSelect = function () {
+//     document.multiselect("#testSelect1");
+// };
 
 export { app };
 

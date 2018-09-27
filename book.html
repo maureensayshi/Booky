@@ -13,11 +13,11 @@
     <div class="menu">
         <img class="close-menu" src="img/cancel.svg" />
         <div><a href="/bookshelf.html">總書櫃</a></div>
-        <div value="unread"><a>未讀</a></div>
-        <div value="reading"><a>閱讀中</a></div>
-        <div value="readed"><a>已讀</a></div>
-        <div value="twice"><a>值得二讀</a></div>
-        <div value="lend"><a>出借的書</a></div>
+        <div value="0"><a href="/bookshelf.html?status=0">未讀</a></div>
+        <div value="1"><a href="/bookshelf.html?status=1">閱讀中</a></div>
+        <div value="2"><a href="/bookshelf.html?status=2">已讀</a></div>
+        <div value="twice"><a href="/bookshelf.html?status=twice">值得二讀</a></div>
+        <div value="lend"><a href="/bookshelf.html?status=lend">出借的書</a></div>
         <div><a href="/member.html">帳號管理</a></div>
     </div>
     <header>
@@ -45,23 +45,42 @@
                         <div>作者 : <span>王珉瑄, 王珉瑄, 王珉瑄, 王珉瑄, 潘國育</span></div>
                         <div>出版社 : <span>呱呱叫出版社呱呱呱呱呱呱呱</span></div>
                         <div class="book-place"><img src="./img/map.svg"><input type="text" placeholder="ex. 台北家、美國家" /></div>
-                        <div class="book-bookshelf">所屬書櫃 :
-                            <select id="testSelect1" multiple>
-                                <option value="unread">未讀</option>
-                                <option value="reading">閱讀中</option>
-                                <option value="readed">已讀</option>
-                                <option value="twice">值得二讀</option>
-                            </select>
+
+                        <div class="reading-status">
+                            <span>閱讀狀態 : </span>
+                            <label class="container">
+                                <span>未讀&nbsp&nbsp&nbsp</span>
+                                <input type="radio" checked="checked" name="reading" value="0">
+                                <span class="checkmark"></span>
+                            </label>
+                            <label class="container">
+                                <span>閱讀中&nbsp&nbsp&nbsp</span>
+                                <input type="radio" name="reading" value="1">
+                                <span class="checkmark"></span>
+                            </label>
+                            <label class="container">
+                                <span>已讀&nbsp&nbsp&nbsp</span>
+                                <input type="radio" name="reading" value="2">
+                                <span class="checkmark"></span>
+                            </label>
+                        </div>
+                        <div class="twice-or-not">
+                            <label for="twice">值得二讀 : </label>
+                            <input type="checkbox" value="twice">
                         </div>
                         <div class="lend-or-not">
                             <span>是否出借 : </span>
-                            <span>
-                                <input type="radio" value="lended">
-                                <span>是</span>
-                                <input type="radio" value="not-lended">
-                                <span>否</span>
-                            </span>
-                        </div>
+                            <label class="container">
+                                <span>否&nbsp&nbsp&nbsp</span>
+                                <input type="radio" checked="checked" name="lend" value="unlend">
+                                <span class="checkmark"></span>
+                            </label>
+                            <label class="container">
+                                <span>是&nbsp&nbsp&nbsp</span>
+                                <input type="radio" name="lend" value="lend">
+                                <span class="checkmark"></span>
+                            </label>
+                        </div>                     
                         <div class="lend-to">
                             <span>出借對象 : </span>
                             <input type="text" / placeholder="ex. 王小明"">
@@ -70,10 +89,10 @@
                 </div>
                 <!-- button -->
                 <div class="
-                                    book-button">
-                                <input type="button" value="儲存修改" />
-                                <input type="button" value="刪除書籤" />
-                                <input type="button" value="加到 Google 日曆" />
+                                book-button">
+                            <input type="button" value="儲存修改" />
+                            <input type="button" value="刪除書籤" />
+                            <input type="button" value="加到 Google 日曆" />
                         </div>
                     </div>
                 </div>
@@ -83,7 +102,7 @@
         <div class="footer">&copy; 2018 Booky</div>
     </footer>
 </body>
-<script src="js/multiselect.min.js"></script>
+<!-- <script src="js/multiselect.min.js"></script> -->
 <script type="module" src="js/book.js"></script>
 
 
