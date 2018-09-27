@@ -122,8 +122,8 @@ app.getBookData = function (data) {
         let bookISBN;  // 4. ISBN-13
         let bookMaxPage; // 5. 總頁數
         let bookCover; // 6. 書封照片
-        // console.log(data.items[i]);
-        console.log(data.items[i].volumeInfo);
+        console.log(data.items[i].id);
+        // console.log(data.items[i].volumeInfo);
         //書名
         let title = data.items[i].volumeInfo.title;
         bookTitle = title; //存取書名       
@@ -149,7 +149,7 @@ app.getBookData = function (data) {
         // 最大頁數 pageCount
         let maxPage = data.items[i].volumeInfo.pageCount;
         bookMaxPage = (maxPage != null) ? maxPage : "請輸入總頁數";
-        console.log(bookMaxPage);
+        // console.log(bookMaxPage);
         // 書封照片
         let cover = data.items[i].volumeInfo.imageLinks;
         bookCover = (cover != null) ? cover.thumbnail : "https://bit.ly/2ObFgq5";

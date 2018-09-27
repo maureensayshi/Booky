@@ -13,11 +13,11 @@
     <div class="menu">
         <img class="close-menu" src="img/cancel.svg" />
         <div><a href="/bookshelf.html">總書櫃</a></div>
-        <div value="work"><a>工作用書</a></div>
-        <div value="sleep"><a>睡前讀物</a></div>
+        <div value="unread"><a>未讀</a></div>
+        <div value="reading"><a>閱讀中</a></div>
+        <div value="readed"><a>已讀</a></div>
         <div value="twice"><a>值得二讀</a></div>
-        <div value="readed"><a>已讀完</a></div>
-        <div value="lended"><a>出借的書</a></div>
+        <div value="lend"><a>出借的書</a></div>
         <div><a href="/member.html">帳號管理</a></div>
     </div>
     <header>
@@ -47,10 +47,10 @@
                         <div class="book-place"><img src="./img/map.svg"><input type="text" placeholder="ex. 台北家、美國家" /></div>
                         <div class="book-bookshelf">所屬書櫃 :
                             <select id="testSelect1" multiple>
-                                <option value="work">工作用書</option>
-                                <option value="sleep">睡前讀物</option>
+                                <option value="unread">未讀</option>
+                                <option value="reading">閱讀中</option>
+                                <option value="readed">已讀</option>
                                 <option value="twice">值得二讀</option>
-                                <option value="readed">已讀完</option>
                             </select>
                         </div>
                         <div class="lend-or-not">
@@ -65,17 +65,7 @@
                         <div class="lend-to">
                             <span>出借對象 : </span>
                             <input type="text" / placeholder="ex. 王小明"">
-                        </div>
-                        <div class="
-                                book-progress">
-                            <span>閱讀進度 :</span>
-                            <span>
-                                <input type="text" placeholder="ex. 100"" />
-                                    <span>/</span>
-                                    <span>360</span>
-                                    <span>頁</span>
-                                </span>
-                        </div>
+                        </div>                    
                     </div>
                 </div>
                 <!-- button -->

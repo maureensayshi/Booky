@@ -1,15 +1,15 @@
 "use strict";
 
 // Initialize Firebase
-let config = {
-    apiKey: "AIzaSyALgpVirl6lyBvOK9W--e5QycFeMFzcPLg",
-    authDomain: "booky-217508.firebaseapp.com",
-    databaseURL: "https://booky-217508.firebaseio.com",
-    projectId: "booky-217508",
-    storageBucket: "booky-217508.appspot.com",
-    messagingSenderId: "757419169220"
-};
-let DB = firebase.initializeApp(config);
+// let config = {
+//     apiKey: "AIzaSyALgpVirl6lyBvOK9W--e5QycFeMFzcPLg",
+//     authDomain: "booky-217508.firebaseapp.com",
+//     databaseURL: "https://booky-217508.firebaseio.com",
+//     projectId: "booky-217508",
+//     storageBucket: "booky-217508.appspot.com",
+//     messagingSenderId: "757419169220"
+// };
+// let DB = firebase.initializeApp(config);
 
 
 // initialize app structure

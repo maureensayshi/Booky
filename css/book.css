@@ -68,7 +68,6 @@ main .book-place img{
 
 main .book-bookshelf select,
 main .book-place input,
-main .book-progress input,
 main .lend-to input{
     width: 170px;
     height: 30px;
@@ -93,20 +92,6 @@ main .lend-to>span:nth-child(1){
 
 main .lend-or-not>input{
   margin-left: 30px;
-}
-
-main .book-progress{
-    display: flex;
-    height: 30px; 
-    align-items: center;
-}
-
-main .book-progress>span{
-    align-items: center;
-}
-
-main .book-progress>span>span{
-    margin-left: 10px;
 }
 
 main .book-button{
@@ -160,17 +145,11 @@ main .book-button input:nth-child(3){ background: url(../img/calendar.svg) no-re
         width: 200px; margin: 0 10px;
     }
     
-    main .book-progress input,
     main .lend-to input{
         width: 120px;
         margin: 10px;
     }
 
-    main .book-progress>span{
-        display: flex;
-        align-items: center;
-        margin-left: -10px;
-    }
     main .book-button{
         margin-top: 10px;
     }
@@ -208,22 +187,11 @@ main .book-button input:nth-child(3){ background: url(../img/calendar.svg) no-re
     .multiselect-input-div input{margin: 0;}
     .multiselect-wrapper .multiselect-list{margin-top: -5px;margin-left: 0;}
     
-    main .book-progress input,
     main .lend-to input{
         width: 120px;
         margin: 10px;
     }
-    main .book-progress{
-        flex-direction: column;
-        align-items: flex-start;
-    }
-    main .book-progress>span{
-        display: flex;
-        align-items: center;
-        margin-top: 30px;
-        margin-left: -10px;
-    }
-    
+   
     main .book-button{
         margin-top: 40px;
     }
