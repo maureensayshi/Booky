@@ -152,7 +152,7 @@ app.getBookData = function (data) {
         console.log(bookMaxPage);
         // 書封照片
         let cover = data.items[i].volumeInfo.imageLinks;
-        bookCover = (cover != null) ? cover.thumbnail :  "https://bit.ly/2ObFgq5";
+        bookCover = (cover != null) ? cover.thumbnail : "https://bit.ly/2ObFgq5";
         app.showBookResult(bookTitle, bookAuthor, bookPublisher, bookISBN, bookMaxPage, bookCover);
     }
 };

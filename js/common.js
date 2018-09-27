@@ -1,10 +1,16 @@
 "use strict";
-// initialize firebase
-// firebase.initializeApp({
-// 	apiKey: "AIzaSyB8bXw1Xco2dzjTwI1RvjJsMalLXtr8gYo",
-// 	projectId: "appworks-school-stylish",
-// 	storageBucket: "appworks-school-stylish.appspot.com"
-// });
+
+// Initialize Firebase
+let config = {
+    apiKey: "AIzaSyALgpVirl6lyBvOK9W--e5QycFeMFzcPLg",
+    authDomain: "booky-217508.firebaseapp.com",
+    databaseURL: "https://booky-217508.firebaseio.com",
+    projectId: "booky-217508",
+    storageBucket: "booky-217508.appspot.com",
+    messagingSenderId: "757419169220"
+};
+let DB = firebase.initializeApp(config);
+
 
 // initialize app structure
 
@@ -13,6 +19,8 @@ let app = {
     // 	API_HOST:"https://appworks-school-stylish.firebaseapp.com"
     // }
 };
+
+// Other Func
 
 app.get = function (selector) {
     return document.querySelector(selector);
