@@ -7,6 +7,10 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Booky - Welcome</title>
     <link rel="stylesheet" type="text/css" href="css/welcome.css" media="all" />
+    <script src="https://www.gstatic.com/firebasejs/5.5.1/firebase.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.3.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.3.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.3.0/firebase-database.js"></script>
 </head>
 
 <body>
@@ -14,7 +18,7 @@
         <div class="btn_logo">
             <a><img src="img/Booky.png" /></a>
         </div>
-        <button type="button" class="login">登入</button>
+        <!-- <button type="button" class="login">登入</button> -->
     </header>
     <main>
         <div class="view">
@@ -43,8 +47,8 @@
         </div>
 
         <div class="signinDiv">
-            <button type="button" class="login">Google 帳號登入</button>
-            <input class="signin"" type=" button" value="Google 帳號註冊">
+            <!-- <button type="button" class="login">Google 帳號登入</button> -->
+            <button class="signin" id="google">註冊 / 登入</button>
         </div>
 
         <div class="steps">
@@ -81,7 +85,6 @@
         <div class="background-img"></div>
         <div class="footer">&copy; 2018 Booky</div>
     </footer>
-
 </body>
 <script type="module" src=" js/welcome.js"> </script>
 

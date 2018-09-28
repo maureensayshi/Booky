@@ -1,25 +1,59 @@
 "use strict";
 
-// Initialize Firebase
-// let config = {
-//     apiKey: "AIzaSyALgpVirl6lyBvOK9W--e5QycFeMFzcPLg",
-//     authDomain: "booky-217508.firebaseapp.com",
-//     databaseURL: "https://booky-217508.firebaseio.com",
-//     projectId: "booky-217508",
-//     storageBucket: "booky-217508.appspot.com",
-//     messagingSenderId: "757419169220"
-// };
-// let DB = firebase.initializeApp(config);
-
-
 // initialize app structure
-
 let app = {
     // cst:{
     // 	API_HOST:"https://appworks-school-stylish.firebaseapp.com"
     // }
 };
 
+app.firebase = function () {
+    // Initialize Firebase
+    let firebaseInit = {
+        apiKey: "AIzaSyALgpVirl6lyBvOK9W--e5QycFeMFzcPLg",
+        authDomain: "booky-217508.firebaseapp.com",
+        databaseURL: "https://booky-217508.firebaseio.com",
+        projectId: "booky-217508",
+        storageBucket: "booky-217508.appspot.com",
+        messagingSenderId: "757419169220"
+    };
+    let DB = firebase.initializeApp(firebaseInit);
+};
+
+app.checkLogin = function () {
+    firebase.auth().onAuthStateChanged(function (user) {
+        if (user) {
+            app.closeLoading();
+            // User is signed in.
+            let displayName = user.displayName;
+            let email = user.email;
+            let emailVerified = user.emailVerified;
+            let photoURL = user.photoURL;
+            let isAnonymous = user.isAnonymous;
+            let uid = user.uid;
+            let providerData = user.providerData;
+            console.log(email);
+            console.log(emailVerified);
+            console.log(photoURL);
+            console.log(isAnonymous);
+            console.log(uid);
+            console.log(providerData);
+
+        } else {
+            window.location = "/welcome.html";
+            // User is signed out.
+            // [START_EXCLUDE]
+            // document.getElementById("quickstart-sign-in-status").textContent = "Signed out";
+            // document.getElementById("quickstart-sign-in").textContent = "Sign in with Google";
+            // document.getElementById("quickstart-account-details").textContent = "null";
+            // document.getElementById("quickstart-oauthtoken").textContent = "null";
+            // [END_EXCLUDE]
+        }
+        // [START_EXCLUDE]
+        // document.getElementById("quickstart-sign-in").disabled = false;
+        // [END_EXCLUDE]
+    });
+};
 // Other Func
 
 app.get = function (selector) {
@@ -65,7 +99,6 @@ app.menu = function () {
                 menuList[i].style.visibility = "visible";
             }
         }, 300);
-
     };
 
     close_menu.onclick = function () {
@@ -76,6 +109,14 @@ app.menu = function () {
             menuList[i].style.visibility = "hidden";
         }
     };
+};
+
+// loading
+app.showLoading = function () {
+    app.get("#loading").style.display = "block";
+};
+app.closeLoading = function () {
+    app.get("#loading").style.display = "none";
 };
 
 export { app };

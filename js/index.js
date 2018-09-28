@@ -3,8 +3,11 @@
 import { app } from "./common.js";
 
 app.init = function () {
+    app.showLoading();
+    app.firebase();
+    app.checkLogin();
     app.menu();
-    app.keyin_search();
+    app.keyin_search();   
 };
 
 app.searchKeyWord = function () {
@@ -16,10 +19,6 @@ app.searchKeyWord = function () {
 
 app.keyin_search = function () {
     // 設定不同的搜尋方法   
-    // 1. 選擇搜尋方式
-    // 2. 使用者填入關鍵字
-    // 3. 使用者點擊送出按鈕
-    // 4. 依據使用者選擇的搜尋方式，將關鍵字丟入 fetch
 
     // 直接按 Enter 搜尋
     let formSearch = app.get("#searchForm");
@@ -122,7 +121,6 @@ app.getBookData = function (data) {
         let bookISBN;  // 4. ISBN-13
         let bookMaxPage; // 5. 總頁數
         let bookCover; // 6. 書封照片
-        console.log(data.items[i].id);
         // console.log(data.items[i].volumeInfo);
         //書名
         let title = data.items[i].volumeInfo.title;
@@ -130,6 +128,8 @@ app.getBookData = function (data) {
         //作者 or 作者群
         let authors = data.items[i].volumeInfo.authors;
         bookAuthor = (authors != null) ? authors.join("、") : "暫無資料";
+        console.log(authors);
+        
         //出版社
         let publisher = data.items[i].volumeInfo.publisher;
         bookPublisher = (publisher != null) ? publisher : "暫無資料";
