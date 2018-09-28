@@ -24,6 +24,8 @@ app.checkLogin = function () {
     firebase.auth().onAuthStateChanged(function (user) {
         if (user) {
             app.closeLoading();
+            app.get(".welcome").style.display = "none";
+            app.get(".real").style.display = "block";
             // User is signed in.
             let displayName = user.displayName;
             let email = user.email;
@@ -40,18 +42,11 @@ app.checkLogin = function () {
             console.log(providerData);
 
         } else {
-            // window.location = "/welcome.html";
+            // window.location = "/";
+            app.get(".welcome").style.display = "block";
+            app.get(".real").style.display = "none";           
             // User is signed out.
-            // [START_EXCLUDE]
-            // document.getElementById("quickstart-sign-in-status").textContent = "Signed out";
-            // document.getElementById("quickstart-sign-in").textContent = "Sign in with Google";
-            // document.getElementById("quickstart-account-details").textContent = "null";
-            // document.getElementById("quickstart-oauthtoken").textContent = "null";
-            // [END_EXCLUDE]
         }
-        // [START_EXCLUDE]
-        // document.getElementById("quickstart-sign-in").disabled = false;
-        // [END_EXCLUDE]
     });
 };
 // Other Func
