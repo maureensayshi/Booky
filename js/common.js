@@ -20,12 +20,11 @@ app.firebase = function () {
     let DB = firebase.initializeApp(firebaseInit);
 };
 
-app.checkLogin = function () {
+// check login status on every page
+app.checkLogin = function (){
     firebase.auth().onAuthStateChanged(function (user) {
         if (user) {
-            app.closeLoading();
-            app.get(".welcome").style.display = "none";
-            app.get(".real").style.display = "block";
+            app.closeLoading();         
             // User is signed in.
             let displayName = user.displayName;
             let email = user.email;
@@ -40,15 +39,14 @@ app.checkLogin = function () {
             console.log(isAnonymous);
             console.log(uid);
             console.log(providerData);
-
         } else {
-            // window.location = "/";
-            app.get(".welcome").style.display = "block";
-            app.get(".real").style.display = "none";           
+            window.location = "/";   
             // User is signed out.
         }
     });
-};
+
+}
+
 // Other Func
 
 app.get = function (selector) {

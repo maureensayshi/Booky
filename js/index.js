@@ -5,74 +5,80 @@ import { app } from "./common.js";
 app.init = function () {
     app.showLoading();
     app.firebase();
-    app.checkLogin();
-    app.initUser();
+    app.checkLoginIndex();
+    app.googleLogin();
     app.menu();
-    app.keyin_search();   
+    app.keyin_search();
 };
 
-app.initUser = function () {
-    // app.showLoading();
+app.checkLoginIndex = function () {
+    firebase.auth().onAuthStateChanged(function (user) {
+        if (user) {
+            app.closeLoading();
+            app.get(".welcome").style.display = "none";
+            app.get(".real").style.display = "block";
+            // User is signed in.
+            let displayName = user.displayName;
+            let email = user.email;
+            let emailVerified = user.emailVerified;
+            let photoURL = user.photoURL;
+            let isAnonymous = user.isAnonymous;
+            let uid = user.uid;
+            let providerData = user.providerData;
+            console.log(email);
+            console.log(emailVerified);
+            console.log(photoURL);
+            console.log(isAnonymous);
+            console.log(uid);
+            console.log(providerData);
+
+        } else {
+            // window.location = "/";
+            app.get(".welcome").style.display = "block";
+            app.get(".real").style.display = "none";           
+            // User is signed out.
+        }
+    });
+};
+
+app.googleLogin = function () {
+    let gButton = app.get("#google");
+    gButton.addEventListener("click", function () {
+        app.showLoading();
+        if (!firebase.auth().currentUser) {           
+            let provider = new firebase.auth.GoogleAuthProvider();         
+            provider.addScope("https://www.googleapis.com/auth/plus.login");    
+            //啟動 login 程序   
+            firebase.auth().signInWithRedirect(provider);          
+        } else {
+            // [START signout]
+            // firebase.auth().signOut();
+            // [END signout]
+        }
+    });
+
     firebase.auth().getRedirectResult().then(function (result) {
         app.closeLoading();
         if (result.credential) {
             // This gives you a Google Access Token. You can use it to access the Google API.
             let token = result.credential.accessToken;
             console.log(token);
-            // [START_EXCLUDE]
-            // document.getElementById("quickstart-oauthtoken").textContent = token;
-        } else {
-            // document.getElementById("quickstart-oauthtoken").textContent = "null";
-            // [END_EXCLUDE]
-        }
-        // The signed-in user info.
-        let user = result.user;
-        console.log(user);
-
+        } 
     }).catch(function (error) {
         // Handle Errors here.
         let errorCode = error.code;
-        let errorMessage = error.message;
-        // The email of the user's account used.
-        let email = error.email;
-        // The firebase.auth.AuthCredential type that was used.
+        let errorMessage = error.message;    
+        let email = error.email;      
         let credential = error.credential;
-        // [START_EXCLUDE]
+        console.log("Redirect didn't sucess");
+        console.log("error messege:" + errorMessage);
+        console.log("error email:" + email);
+        console.log("error credential:" + credential);           
         if (errorCode === "auth/account-exists-with-different-credential") {
             alert("You have already signed up with a different auth provider for that email.");
-            // If you are using multiple auth providers on your app you should handle linking
-            // the user's accounts here.
         } else {
             console.error(error);
         }
-        // [END_EXCLUDE]
-    });
-    // [END getidptoken]
-    // Listening for auth state changes.
-    // [END authstatelistener]
-    let gButton = app.get("#google");
-    gButton.addEventListener("click", function () {
-        app.showLoading();
-        if (!firebase.auth().currentUser) {
-            // [START createprovider]
-            let provider = new firebase.auth.GoogleAuthProvider();
-            // [END createprovider]
-            // [START addscopes]
-            provider.addScope("https://www.googleapis.com/auth/plus.login");
-            // [END addscopes]
-            // [START signin]
-            
-            firebase.auth().signInWithRedirect(provider);
-            
-            // [END signin]
-        } else {
-            // [START signout]
-            // firebase.auth().signOut();
-            // [END signout]
-        }
-        // [START_EXCLUDE]
-        // gButton.disabled = true;
-        // [END_EXCLUDE]  
     });
 };
 
@@ -84,8 +90,6 @@ app.searchKeyWord = function () {
 };
 
 app.keyin_search = function () {
-    // 設定不同的搜尋方法   
-
     // 直接按 Enter 搜尋
     let formSearch = app.get("#searchForm");
     formSearch.onsubmit = function () {
@@ -195,7 +199,7 @@ app.getBookData = function (data) {
         let authors = data.items[i].volumeInfo.authors;
         bookAuthor = (authors != null) ? authors.join("、") : "暫無資料";
         console.log(authors);
-        
+
         //出版社
         let publisher = data.items[i].volumeInfo.publisher;
         bookPublisher = (publisher != null) ? publisher : "暫無資料";
