@@ -48,13 +48,13 @@ app.menu = function () {
     menu_btn.onclick = function () {
         menu.style.display = "flex";
         if (window.innerWidth > 1200) {
-            menu.style.width = "500px";
+            menu.style.width = "400px";
         } else if (window.innerWidth < 1200 && window.innerWidth > 980) {
-            menu.style.width = "380px";
+            menu.style.width = "320px";
         } else if (window.innerWidth < 980 && window.innerWidth > 480) {
-            menu.style.width = "280px";
-        } else if (window.innerWidth < 480 && window.innerWidth > 320) {
-            menu.style.width = "200px";
+            menu.style.width = "250px";
+        } else if (window.innerWidth < 480 && window.innerWidth >= 320) {
+            menu.style.width = "180px";
         }
         menu.style.visibility = "visible";
         menu_btn.style.visibility = "hidden";
@@ -62,15 +62,6 @@ app.menu = function () {
 
         setTimeout(function () {
             for (let i = 0; i < menuList.length; i++) {
-                // if (window.innerWidth > 1200) {
-                //     menuList[i].style.width = "350px";
-                // } else if (window.innerWidth < 1200 && window.innerWidth > 980) {
-                //     menuList[i].style.width = "266px";
-                // } else if (window.innerWidth < 980 && window.innerWidth > 480) {
-                //     menuList[i].style.width = "197px";
-                // } else if (window.innerWidth < 480 && window.innerWidth > 320) {
-                //     menuList[i].style.width = "140px";
-                // }
                 menuList[i].style.visibility = "visible";
             }
         }, 300);
@@ -81,18 +72,11 @@ app.menu = function () {
         menu.style.width = "0px";
         menu_btn.style.visibility = "visible";
         close_menu.style.height = "0px";
-        // setTimeout(function () {
         for (let i = 0; i < menuList.length; i++) {
             menuList[i].style.visibility = "hidden";
         }
-        // }, 350);
     };
 };
-
-// choose multi-bookshelf in book.html
-// app.multiSelect = function () {
-//     document.multiselect("#testSelect1");
-// };
 
 export { app };
 
