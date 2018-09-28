@@ -40,7 +40,7 @@ app.checkLogin = function () {
             console.log(providerData);
 
         } else {
-            window.location = "/welcome.html";
+            // window.location = "/welcome.html";
             // User is signed out.
             // [START_EXCLUDE]
             // document.getElementById("quickstart-sign-in-status").textContent = "Signed out";

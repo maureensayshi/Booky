@@ -1,5 +1,117 @@
 @import "./common.css";
 
+/* welcome */
+
+.welcome main .view{
+    display: flex;
+    justify-content: center;
+}
+
+.welcome main .key-visual{
+    display: flex;
+    /* overflow: auto; */
+    flex-wrap: nowrap;
+    justify-content: space-between;  
+    align-items: center;
+}
+
+.welcome main .key-visual>.visual-book{
+    flex: none;
+    width: 150px;
+    height: 214px;
+    padding: 13px;
+    margin: 110px 30px;
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: 5px 5px 10px #999999;
+}
+
+
+.welcome main .key-visual>.visual-book:nth-child(2),
+.welcome main .key-visual>.visual-book:nth-child(4){
+    width: 200px;
+    height: 288px;
+}
+
+.welcome main .key-visual>.visual-book:nth-child(3){
+   width: 300px;
+   height: auto;
+}
+
+.welcome main .introduce{
+    display: flex;
+    flex-direction: column;
+    margin: 20px;
+    align-items: center;
+    letter-spacing: 2px;
+}
+
+.welcome main .introduce p{line-height: 3;}
+
+.welcome main .steps{
+    width: 100%;
+    padding: 40px 0;
+    margin: 30px 0 10px 0;
+    background-color: rgba(255, 255, 255, .5);    
+    display: flex;
+    justify-content: center;
+}
+
+.welcome main .stepsBox{
+    flex: none;
+    display: flex;
+    justify-content: space-between;
+}
+
+.welcome main .step{
+    flex: none;
+    width: 128px;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 20px;
+}
+.welcome main .step>div{
+    width: 110px;
+    height: 110px;
+    background-color: white;
+    border-radius: 50%;
+    background-position: center center;    
+    background-repeat: no-repeat;
+    background-size: 50%;
+}
+
+.welcome main .step:nth-child(1)>div{background-image: url("../img/user.svg");}
+.welcome main .step:nth-child(2)>div{background-image: url("../img/bar.svg");}
+.welcome main .step:nth-child(3)>div{background-image: url("../img/book.svg");}
+.welcome main .step:nth-child(4)>div{background-image: url("../img/bookshelf.svg");}
+.welcome main .step:nth-child(5)>div{background-image: url("../img/clock.svg");}
+
+.welcome main .step p { line-height: 1; padding-top: 13px;}
+
+
+.welcome main .signinDiv{ display: flex; flex-direction: column; margin: 50px;}
+.welcome main .signin,
+.welcome main .login{
+    width: 250px; height: 50px; align-self: center; letter-spacing: 3px; padding-left: 100px; border-radius: 5px; border:none;
+    margin: 6px; font-size: 14px; cursor: pointer; font-family: "微軟正黑體";
+    background: url("../img/google.svg") no-repeat 20px #8556B7;
+	color: white; -webkit-box-shadow: none; -moz-box-shadow: none; box-shadow: none;
+}
+
+/* real index page */
+
+.welcome{
+    display: none;
+}
+
+/* .real{
+    display: none;
+} */
+
+
+
 main .view{
     display: flex;
     justify-content: center;
@@ -196,6 +308,29 @@ main .container-two .result-book-info button{
 
 /* RWD */
 @media (max-width: 1200px) and (min-width: 980px){
+
+    /* welcome */
+    .welcome main .key-visual>.visual-book{
+        width: 110px;
+        height: 157px;
+        padding: 13px;
+        margin: 40px 15px;        
+    }
+
+    .welcome main .key-visual>.visual-book:nth-child(2),
+    .welcome main .key-visual>.visual-book:nth-child(4){
+        width: 150px;
+        height: 214px;
+     }
+
+     .welcome main .key-visual>.visual-book:nth-child(3){
+        width: 200px;
+        height: auto;
+     }
+    
+     .welcome main .step{width:120px; margin: 0 15px;}
+
+    /* real index */
     main .key-visual>.visual-book{
         width: 110px;
         height: 157px;
@@ -216,6 +351,36 @@ main .container-two .result-book-info button{
 }
 
 @media (max-width: 980px) and (min-width: 640px){
+
+    /* welcome */
+
+    .welcome main .key-visual>.visual-book{
+        width: 80px;
+        height: 114px;
+        padding: 10px;
+        margin: 40px 15px;        
+    }
+
+    .welcome main .key-visual>.visual-book:nth-child(2),
+    .welcome main .key-visual>.visual-book:nth-child(4){
+        width: 100px;
+        height: 142px;
+     }
+
+     .welcome main .key-visual>.visual-book:nth-child(3){
+        width: 130px;
+        height: auto;
+     }
+
+     .welcome main .introduce{letter-spacing: 1px;}
+     .welcome main .introduce p{line-height: 2;}
+    
+     .welcome main .step{width:90px; margin: 0 10px;}
+     .welcome main .step>div{width: 85px; height: 85px;}
+     .welcome main .step p{ font-size: 12px;}
+
+    /* real index page */
+
     main .key-visual>.visual-book{
         width: 80px;
         height: 114px;
@@ -260,6 +425,25 @@ main .container-two .result-book-info button{
 }
 
 @media (max-width: 640px) and (min-width: 480px){
+
+    /* welcome */
+
+    .welcome main .key-visual>.visual-book:nth-child(odd),
+    .welcome main .key-visual>.visual-book:nth-child(even){
+        overflow: hidden;
+        width: 150px;
+        height: 214px;
+        padding: 10px;
+        margin: 40px 15px;        
+    }
+
+    .welcome main .introduce{margin: 40px;}
+    .welcome main .introduce p {font-size: 14px; line-height: 2; text-align: center;}
+    .welcome main .steps{margin: 20px 0 10px 0;padding: 20px 0;}
+    .welcome main .stepsBox{flex-direction: column;}
+    .welcome main .step{margin: 20px 20px;}
+
+    /* real index page */
     main .key-visual>.visual-book:nth-child(odd),
     main .key-visual>.visual-book:nth-child(even){
         overflow: hidden;
@@ -324,6 +508,25 @@ main .container-two .result-book-info button{
 }
 
 @media (max-width: 480px) and (min-width: 320px){  
+
+    /* welcome */
+
+    .welcome main .key-visual>.visual-book:nth-child(odd),
+    .welcome main .key-visual>.visual-book:nth-child(even){
+        overflow: hidden;
+        width: 150px;
+        height: 214px;
+        padding: 10px;
+        margin: 40px 15px;        
+    }
+
+    .welcome main .introduce{margin: 40px;}
+    .welcome main .introduce p {font-size: 14px; line-height: 2; text-align: center;}
+    .welcome main .steps{margin: 20px 0 10px 0;padding: 20px 0;}
+    .welcome main .stepsBox{flex-direction: column;}
+    .welcome main .step{margin: 20px 20px;}
+
+    /* real index page */
     main .key-visual>.visual-book:nth-child(odd),
     main .key-visual>.visual-book:nth-child(even){
         overflow: hidden;
