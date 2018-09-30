@@ -9,7 +9,7 @@ let app = {
 
 app.firebase = function () {
     // Initialize Firebase
-    let firebaseInit = {
+    let firebaseInfo = {
         apiKey: "AIzaSyALgpVirl6lyBvOK9W--e5QycFeMFzcPLg",
         authDomain: "booky-217508.firebaseapp.com",
         databaseURL: "https://booky-217508.firebaseio.com",
@@ -17,35 +17,31 @@ app.firebase = function () {
         storageBucket: "booky-217508.appspot.com",
         messagingSenderId: "757419169220"
     };
-    let DB = firebase.initializeApp(firebaseInit);
+    let firebaseInit = firebase.initializeApp(firebaseInfo);
+
 };
 
 // check login status on every page
-app.checkLogin = function (){
+app.checkLogin = function () {
     firebase.auth().onAuthStateChanged(function (user) {
         if (user) {
-            app.closeLoading();         
+            app.closeLoading();
             // User is signed in.
+            let uid = user.uid;
             let displayName = user.displayName;
             let email = user.email;
-            let emailVerified = user.emailVerified;
             let photoURL = user.photoURL;
-            let isAnonymous = user.isAnonymous;
-            let uid = user.uid;
-            let providerData = user.providerData;
-            console.log(email);
-            console.log(emailVerified);
-            console.log(photoURL);
-            console.log(isAnonymous);
             console.log(uid);
-            console.log(providerData);
+            console.log(displayName);
+            console.log(email);
+            console.log(photoURL);
         } else {
-            window.location = "/";   
+            window.location = "/";
             // User is signed out.
         }
     });
 
-}
+};
 
 // Other Func
 

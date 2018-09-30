@@ -4,7 +4,6 @@
             "uid": "QWG5DhLXU7PLgvna9frGguJXmCI2",
             "name": "彭彭",
             "email": "maureen81711@gmail.com",
-            "provider": "google",
             "photo": "https://lh5.googleusercontent.com/-lFdPTW-QmYE/AAAAAAAAAAI/AAAAAAAAAAA/APUIFaPcn7ltaoSgCT_sj2wFIw7rVFEOTw/mo/photo.jpg",
             "bookList": {
                 "VoYRAQAAMAAJ": {
@@ -38,11 +37,17 @@
             }
         },
         "B0ibZ6Oo3TcF114n6JjbmKhMDi43": {
-            "uid": "B0ibZ6Oo3TcF114n6JjbmKhMDi43",
-            "name": "彭彭",
-            "email": "maureen81711@gmail.com",
-            "provider": "google",
-            "photo": "https://lh5.googleusercontent.com/-lFdPTW-QmYE/AAAAAAAAAAI/AAAAAAAAAAA/APUIFaPcn7ltaoSgCT_sj2wFIw7rVFEOTw/mo/photo.jpg",
+            "uid": "",
+            "name": "",
+            "email": "",
+            "photo": "",
+            "bookList": ""
+        },
+        "B0ibZ6Oo3TcF114n6JjbmKhMDi43": {
+            "uid": "",
+            "name": "",
+            "email": "",
+            "photo": "",
             "bookList": {
                 "3rQkwxfIy-AC": {
                     "id": "3rQkwxfIy-AC",
@@ -55,20 +60,6 @@
                     "publisher": "之初出版社",
                     "readStatus": 2,
                     "twice" : true,
-                    "lend": true,
-                    "lendTo": "潘國育"
-                },
-                "5QGJAQAACAAJ": {
-                    "id": "5QGJAQAACAAJ",
-                    "title": "銀髮族健康手冊",
-                    "authors": [
-                        "彭彭",
-                        "彭彭二",
-                        "彭彭三"
-                    ],
-                    "publisher": "之初出版社",
-                    "readStatus": 0,
-                    "twice" : false,
                     "lend": true,
                     "lendTo": "潘國育"
                 }

@@ -4,80 +4,81 @@ import { app } from "./common.js";
 
 app.init = function () {
     app.showLoading();
-    app.firebase();
-    app.checkLoginIndex();
-    app.googleLogin();
+    // 啟動 firebase
+    let firebaseInfo = {
+        apiKey: "AIzaSyALgpVirl6lyBvOK9W--e5QycFeMFzcPLg",
+        authDomain: "booky-217508.firebaseapp.com",
+        databaseURL: "https://booky-217508.firebaseio.com",
+        projectId: "booky-217508",
+        storageBucket: "booky-217508.appspot.com",
+        messagingSenderId: "757419169220"
+    };
+    let firebaseInit = firebase.initializeApp(firebaseInfo);
+    app.checkLoginIndex(firebaseInit);
     app.menu();
     app.keyin_search();
 };
 
-app.checkLoginIndex = function () {
+//檢查登入狀態
+app.checkLoginIndex = function (firebaseInit) {
     firebase.auth().onAuthStateChanged(function (user) {
         if (user) {
             app.get(".welcome").style.display = "none";
             app.get(".real").style.display = "block";
             app.closeLoading();
             // User is signed in.
-            let displayName = user.displayName;
-            let email = user.email;
-            let emailVerified = user.emailVerified;
-            let photoURL = user.photoURL;
-            let isAnonymous = user.isAnonymous;
-            let uid = user.uid;
-            let providerData = user.providerData;
-            console.log(email);
-            console.log(emailVerified);
-            console.log(photoURL);
-            console.log(isAnonymous);
-            console.log(uid);
-            console.log(providerData);
-
+            console.log("會員登入");
         } else {
             app.get(".welcome").style.display = "block";
-            app.get(".real").style.display = "none";     
-            app.closeLoading();      
-            // User is signed out.
+            app.get(".real").style.display = "none";
+            app.closeLoading();
+            app.googleLogin(firebaseInit);
         }
     });
 };
 
-app.googleLogin = function () {
+//點擊註冊或登入鍵後，執行註冊和登入
+app.googleLogin = function (firebaseInit) {
     let gButton = app.get("#google");
     gButton.addEventListener("click", function () {
         app.showLoading();
-        if (!firebase.auth().currentUser) {           
-            let provider = new firebase.auth.GoogleAuthProvider();         
-            provider.addScope("https://www.googleapis.com/auth/plus.login");    
+        if (!firebase.auth().currentUser) {
+            let provider = new firebase.auth.GoogleAuthProvider();
+            provider.addScope("https://www.googleapis.com/auth/plus.login");
             //啟動 login 程序   
-            firebase.auth().signInWithRedirect(provider);          
+            firebase.auth().signInWithRedirect(provider);
+            firebase.auth().getRedirectResult().then(function (result) {
+                app.closeLoading();
+                if (result.user) {
+                    let uid = result.user.uid;
+                    let name = result.user.displayName;
+                    let email = result.user.email;
+                    let photo = result.user.photoURL;
+                    //prepare member data for DB
+                    let memberData = {
+                        uid: uid,
+                        name: name,
+                        email: email,
+                        photo: photo,
+                        bookList: "",
+                    };
+                    //send member data to DB
+                    let db = firebaseInit.database();
+                    db.ref("/members/" + uid).set(memberData, function (error) {
+                        if (error) {
+                            console.log("Error of setting member data.");
+                        } else {
+                            console.log("Set member data okay.");
+                        }
+                    }).then(function (res) {
+                        console.log(res);
+                    });
+                }
+            }).catch(function (error) {
+                console.log(error);
+            });
         } else {
-            // [START signout]
-            // firebase.auth().signOut();
-            // [END signout]
-        }
-    });
-
-    firebase.auth().getRedirectResult().then(function (result) {
-        app.closeLoading();
-        if (result.credential) {
-            // This gives you a Google Access Token. You can use it to access the Google API.
-            let token = result.credential.accessToken;
-            console.log(token);
-        } 
-    }).catch(function (error) {
-        // Handle Errors here.
-        let errorCode = error.code;
-        let errorMessage = error.message;    
-        let email = error.email;      
-        let credential = error.credential;
-        console.log("Redirect didn't sucess");
-        console.log("error messege:" + errorMessage);
-        console.log("error email:" + email);
-        console.log("error credential:" + credential);           
-        if (errorCode === "auth/account-exists-with-different-credential") {
-            alert("You have already signed up with a different auth provider for that email.");
-        } else {
-            console.error(error);
+            console.log("執行會員登入");
         }
     });
 };
@@ -198,7 +199,7 @@ app.getBookData = function (data) {
         //作者 or 作者群
         let authors = data.items[i].volumeInfo.authors;
         bookAuthor = (authors != null) ? authors.join("、") : "暫無資料";
-        console.log(authors);
+        // console.log(authors);
 
         //出版社
         let publisher = data.items[i].volumeInfo.publisher;
