@@ -7,17 +7,21 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Booky 書櫃</title>
     <link rel="stylesheet" type="text/css" href="css/bookshelf.css" media="all" />
+    <script src="https://www.gstatic.com/firebasejs/5.5.1/firebase.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.3.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.3.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.3.0/firebase-database.js"></script>
 </head>
 
 <body>
     <div class="menu">
         <img class="close-menu" src="img/cancel.svg" />
         <div><a href="/bookshelf.html">總書櫃</a></div>
-        <div><a>工作用書</a></div>
-        <div><a>睡前讀物</a></div>
-        <div><a>值得二讀</a></div>
-        <div><a>已讀完</a></div>
-        <div><a>出借的書</a></div>
+        <div value="0"><a href="/bookshelf.html?status=0">未讀</a></div>
+        <div value="1"><a href="/bookshelf.html?status=1">閱讀中</a></div>
+        <div value="2"><a href="/bookshelf.html?status=2">已讀</a></div>
+        <div value="twice"><a href="/bookshelf.html?status=twice">值得二讀</a></div>
+        <div value="lend"><a href="/bookshelf.html?status=lend">出借的書</a></div>
         <div><a href="/member.html">帳號管理</a></div>
     </div>
     <header>
@@ -42,10 +46,6 @@
                         <img src="./img/sample1.PNG" />
                     </div>
                     <div class="book-title">這是書名這是書名這是書名</div>
-                    <div class="progressbar">
-                        <div class="progress"></div>
-                    </div>
-                    <div class="progress-title">閱讀進度</div>
                 </div>
                 <!-- second book -->
                 <div>
@@ -53,10 +53,6 @@
                         <img src="./img/sample1.PNG" />
                     </div>
                     <div class="book-title">這是書名這是</div>
-                    <div class="progressbar">
-                        <div class="progress"></div>
-                    </div>
-                    <div class="progress-title">閱讀進度</div>
                 </div>
                 <!-- third book -->
                 <div>
@@ -64,10 +60,6 @@
                         <img src="./img/sample1.PNG" />
                     </div>
                     <div class="book-title">超現實藝術家的謎夢人生：他們超現實藝術家的謎夢人生</div>
-                    <div class="progressbar">
-                        <div class="progress"></div>
-                    </div>
-                    <div class="progress-title">閱讀進度</div>
                 </div>
                 <!-- fourth book -->
                 <div>
@@ -75,10 +67,6 @@
                         <img src="./img/sample1.PNG" />
                     </div>
                     <div class="book-title">走進寶島看臺灣: 文化藏寶圖</div>
-                    <div class="progressbar">
-                        <div class="progress"></div>
-                    </div>
-                    <div class="progress-title">閱讀進度</div>
                 </div>
                 <!-- fifth book -->
                 <div>
@@ -86,10 +74,6 @@
                         <img src="./img/sample1.PNG" />
                     </div>
                     <div class="book-title">走進寶島看臺灣: 文化藏寶圖</div>
-                    <div class="progressbar">
-                        <div class="progress"></div>
-                    </div>
-                    <div class="progress-title">閱讀進度</div>
                 </div>
                 <!-- sixth book -->
                 <div>
@@ -97,10 +81,6 @@
                         <img src="./img/sample1.PNG" />
                     </div>
                     <div class="book-title">走進歷史看中國-政治與戰爭</div>
-                    <div class="progressbar">
-                        <div class="progress"></div>
-                    </div>
-                    <div class="progress-title">閱讀進度</div>
                 </div>
             </div>
         </div>
@@ -109,6 +89,9 @@
         <div class="background-img"></div>
         <div class="footer">&copy; 2018 Booky</div>
     </footer>
+    <div id="loading" class="loading">
+        <img src="img/load.gif" />
+    </div>
 </body>
 <script type="module" src="js/bookshelf.js"></script>
 

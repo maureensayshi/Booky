@@ -3,8 +3,89 @@
 import { app } from "./common.js";
 
 app.init = function () {
+    app.showLoading();
+    // Initialize Firebase
+    let firebaseKey = {
+        apiKey: "AIzaSyALgpVirl6lyBvOK9W--e5QycFeMFzcPLg",
+        authDomain: "booky-217508.firebaseapp.com",
+        databaseURL: "https://booky-217508.firebaseio.com",
+        projectId: "booky-217508",
+        storageBucket: "booky-217508.appspot.com",
+        messagingSenderId: "757419169220"
+    };
+    let firebaseInit = firebase.initializeApp(firebaseKey);
+    app.checkLoginIndex(firebaseInit);
+    app.getRedirectResult(firebaseInit);
     app.menu();
     app.keyin_search();
+};
+
+app.checkLoginIndex = function () {
+    firebase.auth().onAuthStateChanged(function (user) {
+        if (user) {
+            app.get(".welcome").style.display = "none";
+            app.get(".real").style.display = "block";
+            app.closeLoading();
+            // User is signed in.
+        } else {
+            app.get(".welcome").style.display = "block";
+            app.get(".real").style.display = "none";
+            app.closeLoading();
+            app.googleLogin();
+            // User is signed out.
+        }
+    });
+};
+
+app.googleLogin = function () {
+    let gButton = app.get("#google");
+    gButton.addEventListener("click", function () {
+        app.showLoading();
+        if (!firebase.auth().currentUser) {
+            let provider = new firebase.auth.GoogleAuthProvider();
+            provider.addScope("https://www.googleapis.com/auth/plus.login");
+            //啟動 login 程序   
+            firebase.auth().signInWithRedirect(provider);
+        } else {
+            console.error(error);
+        }
+    });
+};
+
+app.getRedirectResult = function (firebaseInit) {
+    firebase.auth().getRedirectResult().then(function (result) {
+        console.log(result);
+        app.closeLoading();
+
+        if (result.user && result.additionalUserInfo.isNewUser) {
+            let uid = result.user.uid;
+            let name = result.user.displayName;
+            let email = result.user.email;
+            let photo = result.user.photoURL;
+            //prepare member data for DB
+            let memberData = {
+                uid: uid,
+                name: name,
+                email: email,
+                photo: photo,
+            };
+            console.log(memberData);
+            //send member data to DB
+            let db = firebaseInit.database();
+            db.ref("/members/" + uid).set(memberData, function (error) {
+                if (error) {
+                    console.log("Error of setting member data.");
+                } else {
+                    console.log("Set member data okay.");
+                }
+            }).then(function (res) {
+                console.log(res);
+            });
+
+        }
+    }).catch(function (error) {
+        console.log(error);
+    });
 };
 
 app.searchKeyWord = function () {
@@ -15,12 +96,6 @@ app.searchKeyWord = function () {
 };
 
 app.keyin_search = function () {
-    // 設定不同的搜尋方法   
-    // 1. 選擇搜尋方式
-    // 2. 使用者填入關鍵字
-    // 3. 使用者點擊送出按鈕
-    // 4. 依據使用者選擇的搜尋方式，將關鍵字丟入 fetch
-
     // 直接按 Enter 搜尋
     let formSearch = app.get("#searchForm");
     formSearch.onsubmit = function () {
@@ -122,61 +197,38 @@ app.getBookData = function (data) {
         let bookISBN;  // 4. ISBN-13
         let bookMaxPage; // 5. 總頁數
         let bookCover; // 6. 書封照片
-        // console.log(data.items[i]);
-        console.log(data.items[i].volumeInfo);
+        // console.log(data.items[i].volumeInfo);
         //書名
         let title = data.items[i].volumeInfo.title;
         bookTitle = title; //存取書名       
-
         //作者 or 作者群
         let authors = data.items[i].volumeInfo.authors;
-        if (authors != null) {
-            bookAuthor = authors.join("、"); //存取作者
-        }
-        else if (authors == null) {
-            bookAuthor = "暫無資料";
-        }
+        bookAuthor = (authors != null) ? authors.join("、") : "暫無資料";
+        // console.log(authors);
+
         //出版社
         let publisher = data.items[i].volumeInfo.publisher;
-        if (publisher != null) {
-            bookPublisher = publisher;
-        } else if (publisher == null) {
-            bookPublisher = "暫無資料";
-        }
+        bookPublisher = (publisher != null) ? publisher : "暫無資料";
         // ISBN
         let isbn = data.items[i].volumeInfo.industryIdentifiers;
         if (isbn != null) {
-            console.log(isbn);
+            // console.log(isbn);
             let tmpISBN;
             for (let i = 0; i < isbn.length; i++) {
-                if (isbn[i].type == "ISBN_13") {
+                if (isbn[i].type == "ISBN_13")
                     tmpISBN = isbn[i].identifier;  //console.log(isbn[i].identifier); 
-                }
             }
-            if (tmpISBN != "" && tmpISBN != null) {
-                bookISBN = tmpISBN;  // console.log("顯示 ISBN 13 碼");
-            } else {
-                bookISBN = "暫無資料";  // console.log("印出無 ISBN 13 碼");
-            }
+            bookISBN = (tmpISBN != "" && tmpISBN != null) ? tmpISBN : "暫無資料";
         } else if (isbn == null) {
             bookISBN = "暫無資料"; // console.log("印出無 ISBN 13 碼");
         }
         // 最大頁數 pageCount
         let maxPage = data.items[i].volumeInfo.pageCount;
-        if (maxPage != null) {
-            bookMaxPage = maxPage; // console.log(maxPage);
-        }
-        else if (maxPage == null) {
-            bookMaxPage = "請輸入總頁數";
-        }
+        bookMaxPage = (maxPage != null) ? maxPage : "請輸入總頁數";
+        // console.log(bookMaxPage);
         // 書封照片
         let cover = data.items[i].volumeInfo.imageLinks;
-        if (cover != null) {
-            bookCover = cover.thumbnail;
-        }
-        else if (cover == null) {
-            bookCover = "https://bit.ly/2ObFgq5";
-        }
+        bookCover = (cover != null) ? cover.thumbnail : "https://bit.ly/2ObFgq5";
         app.showBookResult(bookTitle, bookAuthor, bookPublisher, bookISBN, bookMaxPage, bookCover);
     }
 };

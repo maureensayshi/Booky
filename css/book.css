@@ -1,4 +1,4 @@
-@import "./multiselect.css";
+/* @import "./multiselect.css"; */
 @import "./common.css";
 
 
@@ -49,10 +49,6 @@ main .move-book-detail>div>span{
    padding: 0 10px;
 }
 
-main .move-book-detail>div:nth-child(6)>span,
-main .move-book-detail>div:nth-child(7)>span,
-main .move-book-detail>div:nth-child(8)>span{padding: 0 3px;}
-
 main .move-book-detail>div>span>span{margin-right: 20px;}
 
 main .book-place{
@@ -68,7 +64,6 @@ main .book-place img{
 
 main .book-bookshelf select,
 main .book-place input,
-main .book-progress input,
 main .lend-to input{
     width: 170px;
     height: 30px;
@@ -81,32 +76,110 @@ main .lend-to input{
     font-family: "微軟正黑體";
 }
 
+main .twice-or-not,
+main .reading-status,
 main .lend-or-not{
     display: flex;
-    align-items: center;
+    align-items: center;    
 }
 
+main .reading-status>span:nth-child(1),
 main .lend-or-not>span:nth-child(1),
 main .lend-to>span:nth-child(1){
-    margin-left: 0;
+    margin-left: -9px;
 }
 
-main .lend-or-not>input{
-  margin-left: 30px;
+main .twice-or-not>input{
+    width: 10px;
+    height: 10px;
+    background-color: white;
+    border: 1px solid #cacece;
+    padding: 9px;
+    border-radius: 6px;
+    margin-left: 20px;
+    outline: 0;
+    cursor: pointer;
+    -moz-appearance: none;
+    -webkit-appearance: none;
 }
 
-main .book-progress{
+main .twice-or-not>input:checked{
+    background: #fafafa no-repeat center/12px url(../img/check.png);
+    outline: 0;
+    overflow: visible;
+}
+
+/* The container */
+main .reading-status .container,
+main .lend-or-not .container {
     display: flex;
-    height: 30px; 
-    align-items: center;
+    position: relative;
+    padding-left: 36px;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
-main .book-progress>span{
-    align-items: center;
+/* Hide the browser's default radio button */
+main .reading-status .container input,
+main .lend-or-not .container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
 }
 
-main .book-progress>span>span{
-    margin-left: 10px;
+/* Create a custom radio button */
+main .reading-status .checkmark,
+main .lend-or-not .checkmark{
+    position: absolute;
+    top: -2px;
+    left: 0;
+    height: 20px;
+    width: 20px;
+    background-color: white;
+    border-radius: 6px;
+    border: 1px solid #cacece;
+    margin-left: 8px;
+}
+
+/* On mouse-over, add a grey background color */
+main .reading-status .container:hover input ~ .checkmark,
+main .lend-or-not .container:hover input ~ .checkmark{
+    background-color: #F1F1F3;
+}
+
+/* When the radio button is checked, add a blue background */
+main .reading-status .container input:checked ~ .checkmark,
+main .lend-or-not .container input:checked ~ .checkmark{
+    background-color: white;
+}
+
+/* Create the indicator (the dot/circle - hidden when not checked) */
+main .reading-status .checkmark:after,
+main .lend-or-not .checkmark:after{
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+/* Show the indicator (dot/circle) when checked */
+main .reading-status .container input:checked ~ .checkmark:after,
+main .lend-or-not .container input:checked ~ .checkmark:after {
+    display: block;
+}
+
+/* Style the indicator (dot/circle) */
+main .reading-status .container .checkmark:after,
+main .lend-or-not .container .checkmark:after {
+ 	top: 4px;
+	left: 4px;
+	width: 10px;
+	height: 10px;
+    background: transparent no-repeat center/12px url(../img/check.png);
+    /* outline: 0; */
+    /* overflow: visible; */
 }
 
 main .book-button{
@@ -160,17 +233,11 @@ main .book-button input:nth-child(3){ background: url(../img/calendar.svg) no-re
         width: 200px; margin: 0 10px;
     }
     
-    main .book-progress input,
     main .lend-to input{
         width: 120px;
         margin: 10px;
     }
 
-    main .book-progress>span{
-        display: flex;
-        align-items: center;
-        margin-left: -10px;
-    }
     main .book-button{
         margin-top: 10px;
     }
@@ -202,28 +269,17 @@ main .book-button input:nth-child(3){ background: url(../img/calendar.svg) no-re
     main .book-place input{
         width: 200px; margin: 10px; padding: 10px;
     }
-    .multiselect-wrapper{
+    /* .multiselect-wrapper{
         align-self: flex-start
     }
     .multiselect-input-div input{margin: 0;}
     .multiselect-wrapper .multiselect-list{margin-top: -5px;margin-left: 0;}
-    
-    main .book-progress input,
+     */
     main .lend-to input{
         width: 120px;
         margin: 10px;
     }
-    main .book-progress{
-        flex-direction: column;
-        align-items: flex-start;
-    }
-    main .book-progress>span{
-        display: flex;
-        align-items: center;
-        margin-top: 30px;
-        margin-left: -10px;
-    }
-    
+   
     main .book-button{
         margin-top: 40px;
     }
