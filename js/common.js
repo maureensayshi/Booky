@@ -26,25 +26,19 @@ app.checkLogin = function () {
         if (user) {
             app.closeLoading();
             // User is signed in.
-            let displayName = user.displayName;
+            let name = user.displayName;
             let email = user.email;
-            let emailVerified = user.emailVerified;
             let photoURL = user.photoURL;
-            let isAnonymous = user.isAnonymous;
             let uid = user.uid;
-            let providerData = user.providerData;
+            console.log(name);
             console.log(email);
-            console.log(emailVerified);
             console.log(photoURL);
-            console.log(isAnonymous);
             console.log(uid);
-            console.log(providerData);
         } else {
             window.location = "/";
             // User is signed out.
         }
     });
-
 };
 
 // Other Func
