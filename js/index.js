@@ -4,8 +4,8 @@ import { app } from "./common.js";
 
 app.init = function () {
     app.showLoading();
-    // 啟動 firebase
-    let firebaseInfo = {
+    // Initialize Firebase
+    let firebaseKey = {
         apiKey: "AIzaSyALgpVirl6lyBvOK9W--e5QycFeMFzcPLg",
         authDomain: "booky-217508.firebaseapp.com",
         databaseURL: "https://booky-217508.firebaseio.com",
@@ -13,30 +13,31 @@ app.init = function () {
         storageBucket: "booky-217508.appspot.com",
         messagingSenderId: "757419169220"
     };
-    let firebaseInit = firebase.initializeApp(firebaseInfo);
+    let firebaseInit = firebase.initializeApp(firebaseKey);
     app.checkLoginIndex(firebaseInit);
+    app.getRedirectResult(firebaseInit);
     app.menu();
     app.keyin_search();
 };
 
-app.checkLoginIndex = function (firebaseInit) {
+app.checkLoginIndex = function () {
     firebase.auth().onAuthStateChanged(function (user) {
         if (user) {
             app.get(".welcome").style.display = "none";
             app.get(".real").style.display = "block";
             app.closeLoading();
             // User is signed in.
-            console.log("會員登入");
         } else {
             app.get(".welcome").style.display = "block";
             app.get(".real").style.display = "none";
             app.closeLoading();
-            app.googleLogin(firebaseInit);
+            app.googleLogin();
+            // User is signed out.
         }
     });
 };
 
-app.googleLogin = function (firebaseInit) {
+app.googleLogin = function () {
     let gButton = app.get("#google");
     gButton.addEventListener("click", function () {
         app.showLoading();
@@ -45,40 +46,45 @@ app.googleLogin = function (firebaseInit) {
             provider.addScope("https://www.googleapis.com/auth/plus.login");
             //啟動 login 程序   
             firebase.auth().signInWithRedirect(provider);
-            firebase.auth().getRedirectResult().then(function (result) {
-                console.log(result);
-                app.closeLoading();
-                if (result.user) {
-                    let uid = result.user.uid;
-                    let name = result.user.displayName;
-                    let email = result.user.email;
-                    let photo = result.user.photoURL;
-                    //prepare member data for DB
-                    let memberData = {
-                        uid: uid,
-                        name: name,
-                        email: email,
-                        photo: photo,
-                        bookList: "hello",
-                    };
-                    //send member data to DB
-                    let db = firebaseInit.database();
-                    db.ref("/members/" + uid).set(memberData, function (error) {
-                        if (error) {
-                            console.log("Error of setting member data.");
-                        } else {
-                            console.log("Set member data okay.");
-                        }
-                    }).then(function (res) {
-                        console.log(res);
-                    });
-                }
-            }).catch(function (error) {
-                console.log(error);
-            });
         } else {
-            console.log("執行會員登入");
+            console.error(error);
         }
+    });
+};
+
+app.getRedirectResult = function (firebaseInit) {
+    firebase.auth().getRedirectResult().then(function (result) {
+        console.log(result);
+        app.closeLoading();
+
+        if (result.user && result.additionalUserInfo.isNewUser) {
+            let uid = result.user.uid;
+            let name = result.user.displayName;
+            let email = result.user.email;
+            let photo = result.user.photoURL;
+            //prepare member data for DB
+            let memberData = {
+                uid: uid,
+                name: name,
+                email: email,
+                photo: photo,
+            };
+            console.log(memberData);
+            //send member data to DB
+            let db = firebaseInit.database();
+            db.ref("/members/" + uid).set(memberData, function (error) {
+                if (error) {
+                    console.log("Error of setting member data.");
+                } else {
+                    console.log("Set member data okay.");
+                }
+            }).then(function (res) {
+                console.log(res);
+            });
+
+        }
+    }).catch(function (error) {
+        console.log(error);
     });
 };
 
