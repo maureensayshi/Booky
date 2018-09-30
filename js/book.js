@@ -2,8 +2,10 @@
 import { app } from "./common.js";
 
 app.init = function () {
+    app.showLoading();
+    app.firebase();
+    app.checkLogin();
     app.menu();
-    app.multiSelect();
 };
 
 window.addEventListener("DOMContentLoaded", app.init);

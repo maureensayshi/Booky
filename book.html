@@ -7,6 +7,10 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Booky 單本設定</title>
     <link rel="stylesheet" type="text/css" href="css/book.css" media="all" />
+    <script src="https://www.gstatic.com/firebasejs/5.5.1/firebase.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.3.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.3.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.3.0/firebase-database.js"></script>
 </head>
 
 <body>
@@ -80,7 +84,7 @@
                                 <input type="radio" name="lend" value="lend">
                                 <span class="checkmark"></span>
                             </label>
-                        </div>                     
+                        </div>
                         <div class="lend-to">
                             <span>出借對象 : </span>
                             <input type="text" / placeholder="ex. 王小明"">
@@ -101,6 +105,9 @@
         <div class="background-img"></div>
         <div class="footer">&copy; 2018 Booky</div>
     </footer>
+    <div id="loading" class="loading">
+        <img src="img/load.gif" />
+    </div>
 </body>
 <script type="module" src="js/book.js"></script>
 

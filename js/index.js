@@ -14,9 +14,9 @@ app.init = function () {
 app.checkLoginIndex = function () {
     firebase.auth().onAuthStateChanged(function (user) {
         if (user) {
-            app.closeLoading();
             app.get(".welcome").style.display = "none";
             app.get(".real").style.display = "block";
+            app.closeLoading();
             // User is signed in.
             let displayName = user.displayName;
             let email = user.email;
@@ -33,9 +33,9 @@ app.checkLoginIndex = function () {
             console.log(providerData);
 
         } else {
-            // window.location = "/";
             app.get(".welcome").style.display = "block";
-            app.get(".real").style.display = "none";           
+            app.get(".real").style.display = "none";     
+            app.closeLoading();      
             // User is signed out.
         }
     });

@@ -7,6 +7,10 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Booky 書櫃</title>
     <link rel="stylesheet" type="text/css" href="css/bookshelf.css" media="all" />
+    <script src="https://www.gstatic.com/firebasejs/5.5.1/firebase.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.3.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.3.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.3.0/firebase-database.js"></script>
 </head>
 
 <body>
@@ -41,7 +45,7 @@
                     <div class="visual-book">
                         <img src="./img/sample1.PNG" />
                     </div>
-                    <div class="book-title">這是書名這是書名這是書名</div>                  
+                    <div class="book-title">這是書名這是書名這是書名</div>
                 </div>
                 <!-- second book -->
                 <div>
@@ -85,6 +89,9 @@
         <div class="background-img"></div>
         <div class="footer">&copy; 2018 Booky</div>
     </footer>
+    <div id="loading" class="loading">
+        <img src="img/load.gif" />
+    </div>
 </body>
 <script type="module" src="js/bookshelf.js"></script>
 
