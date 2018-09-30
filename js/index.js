@@ -19,7 +19,6 @@ app.init = function () {
     app.keyin_search();
 };
 
-//檢查登入狀態
 app.checkLoginIndex = function (firebaseInit) {
     firebase.auth().onAuthStateChanged(function (user) {
         if (user) {
@@ -37,7 +36,6 @@ app.checkLoginIndex = function (firebaseInit) {
     });
 };
 
-//點擊註冊或登入鍵後，執行註冊和登入
 app.googleLogin = function (firebaseInit) {
     let gButton = app.get("#google");
     gButton.addEventListener("click", function () {
@@ -48,6 +46,7 @@ app.googleLogin = function (firebaseInit) {
             //啟動 login 程序   
             firebase.auth().signInWithRedirect(provider);
             firebase.auth().getRedirectResult().then(function (result) {
+                console.log(result);
                 app.closeLoading();
                 if (result.user) {
                     let uid = result.user.uid;
@@ -60,7 +59,7 @@ app.googleLogin = function (firebaseInit) {
                         name: name,
                         email: email,
                         photo: photo,
-                        bookList: "",
+                        bookList: "hello",
                     };
                     //send member data to DB
                     let db = firebaseInit.database();
