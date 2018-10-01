@@ -24,29 +24,50 @@ main .view .line{
 
 /* 書的資訊的區塊 */
 
-/* main .book-detail-wrapper{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 600px;
-} */
-
 main .book-detail{
     display: flex;
     width: 500px;
-    margin: 20px;
+    margin: 20px 10px;
 }
 
+main .move-book-detail{
+    width:500px;
+}
 main .move-book-detail>div{
+    width:400px;
     margin: 30px;
     line-height: 1.25;
     display: flex;
-    align-items: center;
 }
 
-main .move-book-detail>div>span{
+main .move-book-detail>div>span{line-height: 1.5;}
+
+main .move-book-detail>div>span:nth-child(1){
    display: flex;
+   width: 70px;
    padding: 0 10px;
+}
+
+main .move-book-detail>div:nth-child(1)>span:nth-child(1){
+    padding: 0;
+    margin-right: -10px;
+}
+main .move-book-detail>div:nth-child(2)>span:nth-child(1){
+    width:90px;
+    padding: 0;
+    margin-right: -10px;
+}
+
+main .move-book-detail>div:nth-child(3)>span:nth-child(1){
+    width:80px;
+    padding: 0;
+    margin-right: -15px;
+}
+
+main .move-book-detail>div:nth-child(5)>span:nth-child(1),
+main .move-book-detail>div:nth-child(7)>span:nth-child(1),
+main .move-book-detail>div:nth-child(8)>span:nth-child(1){
+    width:100px;
 }
 
 main .move-book-detail>div>span>span{margin-right: 20px;}
@@ -65,7 +86,7 @@ main .book-place img{
 main .book-bookshelf select,
 main .book-place input,
 main .lend-to input{
-    width: 170px;
+    width: 310px;
     height: 30px;
     border-radius: 8px;
     background-color: white;
@@ -75,6 +96,8 @@ main .lend-to input{
     font-size: 14px;
     font-family: "微軟正黑體";
 }
+
+main .book-place input{width: 380px;}
 
 main .twice-or-not,
 main .reading-status,
@@ -122,7 +145,7 @@ main .lend-or-not .container {
     user-select: none;
 }
 
-main .status-choice {display: flex;}
+main .status-choice {display: flex;margin-left: -7px;}
 /* Hide the browser's default radio button */
 main .reading-status .container input,
 main .lend-or-not .container input {
@@ -132,8 +155,7 @@ main .lend-or-not .container input {
 }
 
 /* Create a custom radio button */
-main .reading-status .checkmark,
-main .lend-or-not .checkmark{
+main .reading-status .checkmark{
     position: absolute;
     top: -2px;
     left: 0;
@@ -144,6 +166,20 @@ main .lend-or-not .checkmark{
     border: 1px solid #cacece;
     margin-left: 8px;
 }
+
+main .lend-or-not .checkmark{
+    position: absolute;
+    top: -2px;
+    left: 0;
+    height: 20px;
+    width: 20px;
+    background-color: white;
+    border-radius: 12px;
+    border: 1px solid #cacece;
+    /* margin-left: 8px; */
+}
+
+main .lend-to{align-items: center;}
 
 /* On mouse-over, add a grey background color */
 main .reading-status .container:hover input ~ .checkmark,
@@ -223,22 +259,26 @@ main .lend-or-not .container .checkmark:after {
     main .book-detail-wrapper{display: flex; justify-content: center;}
     main .book-detail{width: 400px;}
     main .book-place input{width: 293px;}
-    main .move-book-detail>div{width:350px;align-items: unset;}
-    main .move-book-detail>div>span{padding: 5px 0;line-height: 1.5;}
+    main .move-book-detail>div{width:350px;}
+    main .move-book-detail>div>span{line-height: 1.5;}
     main .move-book-detail>div>span:nth-child(1){width: 50px;}    
+    main .move-book-detail>div:nth-child(1)>span:nth-child(1){width: 50px; margin-right: 0;} 
+    main .move-book-detail>div:nth-child(2)>span:nth-child(1){width: 50px; margin-right: 0;}   
     main .move-book-detail>div>span:nth-child(2){width: 300px; flex-wrap: wrap;}
-    main .move-book-detail>div:nth-child(3)>span:nth-child(1){width: 60px;}
+    main .move-book-detail>div:nth-child(3)>span:nth-child(1){width: 70px;margin-right: 0;}
     main .move-book-detail>div:nth-child(3)>span:nth-child(2){width: 290px;flex-wrap: wrap;}
     main .reading-status>span:nth-child(1), main .lend-or-not>span:nth-child(1), main .lend-to>span:nth-child(1){margin-left: 0;}
-    main .move-book-detail>div:nth-child(5)>span:nth-child(1){width:80px;}
+    main .move-book-detail>div:nth-child(5)>span:nth-child(1){width:100px; padding: 0;}
     main .reading-status{align-items: center;}
     main .status-choice{width: 273px; justify-content: space-around; margin: 8px 0 10px 6px;}
     main .reading-status .container{margin-left: -15px;}
     main .twice-or-not{align-items: center;}
-    main .twice-or-not>input{margin-left: 15px;}
+    main .twice-or-not>input{margin-left: 25px;}
     main .move-book-detail>div:nth-child(7){align-items: center;}
-    main .move-book-detail>div:nth-child(7)>span:nth-child(1){width:80px;}
-    main .move-book-detail>div:nth-child(8)>span:nth-child(1){width:80px;}
+    main .move-book-detail>div:nth-child(7)>span:nth-child(1){width:80px;padding: 0;}
+    main .move-book-detail>div:nth-child(8)>span:nth-child(1){width:80px;padding: 0;}
+    main .lend-or-not .container{margin-left: 17px;}
+    main .checkmark-two{margin-left: -4px;}
     main .lend-to input{width: 240px;}
     .book-button{display: flex; flex-direction: column; margin-top: -20px;}
     footer .background-img{padding: 20%; background-size: 100%;}
@@ -249,24 +289,32 @@ main .lend-or-not .container .checkmark:after {
     main .visual-book{align-self: center;margin: 50px 20px 0px 20px;}
     main .book-detail-wrapper{display: flex; justify-content: center;}
     main .book-detail{width: 300px;}
-    main .book-place input{width: 205px;}
-    main .move-book-detail>div{width:300px;align-items: unset;}
-    main .move-book-detail>div>span{padding: 5px 0;line-height: 1.5;}
-    main .move-book-detail>div>span:nth-child(1){width: 50px;}    
-    main .move-book-detail>div>span:nth-child(2){width: 200px; flex-wrap: wrap;}
-    main .move-book-detail>div:nth-child(3)>span:nth-child(1){width: 60px;}
-    main .move-book-detail>div:nth-child(3)>span:nth-child(2){width: 190px;flex-wrap: wrap;}
+    main .book-place input{width: 200px;}
+    main .move-book-detail>div{width:250px;}
+    main .move-book-detail>div>span{line-height: 1.5;}
+    main .move-book-detail>div>span:nth-child(1){width: 60px;}    
+    main .move-book-detail>div:nth-child(1)>span:nth-child(1){width: 60px; margin-right: 0;} 
+    main .move-book-detail>div:nth-child(2)>span:nth-child(1){width: 60px; margin-right: 0;}   
+    main .move-book-detail>div>span:nth-child(2){width: 250px; flex-wrap: wrap;}
+    main .move-book-detail>div:nth-child(3)>span:nth-child(1){width: 65px;margin-right: 0;}
+    main .move-book-detail>div:nth-child(3)>span:nth-child(2){width: 180px;flex-wrap: wrap;}
     main .reading-status>span:nth-child(1), main .lend-or-not>span:nth-child(1), main .lend-to>span:nth-child(1){margin-left: 0;}
-    main .move-book-detail>div:nth-child(5)>span:nth-child(1){width:80px;}
+    main .move-book-detail>div:nth-child(5)>span:nth-child(1){width:100px; padding: 0;}
     main .reading-status{flex-direction: column;}
-    main .status-choice{width: 270px; justify-content: space-around; margin: 8px 0 10px 0px;}
+    main .reading-status>span{align-self: flex-start;}
+    main .status-choice{width: 273px; justify-content: space-evenly; margin: 8px 0 10px 6px;}
     main .reading-status .container{margin-left: -15px;}
     main .twice-or-not{align-items: center;}
-    main .twice-or-not>input{margin-left: 15px;}
+    main .twice-or-not>input{margin-left: 25px;}
     main .move-book-detail>div:nth-child(7){align-items: center;}
-    main .move-book-detail>div:nth-child(7)>span:nth-child(1){width:80px;}
-    main .move-book-detail>div:nth-child(8)>span:nth-child(1){width:80px;}
-    main .lend-to input{width: 150px;}
-    .book-button{display: flex; flex-direction: column; margin-top: -20px;}  
-    footer .background-img{padding: 21%; background-size: 100%;} 
+    main .move-book-detail>div:nth-child(7)>span:nth-child(1){width:80px;padding: 0;}
+    main .move-book-detail>div:nth-child(8)>span:nth-child(1){width:80px;padding: 0;}
+    main .lend-or-not .container{margin-left: 17px;}
+    main .checkmark-two{margin-left: -4px;}
+    main .lend-to{flex-direction: column;}
+    main .lend-to>span{align-self: flex-start;margin-bottom: 5px;}
+    main .lend-to input{width: 240px;}
+    .book-button{display: flex; flex-direction: column; margin-top: -20px;}
+    footer .background-img{padding: 20%; background-size: 100%;}
+
 }
