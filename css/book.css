@@ -1,11 +1,10 @@
 /* @import "./multiselect.css"; */
 @import "./common.css";
 
-
 main .view{
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    flex-direction: row;
+   max-width: 800px;
 }
 main .visual-book{
     flex: none;
@@ -25,16 +24,17 @@ main .view .line{
 
 /* 書的資訊的區塊 */
 
-main .book-detail-wrapper{
+/* main .book-detail-wrapper{
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 600px;
-}
+} */
 
 main .book-detail{
     display: flex;
-    margin-left: 20%;
+    width: 500px;
+    margin: 20px;
 }
 
 main .move-book-detail>div{
@@ -95,7 +95,7 @@ main .twice-or-not>input{
     background-color: white;
     border: 1px solid #cacece;
     padding: 9px;
-    border-radius: 6px;
+    border-radius: 12px;
     margin-left: 20px;
     outline: 0;
     cursor: pointer;
@@ -122,6 +122,7 @@ main .lend-or-not .container {
     user-select: none;
 }
 
+main .status-choice {display: flex;}
 /* Hide the browser's default radio button */
 main .reading-status .container input,
 main .lend-or-not .container input {
@@ -139,7 +140,7 @@ main .lend-or-not .checkmark{
     height: 20px;
     width: 20px;
     background-color: white;
-    border-radius: 6px;
+    border-radius: 12px;
     border: 1px solid #cacece;
     margin-left: 8px;
 }
@@ -182,12 +183,17 @@ main .lend-or-not .container .checkmark:after {
     /* overflow: visible; */
 }
 
-main .book-button{
+.view-button{
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    justify-content: center;    
 }
 
-main .book-button input{
+.book-button{
+    width: 800px;
+}
+
+.book-button input{
     width: 240px;
     height: 35px;
     align-self: center;
@@ -205,85 +211,62 @@ main .book-button input{
     box-shadow: none;
 }
 
-main .book-button input:nth-child(1){ padding-left: 0;background: url(../img/edit.svg) no-repeat 35px #B690DF; background-size: 10%;}
-main .book-button input:nth-child(2){ padding-left: 0;background: url(../img/delete.svg) no-repeat 35px #B690DF; background-size: 10%;}
-main .book-button input:nth-child(3){ background: url(../img/calendar.svg) no-repeat 35px #B690DF; background-size: 10%;}
+.book-button input:nth-child(1){ padding-left: 0;background: url(../img/edit.svg) no-repeat 35px #B690DF; background-size: 10%;}
+.book-button input:nth-child(2){ padding-left: 0;background: url(../img/delete.svg) no-repeat 35px #B690DF; background-size: 10%;}
+.book-button input:nth-child(3){ background: url(../img/calendar.svg) no-repeat 35px #B690DF; background-size: 10%;}
 
 /* RWD */
 
 @media (max-width: 980px) and (min-width: 640px){
-    main .view .line{width: 500px;}
+    main .view {flex-direction: column;}
+    main .visual-book{align-self: center;margin: 50px 20px 0px 20px;}
+    main .book-detail-wrapper{display: flex; justify-content: center;}
+    main .book-detail{width: 400px;}
+    main .book-place input{width: 293px;}
+    main .move-book-detail>div{width:350px;align-items: unset;}
+    main .move-book-detail>div>span{padding: 5px 0;line-height: 1.5;}
+    main .move-book-detail>div>span:nth-child(1){width: 50px;}    
+    main .move-book-detail>div>span:nth-child(2){width: 300px; flex-wrap: wrap;}
+    main .move-book-detail>div:nth-child(3)>span:nth-child(1){width: 60px;}
+    main .move-book-detail>div:nth-child(3)>span:nth-child(2){width: 290px;flex-wrap: wrap;}
+    main .reading-status>span:nth-child(1), main .lend-or-not>span:nth-child(1), main .lend-to>span:nth-child(1){margin-left: 0;}
+    main .move-book-detail>div:nth-child(5)>span:nth-child(1){width:80px;}
+    main .reading-status{align-items: center;}
+    main .status-choice{width: 273px; justify-content: space-around; margin: 8px 0 10px 6px;}
+    main .reading-status .container{margin-left: -15px;}
+    main .twice-or-not{align-items: center;}
+    main .twice-or-not>input{margin-left: 15px;}
+    main .move-book-detail>div:nth-child(7){align-items: center;}
+    main .move-book-detail>div:nth-child(7)>span:nth-child(1){width:80px;}
+    main .move-book-detail>div:nth-child(8)>span:nth-child(1){width:80px;}
+    main .lend-to input{width: 240px;}
+    .book-button{display: flex; flex-direction: column; margin-top: -20px;}
+    footer .background-img{padding: 20%; background-size: 100%;}
 }
 
-@media (max-width: 640px) and (min-width: 480px){
-    main .visual-book{
-        width: 128px;
-        height: 179px;
-        padding: 13px;
-        margin: 30px 10px;
-    }
-    main .view .line{width: 400px;}
-    main .book-detail-wrapper{width: 400px;}
-    main .book-detail{margin-left: 0;}
-    main .move-book-detail{width: 400px;}
-    main .book-bookshelf select{
-        width:100px; margin: 0 10px;
-    }
-    main .book-place input{
-        width: 200px; margin: 0 10px;
-    }
-    
-    main .lend-to input{
-        width: 120px;
-        margin: 10px;
-    }
-
-    main .book-button{
-        margin-top: 10px;
-    }
-    main .book-button input{
-        width: 230px;
-    }
-}
-
-@media (max-width: 480px) and (min-width: 320px){
-    main .visual-book{
-        width: 128px;
-        height: 179px;
-        padding: 13px;
-        margin: 30px 10px;
-    }
-    main .view .line{width: 280px;}
-    main .book-detail-wrapper{width: 280px;}
-    main .book-detail{margin-left: 0;}
-    main .move-book-detail{width: 280px;}
-    main .move-book-detail>div{flex-direction: column;line-height: 2;}
- 
-    main .move-book-detail>div:nth-child(6)>span{
-        padding: 4px 3px;
-    }
-    main .book-bookshelf select{
-        width:100px; margin: 0 10px;
-    }
-    main .book-place{ height: 45px;}
-    main .book-place input{
-        width: 200px; margin: 10px; padding: 10px;
-    }
-    /* .multiselect-wrapper{
-        align-self: flex-start
-    }
-    .multiselect-input-div input{margin: 0;}
-    .multiselect-wrapper .multiselect-list{margin-top: -5px;margin-left: 0;}
-     */
-    main .lend-to input{
-        width: 120px;
-        margin: 10px;
-    }
-   
-    main .book-button{
-        margin-top: 40px;
-    }
-    main .book-button input{
-        width: 230px;
-    }
+@media (max-width: 640px) and (min-width: 320px){
+    main .view {flex-direction: column;}
+    main .visual-book{align-self: center;margin: 50px 20px 0px 20px;}
+    main .book-detail-wrapper{display: flex; justify-content: center;}
+    main .book-detail{width: 300px;}
+    main .book-place input{width: 205px;}
+    main .move-book-detail>div{width:300px;align-items: unset;}
+    main .move-book-detail>div>span{padding: 5px 0;line-height: 1.5;}
+    main .move-book-detail>div>span:nth-child(1){width: 50px;}    
+    main .move-book-detail>div>span:nth-child(2){width: 200px; flex-wrap: wrap;}
+    main .move-book-detail>div:nth-child(3)>span:nth-child(1){width: 60px;}
+    main .move-book-detail>div:nth-child(3)>span:nth-child(2){width: 190px;flex-wrap: wrap;}
+    main .reading-status>span:nth-child(1), main .lend-or-not>span:nth-child(1), main .lend-to>span:nth-child(1){margin-left: 0;}
+    main .move-book-detail>div:nth-child(5)>span:nth-child(1){width:80px;}
+    main .reading-status{flex-direction: column;}
+    main .status-choice{width: 270px; justify-content: space-around; margin: 8px 0 10px 0px;}
+    main .reading-status .container{margin-left: -15px;}
+    main .twice-or-not{align-items: center;}
+    main .twice-or-not>input{margin-left: 15px;}
+    main .move-book-detail>div:nth-child(7){align-items: center;}
+    main .move-book-detail>div:nth-child(7)>span:nth-child(1){width:80px;}
+    main .move-book-detail>div:nth-child(8)>span:nth-child(1){width:80px;}
+    main .lend-to input{width: 150px;}
+    .book-button{display: flex; flex-direction: column; margin-top: -20px;}  
+    footer .background-img{padding: 21%; background-size: 100%;} 
 }

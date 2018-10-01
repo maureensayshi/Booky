@@ -40,33 +40,33 @@
             <div class="visual-book">
                 <img src="./img/sample1.PNG" />
             </div>
-            <div class="line"></div>
             <div class="book-detail-wrapper">
-                <!-- EDIT -->
                 <div class="book-detail">
                     <div class="move-book-detail">
-                        <div>書名 : <span>古物雜誌古物雜誌五物茶至</span></div>
-                        <div>作者 : <span>王珉瑄, 王珉瑄, 王珉瑄, 王珉瑄, 潘國育</span></div>
-                        <div>出版社 : <span>呱呱叫出版社呱呱呱呱呱呱呱</span></div>
+                        <div><span>書名 : </span><span>古物雜誌古物雜誌五物茶至</span></div>
+                        <div><span>作者 : </span><span>王珉瑄, 王珉瑄, 王珉瑄, 王珉瑄, 潘國育</span></div>
+                        <div><span>出版社 : </span><span>呱呱叫出版社呱呱呱呱呱呱呱</span></div>
                         <div class="book-place"><img src="./img/map.svg"><input type="text" placeholder="ex. 台北家、美國家" /></div>
 
                         <div class="reading-status">
                             <span>閱讀狀態 : </span>
-                            <label class="container">
-                                <span>未讀&nbsp&nbsp&nbsp</span>
-                                <input type="radio" checked="checked" name="reading" value="0">
-                                <span class="checkmark"></span>
-                            </label>
-                            <label class="container">
-                                <span>閱讀中&nbsp&nbsp&nbsp</span>
-                                <input type="radio" name="reading" value="1">
-                                <span class="checkmark"></span>
-                            </label>
-                            <label class="container">
-                                <span>已讀&nbsp&nbsp&nbsp</span>
-                                <input type="radio" name="reading" value="2">
-                                <span class="checkmark"></span>
-                            </label>
+                            <div class="status-choice">
+                                <label class="container">
+                                    <span>未讀&nbsp&nbsp&nbsp</span>
+                                    <input type="radio" checked="checked" name="reading" value="0">
+                                    <span class="checkmark"></span>
+                                </label>
+                                <label class="container">
+                                    <span>閱讀中&nbsp&nbsp&nbsp</span>
+                                    <input type="radio" name="reading" value="1">
+                                    <span class="checkmark"></span>
+                                </label>
+                                <label class="container">
+                                    <span>已讀&nbsp&nbsp&nbsp</span>
+                                    <input type="radio" name="reading" value="2">
+                                    <span class="checkmark"></span>
+                                </label>
+                            </div>
                         </div>
                         <div class="twice-or-not">
                             <label for="twice">值得二讀 : </label>
@@ -91,23 +91,24 @@
                         </div>                    
                     </div>
                 </div>
-                <!-- button -->
-                <div class="
-                                book-button">
-                            <input type="button" value="儲存修改" />
-                            <input type="button" value="刪除書籤" />
-                            <input type="button" value="加到 Google 日曆" />
-                        </div>
-                    </div>
-                </div>
+            </div>
     </main>
-    <footer>
-        <div class="background-img"></div>
-        <div class="footer">&copy; 2018 Booky</div>
-    </footer>
-    <div id="loading" class="loading">
-        <img src="img/load.gif" />
-    </div>
+    <div class="
+                                view-button">
+                            <div class="book-button">
+                                <input type="button" value="儲存修改" />
+                                <input type="button" value="刪除此書" />
+                                <input type="button" value="加到 Google 日曆" />
+                            </div>
+                        </div>
+                        <footer>
+                            <div class="background-img"></div>
+                            <div class="footer">&copy; 2018 Booky</div>
+                        </footer>
+                        <div id="loading" class="loading">
+                            <img src="img/load.gif" />
+                        </div>
+
 </body>
 <script type="module" src="js/book.js"></script>
 

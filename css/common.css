@@ -126,7 +126,7 @@ img{
 header{
     display: flex;
     justify-content: space-around;
-    padding: 60px 60px 30px;
+    padding: 60px 60px 20px;
 }
 
 header .btn_menu{

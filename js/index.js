@@ -81,7 +81,6 @@ app.getRedirectResult = function (firebaseInit) {
             }).then(function (res) {
                 console.log(res);
             });
-
         }
     }).catch(function (error) {
         console.log(error);
@@ -251,6 +250,12 @@ app.showBookResult = function (bookTitle, bookAuthor, bookPublisher, bookISBN, b
     let ISBNParent = app.createElement("p", "", "ISBN-13：", "", "", bookInfoParent);
     let showISBN = app.createElement("span", "", bookISBN, "", "", ISBNParent);
     let addButton = app.createElement("button", "", "加入總書櫃", "", "", bookInfoParent);
+
+    // addButton.addEventListener("click", app.addBook(e));
 };
+
+// app.addBook = function (e) {
+//     console.log(e);
+// };
 
 window.addEventListener("DOMContentLoaded", app.init);
