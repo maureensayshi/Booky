@@ -63,38 +63,24 @@ app.createElement = function (tagName, class_Name, text_Content, attr, attrText,
 app.menu = function () {
     let menu_btn = app.get(".btn_menu");
     let menu = app.get(".menu");
-    let menuList = app.getAll(".menu div");
     let close_menu = app.get(".close-menu");
 
     menu_btn.onclick = function () {
-        menu.style.display = "flex";
-        if (window.innerWidth > 1200) {
-            menu.style.width = "400px";
-        } else if (window.innerWidth < 1200 && window.innerWidth > 980) {
-            menu.style.width = "320px";
-        } else if (window.innerWidth < 980 && window.innerWidth > 480) {
-            menu.style.width = "250px";
-        } else if (window.innerWidth < 480 && window.innerWidth >= 320) {
-            menu.style.width = "180px";
-        }
-        menu.style.visibility = "visible";
+        menu.style.left = "0";
         menu_btn.style.visibility = "hidden";
-        close_menu.style.height = "30px";
-
-        setTimeout(function () {
-            for (let i = 0; i < menuList.length; i++) {
-                menuList[i].style.visibility = "visible";
-            }
-        }, 300);
     };
 
     close_menu.onclick = function () {
-        menu.style.width = "0px";
-        menu_btn.style.visibility = "visible";
-        close_menu.style.height = "0px";
-        for (let i = 0; i < menuList.length; i++) {
-            menuList[i].style.visibility = "hidden";
+        if (window.innerWidth > 1200) {
+            menu.style.left = "-400px";
+        } else if (window.innerWidth < 1200 && window.innerWidth > 980) {
+            menu.style.left = "-320px";
+        } else if (window.innerWidth < 980 && window.innerWidth > 480) {
+            menu.style.left = "-250px";
+        } else if (window.innerWidth < 480 && window.innerWidth >= 320) {
+            menu.style.left = "-180px";
         }
+        menu_btn.style.visibility = "visible";
     };
 };
 
