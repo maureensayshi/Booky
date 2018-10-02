@@ -29,8 +29,15 @@ main .wrapper div{
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 80%;  
+    width: 128px;  
 }
+
+/* main .wrapper a{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+} */
 
 
 main .wrapper .visual-book{
@@ -44,11 +51,16 @@ main .wrapper .visual-book{
     box-shadow: 5px 5px 10px #999999;
 }
 
+main .wrapper .visual-book img{
+    max-height: 150px;
+}
+
 main .wrapper .book-title{
     height: 42px;
-    margin: 5px 0 5px 0;
+    margin: 20px 0 5px 0;
     line-height: 1.25;
     overflow: hidden;
+    width: 100%;
 }
 
 /* main .progressbar {

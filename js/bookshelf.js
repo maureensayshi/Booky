@@ -18,16 +18,20 @@ app.showAll = function () {
         if (val) {
             console.log(val);
             let bookArray = Object.values(val);
+            let bookKey = Object.keys(val);
             console.log(bookArray);
+            console.log(bookKey);
+
 
 
             let wrapper = app.get(".wrapper");
             for (let i = 0; i < bookArray.length; i++) {
-                console.log(bookArray[i].key);
+
                 let parentDiv = app.createElement("div", "", "", "", "", wrapper);
-                let childDiv = app.createElement("div", "visual-book", "", "", "", parentDiv);
+                let nav = app.createElement("a", "", "", "href", "book.html?id=" + bookKey[i], parentDiv);
+                let childDiv = app.createElement("div", "visual-book", "", "", "", nav);
                 app.createElement("img", "", "", "src", bookArray[i].coverURL, childDiv);
-                app.createElement("div", "book-title", bookArray[i].title, "", "", parentDiv);
+                app.createElement("div", "book-title", bookArray[i].title, "", "", nav);
             }
             app.closeLoading();
         } else {
