@@ -5,11 +5,12 @@ main .view{
     display: flex;
     flex-direction: row;
    max-width: 800px;
+   margin-top: 30px;
 }
 main .visual-book{
     flex: none;
-    width: 256px;
-    height: 358px;
+    width: 200px;
+    height: 280px;
     padding: 13px;
     margin: 50px 20px;
     background-color: white;
@@ -44,24 +45,25 @@ main .move-book-detail>div>span{line-height: 1.5;}
 
 main .move-book-detail>div>span:nth-child(1){
    display: flex;
-   width: 70px;
+   width: 10px;
    padding: 0 10px;
 }
 
-main .move-book-detail>div:nth-child(1)>span:nth-child(1){
-    padding: 0;
-    margin-right: -10px;
-}
-main .move-book-detail>div:nth-child(2)>span:nth-child(1){
-    width:90px;
-    padding: 0;
-    margin-right: -10px;
+main #title,
+main #author{
+    width: 350px;
 }
 
-main .move-book-detail>div:nth-child(3)>span:nth-child(1){
-    width:80px;
+main .move-book-detail>div:nth-child(1)>span:nth-child(1),
+main .move-book-detail>div:nth-child(2)>span:nth-child(1){
     padding: 0;
-    margin-right: -15px;
+    width: 50px;
+}
+
+main #publisher{width: 330px;}
+main .move-book-detail>div:nth-child(3)>span:nth-child(1){
+    width:65px;
+    padding: 0;
 }
 
 main .move-book-detail>div:nth-child(5)>span:nth-child(1),

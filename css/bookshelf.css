@@ -32,14 +32,6 @@ main .wrapper div{
     width: 128px;  
 }
 
-/* main .wrapper a{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-} */
-
-
 main .wrapper .visual-book{
     
     width: 128px;
