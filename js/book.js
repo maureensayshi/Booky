@@ -6,7 +6,6 @@ app.init = function () {
         app.uid = uid;
         app.showBook();
         app.menu();
-        app.closeLoading();
     });
 };
 
@@ -22,6 +21,7 @@ app.showBook = function () {
         app.get("#title").textContent = val.title;
         app.get("#author").textContent = val.authors.join("、");
         app.get("#publisher").textContent = val.publisher;
+        app.closeLoading();
     });
 };
 
