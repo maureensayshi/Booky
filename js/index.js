@@ -253,6 +253,7 @@ app.addBook = function (bookTitle, bookAuthor, bookPublisher, bookISBN, bookCove
         coverURL: bookCover,
         lend: false,
         lendTo: "",
+        place: "",
         publisher: bookPublisher,
         readStatus: 0,
         title: bookTitle,
