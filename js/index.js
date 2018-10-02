@@ -59,6 +59,7 @@ app.getRedirectResult = function () {
                 name: name,
                 email: email,
                 photo: photo,
+                bookList: ""
             };
             //send member data to DB
             let db = app.database;
@@ -243,9 +244,32 @@ app.showBookResult = function (bookTitle, bookAuthor, bookPublisher, bookISBN, b
 
 app.addBook = function (bookTitle, bookAuthor, bookPublisher, bookISBN, bookCover) {
 
-    console.log(bookTitle, bookAuthor, bookPublisher, bookISBN, bookCover);
-    console.log(app);
-    console.log(app.uid);
+    console.log(bookAuthor);
+    let eachAuthor = bookAuthor.split("、");
+
+    //prepare book data for DB
+    let newBook = {
+        authors: eachAuthor,
+        coverURL: bookCover,
+        lend: false,
+        lendTo: "",
+        publisher: bookPublisher,
+        readStatus: 0,
+        title: bookTitle,
+        twice: false,
+        isbn: bookISBN,
+    };
+    //send book data to DB
+    let db = app.database;
+    db.ref("/members/" + app.uid + "/bookList/").push(newBook, function (error) {
+        if (error) {
+            console.log("Error of setting new book data.");
+        } else {
+            console.log("Set book data okay.");
+        }
+    }).then(function (res) {
+        console.log(res);
+    });
 };
 
 window.addEventListener("DOMContentLoaded", app.init);
