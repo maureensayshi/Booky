@@ -17,7 +17,7 @@ app.firebase = function () {
         storageBucket: "booky-217508.appspot.com",
         messagingSenderId: "757419169220"
     };
-    let firebaseInit = firebase.initializeApp(firebaseKey);
+    return firebase.initializeApp(firebaseKey);
 };
 
 // check login status on every page

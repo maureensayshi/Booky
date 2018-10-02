@@ -4,35 +4,29 @@ import { app } from "./common.js";
 
 app.init = function () {
     app.showLoading();
-    // Initialize Firebase
-    let firebaseKey = {
-        apiKey: "AIzaSyALgpVirl6lyBvOK9W--e5QycFeMFzcPLg",
-        authDomain: "booky-217508.firebaseapp.com",
-        databaseURL: "https://booky-217508.firebaseio.com",
-        projectId: "booky-217508",
-        storageBucket: "booky-217508.appspot.com",
-        messagingSenderId: "757419169220"
-    };
-    let firebaseInit = firebase.initializeApp(firebaseKey);
-    app.checkLoginIndex(firebaseInit);
-    app.getRedirectResult(firebaseInit);
-    app.menu();
-    app.keyin_search();
+    app.fbInit = app.firebase();
+    app.checkLoginIndex();
+    app.getRedirectResult();
+
 };
 
 app.checkLoginIndex = function () {
-    firebase.auth().onAuthStateChanged(function (user) {
+    app.fbInit.auth().onAuthStateChanged(function (user) {
+        console.log("in app.checklogin .......");
         if (user) {
+            // User is signed in.
+            app.uid = user.uid;
             app.get(".welcome").style.display = "none";
             app.get(".real").style.display = "block";
+            app.menu();
+            app.keyin_search();
             app.closeLoading();
-            // User is signed in.
         } else {
+            // User is signed out or haven't sign up.
             app.get(".welcome").style.display = "block";
             app.get(".real").style.display = "none";
             app.closeLoading();
             app.googleLogin();
-            // User is signed out.
         }
     });
 };
@@ -41,19 +35,19 @@ app.googleLogin = function () {
     let gButton = app.get("#google");
     gButton.addEventListener("click", function () {
         app.showLoading();
-        if (!firebase.auth().currentUser) {
+        if (!app.fbInit.auth().currentUser) {
             let provider = new firebase.auth.GoogleAuthProvider();
             provider.addScope("https://www.googleapis.com/auth/plus.login");
             //啟動 login 程序   
-            firebase.auth().signInWithRedirect(provider);
+            app.fbInit.auth().signInWithRedirect(provider);
         } else {
-            console.error(error);
+            console.error("sign up or login failed");
         }
     });
 };
 
-app.getRedirectResult = function (firebaseInit) {
-    firebase.auth().getRedirectResult().then(function (result) {
+app.getRedirectResult = function () {
+    app.fbInit.auth().getRedirectResult().then(function (result) {
         console.log(result);
         app.closeLoading();
 
@@ -69,9 +63,8 @@ app.getRedirectResult = function (firebaseInit) {
                 email: email,
                 photo: photo,
             };
-            console.log(memberData);
             //send member data to DB
-            let db = firebaseInit.database();
+            let db = app.fbInit.database();
             db.ref("/members/" + uid).set(memberData, function (error) {
                 if (error) {
                     console.log("Error of setting member data.");
@@ -194,9 +187,7 @@ app.getBookData = function (data) {
         let bookAuthor;  // 2. 作者
         let bookPublisher; // 3. 出版社
         let bookISBN;  // 4. ISBN-13
-        let bookMaxPage; // 5. 總頁數
-        let bookCover; // 6. 書封照片
-        // console.log(data.items[i].volumeInfo);
+        let bookCover; // 5. 書封照片
         //書名
         let title = data.items[i].volumeInfo.title;
         bookTitle = title; //存取書名       
@@ -221,19 +212,16 @@ app.getBookData = function (data) {
         } else if (isbn == null) {
             bookISBN = "暫無資料"; // console.log("印出無 ISBN 13 碼");
         }
-        // 最大頁數 pageCount
-        let maxPage = data.items[i].volumeInfo.pageCount;
-        bookMaxPage = (maxPage != null) ? maxPage : "請輸入總頁數";
-        // console.log(bookMaxPage);
         // 書封照片
         let cover = data.items[i].volumeInfo.imageLinks;
         bookCover = (cover != null) ? cover.thumbnail : "https://bit.ly/2ObFgq5";
-        app.showBookResult(bookTitle, bookAuthor, bookPublisher, bookISBN, bookMaxPage, bookCover);
+        app.showBookResult(bookTitle, bookAuthor, bookPublisher, bookISBN, bookCover);
     }
 };
 
-app.showBookResult = function (bookTitle, bookAuthor, bookPublisher, bookISBN, bookMaxPage, bookCover) {
+app.showBookResult = function (bookTitle, bookAuthor, bookPublisher, bookISBN, bookCover) {
     app.get("main .container-two").style.display = "flex";
+    app.get("main .container-two").scrollIntoView({ block: "start", behavior: "smooth" });
     let booksParent = app.get(".result");
     //each book
     let bookParent = app.createElement("div", "result-book", "", "", "", booksParent);
@@ -250,12 +238,22 @@ app.showBookResult = function (bookTitle, bookAuthor, bookPublisher, bookISBN, b
     let ISBNParent = app.createElement("p", "", "ISBN-13：", "", "", bookInfoParent);
     let showISBN = app.createElement("span", "", bookISBN, "", "", ISBNParent);
     let addButton = app.createElement("button", "", "加入總書櫃", "", "", bookInfoParent);
-
-    // addButton.addEventListener("click", app.addBook(e));
+    //加入總書櫃按鈕
+    addButton.addEventListener("click", function () {
+        app.addBook(bookTitle, bookAuthor, bookPublisher, bookISBN, bookCover);
+    });
 };
 
-// app.addBook = function (e) {
-//     console.log(e);
-// };
+app.addBook = function (bookTitle, bookAuthor, bookPublisher, bookISBN, bookCover) {
+
+    console.log(bookTitle, bookAuthor, bookPublisher, bookISBN, bookCover);
+    console.log(app);
+    console.log(app.uid);
+
+
+    let db = app.fbInit.database();
+};
 
 window.addEventListener("DOMContentLoaded", app.init);
+
+
