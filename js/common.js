@@ -1,43 +1,31 @@
 "use strict";
+// initialize firebase
+firebase.initializeApp({
+    apiKey: "AIzaSyALgpVirl6lyBvOK9W--e5QycFeMFzcPLg",
+    authDomain: "booky-217508.firebaseapp.com",
+    databaseURL: "https://booky-217508.firebaseio.com",
+    projectId: "booky-217508",
+    storageBucket: "booky-217508.appspot.com",
+    messagingSenderId: "757419169220"
+});
 
 // initialize app structure
 let app = {
-    // cst:{
-    // 	API_HOST:"https://appworks-school-stylish.firebaseapp.com"
-    // }
+    database: firebase.database(),
 };
 
-app.firebase = function () {
-    // Initialize Firebase
-    let firebaseKey = {
-        apiKey: "AIzaSyALgpVirl6lyBvOK9W--e5QycFeMFzcPLg",
-        authDomain: "booky-217508.firebaseapp.com",
-        databaseURL: "https://booky-217508.firebaseio.com",
-        projectId: "booky-217508",
-        storageBucket: "booky-217508.appspot.com",
-        messagingSenderId: "757419169220"
-    };
-    return firebase.initializeApp(firebaseKey);
-};
-
-// check login status on every page
 app.checkLogin = function () {
-    firebase.auth().onAuthStateChanged(function (user) {
-        if (user) {
-            app.closeLoading();
-            // User is signed in.
-            let name = user.displayName;
-            let email = user.email;
-            let photoURL = user.photoURL;
-            let uid = user.uid;
-            console.log(name);
-            console.log(email);
-            console.log(photoURL);
-            console.log(uid);
-        } else {
-            window.location = "/";
-            // User is signed out.
-        }
+    return new Promise((resolve, reject) => {
+        firebase.auth().onAuthStateChanged(function (user) {
+            console.log("in app.checklogin .......");
+            if (user) {
+                resolve(user.uid);
+                console.log(user.uid);
+            } else {
+                // User is signed out or haven't sign up.
+                reject(window.location = "/");
+            }
+        });
     });
 };
 
@@ -92,7 +80,7 @@ app.closeLoading = function () {
     app.get("#loading").style.display = "none";
 };
 
-export { app };
+// export { app };
 
 
 

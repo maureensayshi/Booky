@@ -1,11 +1,17 @@
 "use strict";
-import { app } from "./common.js";
 
 app.init = function () {
     app.showLoading();
-    app.firebase();
-    app.checkLogin();
-    app.menu();
+    app.checkLogin().then(uid => {
+        app.uid = uid;
+        app.checkingBook();
+        app.menu();
+        app.closeLoading();
+    });
+};
+
+app.checkingBook = function () {
+    console.log(app.uid);
 };
 
 window.addEventListener("DOMContentLoaded", app.init);

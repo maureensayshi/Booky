@@ -1,21 +1,18 @@
 "use strict";
 
-import { app } from "./common.js";
-
 app.init = function () {
     app.showLoading();
-    app.fbInit = app.firebase();
-    app.checkLoginIndex();
+    app.checkingIndex();
     app.getRedirectResult();
-
 };
 
-app.checkLoginIndex = function () {
-    app.fbInit.auth().onAuthStateChanged(function (user) {
+app.checkingIndex = function () {
+    firebase.auth().onAuthStateChanged(function (user) {
         console.log("in app.checklogin .......");
         if (user) {
             // User is signed in.
             app.uid = user.uid;
+            console.log(app.uid);
             app.get(".welcome").style.display = "none";
             app.get(".real").style.display = "block";
             app.menu();
@@ -35,11 +32,11 @@ app.googleLogin = function () {
     let gButton = app.get("#google");
     gButton.addEventListener("click", function () {
         app.showLoading();
-        if (!app.fbInit.auth().currentUser) {
+        if (!firebase.auth().currentUser) {
             let provider = new firebase.auth.GoogleAuthProvider();
             provider.addScope("https://www.googleapis.com/auth/plus.login");
             //啟動 login 程序   
-            app.fbInit.auth().signInWithRedirect(provider);
+            firebase.auth().signInWithRedirect(provider);
         } else {
             console.error("sign up or login failed");
         }
@@ -47,7 +44,7 @@ app.googleLogin = function () {
 };
 
 app.getRedirectResult = function () {
-    app.fbInit.auth().getRedirectResult().then(function (result) {
+    firebase.auth().getRedirectResult().then(function (result) {
         console.log(result);
         app.closeLoading();
 
@@ -64,7 +61,7 @@ app.getRedirectResult = function () {
                 photo: photo,
             };
             //send member data to DB
-            let db = app.fbInit.database();
+            let db = app.database;
             db.ref("/members/" + uid).set(memberData, function (error) {
                 if (error) {
                     console.log("Error of setting member data.");
@@ -249,9 +246,6 @@ app.addBook = function (bookTitle, bookAuthor, bookPublisher, bookISBN, bookCove
     console.log(bookTitle, bookAuthor, bookPublisher, bookISBN, bookCover);
     console.log(app);
     console.log(app.uid);
-
-
-    let db = app.fbInit.database();
 };
 
 window.addEventListener("DOMContentLoaded", app.init);

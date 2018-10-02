@@ -1,40 +1,17 @@
 "use strict";
 
-import { app } from "./common.js";
-
 app.init = function () {
     app.showLoading();
-    // Initialize Firebase
-    let firebaseKey = {
-        apiKey: "AIzaSyALgpVirl6lyBvOK9W--e5QycFeMFzcPLg",
-        authDomain: "booky-217508.firebaseapp.com",
-        databaseURL: "https://booky-217508.firebaseio.com",
-        projectId: "booky-217508",
-        storageBucket: "booky-217508.appspot.com",
-        messagingSenderId: "757419169220"
-    };
-    let firebaseInit = firebase.initializeApp(firebaseKey);
-    app.checkLoginMember(firebaseInit);
-};
-
-app.checkLoginMember = function (firebaseInit) {
-    firebase.auth().onAuthStateChanged(function (user) {
-        if (user) {
-            // User is signed in.          
-            let uid = user.uid;
-            app.showMemberInfo(firebaseInit, uid);
-            app.menu();
-            app.logOut();
-        } else {
-            window.location = "/";
-            // User is signed out.
-        }
+    app.checkLogin().then(uid => {
+        app.uid = uid;
+        app.showMemberInfo();
+        app.logOut();
     });
 };
 
-app.showMemberInfo = function (firebaseInit, uid) {
-    let db = firebaseInit.database();
-    let dbMember = db.ref("/members/" + uid);
+app.showMemberInfo = function () {
+    let db = app.database;
+    let dbMember = db.ref("/members/" + app.uid);
     dbMember.on("value", function (snapshot) {
         let val = snapshot.val();
         console.log(val);
