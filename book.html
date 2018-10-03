@@ -47,68 +47,67 @@
                         <div><span>書名 : </span><span id="title"></span></div>
                         <div><span>作者 : </span><span id="author"></span></div>
                         <div><span>出版社 : </span><span id="publisher"></span></div>
-                        <div class="book-place"><img src="./img/map.svg"><input type="text" placeholder="ex. 台北家、美國家" /></div>
+                        <div class="book-place"><img src="./img/map.svg"><input type="text" disabled=true value="" /></div>
 
                         <div class="reading-status">
                             <span>閱讀狀態 : </span>
                             <div class="status-choice">
                                 <label class="container">
                                     <span>未讀&nbsp&nbsp&nbsp</span>
-                                    <input type="radio" checked="checked" name="reading" value="0">
+                                    <input type="radio" disabled=true checked="checked" name="reading" value="0">
                                     <span class="checkmark"></span>
                                 </label>
                                 <label class="container">
                                     <span>閱讀中&nbsp&nbsp&nbsp</span>
-                                    <input type="radio" name="reading" value="1">
+                                    <input type="radio" disabled=true name="reading" value="1">
                                     <span class="checkmark"></span>
                                 </label>
                                 <label class="container">
                                     <span>已讀&nbsp&nbsp&nbsp</span>
-                                    <input type="radio" name="reading" value="2">
+                                    <input type="radio" disabled=true name="reading" value="2">
                                     <span class="checkmark"></span>
                                 </label>
                             </div>
                         </div>
                         <div class="twice-or-not">
                             <label for="twice">值得二讀 : </label>
-                            <input type="checkbox" value="twice">
+                            <input type="checkbox" disabled=true value="twice">
                         </div>
                         <div class="lend-or-not">
                             <span>是否出借 : </span>
                             <label class="container">
                                 <span>否&nbsp&nbsp&nbsp</span>
-                                <input type="radio" checked="checked" name="lend" value="unlend">
+                                <input type="radio" disabled=true checked="checked" name="lend" value=false>
                                 <span class="checkmark"></span>
                             </label>
                             <label class="container">
                                 <span>是&nbsp&nbsp&nbsp</span>
-                                <input type="radio" name="lend" value="lend">
+                                <input type="radio" disabled=true name="lend" value=true>
                                 <span class="checkmark checkmark-two"></span>
                             </label>
                         </div>
                         <div class="lend-to">
                             <span>出借對象 : </span>
-                            <input type="text" / placeholder="ex. 王小明"">
-                        </div>                    
+                            <input type="text" disabled=true value="" />
+                        </div>
                     </div>
                 </div>
             </div>
     </main>
-    <div class="
-                                view-button">
-                            <div class="book-button">
-                                <input type="button" value="儲存修改" />
-                                <input type="button" value="刪除此書" />
-                                <input type="button" value="加到 Google 日曆" />
-                            </div>
-                        </div>
-                        <footer>
-                            <div class="background-img"></div>
-                            <div class="footer">&copy; 2018 Booky</div>
-                        </footer>
-                        <div id="loading" class="loading">
-                            <img src="img/load.gif" />
-                        </div>
+    <div class="view-button">
+        <div class="book-button">
+            <input id="save-and-edit" type="button" value="更新資料" />
+            <input id="delete" type="button" value="刪除此書" />
+            <input id="calendar" type="button" value="加到 Google 日曆" />
+        </div>
+    </div>
+    <footer>
+        <div class="background-img"></div>
+        <div class="footer">&copy; 2018 Booky</div>
+    </footer>
+    <div id="loading" class="loading">
+        <img src="img/load.gif" />
+    </div>
 
 </body>
 <script src="js/book.js"></script>

@@ -87,7 +87,7 @@ main .book-place img{
     margin-right: 10px;
 }
 
-main .book-bookshelf select,
+
 main .book-place input,
 main .lend-to input{
     width: 310px;
@@ -100,6 +100,20 @@ main .lend-to input{
     font-size: 14px;
     font-family: "微軟正黑體";
 }
+
+/* 無法變更的樣式
+main .book-place input,
+main .lend-to input{
+    width: 310px;
+    height: 30px;
+    background-color:transparent;
+    border: none;
+    padding: 0px 6px;
+    margin: 0 10px;
+    font-size: 16px;
+    font-family: "微軟正黑體";
+} */
+
 
 main .book-place input{width: 380px;}
 
