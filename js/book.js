@@ -43,10 +43,6 @@ app.showBook = function () {
                 lendChoices[i].checked = true;
             }
         }
-
-        console.log(app.get("main .reading-status .container input:checked"));
-
-
         app.closeLoading();
         app.editBook(val);
     });
@@ -100,6 +96,16 @@ app.editBook = function (val) {
 
             //送到db
             console.log(val);
+
+            // db.ref("/members/" + uid).set(memberData, function (error) {
+            //     if (error) {
+            //         console.log("Error of setting member data.");
+            //     } else {
+            //         console.log("Set member data okay.");
+            //     }
+            // }).then(function (res) {
+            //     console.log(res);
+            // });
 
             // let dbMember = app.database.ref("/members/" + app.uid + "/bookList/");
 
