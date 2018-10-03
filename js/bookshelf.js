@@ -1,7 +1,7 @@
 "use strict";
 
 app.init = function () {
-    // app.showLoading();
+    app.showLoading();
     app.checkLogin().then(uid => {
         app.uid = uid;
         app.getStatus();
@@ -11,7 +11,8 @@ app.init = function () {
 
 app.getStatus = function () {
 
-    let readStatus = parseInt(window.location.search.split("?status=")[1]);
+    let readStatus = window.location.search.split("?status=")[1];
+
     console.log(readStatus);
     let bsTitle = app.get(".view>h2");
     if (readStatus == "all") {
@@ -33,21 +34,61 @@ app.getStatus = function () {
 };
 
 app.allocateBS = function (readStatus) {
+    let readStatusNum = parseInt(readStatus);
     let dbMember = app.database.ref("/members/" + app.uid + "/bookList/");
-    dbMember.orderByChild("readStatus").equalTo(readStatus).once("value").then((snapshot) => {
-        console.log(snapshot.val());
-        let bookSelected = Object.values(snapshot.val());
-        let bookKey = Object.keys(snapshot.val());
-        for (let i = 0; i < bookSelected.length; i++) {
-            let wrapper = app.get(".wrapper");
-            let parentDiv = app.createElement("div", "", "", "", "", wrapper);
-            let nav = app.createElement("a", "", "", "href", "book.html?id=" + bookKey[i], parentDiv);
-            let childDiv = app.createElement("div", "visual-book", "", "", "", nav);
-            app.createElement("img", "", "", "src", bookSelected[i].coverURL, childDiv);
-            app.createElement("div", "book-title", bookSelected[i].title, "", "", nav);
+    if (readStatusNum != null && readStatus != "all" && readStatus != "twice" && readStatus != "lend") {
+        dbMember.orderByChild("readStatus").equalTo(readStatusNum).once("value").then((snapshot) => {
+            app.showBook(snapshot.val());
+        }).catch((error) => {
+            app.get(".wrapper").textContent = "此書櫃暫無書籍";
+            app.get(".wrapper").style.gridTemplateColumns = "repeat(1, 1fr)";
+            console.log("no books " + error);
             app.closeLoading();
-        }
-    });
+        });
+    } else if (readStatus == "all") {
+        dbMember.orderByChild("readStatus").once("value").then((snapshot) => {
+            app.showBook(snapshot.val());
+        }).catch((error) => {
+            console.log("no books " + error);
+            app.get(".wrapper").textContent = "此書櫃暫無書籍";
+            app.get(".wrapper").style.gridTemplateColumns = "repeat(1, 1fr)";
+            app.closeLoading();
+        });
+    } else if (readStatus == "twice") {
+        dbMember.orderByChild("twice").equalTo(true).once("value").then((snapshot) => {
+            app.showBook(snapshot.val());
+        }).catch((error) => {
+            console.log("no books " + error);
+            app.get(".wrapper").textContent = "此書櫃暫無書籍";
+            app.get(".wrapper").style.gridTemplateColumns = "repeat(1, 1fr)";
+            app.closeLoading();
+        });
+    } else if (readStatus == "lend") {
+        dbMember.orderByChild("lend").equalTo(true).once("value").then((snapshot) => {
+            app.showBook(snapshot.val());
+        }).catch((error) => {
+            console.log("no books " + error);
+            app.get(".wrapper").textContent = "此書櫃暫無書籍";
+            app.get(".wrapper").style.gridTemplateColumns = "repeat(1, 1fr)";
+            app.closeLoading();
+        });
+    }
+};
+
+app.showBook = function (bookList) {
+    let bookSelected = Object.values(bookList);
+    console.log(bookSelected);
+
+    let bookKey = Object.keys(bookList);
+    for (let i = 0; i < bookSelected.length; i++) {
+        let wrapper = app.get(".wrapper");
+        let parentDiv = app.createElement("div", "", "", "", "", wrapper);
+        let nav = app.createElement("a", "", "", "href", "book.html?id=" + bookKey[i], parentDiv);
+        let childDiv = app.createElement("div", "visual-book", "", "", "", nav);
+        app.createElement("img", "", "", "src", bookSelected[i].coverURL, childDiv);
+        app.createElement("div", "book-title", bookSelected[i].title, "", "", nav);
+        app.closeLoading();
+    }
 };
 
 
