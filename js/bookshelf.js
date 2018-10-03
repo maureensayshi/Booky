@@ -6,6 +6,7 @@ app.init = function () {
         app.uid = uid;
         app.showAll();
         app.menu();
+
     });
 };
 
@@ -21,20 +22,51 @@ app.showAll = function () {
             let bookKey = Object.keys(val);
 
             let wrapper = app.get(".wrapper");
+
             for (let i = 0; i < bookArray.length; i++) {
-                let parentDiv = app.createElement("div", "", "", "", "", wrapper);
-                let nav = app.createElement("a", "", "", "href", "book.html?id=" + bookKey[i], parentDiv);
-                let childDiv = app.createElement("div", "visual-book", "", "", "", nav);
-                app.createElement("img", "", "", "src", bookArray[i].coverURL, childDiv);
-                app.createElement("div", "book-title", bookArray[i].title, "", "", nav);
+                if (window.location.search == "?status=0") {
+                    if (bookArray[i].readStatus == 0) {
+                        app.createBook(wrapper, bookArray, bookKey, i);
+                        app.closeLoading();
+                    }
+                } else if (window.location.search == "?status=1") {
+                    if (bookArray[i].readStatus == 1) {
+                        app.createBook(wrapper, bookArray, bookKey, i);
+                        app.closeLoading();
+                    }
+                    app.closeLoading();
+                } else if (window.location.search == "?status=2") {
+                    if (bookArray[i].readStatus == 2) {
+                        app.createBook(wrapper, bookArray, bookKey, i);
+                        app.closeLoading();
+                    }
+                } else if (window.location.search == "?status=all") {
+                    if (bookArray[i].readStatus) {
+                        app.createBook(wrapper, bookArray, bookKey, i);
+                        app.closeLoading();
+                    }
+                } else if (window.location.search == "?status=twice") {
+                    if (bookArray[i].twice) {
+                        app.createBook(wrapper, bookArray, bookKey, i);
+                        app.closeLoading();
+                    }
+                }
             }
-            app.closeLoading();
+
         } else {
             console.log("no book");
             app.closeLoading();
         }
     });
 
+};
+
+app.createBook = function (wrapper, bookArray, bookKey, i) {
+    let parentDiv = app.createElement("div", "", "", "", "", wrapper);
+    let nav = app.createElement("a", "", "", "href", "book.html?id=" + bookKey[i], parentDiv);
+    let childDiv = app.createElement("div", "visual-book", "", "", "", nav);
+    app.createElement("img", "", "", "src", bookArray[i].coverURL, childDiv);
+    app.createElement("div", "book-title", bookArray[i].title, "", "", nav);
 };
 
 window.addEventListener("DOMContentLoaded", app.init);
