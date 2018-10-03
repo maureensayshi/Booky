@@ -5,6 +5,7 @@ app.init = function () {
     app.checkLogin().then(uid => {
         app.uid = uid;
         app.showMemberInfo();
+        app.menu();
         app.logOut();
     });
 };
