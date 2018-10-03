@@ -253,7 +253,7 @@ app.addBook = function (bookTitle, bookAuthor, bookPublisher, bookISBN, bookCove
         coverURL: bookCover,
         lend: false,
         lendTo: "",
-        place: "",
+        place: "尚未更新存放地點",
         publisher: bookPublisher,
         readStatus: 0,
         title: bookTitle,

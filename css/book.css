@@ -88,8 +88,7 @@ main .book-place img{
 }
 
 
-main .book-place input,
-main .lend-to input{
+.input-edit{
     width: 310px;
     height: 30px;
     border-radius: 8px;
@@ -101,21 +100,19 @@ main .lend-to input{
     font-family: "微軟正黑體";
 }
 
-/* 無法變更的樣式
-main .book-place input,
-main .lend-to input{
+/* 無法變更的樣式 */
+.input-init{
     width: 310px;
     height: 30px;
     background-color:transparent;
     border: none;
-    padding: 0px 6px;
     margin: 0 10px;
     font-size: 16px;
     font-family: "微軟正黑體";
-} */
+}
 
 
-main .book-place input{width: 380px;}
+/* .input-init{width: 380px;} */
 
 main .twice-or-not,
 main .reading-status,
@@ -287,7 +284,7 @@ main .lend-or-not .container .checkmark:after {
     main .move-book-detail>div:nth-child(5)>span:nth-child(1){width:100px; padding: 0;}
     main .reading-status{align-items: center;}
     main .status-choice{width: 273px; justify-content: space-around; margin: 8px 0 10px 6px;}
-    main .reading-status .container{margin-left: -15px;}
+    main .reading-status .container{margin-left: -40px;}
     main .twice-or-not{align-items: center;}
     main .twice-or-not>input{margin-left: 25px;}
     main .move-book-detail>div:nth-child(7){align-items: center;}
@@ -304,7 +301,7 @@ main .lend-or-not .container .checkmark:after {
     main .visual-book{align-self: center;margin: 50px 20px 0px 20px;}
     main .book-detail-wrapper{display: flex; justify-content: center;}
     main .book-detail{width: 300px;}
-    main .book-place input{width: 200px;}
+    .input-init{width: 200px;}
     main .move-book-detail>div{width:270px;}
     main #author{width: 200px;line-height: 1.5;}
     main .move-book-detail>div>span:nth-child(1){width: 60px;}    
@@ -323,12 +320,12 @@ main .lend-or-not .container .checkmark:after {
     main .twice-or-not>input{margin-left: 25px;}
     main .move-book-detail>div:nth-child(7){align-items: center;}
     main .move-book-detail>div:nth-child(7)>span:nth-child(1){width:80px;padding: 0;}
-    main .move-book-detail>div:nth-child(8)>span:nth-child(1){width:80px;padding: 0;}
+    main .move-book-detail>div:nth-child(8)>span:nth-child(1){width:120px;padding: 0;}
     main .lend-or-not .container{margin-left: 17px;}
     main .checkmark-two{margin-left: -4px;}
-    main .lend-to{flex-direction: column;}
+    /* main .lend-to{flex-direction: column;} */
     main .lend-to>span{align-self: flex-start;margin-bottom: 5px;}
-    main .lend-to input{width: 250px;}
+    .input-init{width: 250px;}
     .book-button{display: flex; flex-direction: column; margin-top: -20px;}
     footer .background-img{padding: 20%; background-size: 100%;}
 
