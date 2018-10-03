@@ -12,7 +12,6 @@ app.init = function () {
 app.getStatus = function () {
 
     let readStatus = window.location.search.split("?status=")[1];
-
     console.log(readStatus);
     let bsTitle = app.get(".view>h2");
     if (readStatus == "all") {
@@ -28,9 +27,7 @@ app.getStatus = function () {
     } else if (readStatus == "lend") {
         bsTitle.textContent = "出借的書";
     }
-
     app.allocateBS(readStatus);
-
 };
 
 app.allocateBS = function (readStatus) {
@@ -77,8 +74,6 @@ app.allocateBS = function (readStatus) {
 
 app.showBook = function (bookList) {
     let bookSelected = Object.values(bookList);
-    console.log(bookSelected);
-
     let bookKey = Object.keys(bookList);
     for (let i = 0; i < bookSelected.length; i++) {
         let wrapper = app.get(".wrapper");
@@ -90,6 +85,5 @@ app.showBook = function (bookList) {
         app.closeLoading();
     }
 };
-
 
 window.addEventListener("DOMContentLoaded", app.init);
