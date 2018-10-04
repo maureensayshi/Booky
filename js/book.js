@@ -111,7 +111,7 @@ app.editBook = function (val, dbBookList) {
 
     delete_btn.addEventListener("click", function () {
         //重新傳回資料庫
-        dbBookList.set(null, function (error) {
+        dbBookList.remove(function (error) {
             if (error) {
                 console.log("刪除書籍失敗");
             } else {
