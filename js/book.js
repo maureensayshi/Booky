@@ -14,7 +14,7 @@ app.showBook = function () {
     console.log(bookID);
     let db = app.database;
     let dbBookList = db.ref("/members/" + app.uid + "/bookList/" + bookID);
-    dbBookList.on("value", function (snapshot) {
+    dbBookList.once("value", function (snapshot) {
         let val = snapshot.val();
         // console.log(val);
         app.get("main .visual-book>img").src = val.coverURL;
@@ -44,8 +44,9 @@ app.showBook = function () {
 };
 
 app.editBook = function (val, dbBookList) {
-
     let save_btn = app.get("#save-and-edit");
+
+    //儲存/修改資料
     save_btn.addEventListener("click", function () {
         let placeInput = app.get("main .book-place input");
         let lendToInput = app.get("main .lend-to input");
@@ -54,13 +55,10 @@ app.editBook = function (val, dbBookList) {
         let twiceButton = app.get("main .twice-or-not>input");
         let lendChoices = app.getAll("main .lend-or-not .container input");
         let lendChoicesChecked = app.get("main .lend-or-not .container input:checked");
-        // placeInput.className = placeInput.disabled ? "input-init" : "input-edit";
+
         if (save_btn.value == "更新資料") {
             save_btn.value = "儲存修改";
             save_btn.style.backgroundImage = "url(../img/save.svg)";
-            // app.get("main").classList.add("edit");
-            // placeInput.classList.remove("main" + " book-place input");
-            // placeInput.classList.add("edit");
             placeInput.disabled = false;
             lendToInput.disabled = false;
             placeInput.className = placeInput.disabled ? "input-init" : "input-edit";
@@ -88,19 +86,14 @@ app.editBook = function (val, dbBookList) {
                 console.log(lendChoices[i].value);
             }
             let lendChoiceSelected = lendChoicesChecked.value === "true" ? true : false;
-            // console.log(placeInput.value); //放置地點 string
-            // console.log(readChoicesChecked.value); //閱讀狀態數字 0/1/2
-            // console.log(twiceButton.checked); //值得二讀 true/false
-            // console.log(typeof lendChoicesChecked.value); //是否有借人 true/false
-            // console.log(lendToInput.value); //借出對象 string
-            //重新賦值給資料庫
-            val.place = placeInput.value;
-            val.readStatus = readChoicesChecked.value;
-            val.twice = twiceButton.checked;
-            val.lend = lendChoiceSelected;
-            val.lendTo = lendChoiceSelected == true ? lendToInput.value : "";
 
-            // console.log(val);
+            //重新賦值書籍資料
+            val.place = placeInput.value; //放置地點 string
+            val.readStatus = readChoicesChecked.value; //閱讀狀態數字 0/1/2 string
+            val.twice = twiceButton.checked; //值得二讀 true/false
+            val.lend = lendChoiceSelected; //是否有借人 true/false
+            val.lendTo = lendChoiceSelected == true ? lendToInput.value : "無"; //借出對象 string
+
             //重新傳回資料庫
             dbBookList.set(val, function (error) {
                 if (error) {
@@ -112,6 +105,23 @@ app.editBook = function (val, dbBookList) {
             });
         }
     });
+
+    //刪除書籍
+    let delete_btn = app.get("#delete");
+
+    delete_btn.addEventListener("click", function () {
+        //重新傳回資料庫
+        dbBookList.set(null, function (error) {
+            if (error) {
+                console.log("刪除書籍失敗");
+            } else {
+                console.log("刪除此書!");
+                alert("刪除此書!");
+                window.location = "/";
+            }
+        });
+    });
+
 };
 
 

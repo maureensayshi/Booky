@@ -282,6 +282,7 @@ app.addBook = function (bookTitle, bookAuthor, bookPublisher, bookISBN, bookCove
             console.log("Error of setting new book data.");
         } else {
             console.log("Set book data okay.");
+            alert("加入 " + newBook.title + " 到總書櫃");
         }
     }).then(function (res) {
         console.log(res);
