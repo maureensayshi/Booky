@@ -178,8 +178,7 @@ main .key-visual .visual-item:nth-child(3) .visual-book-back{
 } */
 
 
-main .container,
-main .container-two{
+main .container{
     width: 100%;
     max-width: 1100px;
     display: flex;
@@ -191,7 +190,12 @@ main .container-two{
 
 main .container-two{
     display: none;
-    /* background-color: rgba(255, 255, 255, .6); */
+    width: 100%;
+    max-width: 1100px;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 auto 60px auto;
+    background-color: rgba(255, 255, 255, .8);
 }
 
 main .container h2,
@@ -199,7 +203,7 @@ main .container-two h2 {
     font-size: 20px; 
     font-weight: bold;
     padding: 30px 425px 20px 425px;
-    border-bottom: 1px solid #3f3a3a;
+    border-bottom: 1px solid #E1E0E1;
 }
 
 main .container .add{
@@ -215,7 +219,7 @@ main .container .scan-add{
     flex: none;
     /* width: 42%; */
     width: 50%;
-    padding: 50px 0 90px 0;
+    padding: 50px 0 50px 0;
     border-radius: 10px;
     /* margin: 30px 5px; */
     margin: 0 0 80px 0;
@@ -235,7 +239,7 @@ main .container .scan-add h3{
     border-top-left-radius: 10px; */
     margin-bottom: 30px;
     /* background-color: rgba(182, 144, 223, .5);     */
-    border-bottom: 1px solid #cccccc;
+    border-bottom: 1px solid #E1E0E1;
     text-align: center;
   
     
@@ -294,7 +298,7 @@ main .container-two .result .result-book{
     flex: none;
     display: flex;
     padding: 10px 0 0 80px;
-    border-bottom: 1px solid #BBBBBB;
+    border-bottom: 1px solid #E1E0E1;
     width: 512px;
 }
 
