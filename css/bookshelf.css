@@ -6,23 +6,31 @@ main .view{
     align-items: center;
 }
 main .view h2{
-    width: 80%;
+    width: 900px;
     font-size: 24px;
-    padding: 80px 300px 20px 300px;
-    border-bottom: 1px solid #BBBBBB;
+    padding: 50px 150px 40px 150px;
+    border-bottom: 1px solid #E1E0E1;
+    margin-top: 60px;
+    color: #544D30;
     display: flex;
     justify-content: center;
-    
+    background-color: rgba(255, 255, 255, .6);
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
 }
 
 main .wrapper{
-    width: 800px;
+    width: 900px;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-gap: 10px;
     grid-auto-rows: minmax(300px, auto);
     align-items: center;
     justify-items: center;
+    background-color: rgba(255, 255, 255, .6);
+    margin-bottom: 60px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
 }
 
 main .wrapper div{
