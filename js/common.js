@@ -52,10 +52,12 @@ app.menu = function () {
     let menu_btn = app.get(".btn_menu");
     let menu = app.get(".menu");
     let close_menu = app.get(".close-menu");
+    let shadow = app.get(".menu-shade");
 
     menu_btn.onclick = function () {
         menu.style.left = "0";
         menu_btn.style.visibility = "hidden";
+        shadow.style.left = "0%";
     };
 
     close_menu.onclick = function () {
@@ -69,6 +71,7 @@ app.menu = function () {
             menu.style.left = "-180px";
         }
         menu_btn.style.visibility = "visible";
+        shadow.style.left = "-100%";
     };
 };
 

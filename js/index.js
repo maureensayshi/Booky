@@ -4,6 +4,8 @@ app.init = function () {
     app.showLoading();
     app.checkingIndex();
     app.getRedirectResult();
+    console.log(window.innerHeight);
+
 };
 
 app.checkingIndex = function () {
@@ -19,6 +21,7 @@ app.checkingIndex = function () {
             app.keyin_search();
             app.visualBook();
             app.closeLoading();
+
         } else {
             // User is signed out or haven't sign up.
             app.get(".welcome").style.display = "block";
@@ -233,6 +236,7 @@ app.getBookData = function (data) {
 };
 
 app.showBookResult = function (bookTitle, bookAuthor, bookPublisher, bookISBN, bookCover) {
+    app.get("main .container").style.margin = "250px auto 0px auto";
     app.get("main .container-two").style.display = "flex";
     app.get("main .container-two").scrollIntoView({ block: "start", behavior: "smooth" });
     let booksParent = app.get(".result");
