@@ -106,12 +106,6 @@
     display: none;
 }
 
-/* .real{
-    display: none;
-} */
-
-
-
 main .view{
     display: flex;
     justify-content: center;
@@ -125,7 +119,7 @@ main .key-visual{
     align-items: center;
 }
 
-main .key-visual>.visual-book{
+main .key-visual .visual-book{
     flex: none;
     width: 150px;
     height: 214px;
@@ -134,18 +128,53 @@ main .key-visual>.visual-book{
     background-color: white;
     border-radius: 15px;
     box-shadow: 5px 5px 10px #999999;
+    position: relative;
+    z-index: 100;
+}
+
+main .key-visual .visual-book>img{
+    z-index: 130;
+}
+
+main .key-visual .visual-item{
+    position: relative;
+}
+main .key-visual .visual-item .visual-book-back{
+    flex: none;
+    width: 150px;
+    height: 214px;
+    padding: 15px;
+    margin: 70px 30px;
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: 5px 5px 10px #999999;
+    position: absolute;
+    top:0;
+    left: 0;
+    /* z-index: -1; */
+}
+
+main .key-visual .visual-item:nth-child(1) .visual-book,
+main .key-visual .visual-item:nth-child(5) .visual-book,
+main .key-visual .visual-item:nth-child(1) .visual-book-back,
+main .key-visual .visual-item:nth-child(5) .visual-book-back{
+    width: 150px;
+    height: 214px;
 }
 
 
-main .key-visual>.visual-book:nth-child(2),
-main .key-visual>.visual-book:nth-child(4){
+main .key-visual .visual-item:nth-child(2) .visual-book,
+main .key-visual .visual-item:nth-child(4) .visual-book,
+main .key-visual .visual-item:nth-child(2) .visual-book-back,
+main .key-visual .visual-item:nth-child(4) .visual-book-back{
     width: 200px;
     height: 288px;
 }
 
-main .key-visual>.visual-book:nth-child(3){
-   width: 300px;
-   height: auto;
+main .key-visual .visual-item:nth-child(3) .visual-book,
+main .key-visual .visual-item:nth-child(3) .visual-book-back{
+    width: 300px;
+    height: 400px;
 }
 
 

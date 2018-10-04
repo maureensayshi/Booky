@@ -17,6 +17,7 @@ app.checkingIndex = function () {
             app.get(".real").style.display = "block";
             app.menu();
             app.keyin_search();
+            app.visualBook();
             app.closeLoading();
         } else {
             // User is signed out or haven't sign up.
@@ -78,6 +79,20 @@ app.getRedirectResult = function () {
     });
 };
 
+app.visualBook = function () {
+    let visuals = app.getAll(".visual-book");
+    let back = app.getAll(".visual-book-back");
+    for (let i = 0; i < visuals.length; i++) {
+        visuals[i].addEventListener("click", function () {
+            visuals[i].classList.add("magictime", "perspectiveLeft");
+            visuals[i].classList.remove("perspectiveLeftReturn");
+        });
+        back[i].addEventListener("click", function () {
+            visuals[i].classList.add("perspectiveLeftReturn");
+            visuals[i].classList.remove("perspectiveLeft");
+        });
+    }
+};
 app.searchKeyWord = function () {
     let keyWord;
     keyWord = app.get("#keyword").value;

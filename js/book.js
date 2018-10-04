@@ -99,6 +99,7 @@ app.editBook = function (val, dbBookList) {
             val.twice = twiceButton.checked;
             val.lend = lendChoiceSelected;
             val.lendTo = lendChoiceSelected == true ? lendToInput.value : "";
+
             // console.log(val);
             //重新傳回資料庫
             dbBookList.set(val, function (error) {
@@ -111,7 +112,7 @@ app.editBook = function (val, dbBookList) {
             });
         }
     });
-
 };
+
 
 window.addEventListener("DOMContentLoaded", app.init);
