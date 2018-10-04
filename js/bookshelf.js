@@ -31,15 +31,12 @@ app.getStatus = function () {
 };
 
 app.allocateBS = function (readStatus) {
-    let readStatusNum = parseInt(readStatus);
-    console.log(readStatusNum);
 
     let dbMember = app.database.ref("/members/" + app.uid + "/bookList/");
-    if (readStatusNum >= 0) {
-        dbMember.orderByChild("readStatus").equalTo(readStatusNum).once("value").then((snapshot) => {
+    if (readStatus >= 0) {
+        dbMember.orderByChild("readStatus").equalTo(readStatus).once("value").then((snapshot) => {
             app.showBook(snapshot.val());
         }).catch((error) => {
-
             app.get(".wrapper").textContent = "此書櫃暫無書籍";
             app.get(".wrapper").style.gridTemplateColumns = "repeat(1, 1fr)";
             console.log("no books " + error);
