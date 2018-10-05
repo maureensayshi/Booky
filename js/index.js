@@ -18,6 +18,7 @@ app.checkingIndex = function () {
             app.get(".welcome").style.display = "none";
             app.get(".real").style.display = "block";
             app.menu();
+            app.searchBar();
             app.keyin_search();
             app.visualBook();
             app.closeLoading();
@@ -236,7 +237,7 @@ app.getBookData = function (data) {
 };
 
 app.showBookResult = function (bookTitle, bookAuthor, bookPublisher, bookISBN, bookCover) {
-    app.get("main .container").style.margin = "250px auto 0px auto";
+    // app.get("main .container").style.margin = "0 auto 0px auto";
     app.get("main .container-two").style.display = "flex";
     app.get("main .container-two").scrollIntoView({ block: "start", behavior: "smooth" });
     let booksParent = app.get(".result");

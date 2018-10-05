@@ -232,7 +232,7 @@ main .lend-or-not .container .checkmark:after {
 	left: 4px;
 	width: 10px;
 	height: 10px;
-    background: transparent no-repeat center/12px url(../img/check.png);
+    background: transparent no-repeat center/12px url(../img/tick.svg);
     /* outline: 0; */
     /* overflow: visible; */
 }

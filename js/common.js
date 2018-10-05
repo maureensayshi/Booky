@@ -75,6 +75,25 @@ app.menu = function () {
     };
 };
 
+//search bar
+app.searchBar = function () {
+    let search_btn = app.get("header .btn_search input");
+    let searchPage = app.get(".search-shade");
+    let close_search_btn = app.get(".searchbar-img>img");
+
+    search_btn.onclick = function () {
+        searchPage.style.visibility = "visible";
+        searchPage.style.opacity = "1";
+        searchPage.style.filter = "alpha(opacity=100)";
+    };
+
+    close_search_btn.onclick = function () {
+        searchPage.style.visibility = "hidden";
+        searchPage.style.opacity = "0";
+        searchPage.style.filter = "alpha(opacity=0)";
+    };
+};
+
 // loading
 app.showLoading = function () {
     app.get("#loading").style.display = "block";
