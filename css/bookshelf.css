@@ -8,13 +8,15 @@ main .view{
 main .view h2{
     width: 900px;
     font-size: 24px;
+    font-weight: 600;
+    font-family: "Cinzel", serif, "NSimSun";
     padding: 50px 150px 40px 150px;
-    border-bottom: 1px solid #E1E0E1;
     margin-top: 60px;
     color: #544D30;
+    letter-spacing: 10px;
     display: flex;
     justify-content: center;
-    background-color: rgba(255, 255, 255, .6);
+    background-color: rgba(255, 255, 255, 1);
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
 }
@@ -41,7 +43,6 @@ main .wrapper div{
 }
 
 main .wrapper .visual-book{
-    
     width: 128px;
     height: 179px;
     padding: 13px;
@@ -56,11 +57,13 @@ main .wrapper .visual-book img{
 }
 
 main .wrapper .book-title{
-    height: 42px;
+    height: 39.5px;
     margin: 20px 0 5px 0;
     line-height: 1.25;
     overflow: hidden;
     width: 100%;
+    font-family: "Martel Sans", "微軟正黑體";
+    letter-spacing: 0.5px;
 }
 
 /* main .progressbar {

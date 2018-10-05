@@ -16,17 +16,17 @@ app.getStatus = function () {
     console.log(readStatus);
     let bsTitle = app.get(".view>h2");
     if (readStatus == "all") {
-        bsTitle.textContent = "總書櫃";
+        bsTitle.textContent = "總書櫃  /  ALL";
     } else if (readStatus == 0) {
-        bsTitle.textContent = "未讀";
+        bsTitle.textContent = "未讀 / UNREAD";
     } else if (readStatus == 1) {
-        bsTitle.textContent = "閱讀中";
+        bsTitle.textContent = "閱讀中 / READING";
     } else if (readStatus == 2) {
-        bsTitle.textContent = "已讀";
+        bsTitle.textContent = "已讀 / READ";
     } else if (readStatus == "twice") {
-        bsTitle.textContent = "值得二讀";
+        bsTitle.textContent = "值得二讀 / TWICE";
     } else if (readStatus == "lend") {
-        bsTitle.textContent = "出借的書";
+        bsTitle.textContent = "出借的書 / LENT";
     }
     app.allocateBS(readStatus);
 };

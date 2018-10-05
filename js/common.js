@@ -92,6 +92,51 @@ app.searchBar = function () {
         searchPage.style.opacity = "0";
         searchPage.style.filter = "alpha(opacity=0)";
     };
+
+    app.searchBarGo();
+};
+
+//搜尋書庫裡的書
+
+app.searchBarGo = function () {
+    let formSearchBar = app.get(".searchbar-form");
+    formSearchBar.onsubmit = function () {
+        app.searchBarKeyWord = app.get(".searchbar-form>input").value;
+        app.searchDB();
+        return false;
+    };
+};
+
+app.searchDB = function () {
+    console.log(app.searchBarKeyWord);
+    console.log(app.uid);
+
+    let db = app.database;
+    if (app.searchBarKeyWord) {
+        let dbBookList = db.ref("/members/" + app.uid + "/bookList/");
+        dbBookList.on("value", function (snapshot) {
+            console.log(snapshot.val());
+            let bookListArrK = Object.keys(snapshot.val());
+            let bookListArrV = Object.values(snapshot.val());
+            let mixedStr = "";
+            for (let i = 0; i < bookListArrV.length; i++) {
+                let author = bookListArrV[i].authors.toString();
+                mixedStr = bookListArrV[i].title + bookListArrV[i].publisher + bookListArrV[i].isbn + author;
+                console.log(mixedStr);
+                if (mixedStr.toLowerCase().indexOf(app.searchBarKeyWord.toLowerCase()) != -1) {
+                    console.log(bookListArrV[i], bookListArrK[i]);
+                    window.location = "/?search=" + app.searchBarKeyWord;
+                    app.get(".view").style.display = "none";
+                } else {
+                    console.log("無搜尋結果");
+                }
+            }
+
+
+
+
+        });
+    }
 };
 
 // loading
