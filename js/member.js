@@ -6,6 +6,7 @@ app.init = function () {
         app.uid = uid;
         app.showMemberInfo();
         app.menu();
+        app.searchBar();
         app.logOut();
     });
 };

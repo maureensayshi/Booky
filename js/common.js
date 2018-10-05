@@ -62,7 +62,7 @@ app.menu = function () {
 
     close_menu.onclick = function () {
         if (window.innerWidth > 1200) {
-            menu.style.left = "-400px";
+            menu.style.left = "-350px";
         } else if (window.innerWidth < 1200 && window.innerWidth > 980) {
             menu.style.left = "-320px";
         } else if (window.innerWidth < 980 && window.innerWidth > 480) {

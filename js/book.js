@@ -6,6 +6,7 @@ app.init = function () {
         app.uid = uid;
         app.showBook();
         app.menu();
+        app.searchBar();
     });
 };
 
