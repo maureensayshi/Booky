@@ -84,19 +84,46 @@ app.getRedirectResult = function () {
 };
 
 app.visualBook = function () {
-    let visuals = app.getAll(".visual-book");
-    let back = app.getAll(".visual-book-back");
-    // for (let i = 0; i < visuals.length; i++) {
-    //     visuals[i].addEventListener("mouseover", function () {
-    //         visuals[i].classList.add("magictime", "perspectiveLeft");
-    //         visuals[i].classList.remove("perspectiveLeftReturn");
-    //     });
-    //     back[i].addEventListener("mouseleave", function () {
-    //         visuals[i].classList.add("perspectiveLeftReturn");
-    //         visuals[i].classList.remove("perspectiveLeft");
-    //     });
+    let pre_btn = app.get("#pre");
+    let next_btn = app.get("#next");
+    let box = app.get(".real-visual");
+    console.log(box);
+
+    let index = 0;
+    // box.style.left = (0 - index * 138) + "px";
+
+    pre_btn.onclick = function () {
+        index++;
+        box.style.left = (0 - index * 158) + "px";
+        console.log(box.style.left);
+
+    };
+    next_btn.onclick = function () {
+        index--;
+        box.style.left = (0 - index * 158) + "px";
+    };
+    // let slideIndex = 1;
+
+    // function plusImg(n) {
+    //     showPics(slideIndex += n);
     // }
+
+    // function showPics(n) {
+    //     if (n > keyArr.length) { slideIndex = 1; }
+    //     if (n < 1) { slideIndex = keyArr.length; }
+    //     for (let i = 0; i < keyArr.length; i++) {
+    //         keyArr[i].style.left = i * -158 + "px";
+    //     }
+    // }
+
+    // pre_btn.onclick = function () {
+    //     plusImg(keyArr[i]);
+    // };
+    // next_btn.onclick = function () {
+    //     plusImg(1);
+    // };
 };
+
 app.searchKeyWord = function () {
     let keyWord;
     keyWord = app.get("#keyword").value;

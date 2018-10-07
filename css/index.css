@@ -121,31 +121,77 @@ main .key-visualBox{
     margin: 70px 0 50px 0;
     width: 100%;
     max-width: 1000px;
+    /* border: 1px solid blue; */
+    position: relative;
     border: 1px solid blue;
+}
+
+main .visual{
+    width: 790px;  
+    height: 200px;
+    border: 1px solid yellow;
+    overflow: hidden;  
     position: relative;
 }
 
-main .key-visual{
-    border: 1px solid red;
-    width: 800px;  
-    scroll-snap-type: x mandatory;
-    overflow-x: scroll;  
+main .real-visual{
+    /* border: 1px solid red; */
+    /* width: 790px;  
+    height: 200px; */
     display: flex;    
-    align-items: center;  
+    position: absolute;
+    left: 0;
+    /* justify-content: space-evenly; */
+    align-items: center;    
+    border: 1px solid red;
 }
 
-main .key-visual .visual-book{
-    flex: none;
+main .visual img{
+    /* flex: none; */
     width: 128px;
-    height: 150px;  
-    box-shadow: 0px 15px 50px 1px #BBBBBB; 
-    z-index: 10;
-    scroll-snap-align: center;
-    margin: 10px; 
-    border-radius: 10px;
+    height: 100%;  
+    box-shadow: 0px 3px 20px 1px #BBBBBB; 
+    /* z-index: 10;  */
+    margin: 0 15px; 
+    /* border-radius: 3px; */
+}
+/* 
+main .key-visual img:nth-child(1){
+    position: absolute;
+    left: 0px;
+    bottom: 50%;
+    transform: translate(10%,50%);
 }
 
-main .left{
+main .key-visual img:nth-child(2){
+    position: absolute;
+    left: 158px;
+    bottom: 50%;
+    transform: translate(10%,50%);
+}
+
+main .key-visual img:nth-child(3){
+    position: absolute;
+    left:316px;
+    bottom: 50%;
+    transform: translate(10%,50%);
+}
+
+main .key-visual img:nth-child(4){
+    position: absolute;
+    left:474px;
+    bottom: 50%;
+    transform: translate(10%,50%);
+}
+
+main .key-visual img:nth-child(5){
+    position: absolute;
+    left: 632px;
+    bottom: 50%;
+    transform: translate(10%,50%);
+} */
+
+main #pre{
     width: 35px;
     height: 35px;
     background: url("../img/left.svg") bottom center no-repeat  ;
@@ -157,7 +203,7 @@ main .left{
     transform: translateY(-50%);
 }
 
-main .right{
+main #next{
     width: 35px;
     height: 35px;
     background: url("../img/right.svg") bottom center no-repeat  ;
