@@ -112,73 +112,69 @@ main .view{
   height: 600px; */
 }
 
-main .key-visual{
+main .key-visualBox{
     display: flex;
-    height: 600px;
+    justify-content: center;
+    margin: 70px 0 50px 0;
+    width: 100%;
+    border: 1px solid blue;
+    position: relative;
+}
+
+main .left{
+    width: 35px;
+    height: 35px;
+    background: url("../img/left.svg") bottom center no-repeat  ;
+    background-size: 100%;
+    border: 1px solid red;
+    position: absolute;
+    left: 0;
+    top: 40%;
+}
+
+main .right{
+    width: 35px;
+    height: 35px;
+    background: url("../img/right.svg") bottom center no-repeat  ;
+    background-size: 100%;
+    border: 1px solid red;
+    position: absolute;
+    right: 0;
+    top: 40%;
+}
+
+main .key-visual{
+    border: 1px solid red;
+    display: flex;
+    /* height: 600px; */
+    width: 80%;
+   
     flex-wrap: nowrap;
     justify-content: space-between;  
-    align-items: flex-start;
+    align-items: center;
     /* scroll-snap-align: start; */
+    position: relative;
 }
 
 main .key-visual .visual-book{
     flex: none;
-    width: 150px;
-    height: 214px;
-    padding: 15px;
-    margin: 30px 30px;
-    background-color: white;
-    border-radius: 15px;
-    box-shadow: 0px 10px 40px 1px #BBBBBB;
-    position: relative;
+    width: 128px;
+    height: auto;  
+    box-shadow: 0px 15px 50px 1px #BBBBBB;
+    position: relative;   
     z-index: 10;
 }
 
 main .key-visual .visual-book>img{
-    z-index: 90;
+    z-index: 90; 
 }
 
 main .key-visual .visual-item{
     position: relative;
 }
-main .key-visual .visual-item .visual-book-back{
-    flex: none;
-    width: 150px;
-    height: 214px;
-    padding: 15px;
-    margin: 30px 30px;
-    background-color: white;
-    border-radius: 15px;
-    box-shadow: 5px 5px 10px #999999;
-    position: absolute;
-    top:0;
-    left: 0;
-    /* z-index: -1; */
-}
 
-/* main .key-visual .visual-item:nth-child(1) .visual-book,
-main .key-visual .visual-item:nth-child(5) .visual-book,
-main .key-visual .visual-item:nth-child(1) .visual-book-back,
-main .key-visual .visual-item:nth-child(5) .visual-book-back{
-    width: 150px;
-    height: 214px;
-}
-
-
-main .key-visual .visual-item:nth-child(2) .visual-book,
-main .key-visual .visual-item:nth-child(4) .visual-book,
-main .key-visual .visual-item:nth-child(2) .visual-book-back,
-main .key-visual .visual-item:nth-child(4) .visual-book-back{
-    width: 200px;
-    height: 288px;
-}
-
-main .key-visual .visual-item:nth-child(3) .visual-book,
-main .key-visual .visual-item:nth-child(3) .visual-book-back{
-    width: 300px;
-    height: 400px;
-} */
-
+/* width: 250px; */
+/* height: auto; */
 
 main .container{
     /* height: 500px;
@@ -308,12 +304,12 @@ main .container-two .result .result-book{
 main .container-two>.result>.result-book>.result-book-img{
     flex: none;
     width: 128px;
-    height: 190px;
-    padding: 13px;
+    height: 196px;
+    /* padding: 13px; */
     margin: 30px 20px;
-    background-color: white;
+    /* background-color: white; */
     border-radius: 15px;
-    box-shadow: 5px 5px 10px #999999;
+    /* box-shadow: 5px 5px 10px #999999; */
 }
 
 main .container-two>.result>.result-book>.result-book-info{
@@ -323,8 +319,8 @@ main .container-two>.result>.result-book>.result-book-info{
 
 main .container-two>.result>.result-book>.result-book-info>p{
     width: 230px;
-    line-height: 1.5;   
-    margin: 4px 0 15px 0;
+    line-height: 1.25;   
+    margin: 0 0 15px 0;
     letter-spacing: 1px;  
     font-weight: 600;
 }

@@ -307,7 +307,7 @@ main .bg{
     background: url("../img/background.jpg") bottom center no-repeat  ;
     background-size: 80%;
     background-attachment: fixed;
-    opacity: 1;
+    opacity: 0.7;
    z-index: -1;
 }
 

@@ -86,16 +86,16 @@ app.getRedirectResult = function () {
 app.visualBook = function () {
     let visuals = app.getAll(".visual-book");
     let back = app.getAll(".visual-book-back");
-    for (let i = 0; i < visuals.length; i++) {
-        visuals[i].addEventListener("mouseover", function () {
-            visuals[i].classList.add("magictime", "perspectiveLeft");
-            visuals[i].classList.remove("perspectiveLeftReturn");
-        });
-        back[i].addEventListener("mouseleave", function () {
-            visuals[i].classList.add("perspectiveLeftReturn");
-            visuals[i].classList.remove("perspectiveLeft");
-        });
-    }
+    // for (let i = 0; i < visuals.length; i++) {
+    //     visuals[i].addEventListener("mouseover", function () {
+    //         visuals[i].classList.add("magictime", "perspectiveLeft");
+    //         visuals[i].classList.remove("perspectiveLeftReturn");
+    //     });
+    //     back[i].addEventListener("mouseleave", function () {
+    //         visuals[i].classList.add("perspectiveLeftReturn");
+    //         visuals[i].classList.remove("perspectiveLeft");
+    //     });
+    // }
 };
 app.searchKeyWord = function () {
     let keyWord;

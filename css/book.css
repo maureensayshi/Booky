@@ -145,7 +145,7 @@ main .twice-or-not>input{
 }
 
 main .twice-or-not>input:checked{
-    background: #fafafa no-repeat center/12px url(../img/check.png);
+    background: #fafafa no-repeat center/12px url(../img/tick.svg);
     outline: 0;
     overflow: visible;
 }
