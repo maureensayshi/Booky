@@ -143,7 +143,6 @@ header{
 header .btn_menu{
     flex: auto;
     width: 50%;
-    cursor: pointer;
     outline: 0;
 }
 
@@ -151,6 +150,7 @@ header .btn_menu img{
     width: auto;
     height: 30px;
     margin: 5px 0 0 10px;
+    cursor: pointer;
 }
 
 header .btn_logo{

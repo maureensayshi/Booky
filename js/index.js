@@ -17,10 +17,10 @@ app.checkingIndex = function () {
             console.log(app.uid);
             app.get(".welcome").style.display = "none";
             app.get(".real").style.display = "block";
+            app.visualBook();
             app.menu();
             app.searchBar();
             app.keyin_search();
-            app.visualBook();
             app.closeLoading();
 
         } else {
@@ -84,44 +84,52 @@ app.getRedirectResult = function () {
 };
 
 app.visualBook = function () {
-    let pre_btn = app.get("#pre");
-    let next_btn = app.get("#next");
-    let box = app.get(".real-visual");
-    console.log(box);
+    let box = app.get(".book-list");
+    let db = app.database;
+    let dbBookList = db.ref("/members/" + app.uid + "/bookList/");
+    dbBookList.on("value", function (snapshot) {
+        console.log(snapshot.val());
+        let bookListArrV = Object.values(snapshot.val());
+        console.log(bookListArrV);
+        for (let i = 0; i < bookListArrV.length; i++) {
+            let pic = document.createElement("img");
+            pic.src = bookListArrV[i].coverURL;
+            box.appendChild(pic);
+        }
+        for (let i = 1; i < bookListArrV.length; i++) {
+            let pic = document.createElement("img");
+            pic.src = bookListArrV[i].coverURL;
+            box.appendChild(pic);
+        }
+        console.log(box);
 
-    let index = 0;
-    // box.style.left = (0 - index * 138) + "px";
+    });
 
-    pre_btn.onclick = function () {
-        index++;
-        box.style.left = (0 - index * 158) + "px";
-        console.log(box.style.left);
-
-    };
-    next_btn.onclick = function () {
-        index--;
-        box.style.left = (0 - index * 158) + "px";
-    };
-    // let slideIndex = 1;
-
-    // function plusImg(n) {
-    //     showPics(slideIndex += n);
-    // }
-
-    // function showPics(n) {
-    //     if (n > keyArr.length) { slideIndex = 1; }
-    //     if (n < 1) { slideIndex = keyArr.length; }
-    //     for (let i = 0; i < keyArr.length; i++) {
-    //         keyArr[i].style.left = i * -158 + "px";
-    //     }
-    // }
-
-    // pre_btn.onclick = function () {
-    //     plusImg(keyArr[i]);
-    // };
+    // let index = 0;
     // next_btn.onclick = function () {
-    //     plusImg(1);
+    //     let bookArrNode = app.getAll(".book-list>img");
+    //     let bookArr = Array.apply(null, bookArrNode);
+    //     index++;
+    //     box.style.left = (0 - index * 168) + "px";
+    //     let leftImg = bookArr.shift();
+    //     //在右側創造一個img，裝著最左側那一個的img src
+    //     let newImg = document.createElement("img");
+    //     newImg.src = leftImg.src;
+    //     console.log(newImg);
+    //     //刪除最左側那一個
+    //     // bookArr.shift();
+    //     //把新的img放到陣列最後面
+    //     box.removeChild(leftImg);
+    //     box.appendChild(newImg);
     // };
+    // pre_btn.onclick = function () {
+    //     let box = app.get(".real-visual");
+    //     let bookArrNode = app.getAll(".real-visual>img");
+    //     let bookArr = Array.apply(null, bookArrNode);
+    //     index--;
+    //     box.style.left = (0 - index * 168) + "px";
+    // };
+
 };
 
 app.searchKeyWord = function () {

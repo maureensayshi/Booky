@@ -49,7 +49,7 @@ app.createElement = function (tagName, class_Name, text_Content, attr, attrText,
 
 // menu open and close
 app.menu = function () {
-    let menu_btn = app.get(".btn_menu");
+    let menu_btn = app.get(".btn_menu>img");
     let menu = app.get(".menu");
     let close_menu = app.get(".close-menu");
     let shadow = app.get(".menu-shade");

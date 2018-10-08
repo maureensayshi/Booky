@@ -106,6 +106,43 @@
     display: none;
 }
 
+main{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.key-visual {
+    overflow: hidden;
+    display: flex;
+    width: 840px;
+}
+  
+.sliding-background{
+    animation: slide 42s linear infinite;  
+}
+
+.book-list {   
+    height: 185px;
+    display: flex;
+    align-items: center;   
+}
+
+  .book-list img{
+      width: 128px; 
+      margin: 0 20px;
+      box-shadow: 0px 3px 10px 0px #BBBBBB; 
+    }
+
+  @keyframes slide {
+    0%{
+      transform: translate3d(0, 0, 0);
+    }
+    100%{
+      transform: translate3d(-2352px, 0, 0);
+    }
+  }
+
+
 main .view{
   /* scroll-snap-type: y mandatory;
   overflow-y: scroll;
@@ -123,39 +160,34 @@ main .key-visualBox{
     max-width: 1000px;
     /* border: 1px solid blue; */
     position: relative;
-    border: 1px solid blue;
+    /* border: 1px solid blue; */
 }
 
-main .visual{
-    width: 790px;  
+/* main .visual{
+    width: 840px;  
     height: 200px;
     border: 1px solid yellow;
     overflow: hidden;  
     position: relative;
-}
-
+} */
+/* 
 main .real-visual{
-    /* border: 1px solid red; */
-    /* width: 790px;  
-    height: 200px; */
     display: flex;    
     position: absolute;
     left: 0;
-    /* justify-content: space-evenly; */
     align-items: center;    
     border: 1px solid red;
+    -webkit-transition: left 1s ease;
+    transition: left 1s ease;  
 }
 
 main .visual img{
-    /* flex: none; */
     width: 128px;
     height: 100%;  
     box-shadow: 0px 3px 20px 1px #BBBBBB; 
-    /* z-index: 10;  */
-    margin: 0 15px; 
-    /* border-radius: 3px; */
+    margin: 0 20px; 
 }
-/* 
+
 main .key-visual img:nth-child(1){
     position: absolute;
     left: 0px;
@@ -165,28 +197,28 @@ main .key-visual img:nth-child(1){
 
 main .key-visual img:nth-child(2){
     position: absolute;
-    left: 158px;
+    left: 168px;
     bottom: 50%;
     transform: translate(10%,50%);
 }
 
 main .key-visual img:nth-child(3){
     position: absolute;
-    left:316px;
+    left:326px;
     bottom: 50%;
     transform: translate(10%,50%);
 }
 
 main .key-visual img:nth-child(4){
     position: absolute;
-    left:474px;
+    left:484px;
     bottom: 50%;
     transform: translate(10%,50%);
 }
 
 main .key-visual img:nth-child(5){
     position: absolute;
-    left: 632px;
+    left: 642px;
     bottom: 50%;
     transform: translate(10%,50%);
 } */
@@ -194,25 +226,24 @@ main .key-visual img:nth-child(5){
 main #pre{
     width: 35px;
     height: 35px;
-    background: url("../img/left.svg") bottom center no-repeat  ;
+    background: url("../img/left.svg") bottom center no-repeat;
     background-size: 100%;
-    border: 1px solid red;
     position: absolute;
     left: 0;
     top: 50%;
     transform: translateY(-50%);
+    cursor: pointer;   
 }
-
 main #next{
     width: 35px;
     height: 35px;
-    background: url("../img/right.svg") bottom center no-repeat  ;
+    background: url("../img/right.svg") bottom center no-repeat;
     background-size: 100%;
-    border: 1px solid red;
     position: absolute;
     right: 0;
     top: 50%;
     transform: translateY(-50%);
+    cursor: pointer;  
 }
 
 /* width: 250px; */
