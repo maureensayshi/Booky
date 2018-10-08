@@ -91,12 +91,14 @@ app.visualBook = function () {
     dbBookList.on("value", function (snapshot) {
         console.log(snapshot.val());
         let bookListArrV = Object.values(snapshot.val());
-        console.log(bookListArrV);
-        // slideBG.style.animation = "slide " + ((bookListArrV.length - 1) * 168) / 56 + "s linear infinite";
+        let num = 0;
+        if (bookListArrV.length < 5) {
+            num = 5 - bookListArrV.length;
+        }
         slideBG.animate([
             // keyframes
             { transform: "translate3d(0, 0, 0)" },
-            { transform: "translate3d(-" + ((bookListArrV.length) * 168) + "px, 0, 0)" }
+            { transform: "translate3d(-" + ((bookListArrV.length + num) * 168) + "px, 0, 0)" }
         ], {
             // timing options
             duration: ((bookListArrV.length) * 168 * 1000) / 56,
@@ -107,10 +109,26 @@ app.visualBook = function () {
             pic.src = bookListArrV[i].coverURL;
             box.appendChild(pic);
         }
+        if (bookListArrV.length < 5) {
+            let sample = document.createElement("div");
+            sample.style.width = "128px";
+            sample.style.height = "180px";
+            sample.style.margin = "20px";
+            sample.style.backgroundColor = "red";
+            box.appendChild(sample);
+        }
         for (let i = 0; i < bookListArrV.length; i++) {
             let pictwo = document.createElement("img");
             pictwo.src = bookListArrV[i].coverURL;
             box.appendChild(pictwo);
+        }
+        if (bookListArrV.length < 5) {
+            let sample = document.createElement("div");
+            sample.style.width = "128px";
+            sample.style.height = "180px";
+            sample.style.margin = "20px";
+            sample.style.backgroundColor = "red";
+            box.appendChild(sample);
         }
         console.log(box);
 
