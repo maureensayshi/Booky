@@ -100,7 +100,13 @@ app.visualBook = function () {
         for (let i = 0; i < bookListArrV.length; i++) {
             let pic = document.createElement("img");
             pic.src = bookListArrV[i].coverURL;
+            pic.tag = bookListArrV[i].title;
             box.appendChild(pic);
+            console.log(pic);
+
+            pic.onmouseover = function () {
+                console.log(pic.tag);
+            };
         }
         //sample book color
         let colorArr = ["#DCB58C", "#EAA140", "#B9B144"];
@@ -109,6 +115,7 @@ app.visualBook = function () {
         if (bookListArrV.length < 5) {
             let sample = document.createElement("div");
             sample.className = "sample-book";
+            sample.style.tag = "sample";
             sample.style.backgroundColor = colorArr[Math.floor(Math.random() * colorArr.length)];
 
             for (let i = 0; i < num; i++) {
@@ -124,13 +131,13 @@ app.visualBook = function () {
         if (bookListArrV.length < 5) {
             let sampletwo = document.createElement("div");
             sampletwo.className = "sample-book";
+            sampletwo.style.tag = "sample";
             sampletwo.style.backgroundColor = colorArr[Math.floor(Math.random() * colorArr.length)];
 
             for (let i = 0; i < num; i++) {
                 box.appendChild(sampletwo.cloneNode());
             }
         }
-        console.log(box);
         //key visual animation
         slideBG.animate([
             // keyframes
@@ -138,37 +145,10 @@ app.visualBook = function () {
             { transform: "translate3d(-" + ((bookListArrV.length + num) * 168) + "px, 0, 0)" }
         ], {
             // timing options
-            duration: ((bookListArrV.length + num) * 168 * 1000) / 56,
+            duration: ((bookListArrV.length + num) * 168 * 1000) / 70,
             iterations: Infinity
         });
-
     });
-
-    // let index = 0;
-    // next_btn.onclick = function () {
-    //     let bookArrNode = app.getAll(".book-list>img");
-    //     let bookArr = Array.apply(null, bookArrNode);
-    //     index++;
-    //     box.style.left = (0 - index * 168) + "px";
-    //     let leftImg = bookArr.shift();
-    //     //在右側創造一個img，裝著最左側那一個的img src
-    //     let newImg = document.createElement("img");
-    //     newImg.src = leftImg.src;
-    //     console.log(newImg);
-    //     //刪除最左側那一個
-    //     // bookArr.shift();
-    //     //把新的img放到陣列最後面
-    //     box.removeChild(leftImg);
-    //     box.appendChild(newImg);
-    // };
-    // pre_btn.onclick = function () {
-    //     let box = app.get(".real-visual");
-    //     let bookArrNode = app.getAll(".real-visual>img");
-    //     let bookArr = Array.apply(null, bookArrNode);
-    //     index--;
-    //     box.style.left = (0 - index * 168) + "px";
-    // };
-
 };
 
 app.searchKeyWord = function () {

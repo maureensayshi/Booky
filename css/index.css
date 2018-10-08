@@ -152,9 +152,6 @@ main{
     content: "add book";
 }
 
- 
-
-
 main .view{
   /* scroll-snap-type: y mandatory;
   overflow-y: scroll;
@@ -174,67 +171,7 @@ main .key-visualBox{
     position: relative;
     /* border: 1px solid blue; */
 }
-
-/* main .visual{
-    width: 840px;  
-    height: 200px;
-    border: 1px solid yellow;
-    overflow: hidden;  
-    position: relative;
-} */
 /* 
-main .real-visual{
-    display: flex;    
-    position: absolute;
-    left: 0;
-    align-items: center;    
-    border: 1px solid red;
-    -webkit-transition: left 1s ease;
-    transition: left 1s ease;  
-}
-
-main .visual img{
-    width: 128px;
-    height: 100%;  
-    box-shadow: 0px 3px 20px 1px #BBBBBB; 
-    margin: 0 20px; 
-}
-
-main .key-visual img:nth-child(1){
-    position: absolute;
-    left: 0px;
-    bottom: 50%;
-    transform: translate(10%,50%);
-}
-
-main .key-visual img:nth-child(2){
-    position: absolute;
-    left: 168px;
-    bottom: 50%;
-    transform: translate(10%,50%);
-}
-
-main .key-visual img:nth-child(3){
-    position: absolute;
-    left:326px;
-    bottom: 50%;
-    transform: translate(10%,50%);
-}
-
-main .key-visual img:nth-child(4){
-    position: absolute;
-    left:484px;
-    bottom: 50%;
-    transform: translate(10%,50%);
-}
-
-main .key-visual img:nth-child(5){
-    position: absolute;
-    left: 642px;
-    bottom: 50%;
-    transform: translate(10%,50%);
-} */
-
 main #pre{
     width: 35px;
     height: 35px;
@@ -256,7 +193,7 @@ main #next{
     top: 50%;
     transform: translateY(-50%);
     cursor: pointer;  
-}
+} */
 
 /* width: 250px; */
 /* height: auto; */
