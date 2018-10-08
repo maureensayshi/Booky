@@ -114,7 +114,7 @@ app.searchDB = function () {
     let db = app.database;
     if (app.searchBarKeyWord) {
         let dbBookList = db.ref("/members/" + app.uid + "/bookList/");
-        dbBookList.on("value", function (snapshot) {
+        dbBookList.once("value", function (snapshot) {
             console.log(snapshot.val());
             let bookListArrK = Object.keys(snapshot.val());
             let bookListArrV = Object.values(snapshot.val());

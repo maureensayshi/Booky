@@ -88,49 +88,59 @@ app.visualBook = function () {
     let slideBG = app.get(".sliding-background");
     let db = app.database;
     let dbBookList = db.ref("/members/" + app.uid + "/bookList/");
-    dbBookList.on("value", function (snapshot) {
+    dbBookList.once("value", function (snapshot) {
         console.log(snapshot.val());
         let bookListArrV = Object.values(snapshot.val());
         let num = 0;
         if (bookListArrV.length < 5) {
             num = 5 - bookListArrV.length;
         }
-        slideBG.animate([
-            // keyframes
-            { transform: "translate3d(0, 0, 0)" },
-            { transform: "translate3d(-" + ((bookListArrV.length + num) * 168) + "px, 0, 0)" }
-        ], {
-            // timing options
-            duration: ((bookListArrV.length) * 168 * 1000) / 56,
-            iterations: Infinity
-        });
+        //show book list from db
+        //first round
         for (let i = 0; i < bookListArrV.length; i++) {
             let pic = document.createElement("img");
             pic.src = bookListArrV[i].coverURL;
             box.appendChild(pic);
         }
+        //sample book color
+        let colorArr = ["#DCB58C", "#EAA140", "#B9B144"];
+        // let color = colorArr[Math.floor(Math.random() * colorArr.length)];
+
         if (bookListArrV.length < 5) {
             let sample = document.createElement("div");
-            sample.style.width = "128px";
-            sample.style.height = "180px";
-            sample.style.margin = "20px";
-            sample.style.backgroundColor = "red";
-            box.appendChild(sample);
+            sample.className = "sample-book";
+            sample.style.backgroundColor = colorArr[Math.floor(Math.random() * colorArr.length)];
+
+            for (let i = 0; i < num; i++) {
+                box.appendChild(sample.cloneNode());
+            }
         }
+        //second round
         for (let i = 0; i < bookListArrV.length; i++) {
             let pictwo = document.createElement("img");
             pictwo.src = bookListArrV[i].coverURL;
             box.appendChild(pictwo);
         }
         if (bookListArrV.length < 5) {
-            let sample = document.createElement("div");
-            sample.style.width = "128px";
-            sample.style.height = "180px";
-            sample.style.margin = "20px";
-            sample.style.backgroundColor = "red";
-            box.appendChild(sample);
+            let sampletwo = document.createElement("div");
+            sampletwo.className = "sample-book";
+            sampletwo.style.backgroundColor = colorArr[Math.floor(Math.random() * colorArr.length)];
+
+            for (let i = 0; i < num; i++) {
+                box.appendChild(sampletwo.cloneNode());
+            }
         }
         console.log(box);
+        //key visual animation
+        slideBG.animate([
+            // keyframes
+            { transform: "translate3d(0, 0, 0)" },
+            { transform: "translate3d(-" + ((bookListArrV.length + num) * 168) + "px, 0, 0)" }
+        ], {
+            // timing options
+            duration: ((bookListArrV.length + num) * 168 * 1000) / 56,
+            iterations: Infinity
+        });
 
     });
 
