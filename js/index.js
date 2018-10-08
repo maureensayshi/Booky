@@ -85,21 +85,32 @@ app.getRedirectResult = function () {
 
 app.visualBook = function () {
     let box = app.get(".book-list");
+    let slideBG = app.get(".sliding-background");
     let db = app.database;
     let dbBookList = db.ref("/members/" + app.uid + "/bookList/");
     dbBookList.on("value", function (snapshot) {
         console.log(snapshot.val());
         let bookListArrV = Object.values(snapshot.val());
         console.log(bookListArrV);
+        // slideBG.style.animation = "slide " + ((bookListArrV.length - 1) * 168) / 56 + "s linear infinite";
+        slideBG.animate([
+            // keyframes
+            { transform: "translate3d(0, 0, 0)" },
+            { transform: "translate3d(-" + ((bookListArrV.length) * 168) + "px, 0, 0)" }
+        ], {
+            // timing options
+            duration: ((bookListArrV.length) * 168 * 1000) / 56,
+            iterations: Infinity
+        });
         for (let i = 0; i < bookListArrV.length; i++) {
             let pic = document.createElement("img");
             pic.src = bookListArrV[i].coverURL;
             box.appendChild(pic);
         }
-        for (let i = 1; i < bookListArrV.length; i++) {
-            let pic = document.createElement("img");
-            pic.src = bookListArrV[i].coverURL;
-            box.appendChild(pic);
+        for (let i = 0; i < bookListArrV.length; i++) {
+            let pictwo = document.createElement("img");
+            pictwo.src = bookListArrV[i].coverURL;
+            box.appendChild(pictwo);
         }
         console.log(box);
 

@@ -116,10 +116,15 @@ main{
     display: flex;
     width: 840px;
 }
-  
-.sliding-background{
-    animation: slide 42s linear infinite;  
-}
+/* 
+@keyframes slide {
+    0%{
+      transform: translate3d(0, 0, 0);
+    }
+    100%{
+      transform: translate3d(-2352px, 0, 0);
+    }
+  } */
 
 .book-list {   
     height: 185px;
@@ -127,20 +132,13 @@ main{
     align-items: center;   
 }
 
-  .book-list img{
-      width: 128px; 
-      margin: 0 20px;
-      box-shadow: 0px 3px 10px 0px #BBBBBB; 
-    }
+.book-list img{
+    width: 128px; 
+    margin: 0 20px;
+    box-shadow: 0px 3px 10px 0px #BBBBBB; 
+}
 
-  @keyframes slide {
-    0%{
-      transform: translate3d(0, 0, 0);
-    }
-    100%{
-      transform: translate3d(-2352px, 0, 0);
-    }
-  }
+ 
 
 
 main .view{
