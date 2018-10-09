@@ -17,7 +17,7 @@ app.checkingIndex = function () {
             console.log(app.uid);
             app.get(".welcome").style.display = "none";
             app.get(".real").style.display = "block";
-            app.visualBook();
+            // app.visualBook();
             app.menu();
             app.searchBar();
             app.keyin_search();
