@@ -136,7 +136,6 @@ main .key-visualBox{
     overflow: hidden;
     display: flex;
     width: 840px;
-    border: 1px solid blue;
     height: 300px;
 }
 
@@ -170,8 +169,8 @@ main .key-visualBox{
 }
 
 .book-list-img:hover{
-    transform: scale(1.2);
-    transition: transform .35s;   
+    transform: scale(1.4);
+    transition: transform .75s;   
 }
 
 
@@ -185,7 +184,7 @@ main .key-visualBox{
     width: 100%;
     height: 100%;
     padding: 10px;
-    background-color: rgba(101, 101, 101, .5);
+    background-color: rgba(101, 101, 101, .6);
     color: white;
     opacity: 0;  
     -webkit-transition: opacity 0s, -webkit-transform 0.35s;
@@ -211,7 +210,7 @@ main .key-visualBox{
     left: 50%;
     transform: translate(-50%,-50%);
     font-size: 20px;
-    color: white;
+    font-weight: bold;
     text-align: center;
 }
 
@@ -263,9 +262,9 @@ main #pre{
 main .container{
     /* height: 500px;
     scroll-snap-align: start; */
-    width: 100%;
-    max-width: 1100px;
     display: none;
+    width: 100%;
+    max-width: 1100px;    
     flex-direction: column;
     align-items: center;
     margin: 0 auto 100px auto;

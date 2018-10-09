@@ -17,7 +17,7 @@ app.checkingIndex = function () {
             console.log(app.uid);
             app.get(".welcome").style.display = "none";
             app.get(".real").style.display = "block";
-            // app.visualBook();
+            app.visualBook();
             app.menu();
             app.searchBar();
             app.keyin_search();
@@ -84,26 +84,40 @@ app.getRedirectResult = function () {
 };
 
 app.visualBook = function () {
-    let box = app.get(".book-list");
     let slideBG = app.get(".sliding-background");
+    let box = app.get(".book-list");
     let db = app.database;
     let dbBookList = db.ref("/members/" + app.uid + "/bookList/");
     dbBookList.once("value", function (snapshot) {
         console.log(snapshot.val());
         let bookListArrV = Object.values(snapshot.val());
+        let bookListArrK = Object.keys(snapshot.val());
+        let bookLength = bookListArrV.length;
         let num = 0;
-        if (bookListArrV.length < 5) {
-            num = 5 - bookListArrV.length;
+
+        for (let i = 0; i < bookListArrV.length; i++) {
+            if (bookListArrV.length < 5) {
+                num = 5 - bookListArrV.length;
+                if (bookListArrV[i].readStatus == 2) {
+                    num++;
+                    bookLength--;
+                    console.log(num);
+                }
+            } else if (bookListArrV.length > 5 && bookListArrV[i].readStatus == 2) {
+                num++;
+                bookLength--;
+                console.log(num);
+            }
         }
 
         //key visual animation
         let slide = slideBG.animate([
             // keyframes
             { transform: "translate3d(0, 0, 0)" },
-            { transform: "translate3d(-" + ((bookListArrV.length + num) * 168) + "px, 0, 0)" }
+            { transform: "translate3d(-" + ((bookLength + num) * 168) + "px, 0, 0)" }
         ], {
             // timing options
-            duration: ((bookListArrV.length + num) * 168 * 1000) / 56,
+            duration: ((bookLength + num) * 168 * 1000) / 56,
             iterations: Infinity
         });
 
@@ -118,14 +132,20 @@ app.visualBook = function () {
         //show book list from db
         //first round
         for (let i = 0; i < bookListArrV.length; i++) {
-            let pic = document.createElement("img");
-            pic.src = bookListArrV[i].coverURL;
-            pic.tag = bookListArrV[i].title;
-            pic.className = "book-list-img";
-            box.appendChild(pic);
-            console.log(pic);
-            pic.onmouseover = function () { app.stopAnimation(); };
-            pic.onmouseout = function () { app.startAnimation(); };
+            if (bookListArrV[i].readStatus != 2) {
+                let bookRead = bookListArrV[i].readStatus == 1 ? "閱讀中" : "未讀";
+                //every book
+                let bookDiv = app.createElement("div", "book-list-img", "", "", "", box);
+                let bookImg = app.createElement("img", "", "", "src", bookListArrV[i].coverURL, bookDiv);
+                let bookHref = app.createElement("a", "spanBox", "", "href", "/book.html?id=" + bookListArrK[i], bookDiv);
+                let bookText = app.createElement("span", "overlay", "", "", "", bookHref);
+                let bookReadText = app.createElement("span", "", bookRead, "", "", bookText);
+                let bookClick = app.createElement("span", "", "View", "", "", bookText);
+                console.log(box);
+
+                bookDiv.onmouseover = function () { app.stopAnimation(); };
+                bookDiv.onmouseout = function () { app.startAnimation(); };
+            }
         }
         //sample book color
         let colorArr = ["#DCB58C", "#EAA140", "#B9B144"];
@@ -140,15 +160,23 @@ app.visualBook = function () {
                 sample.onmouseout = function () { app.startAnimation(); };
             }
         }
+
         //second round
         for (let i = 0; i < bookListArrV.length; i++) {
-            let pictwo = document.createElement("img");
-            pictwo.src = bookListArrV[i].coverURL;
-            pictwo.tag = bookListArrV[i].title;
-            pictwo.className = "book-list-img";
-            box.appendChild(pictwo);
-            pictwo.onmouseover = function () { app.stopAnimation(); };
-            pictwo.onmouseout = function () { app.startAnimation(); };
+            if (bookListArrV[i].readStatus != 2) {
+                let bookRead = bookListArrV[i].readStatus == 1 ? "閱讀中" : "未讀";
+                //every book
+                let bookDiv = app.createElement("div", "book-list-img", "", "", "", box);
+                let bookImg = app.createElement("img", "", "", "src", bookListArrV[i].coverURL, bookDiv);
+                let bookHref = app.createElement("a", "spanBox", "", "href", "/book.html?id=" + bookListArrK[i], bookDiv);
+                let bookText = app.createElement("span", "overlay", "", "", "", bookHref);
+                let bookReadText = app.createElement("span", "", bookRead, "", "", bookText);
+                let bookClick = app.createElement("span", "", "View", "", "", bookText);
+                console.log(box);
+
+                bookDiv.onmouseover = function () { app.stopAnimation(); };
+                bookDiv.onmouseout = function () { app.startAnimation(); };
+            }
         }
         if (bookListArrV.length < 5) {
             for (let i = 0; i < num; i++) {
@@ -161,7 +189,6 @@ app.visualBook = function () {
                 sampletwo.onmouseout = function () { app.startAnimation(); };
             }
         }
-
     });
 };
 
