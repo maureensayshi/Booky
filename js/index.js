@@ -95,18 +95,33 @@ app.visualBook = function () {
         if (bookListArrV.length < 5) {
             num = 5 - bookListArrV.length;
         }
+
+        //key visual animation
+        let slide = slideBG.animate([
+            // keyframes
+            { transform: "translate3d(0, 0, 0)" },
+            { transform: "translate3d(-" + ((bookListArrV.length + num) * 168) + "px, 0, 0)" }
+        ], {
+            // timing options
+            duration: ((bookListArrV.length + num) * 168 * 1000) / 56,
+            iterations: Infinity
+        });
+
+        app.stopAnimation = function () {
+            slideBG.pause();
+        };
+
         //show book list from db
         //first round
         for (let i = 0; i < bookListArrV.length; i++) {
             let pic = document.createElement("img");
             pic.src = bookListArrV[i].coverURL;
             pic.tag = bookListArrV[i].title;
+            pic.className = "book-list-img";
             box.appendChild(pic);
             console.log(pic);
 
-            pic.onmouseover = function () {
-                console.log(pic.tag);
-            };
+            // pic.addEventListener("mouseover", app.stopAnimation(), true);
         }
         //sample book color
         let colorArr = ["#DCB58C", "#EAA140", "#B9B144"];
@@ -126,6 +141,8 @@ app.visualBook = function () {
         for (let i = 0; i < bookListArrV.length; i++) {
             let pictwo = document.createElement("img");
             pictwo.src = bookListArrV[i].coverURL;
+            pictwo.tag = bookListArrV[i].title;
+            pictwo.className = "book-list-img";
             box.appendChild(pictwo);
         }
         if (bookListArrV.length < 5) {
@@ -138,16 +155,7 @@ app.visualBook = function () {
                 box.appendChild(sampletwo.cloneNode());
             }
         }
-        //key visual animation
-        slideBG.animate([
-            // keyframes
-            { transform: "translate3d(0, 0, 0)" },
-            { transform: "translate3d(-" + ((bookListArrV.length + num) * 168) + "px, 0, 0)" }
-        ], {
-            // timing options
-            duration: ((bookListArrV.length + num) * 168 * 1000) / 70,
-            iterations: Infinity
-        });
+
     });
 };
 
