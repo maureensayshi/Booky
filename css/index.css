@@ -139,7 +139,7 @@ main .key-visualBox{
 }
 
 .sliding-background{
-    height: 800px;
+    height: 800px;  
 }
 /* 
 @keyframes slide {
@@ -163,13 +163,11 @@ main .key-visualBox{
     margin: 0 20px;
     box-shadow: 0px 3px 10px 0px #BBBBBB; 
     transform: scale(.9);
-    position: relative;
-    text-align: center;
 }
 
 .book-list-img:hover{
     transform: scale(1.2);
-    transition: all 1s ease-in-out;
+    transition: all .5s ease-in-out;   
 }
 
 .sample-book{
@@ -185,7 +183,7 @@ main .key-visualBox{
 
 .sample-book:hover{
     transform: scale(1.2);
-    transition: all 1s ease-in-out;
+    transition: all .5s ease-in-out;
 }
 
 /* 

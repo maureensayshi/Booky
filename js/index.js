@@ -108,7 +108,11 @@ app.visualBook = function () {
         });
 
         app.stopAnimation = function () {
-            slideBG.pause();
+            slide.pause();
+        };
+
+        app.startAnimation = function () {
+            slide.play();
         };
 
         //show book list from db
@@ -120,21 +124,20 @@ app.visualBook = function () {
             pic.className = "book-list-img";
             box.appendChild(pic);
             console.log(pic);
-
-            // pic.addEventListener("mouseover", app.stopAnimation(), true);
+            pic.onmouseover = function () { app.stopAnimation(); };
+            pic.onmouseout = function () { app.startAnimation(); };
         }
         //sample book color
         let colorArr = ["#DCB58C", "#EAA140", "#B9B144"];
-        // let color = colorArr[Math.floor(Math.random() * colorArr.length)];
-
         if (bookListArrV.length < 5) {
-            let sample = document.createElement("div");
-            sample.className = "sample-book";
-            sample.style.tag = "sample";
-            sample.style.backgroundColor = colorArr[Math.floor(Math.random() * colorArr.length)];
-
             for (let i = 0; i < num; i++) {
-                box.appendChild(sample.cloneNode());
+                let sample = document.createElement("div");
+                sample.className = "sample-book";
+                sample.style.tag = "sample";
+                sample.style.backgroundColor = colorArr[Math.floor(Math.random() * colorArr.length)];
+                box.appendChild(sample);
+                sample.onmouseover = function () { app.stopAnimation(); };
+                sample.onmouseout = function () { app.startAnimation(); };
             }
         }
         //second round
@@ -144,15 +147,18 @@ app.visualBook = function () {
             pictwo.tag = bookListArrV[i].title;
             pictwo.className = "book-list-img";
             box.appendChild(pictwo);
+            pictwo.onmouseover = function () { app.stopAnimation(); };
+            pictwo.onmouseout = function () { app.startAnimation(); };
         }
         if (bookListArrV.length < 5) {
-            let sampletwo = document.createElement("div");
-            sampletwo.className = "sample-book";
-            sampletwo.style.tag = "sample";
-            sampletwo.style.backgroundColor = colorArr[Math.floor(Math.random() * colorArr.length)];
-
             for (let i = 0; i < num; i++) {
-                box.appendChild(sampletwo.cloneNode());
+                let sampletwo = document.createElement("div");
+                sampletwo.className = "sample-book";
+                sampletwo.style.tag = "sample";
+                sampletwo.style.backgroundColor = colorArr[Math.floor(Math.random() * colorArr.length)];
+                box.appendChild(sampletwo);
+                sampletwo.onmouseover = function () { app.stopAnimation(); };
+                sampletwo.onmouseout = function () { app.startAnimation(); };
             }
         }
 
