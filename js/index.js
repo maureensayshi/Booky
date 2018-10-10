@@ -91,6 +91,7 @@ app.visualBook = function () {
     let db = app.database;
     let dbBookList = db.ref("/members/" + app.uid + "/bookList/");
     dbBookList.once("value", function (snapshot) {
+        //如果沒有 book list
         if (snapshot.val() == null) {
             console.log("no");
             num = 5;
@@ -106,26 +107,26 @@ app.visualBook = function () {
             });
 
             for (let i = 0; i < num; i++) {
-                let sample = document.createElement("div");
-                sample.className = "sample-book";
-                sample.style.tag = "sample";
-                sample.style.backgroundColor = colorArr[Math.floor(Math.random() * colorArr.length)];
-                box.appendChild(sample);
-                sample.onmouseover = function () { slideNone.pause(); };
-                sample.onmouseout = function () { slideNone.play(); };
+                let sampleBox = app.createElement("div", "sample-book", "", "", "", box);
+                let sampleHref = app.createElement("a", "spanBox", "", "", "", sampleBox);
+                let sampleText = app.createElement("span", "overlay", "", "", "", sampleHref);
+                let sampleTitle = app.createElement("span", "", "加入書籍", "", "", sampleText);
+                let sampleAdd = app.createElement("span", "", "ADD", "", "", sampleText);
+                sampleBox.style.backgroundColor = colorArr[Math.floor(Math.random() * colorArr.length)];
+                sampleBox.onmouseover = function () { slideNone.pause(); };
+                sampleBox.onmouseout = function () { slideNone.play(); };
             }
 
             for (let i = 0; i < num; i++) {
-                let sample = document.createElement("div");
-                sample.className = "sample-book";
-                sample.style.tag = "sample";
-                sample.style.backgroundColor = colorArr[Math.floor(Math.random() * colorArr.length)];
-                box.appendChild(sample);
-                sample.onmouseover = function () { slideNone.pause(); };
-                sample.onmouseout = function () { slideNone.play(); };
+                let sampleBox = app.createElement("div", "sample-book", "", "", "", box);
+                let sampleHref = app.createElement("a", "spanBox", "", "", "", sampleBox);
+                let sampleText = app.createElement("span", "overlay", "", "", "", sampleHref);
+                let sampleTitle = app.createElement("span", "", "加入書籍", "", "", sampleText);
+                let sampleAdd = app.createElement("span", "", "ADD", "", "", sampleText);
+                sampleBox.style.backgroundColor = colorArr[Math.floor(Math.random() * colorArr.length)];
+                sampleBox.onmouseover = function () { slideNone.pause(); };
+                sampleBox.onmouseout = function () { slideNone.play(); };
             }
-
-
         } else {
             console.log(snapshot.val());
             let bookListArrV = Object.values(snapshot.val());
@@ -183,13 +184,14 @@ app.visualBook = function () {
 
             if (listShow.length < 5) {
                 for (let i = 0; i < num; i++) {
-                    let sample = document.createElement("div");
-                    sample.className = "sample-book";
-                    sample.style.tag = "sample";
-                    sample.style.backgroundColor = colorArr[Math.floor(Math.random() * colorArr.length)];
-                    box.appendChild(sample);
-                    sample.onmouseover = function () { app.stopAnimation(); };
-                    sample.onmouseout = function () { app.startAnimation(); };
+                    let sampleBox = app.createElement("div", "sample-book", "", "", "", box);
+                    let sampleHref = app.createElement("a", "spanBox", "", "", "", sampleBox);
+                    let sampleText = app.createElement("span", "overlay", "", "", "", sampleHref);
+                    let sampleTitle = app.createElement("span", "", "加入書籍", "", "", sampleText);
+                    let sampleAdd = app.createElement("span", "", "ADD", "", "", sampleText);
+                    sampleBox.style.backgroundColor = colorArr[Math.floor(Math.random() * colorArr.length)];
+                    sampleBox.onmouseover = function () { app.stopAnimation(); };
+                    sampleBox.onmouseout = function () { app.startAnimation(); };
                 }
             }
 
@@ -210,13 +212,14 @@ app.visualBook = function () {
             }
             if (listShow.length < 5) {
                 for (let i = 0; i < num; i++) {
-                    let sampletwo = document.createElement("div");
-                    sampletwo.className = "sample-book";
-                    sampletwo.style.tag = "sample";
-                    sampletwo.style.backgroundColor = colorArr[Math.floor(Math.random() * colorArr.length)];
-                    box.appendChild(sampletwo);
-                    sampletwo.onmouseover = function () { app.stopAnimation(); };
-                    sampletwo.onmouseout = function () { app.startAnimation(); };
+                    let sampleBox = app.createElement("div", "sample-book", "", "", "", box);
+                    let sampleHref = app.createElement("a", "spanBox", "", "", "", sampleBox);
+                    let sampleText = app.createElement("span", "overlay", "", "", "", sampleHref);
+                    let sampleTitle = app.createElement("span", "", "加入書籍", "", "", sampleText);
+                    let sampleAdd = app.createElement("span", "", "ADD", "", "", sampleText);
+                    sampleBox.style.backgroundColor = colorArr[Math.floor(Math.random() * colorArr.length)];
+                    sampleBox.onmouseover = function () { app.stopAnimation(); };
+                    sampleBox.onmouseout = function () { app.startAnimation(); };
                 }
             }
         }
