@@ -380,6 +380,7 @@ header .btn_search input:hover,
   
   .add-shade  form{
       width: 60%;
+      margin-top: 30px;
   }
 
   .add-shade form input{
