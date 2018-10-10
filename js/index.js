@@ -15,9 +15,13 @@ app.checkingIndex = function () {
             // User is signed in.
             app.uid = user.uid;
             console.log(app.uid);
-            app.get(".welcome").style.display = "none";
+            // app.get(".welcome").style.display = "none";
             app.get(".real").style.display = "block";
-            app.visualBook();
+            if (document.body.clientWidth >= 980) {
+                app.visualBook();
+            } else {
+                app.visualBookMobile();
+            }
             app.menu();
             app.searchBar();
             app.keyin_search();
@@ -25,7 +29,7 @@ app.checkingIndex = function () {
 
         } else {
             // User is signed out or haven't sign up.
-            app.get(".welcome").style.display = "block";
+            // app.get(".welcome").style.display = "block";
             app.get(".real").style.display = "none";
             app.closeLoading();
             app.googleLogin();
@@ -95,7 +99,6 @@ app.visualBook = function () {
         if (snapshot.val() == null) {
             console.log("no");
             num = 5;
-
             let slideNone = slideBG.animate([
                 // keyframes
                 { transform: "translate3d(0, 0, 0)" },
@@ -105,28 +108,18 @@ app.visualBook = function () {
                     iterations: Infinity
                 });
 
-            for (let i = 0; i < num; i++) {
-                let sampleBoxHref = app.createElement("a", "", "", "href", "", box);
-                let sampleBox = app.createElement("div", "sample-book", "", "", "", sampleBoxHref);
-                let sampleHref = app.createElement("a", "spanBox", "", "", "", sampleBox);
-                let sampleText = app.createElement("span", "overlay", "", "", "", sampleHref);
-                let sampleTitle = app.createElement("span", "", "加入書籍", "", "", sampleText);
-                let sampleAdd = app.createElement("span", "", "ADD", "", "", sampleText);
-                sampleBox.style.backgroundColor = colorArr[Math.floor(Math.random() * colorArr.length)];
-                sampleBox.onmouseover = function () { slideNone.pause(); };
-                sampleBox.onmouseout = function () { slideNone.play(); };
-            }
-
-            for (let i = 0; i < num; i++) {
-                let sampleBoxHref = app.createElement("a", "", "", "href", "", box);
-                let sampleBox = app.createElement("div", "sample-book", "", "", "", sampleBoxHref);
-                let sampleHref = app.createElement("a", "spanBox", "", "", "", sampleBox);
-                let sampleText = app.createElement("span", "overlay", "", "", "", sampleHref);
-                let sampleTitle = app.createElement("span", "", "加入書籍", "", "", sampleText);
-                let sampleAdd = app.createElement("span", "", "ADD", "", "", sampleText);
-                sampleBox.style.backgroundColor = colorArr[Math.floor(Math.random() * colorArr.length)];
-                sampleBox.onmouseover = function () { slideNone.pause(); };
-                sampleBox.onmouseout = function () { slideNone.play(); };
+            for (let j = 0; j < 2; j++) {
+                for (let i = 0; i < num; i++) {
+                    let sampleBoxHref = app.createElement("a", "", "", "href", "", box);
+                    let sampleBox = app.createElement("div", "sample-book", "", "", "", sampleBoxHref);
+                    let sampleHref = app.createElement("a", "spanBox", "", "", "", sampleBox);
+                    let sampleText = app.createElement("span", "overlay", "", "", "", sampleHref);
+                    let sampleTitle = app.createElement("span", "", "加入書籍", "", "", sampleText);
+                    let sampleAdd = app.createElement("span", "", "ADD", "", "", sampleText);
+                    sampleBox.style.backgroundColor = colorArr[Math.floor(Math.random() * colorArr.length)];
+                    sampleBox.onmouseover = function () { slideNone.pause(); };
+                    sampleBox.onmouseout = function () { slideNone.play(); };
+                }
             }
         } else {
             //如果有 book list
@@ -161,66 +154,88 @@ app.visualBook = function () {
             app.stopAnimation = function () { slide.pause(); };
             app.startAnimation = function () { slide.play(); };
             //show book list from db
-            //first round
-            for (let i = 0; i < listShow.length; i++) {
-                let bookRead = bookListArrV[i].readStatus == 1 ? "閱讀中" : "未讀";
-                //every book
-                let bookDivHref = app.createElement("a", "", "", "href", "/book.html?id=" + bookListArrK[i], box);
-                let bookDiv = app.createElement("div", "book-list-img", "", "", "", bookDivHref);
-                let bookImg = app.createElement("img", "", "", "src", bookListArrV[i].coverURL, bookDiv);
-                let bookHref = app.createElement("a", "spanBox", "", "href", "/book.html?id=" + bookListArrK[i], bookDiv);
-                let bookText = app.createElement("span", "overlay", "", "", "", bookHref);
-                let bookReadText = app.createElement("span", "", bookRead, "", "", bookText);
-                let bookClick = app.createElement("span", "", "View", "", "", bookText);
-                console.log(box);
-
-                bookDiv.onmouseover = function () { app.stopAnimation(); };
-                bookDiv.onmouseout = function () { app.startAnimation(); };
-            }
-            if (listShow.length < 5) {
-                for (let i = 0; i < num; i++) {
-                    let sampleBoxHref = app.createElement("a", "", "", "href", "", box);
-                    let sampleBox = app.createElement("div", "sample-book", "", "", "", sampleBoxHref);
-                    let sampleHref = app.createElement("a", "spanBox", "", "", "", sampleBox);
-                    let sampleText = app.createElement("span", "overlay", "", "", "", sampleHref);
-                    let sampleTitle = app.createElement("span", "", "加入書籍", "", "", sampleText);
-                    let sampleAdd = app.createElement("span", "", "ADD", "", "", sampleText);
-                    sampleBox.style.backgroundColor = colorArr[Math.floor(Math.random() * colorArr.length)];
-                    sampleBox.onmouseover = function () { app.stopAnimation(); };
-                    sampleBox.onmouseout = function () { app.startAnimation(); };
+            //repeat twice
+            for (let j = 0; j < 2; j++) {
+                for (let i = 0; i < listShow.length; i++) {
+                    let bookRead = bookListArrV[i].readStatus == 1 ? "閱讀中" : "未讀";
+                    //every book
+                    let bookDivHref = app.createElement("a", "", "", "href", "/book.html?id=" + bookListArrK[i], box);
+                    let bookDiv = app.createElement("div", "book-list-img", "", "", "", bookDivHref);
+                    let bookImg = app.createElement("img", "", "", "src", bookListArrV[i].coverURL, bookDiv);
+                    let bookHref = app.createElement("a", "spanBox", "", "href", "/book.html?id=" + bookListArrK[i], bookDiv);
+                    let bookText = app.createElement("span", "overlay", "", "", "", bookHref);
+                    let bookReadText = app.createElement("span", "", bookRead, "", "", bookText);
+                    let bookClick = app.createElement("span", "", "View", "", "", bookText);
+                    bookDiv.onmouseover = function () { app.stopAnimation(); };
+                    bookDiv.onmouseout = function () { app.startAnimation(); };
                 }
-            }
-
-            //second round
-            for (let i = 0; i < listShow.length; i++) {
-                let bookRead = bookListArrV[i].readStatus == 1 ? "閱讀中" : "未讀";
-                //every book
-                let bookDivHref = app.createElement("a", "", "", "href", "/book.html?id=" + bookListArrK[i], box);
-                let bookDiv = app.createElement("div", "book-list-img", "", "", "", bookDivHref);
-                let bookImg = app.createElement("img", "", "", "src", bookListArrV[i].coverURL, bookDiv);
-                let bookHref = app.createElement("a", "spanBox", "", "href", "/book.html?id=" + bookListArrK[i], bookDiv);
-                let bookText = app.createElement("span", "overlay", "", "", "", bookHref);
-                let bookReadText = app.createElement("span", "", bookRead, "", "", bookText);
-                let bookClick = app.createElement("span", "", "View", "", "", bookText);
-                console.log(box);
-
-                bookDiv.onmouseover = function () { app.stopAnimation(); };
-                bookDiv.onmouseout = function () { app.startAnimation(); };
-            }
-            if (listShow.length < 5) {
-                for (let i = 0; i < num; i++) {
-                    let sampleBoxHref = app.createElement("a", "", "", "href", "", box);
-                    let sampleBox = app.createElement("div", "sample-book", "", "", "", sampleBoxHref);
-                    let sampleHref = app.createElement("a", "spanBox", "", "", "", sampleBox);
-                    let sampleText = app.createElement("span", "overlay", "", "", "", sampleHref);
-                    let sampleTitle = app.createElement("span", "", "加入書籍", "", "", sampleText);
-                    let sampleAdd = app.createElement("span", "", "ADD", "", "", sampleText);
-                    sampleBox.style.backgroundColor = colorArr[Math.floor(Math.random() * colorArr.length)];
-                    sampleBox.onmouseover = function () { app.stopAnimation(); };
-                    sampleBox.onmouseout = function () { app.startAnimation(); };
+                if (listShow.length < 5) {
+                    for (let i = 0; i < num; i++) {
+                        let sampleBoxHref = app.createElement("a", "", "", "href", "", box);
+                        let sampleBox = app.createElement("div", "sample-book", "", "", "", sampleBoxHref);
+                        let sampleHref = app.createElement("a", "spanBox", "", "", "", sampleBox);
+                        let sampleText = app.createElement("span", "overlay", "", "", "", sampleHref);
+                        let sampleTitle = app.createElement("span", "", "加入書籍", "", "", sampleText);
+                        let sampleAdd = app.createElement("span", "", "ADD", "", "", sampleText);
+                        sampleBox.style.backgroundColor = colorArr[Math.floor(Math.random() * colorArr.length)];
+                        sampleBox.onmouseover = function () { app.stopAnimation(); };
+                        sampleBox.onmouseout = function () { app.startAnimation(); };
+                    }
                 }
             }
         }
+    }).catch((error) => {
+        console.log(error);
+    });
+};
+
+app.visualBookMobile = function () {
+    let keyVisual = app.get(".key-visual");
+    keyVisual.classList.add("keyVisualMobile");
+    keyVisual.classList.remove("key-visual");
+
+    let box = app.get(".book-list");
+    box.classList.add("bookListMobile");
+    box.classList.remove("book-list");
+
+
+
+    let db = app.database;
+    let dbBookList = db.ref("/members/" + app.uid + "/bookList/");
+    dbBookList.once("value", function (snapshot) {
+        if (snapshot.val() == null) {
+            console.log("no book");
+        } else {
+            console.log(snapshot.val());
+            let bookListArrV = Object.values(snapshot.val());
+            let bookListArrK = Object.keys(snapshot.val());
+
+            let listRead = [];
+            let listShow = [];
+            for (let i = 0; i < bookListArrV.length; i++) {
+                if (bookListArrV[i].readStatus == 2) {
+                    listRead.push(bookListArrV[i]);
+                } else if (bookListArrV[i].readStatus != 2) {
+                    listShow.push(bookListArrV[i]);
+                }
+            }
+
+            for (let i = 0; i < listShow.length; i++) {
+                let bookBox = app.createElement("div", "bookListMobileImg", "", "", "", box)
+                let bookHref = app.createElement("a", "bookHref", "", "href", "/book.html?id=" + bookListArrK[i], bookBox);
+                let bookDiv = app.createElement("img", "", "", "src", listShow[i].coverURL, bookHref);
+            }
+        }
+
+        let eachBook = app.get(".bookListMobileImg").clientWidth;
+        app.get("#pre").onclick = function () {
+            box.scrollBy(-eachBook, 0);
+        }
+        app.get("#next").onclick = function () {
+            box.scrollBy(eachBook, 0);
+        }
+
+
     }).catch((error) => {
         console.log(error);
     });

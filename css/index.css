@@ -1,7 +1,7 @@
 @import "./common.css";
 
 /* welcome */
-
+/* 
 .welcome main .view{
     display: flex;
     justify-content: center;
@@ -9,7 +9,6 @@
 
 .welcome main .key-visual{
     display: flex;
-    /* overflow: auto; */
     flex-wrap: nowrap;
     justify-content: space-between;  
     align-items: center;
@@ -98,7 +97,7 @@
     margin: 6px; font-size: 14px; cursor: pointer; font-family: "微軟正黑體";
     background: url("../img/google.svg") no-repeat 20px #8556B7;
 	color: white; -webkit-box-shadow: none; -moz-box-shadow: none; box-shadow: none;
-}
+} */
 
 /* real index page */
 
@@ -139,9 +138,9 @@ main .key-visualBox{
     height: 300px;
 }
 
-.sliding-background{
-    height: 200px;  
-}
+/* .sliding-background{
+   
+} */
 /* 
 @keyframes slide {
     0%{
@@ -159,6 +158,7 @@ main .key-visualBox{
     align-items: center;   
 }
 
+/* desktop */
 .book-list-img{
     position: relative;
     width: 128px; 
@@ -172,11 +172,9 @@ main .key-visualBox{
     transition: transform .75s;   
 }
 
-
-
 .book-list-img .overlay{
     position: absolute;
-    font-family: "Cinzel", serif, "NSimSun";
+    font-family: "Cinzel", serif, "微軟正黑體";
     top: 50%;
     left: 50%;
     transform: translate(-50%,-50%);
@@ -192,10 +190,8 @@ main .key-visualBox{
 }
 
 .book-list-img:hover .overlay{
-    opacity: 1;  
-   
+    opacity: 1;     
 }
-
 
 .overlay>span{
     position: absolute;  
@@ -208,8 +204,7 @@ main .key-visualBox{
     top: 35%;
     left: 50%;
     transform: translate(-50%,-50%);
-    font-size: 18px;
-    font-weight: bold;
+    font-size: 14px;
     text-align: center;
 }
 
@@ -221,13 +216,11 @@ main .key-visualBox{
     font-size: 12px;
     letter-spacing:5px;
     text-indent: 5px;
-    padding: 3px;
+    padding: 2px;
     border: 1px solid white;
     text-align: center;
     align-self: center;  
 }
-
-
 
 .sample-book{
     width: 128px;
@@ -239,13 +232,12 @@ main .key-visualBox{
     border-radius: 3px;
     transform: scale(1);
     cursor: pointer;
-    /* background-color: red; */
     position: relative;
 }
 
 .spanBox .overlay{
     position: absolute;
-    font-family: "Cinzel", serif, "NSimSun";
+    font-family: "Cinzel", serif, "微軟正黑體";
     top: 50%;
     left: 50%;
     transform: translate(-50%,-50%);
@@ -271,16 +263,64 @@ main .key-visualBox{
     opacity: 1;
 }
 
+/* mobile */
+
+.keyVisualMobile {
+    overflow: hidden;
+    display: flex;
+    max-width: 70%;
+    /* height: 200px; */
+    position: relative;
+}
+
+
+.bookListMobile{
+    scroll-snap-type: x mandatory;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    display: flex;
+    align-items: center;
+    height: 300px;
+}
+
+.bookListMobileImg{
+    min-width: 33.3%;
+    min-height: 100%;
+    scroll-snap-align: center;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 main #pre{
+    display: none;
     width: 35px;
     height: 35px;
     background: url("../img/left.svg") bottom center no-repeat;
     background-size: 100%;
     position: absolute;
-    left: 0;
-    top: 50%;
-    transform: translateY(-50%);
+    left: 7%;
+    top: 35%;
+    transform: translateY(-35%);
     cursor: pointer;   
+    border: 0;
+    z-index: 10;
+}
+
+main #next{
+    display: none;
+    width: 35px;
+    height: 35px;
+    background: url("../img/right.svg") bottom center no-repeat;
+    background-size: 100%;
+    position: absolute;
+    right: 7%;
+    top: 35%;
+    transform: translateY(-35%);
+    cursor: pointer;  
+    border: 0; 
+    z-index: 10;
 }
 
 main .container{
@@ -541,6 +581,9 @@ main .container-two .result-book-info button{
 
     /* real index page */
 
+    main .key-visualBox{
+        margin: 35px 0 30px 0;
+    }
     main .key-visual>.visual-book{
         width: 80px;
         height: 114px;
@@ -557,6 +600,11 @@ main .container-two .result-book-info button{
     main .key-visual>.visual-book:nth-child(3){
         width: 130px;
         height: auto;
+     }
+
+     main #pre,
+     main #next{
+         display: block;
      }
 
     /* main .container h2,
@@ -612,6 +660,31 @@ main .container-two .result-book-info button{
         padding: 10px;
         margin: 40px 15px;        
     }
+
+    main .key-visualBox{
+        margin: 35px 0 50px 0;
+    }
+
+    
+    /* for key visual scroll */
+    .keyVisualMobile {
+        max-width: 70%;
+    }
+    
+    
+    .bookListMobile{
+        height: 200px;
+    }
+    
+    .bookListMobileImg{
+        min-width: 50%;
+    }
+
+    main #pre,
+    main #next{
+        display: block;
+    }
+
 
     main .container, main .container-two{
         width: 100%;
@@ -695,6 +768,33 @@ main .container-two .result-book-info button{
         padding: 10px;
         margin: 40px 15px;        
     }
+
+    main .key-visualBox{
+        margin: 35px 0 50px 0;
+    }
+
+    
+    /* for key visual scroll */
+    .keyVisualMobile {
+        max-width: 90%;
+    }
+    
+    
+    .bookListMobile{
+        height: 200px;
+    }
+    
+    .bookListMobileImg{
+        min-width: 100%;
+    }
+
+    main #pre,
+    main #next{
+        display: block;
+        top: 20%;
+        transform: translateY(-20%);
+    }
+
 
     main .container, main .container-two{
         width: 100%;
