@@ -101,13 +101,13 @@ app.visualBook = function () {
                 { transform: "translate3d(0, 0, 0)" },
                 { transform: "translate3d(-" + (num * 168) + "px, 0, 0)" }
             ], {
-                // timing options
-                duration: (num * 168 * 1000) / 56,
-                iterations: Infinity
-            });
+                    duration: (num * 168 * 1000) / 56,
+                    iterations: Infinity
+                });
 
             for (let i = 0; i < num; i++) {
-                let sampleBox = app.createElement("div", "sample-book", "", "", "", box);
+                let sampleBoxHref = app.createElement("a", "", "", "href", "", box);
+                let sampleBox = app.createElement("div", "sample-book", "", "", "", sampleBoxHref);
                 let sampleHref = app.createElement("a", "spanBox", "", "", "", sampleBox);
                 let sampleText = app.createElement("span", "overlay", "", "", "", sampleHref);
                 let sampleTitle = app.createElement("span", "", "加入書籍", "", "", sampleText);
@@ -118,7 +118,8 @@ app.visualBook = function () {
             }
 
             for (let i = 0; i < num; i++) {
-                let sampleBox = app.createElement("div", "sample-book", "", "", "", box);
+                let sampleBoxHref = app.createElement("a", "", "", "href", "", box);
+                let sampleBox = app.createElement("div", "sample-book", "", "", "", sampleBoxHref);
                 let sampleHref = app.createElement("a", "spanBox", "", "", "", sampleBox);
                 let sampleText = app.createElement("span", "overlay", "", "", "", sampleHref);
                 let sampleTitle = app.createElement("span", "", "加入書籍", "", "", sampleText);
@@ -128,6 +129,7 @@ app.visualBook = function () {
                 sampleBox.onmouseout = function () { slideNone.play(); };
             }
         } else {
+            //如果有 book list
             console.log(snapshot.val());
             let bookListArrV = Object.values(snapshot.val());
             let bookListArrK = Object.keys(snapshot.val());
@@ -151,25 +153,20 @@ app.visualBook = function () {
                 { transform: "translate3d(0, 0, 0)" },
                 { transform: "translate3d(-" + ((listShow.length + num) * 168) + "px, 0, 0)" }
             ], {
-                // timing options
-                duration: ((listShow.length + num) * 168 * 1000) / 56,
-                iterations: Infinity
-            });
+                    // timing options
+                    duration: ((listShow.length + num) * 168 * 1000) / 56,
+                    iterations: Infinity
+                });
 
-            app.stopAnimation = function () {
-                slide.pause();
-            };
-
-            app.startAnimation = function () {
-                slide.play();
-            };
-
+            app.stopAnimation = function () { slide.pause(); };
+            app.startAnimation = function () { slide.play(); };
             //show book list from db
             //first round
             for (let i = 0; i < listShow.length; i++) {
                 let bookRead = bookListArrV[i].readStatus == 1 ? "閱讀中" : "未讀";
                 //every book
-                let bookDiv = app.createElement("div", "book-list-img", "", "", "", box);
+                let bookDivHref = app.createElement("a", "", "", "href", "/book.html?id=" + bookListArrK[i], box);
+                let bookDiv = app.createElement("div", "book-list-img", "", "", "", bookDivHref);
                 let bookImg = app.createElement("img", "", "", "src", bookListArrV[i].coverURL, bookDiv);
                 let bookHref = app.createElement("a", "spanBox", "", "href", "/book.html?id=" + bookListArrK[i], bookDiv);
                 let bookText = app.createElement("span", "overlay", "", "", "", bookHref);
@@ -180,11 +177,10 @@ app.visualBook = function () {
                 bookDiv.onmouseover = function () { app.stopAnimation(); };
                 bookDiv.onmouseout = function () { app.startAnimation(); };
             }
-            //sample book color
-
             if (listShow.length < 5) {
                 for (let i = 0; i < num; i++) {
-                    let sampleBox = app.createElement("div", "sample-book", "", "", "", box);
+                    let sampleBoxHref = app.createElement("a", "", "", "href", "", box);
+                    let sampleBox = app.createElement("div", "sample-book", "", "", "", sampleBoxHref);
                     let sampleHref = app.createElement("a", "spanBox", "", "", "", sampleBox);
                     let sampleText = app.createElement("span", "overlay", "", "", "", sampleHref);
                     let sampleTitle = app.createElement("span", "", "加入書籍", "", "", sampleText);
@@ -199,7 +195,8 @@ app.visualBook = function () {
             for (let i = 0; i < listShow.length; i++) {
                 let bookRead = bookListArrV[i].readStatus == 1 ? "閱讀中" : "未讀";
                 //every book
-                let bookDiv = app.createElement("div", "book-list-img", "", "", "", box);
+                let bookDivHref = app.createElement("a", "", "", "href", "/book.html?id=" + bookListArrK[i], box);
+                let bookDiv = app.createElement("div", "book-list-img", "", "", "", bookDivHref);
                 let bookImg = app.createElement("img", "", "", "src", bookListArrV[i].coverURL, bookDiv);
                 let bookHref = app.createElement("a", "spanBox", "", "href", "/book.html?id=" + bookListArrK[i], bookDiv);
                 let bookText = app.createElement("span", "overlay", "", "", "", bookHref);
@@ -212,7 +209,8 @@ app.visualBook = function () {
             }
             if (listShow.length < 5) {
                 for (let i = 0; i < num; i++) {
-                    let sampleBox = app.createElement("div", "sample-book", "", "", "", box);
+                    let sampleBoxHref = app.createElement("a", "", "", "href", "", box);
+                    let sampleBox = app.createElement("div", "sample-book", "", "", "", sampleBoxHref);
                     let sampleHref = app.createElement("a", "spanBox", "", "", "", sampleBox);
                     let sampleText = app.createElement("span", "overlay", "", "", "", sampleHref);
                     let sampleTitle = app.createElement("span", "", "加入書籍", "", "", sampleText);
@@ -258,18 +256,18 @@ app.keyin_search = function () {
     let searchType = app.get("#search-type");
     app.search_book = function (keyWord) {
         switch (searchType.value) {
-        case "search-title":
-            app.googleBooks_title(keyWord);
-            break;
-        case "search-isbn":
-            app.googleBooks_isbn(keyWord);
-            break;
-        case "search-author":
-            app.googleBooks_author(keyWord);
-            break;
-        case "":
-            console.log("user didn't key in words");
-            break;
+            case "search-title":
+                app.googleBooks_title(keyWord);
+                break;
+            case "search-isbn":
+                app.googleBooks_isbn(keyWord);
+                break;
+            case "search-author":
+                app.googleBooks_author(keyWord);
+                break;
+            case "":
+                console.log("user didn't key in words");
+                break;
         }
     };
 };

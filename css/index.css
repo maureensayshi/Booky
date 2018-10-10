@@ -263,7 +263,8 @@ main .key-visualBox{
 .sample-book:hover {  
     transform: scale(1.4);
     transition: transform .75s;
-    background:none;
+    background:white;
+    opacity: .5;
 }   
 
 .spanBox:hover .overlay{
