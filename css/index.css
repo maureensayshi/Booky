@@ -602,11 +602,7 @@ main .container-two .result-book-info button{
         height: auto;
      }
 
-     main #pre,
-     main #next{
-         display: block;
-     }
-
+  
     /* main .container h2,
     main .container-two h2 {
         font-size: 20px;
@@ -679,12 +675,6 @@ main .container-two .result-book-info button{
     .bookListMobileImg{
         min-width: 50%;
     }
-
-    main #pre,
-    main #next{
-        display: block;
-    }
-
 
     main .container, main .container-two{
         width: 100%;
@@ -790,7 +780,6 @@ main .container-two .result-book-info button{
 
     main #pre,
     main #next{
-        display: block;
         top: 20%;
         transform: translateY(-20%);
     }

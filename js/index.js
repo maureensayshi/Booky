@@ -198,13 +198,14 @@ app.visualBookMobile = function () {
     box.classList.add("bookListMobile");
     box.classList.remove("book-list");
 
-
-
     let db = app.database;
     let dbBookList = db.ref("/members/" + app.uid + "/bookList/");
     dbBookList.once("value", function (snapshot) {
         if (snapshot.val() == null) {
             console.log("no book");
+            let sampleBoxHref = app.createElement("a", "", "", "href", "", box);
+            let sampleBox = app.createElement("div", "sample-book", "", "", "", sampleBoxHref);
+            sampleBox.style.backgroundColor = "#EAA140";
         } else {
             console.log(snapshot.val());
             let bookListArrV = Object.values(snapshot.val());
@@ -225,15 +226,19 @@ app.visualBookMobile = function () {
                 let bookHref = app.createElement("a", "bookHref", "", "href", "/book.html?id=" + bookListArrK[i], bookBox);
                 let bookDiv = app.createElement("img", "", "", "src", listShow[i].coverURL, bookHref);
             }
+
+            app.get("#pre").style.display = "block";
+            app.get("#next").style.display = "block";
+
+            let eachBook = app.get(".bookListMobileImg").clientWidth;
+            app.get("#pre").onclick = function () {
+                box.scrollBy(-eachBook, 0);
+            }
+            app.get("#next").onclick = function () {
+                box.scrollBy(eachBook, 0);
+            }
         }
 
-        let eachBook = app.get(".bookListMobileImg").clientWidth;
-        app.get("#pre").onclick = function () {
-            box.scrollBy(-eachBook, 0);
-        }
-        app.get("#next").onclick = function () {
-            box.scrollBy(eachBook, 0);
-        }
 
 
     }).catch((error) => {
