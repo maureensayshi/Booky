@@ -97,7 +97,6 @@ app.searchBar = function () {
 };
 
 //搜尋書庫裡的書
-
 app.searchBarGo = function () {
     let formSearchBar = app.get(".searchbar-form");
     formSearchBar.onsubmit = function () {
@@ -131,10 +130,6 @@ app.searchDB = function () {
                     console.log("無搜尋結果");
                 }
             }
-
-
-
-
         });
     }
 };

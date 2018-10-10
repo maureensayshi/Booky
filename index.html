@@ -116,7 +116,13 @@
             <div class="btn_search">
                 <input type="search" />
             </div>
+            <div>
+                <button id="addbook"></button>
+                <button id="scanbook"></button>
+            </div>
         </header>
+
+        <!-- search book shelf -->
         <div class="search-shade">
             <div class="searchbar-img">
                 <img src="img/cancel.svg" />
@@ -134,7 +140,30 @@
                 </ul>
             </div>
         </div>
+
+        <!-- add book by typing -->
+        <div class="add-shade">
+            <div class="add-img">
+                <img src="img/cancel.svg" />
+            </div>
+            <div class="addbar-list">
+                <h5>SEARCH BY</h5>
+                <ul>
+                    <li value="search-title"><a>書名 Title</a></li>
+                    <li value="search-isbn"><a>作者 Author</a></li>
+                    <li value="search-author"><a>書碼 ISBN</a></li>
+                </ul>
+            </div>
+            <form method="get" class="add-form">
+                <input type="text" value="" placeholder="請輸入想加進 BOOKY 的書．．．" />
+            </form>
+
+
+        </div>
+
+
         <main>
+            <!-- key visual -->
             <div class="bg"></div>
             <div class="view">
                 <div class="key-visualBox">
@@ -142,25 +171,7 @@
                     <button id="next"></button>
                     <div class="key-visual">
                         <div class="sliding-background">
-                            <div class="book-list">
-                                <!-- <div class="sample-book">
-                                    <a href="" class="spanBox">
-                                        <span class="overlay">
-                                            <span>新增書籍</span>
-                                            <span>ADD</span>
-                                        </span>
-                                    </a>
-                                </div> -->
-                                <!-- <div class="book-list-img">
-                                    <img src=" http://books.google.com/books/content?id=gCMQDQAAQBAJ&amp;printsec=frontcover&amp;img=1&amp;zoom=1&amp;edge=curl&amp;source=gbs_api" />
-                                    <a href="" class="spanBox">
-                                        <span class="overlay">
-                                            <span>閱讀中</span>
-                                            <span>VIEW</span>
-                                        </span>
-                                    </a>
-                                </div> -->
-                            </div>
+                            <div class="book-list"></div>
                         </div>
                     </div>
                 </div>

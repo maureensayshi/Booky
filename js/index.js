@@ -237,20 +237,25 @@ app.visualBookMobile = function () {
                 if (bookListArrV[i].coverURL == "../img/fakesample1.svg" ||
                     bookListArrV[i].coverURL == "../img/fakesample2.svg" ||
                     bookListArrV[i].coverURL == "../img/fakesample3.svg") {
-                    let bookTitle = app.createElement("div", "bookTitle", listShow[i].title, "", "", bookHref);
+                    bookHref.style.width = "35%";
+                    let bookTitle = app.createElement("div", "bookTitleMobile", listShow[i].title, "", "", bookHref);
                 }
             }
 
             app.get("#pre").style.display = "block";
             app.get("#next").style.display = "block";
 
-            let eachBook = app.get(".bookListMobileImg").clientWidth;
+            let eachBook = app.get(".bookHref").clientWidth;
             app.get("#pre").onclick = function () {
-                box.scrollBy(-eachBook, 0);
-            }
+                box.scrollBy(-375, 0);
+                console.log("pre");
+                console.log(eachBook);
+            };
             app.get("#next").onclick = function () {
-                box.scrollBy(eachBook, 0);
-            }
+                box.scrollBy(375, 0);
+                console.log("next");
+                console.log(eachBook);
+            };
         }
     }).catch((error) => {
         console.log(error);

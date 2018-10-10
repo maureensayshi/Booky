@@ -136,29 +136,37 @@ img{
 header{
     display: flex;
     justify-content: space-around;
-    padding: 30px 60px 30px;
-    /* background-color: white; */
+    padding: 30px 60px 40px;
+    margin: 20px 150px 0 150px; 
 }
 
 header .btn_menu{
     flex: auto;
-    width: 50%;
     outline: 0;
+    position: absolute;
+    left: 60px;
+    top: 55px;
 }
 
 header .btn_menu img{
-    width: auto;
-    height: 30px;
-    margin: 5px 0 0 10px;
+    width: 40px;
+    height: 40px;
+    margin: 5px 0 0 0;
     cursor: pointer;
+    background-color:white;
+    border-radius:50%;  
 }
 
 header .btn_logo{
     flex: none;    
+    position: absolute;
+    top: 55px;
+    left: 50%;
+    transform: translate(-50%);
 }
 
 header .btn_logo img{
-    max-width: 150px;
+    max-width: 200px;
     height: auto;
     cursor: pointer;
 }
@@ -171,18 +179,55 @@ header .btn_search{
 }
 header .btn_search input{
     flex: none;
-    padding: 8px 10px;
-    padding-right: 40px;
+    padding: 17px 17px;
+    padding-right: 35px;
     width: 0px;
     border-width: 0px;
-    border-radius: 15px;
-    background-image: url("../img/search.png");
-    background-repeat: no-repeat;
-    background-size: 80%;
-    background-position: top;
-    background-color: transparent;
+    border-radius: 60%;
+    background: url("../img/search.png") center no-repeat white;
+    background-size: 70%;
     cursor: pointer;
     outline: 0;
+}
+
+#addbook{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: url("../img/add_btn.svg") center no-repeat white;
+    background-size: 50%;
+    position: absolute;
+    right: 135px;
+    top: 68px;
+    transform: translateY(-35%);
+    cursor: pointer;   
+    border: 0;
+    z-index: 10;
+}
+
+header .btn_search input:hover,
+#addbook:hover{
+    background-color:  #EBE4D1;
+}
+
+#scanbook{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: url("../img/bar_btn.svg") center no-repeat white;
+    background-size: 80%;
+    position: absolute;
+    right: 60px;
+    top: 68px;
+    transform: translateY(-35%);
+    cursor: pointer;   
+    border: 0;
+    z-index: 10;
+}
+
+#scanbook:hover{
+    background-color: #EBE4D1;
+    background-image: url("../img/bar_btn_hover.svg");
 }
 
 /* search */
@@ -224,7 +269,7 @@ header .btn_search input{
 }
 
 .search-shade  form{
-    width: 80%;
+    width: 60%;
 }
 
 .search-shade form input{
@@ -235,7 +280,7 @@ header .btn_search input{
     font-family: "微軟正黑體";
     text-transform: uppercase;
     letter-spacing: 2px;
-    font-size: 16px;
+    font-size: 20px;
 }
 
 .searchbar-list{
@@ -246,7 +291,7 @@ header .btn_search input{
 .searchbar-list h5{
     padding: 20px 0 10px 0;
     margin: 5% 0 0 0;
-    font-size: 14px;
+    font-size: 20px;
     font-family: "Martel Sans", sans-serif;
     font-weight: 400;
 }
@@ -294,6 +339,103 @@ header .btn_search input{
     border-bottom: 1px solid #B9B144;
     cursor: pointer;
 }
+
+/* ADD BOOK */
+.add-shade{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    margin:0;
+    background-color: white;
+    overflow: hidden;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* visibility:hidden; */
+    opacity:1;
+    filter:alpha(opacity=1);
+    -webkit-transition:300ms ease;
+    -moz-transition:300ms ease;
+    -o-transition:300ms ease;
+    transition:300ms ease;
+}
+
+.add-img{
+    width: 100%;
+    position: relative;
+    margin-bottom: 200px;
+  }
+  
+  .add-img>img{
+      width: 20px;
+      height: 20px;
+      position: absolute;
+      top: 35px;
+      right: 65px;
+      cursor: pointer;   
+  }
+  
+  .add-shade  form{
+      width: 60%;
+  }
+
+  .add-shade form input{
+    width: 100%;
+    border: 0;
+    padding: 12px 0 10px 20px;
+    border-bottom: 1px solid #B9B144;
+    font-family: "微軟正黑體";
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 20px;
+}
+
+.addbar-list{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: -50px 0 60px 0;
+}
+.addbar-list h5{
+    padding: 20px 0 10px 0;
+    /* margin: 5% 0 0 0; */
+    font-size: 20px;
+    font-family: "Martel Sans", sans-serif;
+    font-weight: 400;   
+}
+.addbar-list ul{
+    list-style: none;
+    margin-top: 10px;
+    display: flex;
+}
+
+.addbar-list li a{
+    width: 250px;
+    font-family: "Cinzel", serif, "NSimSun";
+    display: flex;
+    justify-content: space-around;
+    letter-spacing: 2px;
+    padding: 15px;
+    margin: 10px 15px;
+    text-align: center;
+    font-size: 24px;
+    font-weight: 600;
+    background-color: rgba(185, 177, 68, .4);
+    cursor: pointer;
+}
+
+.addbar-list li:first-child a{
+    background-color: rgba(185, 177, 68, 1);
+}
+
+.addbar-list li a:target{
+    background-color: rgba(185, 177, 68, 1);
+}
+
+
 
 /* main */
 
