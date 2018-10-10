@@ -167,6 +167,17 @@ main .key-visualBox{
     box-shadow: 0px 3px 10px 0px #BBBBBB; 
 }
 
+.bookTitle{
+    position: absolute;
+    top: 15%;
+    left: 35%;
+    transform: translate(-35%,-15%);
+    height: 45px;
+    line-height: 1.5;
+    overflow: hidden;
+    font-family: "Cinzel", serif, "微軟正黑體";
+}
+
 .book-list-img:hover{
     transform: scale(1.4);
     transition: transform .75s;   
@@ -263,16 +274,14 @@ main .key-visualBox{
     opacity: 1;
 }
 
-/* mobile */
+/* mobile scroll feature*/
 
 .keyVisualMobile {
     overflow: hidden;
     display: flex;
     max-width: 70%;
-    /* height: 200px; */
     position: relative;
 }
-
 
 .bookListMobile{
     scroll-snap-type: x mandatory;
@@ -282,6 +291,19 @@ main .key-visualBox{
     align-items: center;
     height: 300px;
 }
+
+.bookHref{
+    width: 45%;
+    position: relative;
+}
+
+.bookTitleMobile{
+    position: absolute;
+    top: 15%;
+    left: 35%;
+    transform: translate(-35%,-15%);
+}
+
 
 .bookListMobileImg{
     min-width: 33.3%;
@@ -780,7 +802,6 @@ main .container-two .result-book-info button{
 
     main #pre,
     main #next{
-        top: 20%;
         transform: translateY(-20%);
     }
 

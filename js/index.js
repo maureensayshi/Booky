@@ -129,16 +129,18 @@ app.visualBook = function () {
 
             let listRead = [];
             let listShow = [];
+            let listK = [];
             for (let i = 0; i < bookListArrV.length; i++) {
                 if (bookListArrV[i].readStatus == 2) {
                     listRead.push(bookListArrV[i]);
                     num = 5;
                 } else if (bookListArrV[i].readStatus != 2) {
                     listShow.push(bookListArrV[i]);
+                    listK.push(bookListArrK[i]);
                     num = listShow.length < 5 ? 5 - listShow.length : 0;
                 }
             }
-            console.log(num);
+            console.log(listShow);
 
             //key visual animation
             let slide = slideBG.animate([
@@ -157,12 +159,17 @@ app.visualBook = function () {
             //repeat twice
             for (let j = 0; j < 2; j++) {
                 for (let i = 0; i < listShow.length; i++) {
-                    let bookRead = bookListArrV[i].readStatus == 1 ? "閱讀中" : "未讀";
+                    let bookRead = listShow[i].readStatus == 1 ? "閱讀中" : "未讀";
                     //every book
-                    let bookDivHref = app.createElement("a", "", "", "href", "/book.html?id=" + bookListArrK[i], box);
+                    let bookDivHref = app.createElement("a", "", "", "href", "/book.html?id=" + listShow[i], box);
                     let bookDiv = app.createElement("div", "book-list-img", "", "", "", bookDivHref);
-                    let bookImg = app.createElement("img", "", "", "src", bookListArrV[i].coverURL, bookDiv);
-                    let bookHref = app.createElement("a", "spanBox", "", "href", "/book.html?id=" + bookListArrK[i], bookDiv);
+                    let bookImg = app.createElement("img", "", "", "src", listShow[i].coverURL, bookDiv);
+                    if (listShow[i].coverURL == "../img/fakesample1.svg" ||
+                        listShow[i].coverURL == "../img/fakesample2.svg" ||
+                        listShow[i].coverURL == "../img/fakesample3.svg") {
+                        let bookTitle = app.createElement("div", "bookTitle", listShow[i].title, "", "", bookDiv);
+                    }
+                    let bookHref = app.createElement("a", "spanBox", "", "href", "/book.html?id=" + listK[i], bookDiv);
                     let bookText = app.createElement("span", "overlay", "", "", "", bookHref);
                     let bookReadText = app.createElement("span", "", bookRead, "", "", bookText);
                     let bookClick = app.createElement("span", "", "View", "", "", bookText);
@@ -213,18 +220,25 @@ app.visualBookMobile = function () {
 
             let listRead = [];
             let listShow = [];
+            let listK = [];
             for (let i = 0; i < bookListArrV.length; i++) {
                 if (bookListArrV[i].readStatus == 2) {
                     listRead.push(bookListArrV[i]);
                 } else if (bookListArrV[i].readStatus != 2) {
                     listShow.push(bookListArrV[i]);
+                    listK.push(bookListArrK[i]);
                 }
             }
 
             for (let i = 0; i < listShow.length; i++) {
                 let bookBox = app.createElement("div", "bookListMobileImg", "", "", "", box)
-                let bookHref = app.createElement("a", "bookHref", "", "href", "/book.html?id=" + bookListArrK[i], bookBox);
+                let bookHref = app.createElement("a", "bookHref", "", "href", "/book.html?id=" + listK[i], bookBox);
                 let bookDiv = app.createElement("img", "", "", "src", listShow[i].coverURL, bookHref);
+                if (bookListArrV[i].coverURL == "../img/fakesample1.svg" ||
+                    bookListArrV[i].coverURL == "../img/fakesample2.svg" ||
+                    bookListArrV[i].coverURL == "../img/fakesample3.svg") {
+                    let bookTitle = app.createElement("div", "bookTitle", listShow[i].title, "", "", bookHref);
+                }
             }
 
             app.get("#pre").style.display = "block";
@@ -238,9 +252,6 @@ app.visualBookMobile = function () {
                 box.scrollBy(eachBook, 0);
             }
         }
-
-
-
     }).catch((error) => {
         console.log(error);
     });
@@ -379,8 +390,10 @@ app.getBookData = function (data) {
             bookISBN = "暫無資料"; // console.log("印出無 ISBN 13 碼");
         }
         // 書封照片
+        let fakeCovers = ["../img/fakesample1.svg", "../img/fakesample2.svg", "../img/fakesample3.svg"];
+        let fakeCover = fakeCovers[Math.floor(Math.random() * fakeCovers.length)];
         let cover = data.items[i].volumeInfo.imageLinks;
-        bookCover = (cover != null) ? cover.thumbnail : "https://bit.ly/2ObFgq5";
+        bookCover = (cover != null) ? cover.thumbnail : fakeCover;
         app.showBookResult(bookTitle, bookAuthor, bookPublisher, bookISBN, bookCover);
     }
 };
@@ -393,7 +406,10 @@ app.showBookResult = function (bookTitle, bookAuthor, bookPublisher, bookISBN, b
     //each book
     let bookParent = app.createElement("div", "result-book", "", "", "", booksParent);
     let ImageParent = app.createElement("div", "result-book-img", "", "", "", bookParent);
+
+    //判斷是不是有書封
     let showImage = app.createElement("img", "", "", "src", bookCover, ImageParent);
+    // }
     // each book info
     let bookInfoParent = app.createElement("div", "result-book-info", "", "", "", bookParent);
     let TitleParent = app.createElement("p", "", "書名：", "", "", bookInfoParent);

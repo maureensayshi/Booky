@@ -314,7 +314,7 @@ main .bg{
 main .view{
     position: relative;
     width: 100%;
-    min-height: 523px;
+    min-height: 300px;
     max-width: 1100px;
     margin: 0px auto;
 }
