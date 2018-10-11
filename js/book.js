@@ -7,6 +7,7 @@ app.init = function () {
         app.showBook();
         app.menu();
         app.searchBar();
+        app.addBookInit();
     });
 };
 
