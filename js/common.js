@@ -134,6 +134,8 @@ app.searchDB = function () {
     }
 };
 
+// add book
+
 // loading
 app.showLoading = function () {
     app.get("#loading").style.display = "block";

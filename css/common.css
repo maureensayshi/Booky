@@ -136,8 +136,8 @@ img{
 header{
     display: flex;
     justify-content: space-around;
-    padding: 30px 60px 40px;
-    margin: 20px 150px 0 150px; 
+    padding: 10px 60px 40px;
+    margin: 10px 150px 0 150px; 
 }
 
 header .btn_menu{
@@ -145,28 +145,27 @@ header .btn_menu{
     outline: 0;
     position: absolute;
     left: 60px;
-    top: 55px;
+    top: 25px;
 }
 
 header .btn_menu img{
-    width: 40px;
-    height: 40px;
-    margin: 5px 0 0 0;
+    width: 25px;
+    height: 25px;
     cursor: pointer;
-    background-color:white;
-    border-radius:50%;  
+    /* background-color:white; */
+    /* border-radius:50%;   */
 }
 
 header .btn_logo{
     flex: none;    
     position: absolute;
-    top: 55px;
+    top: 25px;
     left: 50%;
     transform: translate(-50%);
 }
 
 header .btn_logo img{
-    max-width: 200px;
+    max-width: 120px;
     height: auto;
     cursor: pointer;
 }
@@ -179,55 +178,44 @@ header .btn_search{
 }
 header .btn_search input{
     flex: none;
-    padding: 17px 17px;
-    padding-right: 35px;
+    padding: 16px;
     width: 0px;
     border-width: 0px;
     border-radius: 60%;
-    background: url("../img/search.png") center no-repeat white;
-    background-size: 70%;
+    background: url("../img/search.svg") center no-repeat transparent;
+    background-size: 60%;
     cursor: pointer;
     outline: 0;
 }
 
 #addbook{
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    background: url("../img/add_btn.svg") center no-repeat white;
+    width: 35px;
+    height: 35px;
+    /* border-radius: 50%; */
+    background: url("../img/add_btn.svg") center no-repeat transparent;
     background-size: 50%;
     position: absolute;
     right: 135px;
-    top: 68px;
+    top: 38px;
     transform: translateY(-35%);
     cursor: pointer;   
     border: 0;
     z-index: 10;
-}
-
-header .btn_search input:hover,
-#addbook:hover{
-    background-color:  #EBE4D1;
 }
 
 #scanbook{
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    background: url("../img/bar_btn.svg") center no-repeat white;
-    background-size: 80%;
+    width: 35px;
+    height: 35px;
+    /* border-radius: 50%; */
+    background: url("../img/scan.png") center no-repeat transparent;
+    background-size: 60%;
     position: absolute;
     right: 60px;
-    top: 68px;
+    top: 38px;
     transform: translateY(-35%);
     cursor: pointer;   
     border: 0;
     z-index: 10;
-}
-
-#scanbook:hover{
-    background-color: #EBE4D1;
-    background-image: url("../img/bar_btn_hover.svg");
 }
 
 /* search */
@@ -354,7 +342,7 @@ header .btn_search input:hover,
     display: flex;
     flex-direction: column;
     align-items: center;
-    /* visibility:hidden; */
+    visibility:hidden;
     opacity:1;
     filter:alpha(opacity=1);
     -webkit-transition:300ms ease;
@@ -413,8 +401,8 @@ header .btn_search input:hover,
     display: flex;
 }
 
-.addbar-list li a{
-    width: 250px;
+.addbar-list-li {
+    width: 220px;
     font-family: "Cinzel", serif, "NSimSun";
     display: flex;
     justify-content: space-around;
@@ -422,17 +410,13 @@ header .btn_search input:hover,
     padding: 15px;
     margin: 10px 15px;
     text-align: center;
-    font-size: 24px;
+    font-size: 20px;
     font-weight: 600;
     background-color: rgba(185, 177, 68, .4);
     cursor: pointer;
 }
 
-.addbar-list li:first-child a{
-    background-color: rgba(185, 177, 68, 1);
-}
-
-.addbar-list li a:target{
+.active{
     background-color: rgba(185, 177, 68, 1);
 }
 
@@ -441,16 +425,17 @@ header .btn_search input:hover,
 /* main */
 
 main .bg{
-    position:fixed !important;
+    position: fixed !important;
     top:0;
     right:0;
     bottom:0;
+    overflow: hidden;
     left:0;
     width: 100%;
     background: url("../img/background.jpg") bottom center no-repeat  ;
-    /* background-size: 80%; */
+    background-size: 65%;
     background-attachment: fixed;
-    opacity: 0.7;
+    opacity: 0.8;
    z-index: -1;
 }
 
@@ -465,9 +450,10 @@ main .view{
 /* footer */
 
 footer .footer{
-    padding: 15px;
+    display: none;
+    padding: 10px;
     background-color: #EBE4D1;
-    display: flex;
+    /* display: flex; */
     justify-content: center;    
     letter-spacing: 1px;
     position: fixed;

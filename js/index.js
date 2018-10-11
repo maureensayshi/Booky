@@ -17,7 +17,7 @@ app.checkingIndex = function () {
             console.log(app.uid);
             // app.get(".welcome").style.display = "none";
             app.get(".real").style.display = "block";
-            if (document.body.clientWidth >= 980) {
+            if (document.body.clientWidth > 1024) {
                 app.visualBook();
             } else {
                 app.visualBookMobile();
@@ -237,7 +237,11 @@ app.visualBookMobile = function () {
                 if (bookListArrV[i].coverURL == "../img/fakesample1.svg" ||
                     bookListArrV[i].coverURL == "../img/fakesample2.svg" ||
                     bookListArrV[i].coverURL == "../img/fakesample3.svg") {
-                    bookHref.style.width = "35%";
+                    if (document.body.clientWidth > 640) {
+                        bookHref.style.width = "60%";
+                    } else {
+                        bookHref.style.width = "35%";
+                    }
                     let bookTitle = app.createElement("div", "bookTitleMobile", listShow[i].title, "", "", bookHref);
                 }
             }

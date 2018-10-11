@@ -123,7 +123,7 @@ main .view{
 main .key-visualBox{
     display: flex;
     justify-content: center;
-    margin: 80px 0 50px 0;
+    margin: 0px 0 50px 0;
     width: 100%;
     max-width: 1000px;
     /* border: 1px solid blue; */
@@ -155,7 +155,7 @@ main .key-visualBox{
     width: auto;
     margin-top: 50px;
     display: flex;
-    align-items: center;   
+    align-items: flex-end;   
 }
 
 /* desktop */
@@ -559,6 +559,7 @@ main .container-two .result-book-info button{
         width: 200px;
         height: auto;
      }
+
      main .container .add{width: 800px;}
 
      main .container h2, main .container-two h2{
@@ -625,6 +626,9 @@ main .container-two .result-book-info button{
         height: auto;
      }
 
+     .bookHref{
+        width: 60%;
+    }
   
     /* main .container h2,
     main .container-two h2 {
