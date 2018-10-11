@@ -15,7 +15,7 @@ app.checkingIndex = function () {
             // User is signed in.
             app.uid = user.uid;
             console.log(app.uid);
-            // app.get(".welcome").style.display = "none";
+            app.get(".welcome").style.display = "none";
             app.get(".real").style.display = "block";
             if (document.body.clientWidth > 1024) {
                 app.visualBook();
@@ -29,7 +29,7 @@ app.checkingIndex = function () {
             app.closeLoading();
         } else {
             // User is signed out or haven't sign up.
-            // app.get(".welcome").style.display = "block";
+            app.get(".welcome").style.display = "block";
             app.get(".real").style.display = "none";
             app.closeLoading();
             app.googleLogin();

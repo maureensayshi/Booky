@@ -89,15 +89,16 @@
 
 .welcome main .step p { line-height: 1; padding-top: 13px;}
 
-
+*/
 .welcome main .signinDiv{ display: flex; flex-direction: column; margin: 50px;}
-.welcome main .signin,
-.welcome main .login{
+/* .welcome main .signin,
+}  */
+.welcome .signin{
     width: 250px; height: 50px; align-self: center; letter-spacing: 3px; padding-left: 100px; border-radius: 5px; border:none;
     margin: 6px; font-size: 14px; cursor: pointer; font-family: "微軟正黑體";
     background: url("../img/google.svg") no-repeat 20px #8556B7;
 	color: white; -webkit-box-shadow: none; -moz-box-shadow: none; box-shadow: none;
-} */
+}
 
 /* real index page */
 
