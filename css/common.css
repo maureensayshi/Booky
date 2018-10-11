@@ -330,19 +330,18 @@ header .btn_search input{
 
 /* ADD BOOK */
 .add-shade{
-    position: fixed;
+    position: absolute;
     width: 100%;
-    height: 100%;
+    height: auto;
     top: 0;
     left: 0;
     margin:0;
     background-color: white;
-    overflow: hidden;
     z-index: 100;
     display: flex;
     flex-direction: column;
     align-items: center;
-    visibility:hidden;
+    /* visibility:hidden; */
     opacity:1;
     filter:alpha(opacity=1);
     -webkit-transition:300ms ease;
@@ -354,7 +353,7 @@ header .btn_search input{
 .add-img{
     width: 100%;
     position: relative;
-    margin-bottom: 200px;
+    margin-bottom: 100px;
   }
   
   .add-img>img{
@@ -365,28 +364,13 @@ header .btn_search input{
       right: 65px;
       cursor: pointer;   
   }
-  
-  .add-shade  form{
-      width: 60%;
-      margin-top: 30px;
-  }
 
-  .add-shade form input{
-    width: 100%;
-    border: 0;
-    padding: 12px 0 10px 20px;
-    border-bottom: 1px solid #B9B144;
-    font-family: "微軟正黑體";
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    font-size: 20px;
-}
-
-.addbar-list{
+  .addbar-list{
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: -50px 0 60px 0;
+    margin: 0px 0 60px 0;
+    width: 800px;
 }
 .addbar-list h5{
     padding: 20px 0 10px 0;
@@ -395,14 +379,16 @@ header .btn_search input{
     font-family: "Martel Sans", sans-serif;
     font-weight: 400;   
 }
-.addbar-list ul{
-    list-style: none;
+.addTabs{  
     margin-top: 10px;
     display: flex;
+    justify-content: center; 
+    width: 800px;
 }
 
-.addbar-list-li {
-    width: 220px;
+.addtab {
+    flex: none;
+    width: 25%;   
     font-family: "Cinzel", serif, "NSimSun";
     display: flex;
     justify-content: space-around;
@@ -414,11 +400,46 @@ header .btn_search input{
     font-weight: 600;
     background-color: rgba(185, 177, 68, .4);
     cursor: pointer;
+    border: 0;
+    transition: all transform .75s;   
 }
 
 .active{
     background-color: rgba(185, 177, 68, 1);
+    transition: background 250ms ease-in-out, transform 200ms ease;
+    -webkit-appearance: none;    
 }
+
+  
+  .add-shade  form{
+      width: 100%;
+      margin-top: 50px;
+      position: relative;
+  }
+
+  .add-shade form input{
+    width: 100%;
+    border: 0;
+    padding: 12px 0px 10px 20px;
+    border-bottom: 1px solid #B9B144;
+    font-family: "微軟正黑體";
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 20px;      
+}
+
+.add-shade form button{
+    width: 20px;
+    height: 20px;
+    background: url(../img/search.svg) no-repeat;
+    background-size: 100%; 
+    border: 0;
+    position: absolute;
+    top: 30%;
+    right: 2%;
+    cursor: pointer;
+}
+
 
 
 

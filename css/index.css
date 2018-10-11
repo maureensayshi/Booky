@@ -112,12 +112,8 @@ main{
 }
 
 main .view{
-  /* scroll-snap-type: y mandatory;
-  overflow-y: scroll; */
-  /* height: 600px; */
   display: flex;
   justify-content: center;
-  /* align-items: center; */
 }
 
 main .key-visualBox{
@@ -126,9 +122,6 @@ main .key-visualBox{
     margin: 0px 0 50px 0;
     width: 100%;
     max-width: 1000px;
-    /* border: 1px solid blue; */
-    /* position: relative; */
-    /* border: 1px solid blue; */
 }
 
 .key-visual {
@@ -153,9 +146,9 @@ main .key-visualBox{
 
 .book-list {   
     width: auto;
-    margin-top: 50px;
+    height: 260px;
     display: flex;
-    align-items: flex-end;   
+    align-items: flex-end; 
 }
 
 /* desktop */
@@ -179,8 +172,10 @@ main .key-visualBox{
 }
 
 .book-list-img:hover{
-    transform: scale(1.4);
+    transform-origin: bottom;
+    transform: scale(1.3);
     transition: transform .75s;   
+    z-index: 100;
 }
 
 .book-list-img .overlay{
@@ -346,148 +341,63 @@ main #next{
     z-index: 10;
 }
 
-main .container{
-    /* height: 500px;
-    scroll-snap-align: start; */
-    display: none;
-    width: 100%;
-    max-width: 1100px;    
-    flex-direction: column;
-    align-items: center;
-    margin: 0 auto 100px auto;
-    background-color: rgba(255, 255, 255, 1);
-}
-
-main .container-two{
-    /* scroll-snap-align: start; */
-    /* height: 100%; */
+/* 搜尋結果 */
+.container-two{
     display: none;
     width: 100%;
     max-width: 1100px;
     flex-direction: column;
     align-items: center;
-    margin: 0 auto 60px auto;
-    /* background-color: rgba(255, 255, 255, .8); */
+    margin: 70px auto 60px auto;
 }
 
-main .container h2,
-main .container-two h2 {
+.container-two h2 {
+    width: 100%;
+    text-align: center;
     font-size: 20px; 
     font-weight: bold;
-    padding: 0px 425px 20px 425px;
-    border-bottom: 1px solid #E1E0E1;
-}
-
-main .container .add{
-    display: flex;
-    justify-content: space-around;
-    /* width: 70%; */
-    width: 100%;
-   
-}
-
-main .container .search-add,
-main .container .scan-add{
-    flex: none;
-    width: 50%;
-    padding: 20px 0 50px 0;
-    border-radius: 10px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    /* background-color: rgba(255, 255, 255, .8); */
-}
-
-main .container .search-add h3,
-main .container .scan-add h3{
-    width: 80%;
-    font-size: 20px;
-    font-weight: bold;
-    padding: 25px 0 25px 0;
-    margin-bottom: 30px;
-    border-bottom: 1px solid #E1E0E1;
-    text-align: center;
-    /* background-color: rgba(255, 255, 255, .8); */
-  
-    
-}
-main .container .search-add select,
-main .container #keyword{
-    width: 170px;
-    height: 25px;
-    border-radius: 8px;
-    background-color: white;
-    border: solid 1px #BBBBBB;
-    padding: 0px 4px;
-    margin: 5px;
-    font-size: 14px;
-    font-family: "微軟正黑體";   
-}
-
-main .container .search-add select{cursor: pointer;}
-main .container #keyword{cursor: text;}
-
-main .container .add .search-add form,
-main .container .add .scan-add form{
-    display: flex;
-    flex-direction: column;
-}
-
-main .container .add .search-add form p{margin: 12px;}
-
-main .container .add form button{
-    width: 150px;
-    height: 35px;
-    align-self: center;
-    letter-spacing: 3px;
-    padding-left: 50px;
-    border-radius: 10px;
-    border: none;
     margin: 20px;
-    font-size: 14px;
-    cursor: pointer;
-    font-family: "微軟正黑體";
-    background: url(../img/search-white.svg) no-repeat 35px #DCB58C;
-    background-size: 10%;
-    color: white;
-    -webkit-box-shadow: none;
-    -moz-box-shadow: none;
-    box-shadow: none;
+   padding: 10px 0 20px 0;
+   letter-spacing: 3px;
+    border-bottom: 1px solid #E1E0E1;
+    vertical-align: middle;
 }
 
-main .container-two .result{
+.container-two h2>span{
+    letter-spacing: 2px;
+    margin-right: 4px;
+}
+
+.result{
     display: flex;
     flex-direction: column;
     /* flex-wrap: wrap; */
     justify-content: center;
-    min-height: 500px;
+    /* min-height: 250px; */
+    overflow-y: scroll;
 } 
 
-main .container-two .result .result-book{
+.result .result-book{
     flex: none;
     display: flex;
-    padding: 10px 0 0 80px;
     border-bottom: 1px solid #E1E0E1;
     width: 512px;
 }
 
-main .container-two>.result>.result-book>.result-book-img{
+.result>.result-book>.result-book-img{
     flex: none;
     width: 128px;
-    height: 196px;
-    /* padding: 13px; */
+    height: 180px;
     margin: 30px 20px;
-    /* background-color: white; */
-    border-radius: 15px;
-    /* box-shadow: 5px 5px 10px #999999; */
+    box-shadow: 0px 1px 10px #999999;
 }
 
-main .container-two>.result>.result-book>.result-book-info{
+.result>.result-book>.result-book-info{
     width: 128px;
     margin: 30px 20px;
 }
 
-main .container-two>.result>.result-book>.result-book-info>p{
+.result>.result-book>.result-book-info>p{
     width: 230px;
     line-height: 1.25;   
     margin: 0 0 15px 0;
@@ -495,11 +405,11 @@ main .container-two>.result>.result-book>.result-book-info>p{
     font-weight: 600;
 }
 
-main .container-two>.result>.result-book>.result-book-info>p>span{
+.result>.result-book>.result-book-info>p>span{
     font-weight: normal;
 }
 
-main .container-two .result-book-info button{
+.result-book-info button{
     width: 120px;
     height: 35px;
     letter-spacing: 3px;
@@ -630,29 +540,6 @@ main .container-two .result-book-info button{
         width: 60%;
     }
   
-    /* main .container h2,
-    main .container-two h2 {
-        font-size: 20px;
-        padding: 40px 240px 20px 240px;
-        text-align: center;
-    }
-
-    main .container .add{
-        max-width: 600px;
-        width: 100%;
-    } */
-
-    main .container .add .search-add form p,
-    main .container .add .scan-add form p{
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-
-    main .container .add .search-add form p label,
-    main .container .add .scan-add form p label{
-        margin-bottom: 10px;
-    }
 }
 
 @media (max-width: 640px) and (min-width: 480px){
@@ -703,43 +590,20 @@ main .container-two .result-book-info button{
         min-width: 50%;
     }
 
-    main .container, main .container-two{
-        width: 100%;
-    max-width: 400px;
-    }
-
-    main .container h2,
-    main .container-two h2 {
+    .container-two h2 {
         font-size: 20px;
         padding: 40px 150px 20px 150px;
         text-align: center;
     }
 
-    main .container .add{
-        max-width: 300px;
-        width: 100%;
-        flex-direction: column;
-    }
-
-    main .container .search-add, main .container .scan-add{
-        width: 100%;
-    }
-
-    main .container .add .search-add form p,
-    main .container .add .scan-add form p{
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-
-    main .container-two .result .result-book{
+    .container-two .result .result-book{
         flex-direction: column;
         align-items: center;
         padding: 0;
         width: 400px;
     }
 
-    main .container-two>.result>.result-book>.result-book-info{
+    .container-two>.result>.result-book>.result-book-info{
         width: 250px;
         margin: 10px;
         display: flex;
@@ -747,11 +611,11 @@ main .container-two .result-book-info button{
         align-items: center;
     }
 
-    main .container-two>.result>.result-book>.result-book-info>p{
+    .container-two>.result>.result-book>.result-book-info>p{
         width: 100%;
     }
 
-    main .container-two .result-book-info button{
+    .container-two .result-book-info button{
         width: 150px;
         margin: 10px;   
     }
@@ -811,49 +675,25 @@ main .container-two .result-book-info button{
     }
 
 
-    main .container, main .container-two{
+  .container-two{
         width: 100%;
         max-width: 250px;
     }
 
-    main .container h2,
-    main .container-two h2 {
+  
+  .container-two h2 {
         font-size: 20px;
         padding: 40px 80px 20px 80px;
     }
 
-    main .container .add{
-        max-width: 230px;
-        width: 100%;
-        flex-direction: column;
-    }
-
-    main .container .search-add, main .container .scan-add{
-        width: 100%;
-        padding: 0 0 50px 0;
-        margin:20px 5px;
-    }
-
-    main .container .add .search-add form p,
-    main .container .add .scan-add form p{
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-
-    main .container .add .search-add form label,
-    main .container .add .scan-add form label{
-        margin: 10px;
-    }
-
-    main .container-two .result .result-book{
+    .container-two .result .result-book{
         flex-direction: column;
         align-items: center;
         padding: 0;
         width: 400px;
     }
 
-    main .container-two>.result>.result-book>.result-book-info{
+    .container-two>.result>.result-book>.result-book-info{
         width: 180px;
         margin: 10px;
         display: flex;
@@ -861,11 +701,11 @@ main .container-two .result-book-info button{
         align-items: center;
     }
 
-    main .container-two>.result>.result-book>.result-book-info>p{
+    .container-two>.result>.result-book>.result-book-info>p{
         width: 100%;
     }
 
-    main .container-two .result-book-info button{
+    .container-two .result-book-info button{
         width: 150px;
         margin: 10px;   
     }

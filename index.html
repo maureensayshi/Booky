@@ -12,8 +12,6 @@
     <script src="https://www.gstatic.com/firebasejs/5.3.0/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.3.0/firebase-database.js"></script>
     <script src="https://apis.google.com/js/api.js"></script>
-    <script src="js/common.js"></script>
-    <link rel="stylesheet" href="magic/magic.css" media="all">
 </head>
 
 <body>
@@ -142,23 +140,27 @@
         </div>
 
         <!-- add book by typing -->
-        <div class="add-shade">
+        <div class="add-shade addShade">
             <div class="add-img">
                 <img src="img/cancel.svg" />
             </div>
             <div class="addbar-list">
                 <h5>SEARCH BY</h5>
-                <ul>
-                    <li class="addbar-list-li active" value="search-title">書名 Title</li>
-                    <li class="addbar-list-li" value="search-isbn">作者 Author</li>
-                    <li class="addbar-list-li" value="search-author">書碼 ISBN</li>
-                </ul>
+                <div class="addTabs">
+                    <button class="addtab active" value="search-title">書名 Title</button>
+                    <button class="addtab" value="search-author">作者 Author</button>
+                    <button class="addtab" value="search-isbn">書碼 ISBN</button>
+                </div>
+                <form method="get" class="add-form" id="searchForm">
+                    <input id="keyword" type="text" value="" placeholder="請輸入想加進 BOOKY 的書．．．" />
+                    <button id="keyin-search"></button>
+                </form>
+
+                <div class="container-two">
+                    <h2><span></span>筆搜尋結果</h2>
+                    <div class="result"></div>
+                </div>
             </div>
-            <form method="get" class="add-form">
-                <input type="text" value="" placeholder="請輸入想加進 BOOKY 的書．．．" />
-            </form>
-
-
         </div>
 
 
@@ -175,32 +177,9 @@
                         </div>
                     </div>
                 </div>
+            </div>
 
-
-
-                <div class="container">
-                    <!-- <h2>新增書籍</h2> -->
-                    <div class="add">
-                        <!-- 搜尋加入 -->
-                        <div class="search-add">
-                            <h3>搜尋關鍵字</h3>
-                            <form action="./" method="GET" id="searchForm">
-                                <p>
-                                    <label for="search-type">選擇搜尋方式 : </label>
-                                    <select name="search-option" id="search-type">
-                                        <option value="search-title" selected="selected">書名</option>
-                                        <option value="search-isbn">ISBN 書碼</option>
-                                        <option value="search-author">作者</option>
-                                    </select>
-                                </p>
-                                <p>
-                                    <label for="keyword">請輸入關鍵字 : </label>
-                                    <input id="keyword" type="text" />
-                                </p>
-                                <button type="button" id="keyin-search">開始搜尋</button>
-                            </form>
-                        </div>
-                        <!-- 掃描加入 -->
+            <!-- 
                         <div class="scan-add">
                             <h3>掃描書碼</h3>
                             <form action="./" method="GET">
@@ -212,15 +191,15 @@
                                 <button type="button" id="scan-search">開始搜尋</button>
                             </form>
                         </div>
-                    </div>
+                    </div>  -->
 
-                    <div class="container-two">
-                        <h2>搜尋結果</h2>
-                        <div class="result">
-                        </div>
+            <!-- <div class="container-two">
+                    <h2>搜尋結果</h2>
+                    <div class="result">
                     </div>
-                </div>
-            </div>
+                </div> -->
+            <!-- </div> -->
+            <!-- </div> -->
         </main>
         <footer>
             <div class="footer">&copy; 2018 Booky</div>
@@ -230,6 +209,7 @@
         <img src="img/load.gif" />
     </div>
 </body>
+<script src="js/common.js"></script>
 <script src="js/index.js"></script>
 
 </html>

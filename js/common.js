@@ -134,7 +134,243 @@ app.searchDB = function () {
     }
 };
 
-// add book
+app.keyin_search = function () {
+    app.get(".addShade").style.minHeight = window.innerHeight + "px";
+
+    //先判斷使用者選擇哪種搜尋方式
+    app.typeInit = function () {
+        let threeType = app.getAll(".addtab");
+        console.log(threeType);
+        app.searchText = app.get(".active").value;
+        for (let i = 0; i < threeType.length; i++) {
+            threeType[i].addEventListener("click", app.switchType);
+        }
+    };
+
+    app.switchType = function (e) {
+        let threeType = app.getAll(".addtab");
+        for (let i = 0; i < threeType.length; i++) {
+            threeType[i].classList.remove("active");
+        }
+        e.currentTarget.classList.add("active");
+        app.searchText = e.target.value;
+        console.log(app.searchText);
+    };
+    // 直接按 Enter 搜尋
+    let formSearch = app.get("#searchForm");
+    formSearch.onsubmit = function () {
+        let booksParent = app.get(".result");
+        booksParent.innerHTML = "";
+        booksParent.style.margin = "0px";
+        app.get(".container-two h2>span").textContent = "";
+        app.searchKeyWord();
+        return false;
+    };
+
+    // 點擊搜尋鍵搜尋
+    let clickKeyInSearch = app.get("#keyin-search");
+    clickKeyInSearch.onclick = function () {
+        let booksParent = app.get(".result");
+        booksParent.innerHTML = "";
+        booksParent.style.margin = "0px";
+        app.get(".container-two h2>span").textContent = "";
+        app.searchKeyWord();
+    };
+
+    // add book
+    app.searchKeyWord = function () {
+        let keyWord;
+        keyWord = app.get("#keyword").value;
+        app.search_book(keyWord);
+        console.log(keyWord);
+    };
+
+    app.search_book = function (keyWord) {
+        console.log(app.searchText);
+        switch (app.searchText) {
+            case "search-title":
+                app.googleBooks_title(keyWord);
+                break;
+            case "search-isbn":
+                app.googleBooks_isbn(keyWord);
+                break;
+            case "search-author":
+                app.googleBooks_author(keyWord);
+                break;
+            case "":
+                console.log("user didn't key in words");
+                break;
+        }
+    };
+};
+
+// 找書名
+app.googleBooks_title = function (bookTitle) {
+    fetch("https://www.googleapis.com/books/v1/volumes?q=intitle:" + bookTitle + "&maxResults=40&key=AIzaSyAIhKztMyiZescidKArwy41HAZirttLUHg")
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (data) {
+            console.log(data);
+            if (data.items) {
+                app.getBookData(data);
+            }
+        })
+        .catch(function (error) {
+            console.log("error : can't fetch to google books API" + error);
+            app.get(".container-two").style.display = "flex";
+            app.get(".result").textContent = "無搜尋結果";
+            app.get(".result").style.margin = "50px";
+        });
+};
+
+// 找 ISBN
+app.googleBooks_isbn = function (bookISBN) {
+    fetch("https://www.googleapis.com/books/v1/volumes?q=isbn:" + bookISBN + "&maxResults=40&key=AIzaSyAIhKztMyiZescidKArwy41HAZirttLUHg")
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (data) {
+            console.log(data);
+            app.getBookData(data);
+        })
+        .catch(function (error) {
+            console.log("error : can't fetch to google books API" + error);
+            app.get(".container-two").style.display = "flex";
+            app.get(".result").textContent = "無搜尋結果";
+            app.get(".result").style.margin = "50px";
+        });
+};
+
+// 找作者
+app.googleBooks_author = function (bookAuthor) {
+    fetch("https://www.googleapis.com/books/v1/volumes?q=inauthor:" + bookAuthor + "&maxResults=40&key=AIzaSyAIhKztMyiZescidKArwy41HAZirttLUHg")
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (data) {
+            console.log(data);
+            app.getBookData(data);
+        })
+        .catch(function (error) {
+            console.log("error : can't fetch to google books API" + error);
+            app.get(".container-two").style.display = "flex";
+            app.get(".result").textContent = "無搜尋結果";
+            app.get(".result").style.margin = "50px";
+        });
+};
+
+app.getBookData = function (data) {
+    console.log(data);
+    let amount = 0;
+    if (data.items) {
+        // 抓到需要的不同資料
+        for (let i = 0; i < data.items.length; i++) {
+            amount = data.items.length;
+            let bookTitle;  // 1. 書名
+            let bookAuthor;  // 2. 作者
+            let bookPublisher; // 3. 出版社
+            let bookISBN;  // 4. ISBN-13
+            let bookCover; // 5. 書封照片
+            //書名
+            let title = data.items[i].volumeInfo.title;
+            bookTitle = title; //存取書名       
+            //作者 or 作者群
+            let authors = data.items[i].volumeInfo.authors;
+            bookAuthor = (authors != null) ? authors.join("、") : "暫無資料";
+            // console.log(authors);
+
+            //出版社
+            let publisher = data.items[i].volumeInfo.publisher;
+            bookPublisher = (publisher != null) ? publisher : "暫無資料";
+            // ISBN
+            let isbn = data.items[i].volumeInfo.industryIdentifiers;
+            if (isbn != null) {
+                // console.log(isbn);
+                let tmpISBN;
+                for (let i = 0; i < isbn.length; i++) {
+                    if (isbn[i].type == "ISBN_13")
+                        tmpISBN = isbn[i].identifier;  //console.log(isbn[i].identifier); 
+                }
+                bookISBN = (tmpISBN != "" && tmpISBN != null) ? tmpISBN : "暫無資料";
+            } else if (isbn == null) {
+                bookISBN = "暫無資料"; // console.log("印出無 ISBN 13 碼");
+            }
+            // 書封照片
+            let fakeCovers = ["../img/fakesample1.svg", "../img/fakesample2.svg", "../img/fakesample3.svg"];
+            let fakeCover = fakeCovers[Math.floor(Math.random() * fakeCovers.length)];
+            let cover = data.items[i].volumeInfo.imageLinks;
+            bookCover = (cover != null) ? cover.thumbnail : fakeCover;
+            app.showBookResult(bookTitle, bookAuthor, bookPublisher, bookISBN, bookCover, amount);
+        }
+    } else {
+        console.log("no book");
+        app.get(".container-two").style.display = "flex";
+        app.get(".container-two").scrollIntoView({ block: "start", behavior: "smooth" });
+        app.get(".result").textContent = "查無此書";
+        app.get(".container-two h2>span").textContent = amount;
+    }
+};
+
+app.showBookResult = function (bookTitle, bookAuthor, bookPublisher, bookISBN, bookCover, amount) {
+    console.log(bookTitle, bookAuthor, bookPublisher, bookISBN, bookCover);
+
+    app.get(".container-two").style.display = "flex";
+    app.get(".container-two").scrollIntoView({ block: "start", behavior: "smooth" });
+    app.get(".container-two h2>span").textContent = amount;
+    let booksParent = app.get(".result");
+    //each book
+    let bookParent = app.createElement("div", "result-book", "", "", "", booksParent);
+    let ImageParent = app.createElement("div", "result-book-img", "", "", "", bookParent);
+    let showImage = app.createElement("img", "", "", "src", bookCover, ImageParent);
+    // each book info
+    let bookInfoParent = app.createElement("div", "result-book-info", "", "", "", bookParent);
+    let TitleParent = app.createElement("p", "", "書名：", "", "", bookInfoParent);
+    let showTitle = app.createElement("span", "", bookTitle, "", "", TitleParent);
+    let bookAuthorParent = app.createElement("p", "", "作者：", "", "", bookInfoParent);
+    let showAuthor = app.createElement("span", "", bookAuthor, "", "", bookAuthorParent);
+    let PublisherParent = app.createElement("p", "", "出版社：", "", "", bookInfoParent);
+    let showPublisher = app.createElement("span", "", bookPublisher, "", "", PublisherParent);
+    let ISBNParent = app.createElement("p", "", "ISBN-13：", "", "", bookInfoParent);
+    let showISBN = app.createElement("span", "", bookISBN, "", "", ISBNParent);
+    let addButton = app.createElement("button", "", "加入總書櫃", "", "", bookInfoParent);
+    //加入總書櫃按鈕
+    addButton.addEventListener("click", function () {
+        app.addBook(bookTitle, bookAuthor, bookPublisher, bookISBN, bookCover);
+    });
+};
+
+app.addBook = function (bookTitle, bookAuthor, bookPublisher, bookISBN, bookCover) {
+
+    console.log(bookAuthor);
+    let eachAuthor = bookAuthor.split("、");
+
+    //prepare book data for DB
+    let newBook = {
+        authors: eachAuthor,
+        coverURL: bookCover,
+        lend: false,
+        lendTo: "無",
+        place: "尚未更新存放地點",
+        publisher: bookPublisher,
+        readStatus: "0",
+        title: bookTitle,
+        twice: false,
+        isbn: bookISBN,
+    };
+    //send book data to DB
+    let db = app.database;
+    db.ref("/members/" + app.uid + "/bookList/").push(newBook, function (error) {
+        if (error) {
+            console.log("Error of setting new book data.");
+        } else {
+            console.log("Set book data okay.");
+            alert("加入 " + newBook.title + " 到總書櫃");
+        }
+    }).then(function (res) {
+        console.log(res);
+    });
+};
 
 // loading
 app.showLoading = function () {
@@ -143,8 +379,5 @@ app.showLoading = function () {
 app.closeLoading = function () {
     app.get("#loading").style.display = "none";
 };
-
-// export { app };
-
 
 
