@@ -341,22 +341,22 @@ header .btn_search input{
     display: flex;
     flex-direction: column;
     align-items: center;
-    /* visibility:hidden; */
-    opacity:1;
-    filter:alpha(opacity=1);
+    visibility:hidden;
+    opacity:0;
+    filter:alpha(opacity=0);
     -webkit-transition:300ms ease;
     -moz-transition:300ms ease;
     -o-transition:300ms ease;
     transition:300ms ease;
 }
 
-.add-img{
+.add-shade .add-img{
     width: 100%;
     position: relative;
     margin-bottom: 100px;
   }
   
-  .add-img>img{
+.add-shade .add-img>img{
       width: 20px;
       height: 20px;
       position: absolute;
@@ -365,7 +365,7 @@ header .btn_search input{
       cursor: pointer;   
   }
 
-  .addbar-list{
+.addbar-list{
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -374,7 +374,6 @@ header .btn_search input{
 }
 .addbar-list h5{
     padding: 20px 0 10px 0;
-    /* margin: 5% 0 0 0; */
     font-size: 20px;
     font-family: "Martel Sans", sans-serif;
     font-weight: 400;   
@@ -440,7 +439,193 @@ header .btn_search input{
     cursor: pointer;
 }
 
+/* SCAN BOOK */
+.scan-shade{
+    position: absolute;
+    width: 100%;
+    height: auto;
+    top: 0;
+    left: 0;
+    margin:0;
+    background-color: white;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    visibility:hidden;
+    opacity:0;
+    filter:alpha(opacity=0);
+    -webkit-transition:300ms ease;
+    -moz-transition:300ms ease;
+    -o-transition:300ms ease;
+    transition:300ms ease;
+}
 
+.scan-shade .scan-img{
+    width: 100%;
+    position: relative;
+    margin-bottom: 100px;
+}
+
+.scan-shade .scan-img>img{
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    top: 35px;
+    right: 65px;
+    cursor: pointer;   
+}
+
+.scan-list{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0px 0 60px 0;
+    width: 800px;
+}
+.scan-list h5{
+    padding: 20px 0 10px 0;
+    font-size: 20px;
+    font-family: "Martel Sans", sans-serif;
+    font-weight: 400;   
+    margin-bottom: 15px;
+}
+
+.scan-list .camera{
+    width: 100%;
+    height: 300px;
+    background-color: #ececec;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.scan-list .camera button {
+    width: 25%;   
+    font-family: "Cinzel", serif, "NSimSun";
+    letter-spacing: 2px;
+    padding: 15px;
+    text-align: center;
+    font-size: 20px;
+    font-weight: 600;
+    background-color: rgba(185, 177, 68, .4);
+    cursor: pointer;
+    border: 0;
+}
+
+.scan-shade  form{
+    width: 100%;
+    margin-top: 50px;
+    position: relative;
+}
+
+.scan-shade form input{
+  width: 100%;
+  border: 0;
+  padding: 12px 0px 10px 20px;
+  border-bottom: 1px solid #B9B144;
+  font-family: "微軟正黑體";
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: 20px;      
+}
+
+.scan-shade form button{
+  width: 20px;
+  height: 20px;
+  background: url(../img/search.svg) no-repeat;
+  background-size: 100%; 
+  border: 0;
+  position: absolute;
+  top: 30%;
+  right: 2%;
+  cursor: pointer;
+}
+
+/* 搜尋結果 */
+.container-two{
+    display: none;
+    width: 100%;
+    max-width: 1100px;
+    flex-direction: column;
+    align-items: center;
+    margin: 70px auto 60px auto;
+}
+
+.container-two h2 {
+    width: 100%;
+    text-align: center;
+    font-size: 20px; 
+    font-weight: bold;
+    margin: 20px;
+   padding: 10px 0 20px 0;
+   letter-spacing: 3px;
+    border-bottom: 1px solid #E1E0E1;
+    vertical-align: middle;
+}
+
+.container-two h2>span{
+    letter-spacing: 2px;
+    margin-right: 4px;
+}
+
+.result{
+    display: flex;
+    flex-direction: column;
+    /* flex-wrap: wrap; */
+    justify-content: center;
+    /* min-height: 250px; */
+    overflow-y: scroll;
+} 
+
+.result .result-book{
+    flex: none;
+    display: flex;
+    border-bottom: 1px solid #E1E0E1;
+    width: 512px;
+}
+
+.result>.result-book>.result-book-img{
+    flex: none;
+    width: 128px;
+    height: 180px;
+    margin: 30px 10px 30px 40px;
+    background-color: white;
+}
+
+.result>.result-book>.result-book-info{
+    width: 128px;
+    margin: 30px 20px 30px 60px;
+}
+
+.result>.result-book>.result-book-info>p{
+    width: 230px;
+    line-height: 1.25;   
+    margin: 0 0 15px 0;
+    letter-spacing: 1px;  
+    font-weight: 600;
+}
+
+.result>.result-book>.result-book-info>p>span{
+    font-weight: normal;
+}
+
+.result-book-info button{
+    width: 120px;
+    height: 35px;
+    letter-spacing: 3px;
+    text-align: center;
+    border: none;
+    margin: 10px 0;
+    font-size: 14px;
+    cursor: pointer;
+    font-family: "微軟正黑體";
+    background: rgba(185, 177, 68, 1);
+    color: white;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+}
 
 
 /* main */
@@ -483,6 +668,15 @@ footer .footer{
     width: 100%;
 }       
 
+@media (max-width: 1200px) and (min-width: 980px){
+    main .container-two{max-width: 800px;}
+
+    main .container-two .result{
+        flex-direction: column;
+        flex-wrap: unset;
+    }
+}
+
 @media (max-width: 980px) and (min-width: 480px){
     .menu{
         width: 250px;
@@ -491,6 +685,36 @@ footer .footer{
     .menu div {
         width: 60%;
         padding: 25px;
+    }
+
+    .container-two h2 {
+        font-size: 20px;
+        padding: 40px 150px 20px 150px;
+        text-align: center;
+    }
+
+    .container-two .result .result-book{
+        flex-direction: column;
+        align-items: center;
+        padding: 0;
+        width: 400px;
+    }
+
+    .container-two>.result>.result-book>.result-book-info{
+        width: 250px;
+        margin: 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .container-two>.result>.result-book>.result-book-info>p{
+        width: 100%;
+    }
+
+    .container-two .result-book-info button{
+        width: 150px;
+        margin: 10px;   
     }
 }
 
@@ -505,6 +729,42 @@ footer .footer{
     header{
         padding: 60px 0px 20px;
     }
+
+    .container-two{
+        width: 100%;
+        max-width: 250px;
+    }
+
+  
+  .container-two h2 {
+        font-size: 20px;
+        padding: 40px 80px 20px 80px;
+    }
+
+    .container-two .result .result-book{
+        flex-direction: column;
+        align-items: center;
+        padding: 0;
+        width: 400px;
+    }
+
+    .container-two>.result>.result-book>.result-book-info{
+        width: 180px;
+        margin: 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .container-two>.result>.result-book>.result-book-info>p{
+        width: 100%;
+    }
+
+    .container-two .result-book-info button{
+        width: 150px;
+        margin: 10px;   
+    }
+
     header .btn_logo img{max-width: 120px;}
     footer .background-img{padding: 30%;background-size: 100%;}
     footer .footer{padding: 10px;}

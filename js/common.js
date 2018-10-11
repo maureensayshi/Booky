@@ -92,7 +92,6 @@ app.searchBar = function () {
         searchPage.style.opacity = "0";
         searchPage.style.filter = "alpha(opacity=0)";
     };
-
     app.searchBarGo();
 };
 
@@ -134,28 +133,70 @@ app.searchDB = function () {
     }
 };
 
+// add book
+app.addBookInit = function () {
+    let add_btn = app.get("#addbook");
+
+    let addPage = app.get(".add-shade");
+    let close_add_btn = app.get(".add-img>img");
+
+    add_btn.onclick = function () {
+        addPage.style.visibility = "visible";
+        addPage.style.opacity = "1";
+        addPage.style.filter = "alpha(opacity=100)";
+        app.get(".addShade").style.minHeight = window.innerHeight + "px";
+        app.keyin_search();
+        app.typeInit();
+    };
+
+    close_add_btn.onclick = function () {
+        addPage.style.visibility = "hidden";
+        addPage.style.opacity = "0";
+        addPage.style.filter = "alpha(opacity=0)";
+    };
+};
+
+//先判斷使用者選擇哪種搜尋方式
+app.typeInit = function () {
+    let threeType = app.getAll(".addtab");
+    console.log(threeType);
+    app.searchText = app.get(".active").value;
+    for (let i = 0; i < threeType.length; i++) {
+        threeType[i].addEventListener("click", app.switchType);
+    }
+};
+
+app.switchType = function (e) {
+    let threeType = app.getAll(".addtab");
+    for (let i = 0; i < threeType.length; i++) {
+        threeType[i].classList.remove("active");
+    }
+    e.currentTarget.classList.add("active");
+    app.searchText = e.target.value;
+    console.log(app.searchText);
+};
+
+//掃描書
+app.scanBookInit = function () {
+    let scan_btn = app.get("#scanbook");
+    let scanPage = app.get(".scan-shade");
+    let close_scan_btn = app.get(".scan-img>img");
+
+    scan_btn.onclick = function () {
+        scanPage.style.visibility = "visible";
+        scanPage.style.opacity = "1";
+        scanPage.style.filter = "alpha(opacity=100)";
+        app.get(".scanShade").style.minHeight = window.innerHeight + "px";
+    };
+
+    close_scan_btn.onclick = function () {
+        scanPage.style.visibility = "hidden";
+        scanPage.style.opacity = "0";
+        scanPage.style.filter = "alpha(opacity=0)";
+    };
+};
+
 app.keyin_search = function () {
-    app.get(".addShade").style.minHeight = window.innerHeight + "px";
-
-    //先判斷使用者選擇哪種搜尋方式
-    app.typeInit = function () {
-        let threeType = app.getAll(".addtab");
-        console.log(threeType);
-        app.searchText = app.get(".active").value;
-        for (let i = 0; i < threeType.length; i++) {
-            threeType[i].addEventListener("click", app.switchType);
-        }
-    };
-
-    app.switchType = function (e) {
-        let threeType = app.getAll(".addtab");
-        for (let i = 0; i < threeType.length; i++) {
-            threeType[i].classList.remove("active");
-        }
-        e.currentTarget.classList.add("active");
-        app.searchText = e.target.value;
-        console.log(app.searchText);
-    };
     // 直接按 Enter 搜尋
     let formSearch = app.get("#searchForm");
     formSearch.onsubmit = function () {
@@ -333,7 +374,7 @@ app.showBookResult = function (bookTitle, bookAuthor, bookPublisher, bookISBN, b
     let showPublisher = app.createElement("span", "", bookPublisher, "", "", PublisherParent);
     let ISBNParent = app.createElement("p", "", "ISBN-13：", "", "", bookInfoParent);
     let showISBN = app.createElement("span", "", bookISBN, "", "", ISBNParent);
-    let addButton = app.createElement("button", "", "加入總書櫃", "", "", bookInfoParent);
+    let addButton = app.createElement("button", "", "加入此書", "", "", bookInfoParent);
     //加入總書櫃按鈕
     addButton.addEventListener("click", function () {
         app.addBook(bookTitle, bookAuthor, bookPublisher, bookISBN, bookCover);
