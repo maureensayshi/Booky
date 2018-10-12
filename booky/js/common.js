@@ -80,6 +80,7 @@ app.searchBar = function () {
     let search_btn = app.get("header .btn_search input");
     let searchPage = app.get(".search-shade");
     let close_search_btn = app.get(".searchbar-img>img");
+    let result = app.get(".container-two");
 
     search_btn.onclick = function () {
         searchPage.style.visibility = "visible";
@@ -91,6 +92,7 @@ app.searchBar = function () {
         searchPage.style.visibility = "hidden";
         searchPage.style.opacity = "0";
         searchPage.style.filter = "alpha(opacity=0)";
+        result.style.display = "none";
     };
     app.searchBarGo();
 };
@@ -136,9 +138,9 @@ app.searchDB = function () {
 // add book
 app.addBookInit = function () {
     let add_btn = app.get("#addbook");
-
     let addPage = app.get(".add-shade");
     let close_add_btn = app.get(".add-img>img");
+    let result = app.get(".container-two");
 
     add_btn.onclick = function () {
         addPage.style.visibility = "visible";
@@ -153,6 +155,7 @@ app.addBookInit = function () {
         addPage.style.visibility = "hidden";
         addPage.style.opacity = "0";
         addPage.style.filter = "alpha(opacity=0)";
+        result.style.display = "none";
     };
 };
 
@@ -181,6 +184,7 @@ app.scanBookInit = function () {
     let scan_btn = app.get("#scanbook");
     let scanPage = app.get(".scan-shade");
     let close_scan_btn = app.get(".scan-img>img");
+    let result = app.get(".container-two");
 
     scan_btn.onclick = function () {
         scanPage.style.visibility = "visible";
@@ -193,6 +197,7 @@ app.scanBookInit = function () {
         scanPage.style.visibility = "hidden";
         scanPage.style.opacity = "0";
         scanPage.style.filter = "alpha(opacity=0)";
+        result.style.display = "none";
     };
 };
 

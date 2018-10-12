@@ -237,7 +237,7 @@ app.visualBookMobile = function () {
                 if (bookListArrV[i].coverURL == "./img/fakesample1.svg" ||
                     bookListArrV[i].coverURL == "./img/fakesample2.svg" ||
                     bookListArrV[i].coverURL == "./img/fakesample3.svg") {
-                    if (document.body.clientWidth > 640) {
+                    if (document.body.clientWidth > 375) {
                         bookHref.style.width = "60%";
                     } else {
                         bookHref.style.width = "35%";
