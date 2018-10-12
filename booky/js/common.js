@@ -22,7 +22,7 @@ app.checkLogin = function () {
                 resolve(user.uid);
                 console.log(user.uid);
             } else {
-                // User is signed out or haven't sign up.
+                // User is signed out or haven"t sign up.
                 reject(window.location = "/");
             }
         });
@@ -191,6 +191,7 @@ app.scanBookInit = function () {
         scanPage.style.opacity = "1";
         scanPage.style.filter = "alpha(opacity=100)";
         app.get(".scanShade").style.minHeight = window.innerHeight + "px";
+        app.scan();
     };
 
     close_scan_btn.onclick = function () {
@@ -199,6 +200,48 @@ app.scanBookInit = function () {
         scanPage.style.filter = "alpha(opacity=0)";
         result.style.display = "none";
     };
+};
+
+app.scan = function () {
+    console.log("start to scan");
+    let start_btn = app.get(".camera button");
+
+    const codeReader = new ZXing.BrowserBarcodeReader();
+    console.log("ZXing code reader initialized");
+
+    codeReader.getVideoInputDevices()
+        .then((videoInputDevices) => {
+            const sourceSelect = document.getElementById("sourceSelect");
+            const firstDeviceId = videoInputDevices[0].deviceId;
+            if (videoInputDevices.length > 1) {
+                videoInputDevices.forEach((element) => {
+                    const sourceOption = document.createElement("option");
+                    sourceOption.text = element.label;
+                    sourceOption.value = element.deviceId;
+                    sourceSelect.appendChild(sourceOption);
+                });
+                const sourceSelectPanel = document.getElementById("sourceSelectPanel");
+                sourceSelectPanel.style.display = "block";
+            }
+            document.getElementById("startButton").addEventListener("click", () => {
+                codeReader.decodeFromInputVideoDevice(firstDeviceId, "video").then((result) => {
+                    console.log(result);
+                    document.getElementById("result").textContent = result.text;
+                }).catch((err) => {
+                    console.error(err);
+                    document.getElementById("result").textContent = err;
+                });
+                console.log(`Started continous decode from camera with id ${firstDeviceId}`);
+            });
+            document.getElementById("resetButton").addEventListener("click", () => {
+                document.getElementById("result").textContent = "";
+                codeReader.reset();
+                console.log("Reset.");
+            })
+        })
+        .catch((err) => {
+            console.error(err);
+        });
 };
 
 app.keyin_search = function () {

@@ -170,12 +170,20 @@
             <div class="scan-list">
                 <h5>SEARCH BY SCANNING</h5>
                 <div class="camera">
-                    <button>啟動相機</button>
+                    <button id="startButton">啟動相機</button>
+                    <video id="video" width="90%" height="250" style="border: 1px solid gray"></video>
+                </div>
+                <div id="sourceSelectPanel" style="display:none">
+                    <label for="sourceSelect">Change video source:</label>
+                    <select id="sourceSelect" style="max-width:400px">
+                    </select>
                 </div>
                 <form method="get" class="add-form" id="searchForm">
                     <input id="keyword" type="text" value="" placeholder="讀取到的 ISBN 為 ．．．" />
                     <button id="keyin-search"></button>
                 </form>
+                <button id="resetButton">reset</button>
+                <div id="result"></div>
                 <div class="container-two">
                     <h2><span></span>筆搜尋結果</h2>
                     <div class="result"></div>
@@ -211,5 +219,6 @@
 </body>
 <script src="js/common.js"></script>
 <script src="js/index.js"></script>
+<script type="text/javascript" src="https://unpkg.com/@zxing/library@dev"></script>
 
 </html>
