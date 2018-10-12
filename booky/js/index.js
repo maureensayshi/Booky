@@ -164,9 +164,9 @@ app.visualBook = function () {
                     let bookDivHref = app.createElement("a", "", "", "href", "/book.html?id=" + listShow[i], box);
                     let bookDiv = app.createElement("div", "book-list-img", "", "", "", bookDivHref);
                     let bookImg = app.createElement("img", "", "", "src", listShow[i].coverURL, bookDiv);
-                    if (listShow[i].coverURL == "../img/fakesample1.svg" ||
-                        listShow[i].coverURL == "../img/fakesample2.svg" ||
-                        listShow[i].coverURL == "../img/fakesample3.svg") {
+                    if (listShow[i].coverURL == "./img/fakesample1.svg" ||
+                        listShow[i].coverURL == "./img/fakesample2.svg" ||
+                        listShow[i].coverURL == "./img/fakesample3.svg") {
                         let bookTitle = app.createElement("div", "bookTitle", listShow[i].title, "", "", bookDiv);
                     }
                     let bookHref = app.createElement("a", "spanBox", "", "href", "/book.html?id=" + listK[i], bookDiv);
@@ -234,9 +234,9 @@ app.visualBookMobile = function () {
                 let bookBox = app.createElement("div", "bookListMobileImg", "", "", "", box)
                 let bookHref = app.createElement("a", "bookHref", "", "href", "/book.html?id=" + listK[i], bookBox);
                 let bookDiv = app.createElement("img", "", "", "src", listShow[i].coverURL, bookHref);
-                if (bookListArrV[i].coverURL == "../img/fakesample1.svg" ||
-                    bookListArrV[i].coverURL == "../img/fakesample2.svg" ||
-                    bookListArrV[i].coverURL == "../img/fakesample3.svg") {
+                if (bookListArrV[i].coverURL == "./img/fakesample1.svg" ||
+                    bookListArrV[i].coverURL == "./img/fakesample2.svg" ||
+                    bookListArrV[i].coverURL == "./img/fakesample3.svg") {
                     if (document.body.clientWidth > 640) {
                         bookHref.style.width = "60%";
                     } else {

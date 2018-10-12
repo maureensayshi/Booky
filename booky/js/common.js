@@ -338,7 +338,7 @@ app.getBookData = function (data) {
                 bookISBN = "暫無資料"; // console.log("印出無 ISBN 13 碼");
             }
             // 書封照片
-            let fakeCovers = ["../img/fakesample1.svg", "../img/fakesample2.svg", "../img/fakesample3.svg"];
+            let fakeCovers = ["./img/fakesample1.svg", "./img/fakesample2.svg", "./img/fakesample3.svg"];
             let fakeCover = fakeCovers[Math.floor(Math.random() * fakeCovers.length)];
             let cover = data.items[i].volumeInfo.imageLinks;
             bookCover = (cover != null) ? cover.thumbnail : fakeCover;
