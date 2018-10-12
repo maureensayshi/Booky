@@ -6,18 +6,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Booky 書櫃</title>
-    <link rel="stylesheet" type="text/css" href="../css/bookshelf.css" media="all" />
+    <link rel="stylesheet" type="text/css" href="css/bookshelf.css" media="all" />
     <script src="https://www.gstatic.com/firebasejs/5.5.1/firebase.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.3.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.3.0/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.3.0/firebase-database.js"></script>
-    <script src="../js/common.js"></script>
+    <script src="js/common.js"></script>
 </head>
 
 <body>
     <div class="menu-shade"></div>
     <div class="menu">
-        <img class="close-menu" src="../img/cancel.svg" />
+        <img class="close-menu" src="img/cancel.svg" />
         <div><a href="/booky/bookshelf.html?status=all">全部的書 / ALL</a></div>
         <div value="0"><a href="/booky/bookshelf.html?status=0">未讀 / UNREAD</a></div>
         <div value="1"><a href="/booky/bookshelf.html?status=1">閱讀中 / READING</a></div>
@@ -28,10 +28,10 @@
     </div>
     <header>
         <div class="btn_menu">
-            <img src="../img/menu.svg" />
+            <img src="img/menu.svg" />
         </div>
         <div class="btn_logo">
-            <a href="/"><img src="../img/Booky.png" /></a>
+            <a href="/booky/index.html"><img src="img/Booky.png" /></a>
         </div>
         <div class="btn_search">
             <input type="search" />
@@ -44,7 +44,7 @@
     <!-- search book shelf -->
     <div class="search-shade">
         <div class="searchbar-img">
-            <img src="../img/cancel.svg" />
+            <img src="img/cancel.svg" />
         </div>
         <form method="get" class="searchbar-form">
             <input type="text" value="" />
@@ -63,7 +63,7 @@
     <!-- add book by typing -->
     <div class="add-shade addShade">
         <div class="add-img">
-            <img src="../img/cancel.svg" />
+            <img src="img/cancel.svg" />
         </div>
         <div class="addbar-list">
             <h5>SEARCH BY</h5>
@@ -95,9 +95,9 @@
         <div class="footer">&copy; 2018 Booky</div>
     </footer>
     <div id="loading" class="loading">
-        <img src="../img/load.gif" />
+        <img src="img/load.gif" />
     </div>
 </body>
-<script src="../js/bookshelf.js"></script>
+<script src="js/bookshelf.js"></script>
 
 </html>
