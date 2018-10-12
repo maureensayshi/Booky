@@ -224,7 +224,7 @@ app.scan = function () {
                 sourceSelectPanel.style.display = "block";
             }
             document.getElementById("startButton").addEventListener("click", () => {
-                codeReader.decodeFromInputVideoDevice(firstDeviceId, "video").then((result) => {
+                codeReader.decodeFromInputVideoDevice(undefined, "video").then((result) => {
                     console.log(result);
                     document.getElementById("result").textContent = result.text;
                 }).catch((err) => {
