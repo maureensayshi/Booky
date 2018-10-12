@@ -100,7 +100,7 @@ main .book-place img{
     padding: 0px 6px;
     margin: 0 10px;
     font-size: 14px;
-    font-family: "微軟正黑體";
+    font-family: "Noto Sans JP", sans-serif;
 }
 
 /* 無法變更的樣式 */
@@ -111,7 +111,7 @@ main .book-place img{
     border: none;
     margin: 0 10px;
     font-size: 16px;
-    font-family: "微軟正黑體";
+    font-family: "Noto Sans JP", sans-serif;
 }
 
 
@@ -263,7 +263,7 @@ main .lend-or-not .container .checkmark:after {
     margin: 10px;
     font-size: 14px;
     cursor: pointer;
-    font-family: "微軟正黑體";
+    font-family: "Noto Sans JP", sans-serif;
     color: white;
     -webkit-box-shadow: none;
     -moz-box-shadow: none;
