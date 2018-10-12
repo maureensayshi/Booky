@@ -161,7 +161,7 @@ app.visualBook = function () {
                 for (let i = 0; i < listShow.length; i++) {
                     let bookRead = listShow[i].readStatus == 1 ? "閱讀中" : "未讀";
                     //every book
-                    let bookDivHref = app.createElement("a", "", "", "href", "/book.html?id=" + listShow[i], box);
+                    let bookDivHref = app.createElement("a", "", "", "href", "book.html?id=" + listShow[i], box);
                     let bookDiv = app.createElement("div", "book-list-img", "", "", "", bookDivHref);
                     let bookImg = app.createElement("img", "", "", "src", listShow[i].coverURL, bookDiv);
                     if (listShow[i].coverURL == "./img/fakesample1.svg" ||
@@ -169,7 +169,7 @@ app.visualBook = function () {
                         listShow[i].coverURL == "./img/fakesample3.svg") {
                         let bookTitle = app.createElement("div", "bookTitle", listShow[i].title, "", "", bookDiv);
                     }
-                    let bookHref = app.createElement("a", "spanBox", "", "href", "/book.html?id=" + listK[i], bookDiv);
+                    let bookHref = app.createElement("a", "spanBox", "", "href", "book.html?id=" + listK[i], bookDiv);
                     let bookText = app.createElement("span", "overlay", "", "", "", bookHref);
                     let bookReadText = app.createElement("span", "", bookRead, "", "", bookText);
                     let bookClick = app.createElement("span", "", "View", "", "", bookText);
@@ -232,7 +232,7 @@ app.visualBookMobile = function () {
 
             for (let i = 0; i < listShow.length; i++) {
                 let bookBox = app.createElement("div", "bookListMobileImg", "", "", "", box)
-                let bookHref = app.createElement("a", "bookHref", "", "href", "/book.html?id=" + listK[i], bookBox);
+                let bookHref = app.createElement("a", "bookHref", "", "href", "book.html?id=" + listK[i], bookBox);
                 let bookDiv = app.createElement("img", "", "", "src", listShow[i].coverURL, bookHref);
                 if (bookListArrV[i].coverURL == "./img/fakesample1.svg" ||
                     bookListArrV[i].coverURL == "./img/fakesample2.svg" ||

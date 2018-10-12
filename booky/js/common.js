@@ -123,7 +123,7 @@ app.searchDB = function () {
                 console.log(mixedStr);
                 if (mixedStr.toLowerCase().indexOf(app.searchBarKeyWord.toLowerCase()) != -1) {
                     console.log(bookListArrV[i], bookListArrK[i]);
-                    window.location = "/?search=" + app.searchBarKeyWord;
+                    // window.location = "index.html?search=" + app.searchBarKeyWord;
                     app.get(".view").style.display = "none";
                 } else {
                     console.log("無搜尋結果");

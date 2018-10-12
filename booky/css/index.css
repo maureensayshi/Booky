@@ -166,10 +166,14 @@ main .key-visualBox{
     top: 15%;
     left: 35%;
     transform: translate(-35%,-15%);
-    height: 45px;
+    height: 40px;
+    overflow: hidden;
+    letter-spacing: 1px;
     line-height: 1.5;
     overflow: hidden;
-    font-family: "Martel Sans", sans-serif, "微軟正黑體";
+    font-size: 14px;
+    font-weight: 600;
+    font-family: "Noto Sans JP", sans-serif;
 }
 
 .book-list-img:hover{
@@ -181,7 +185,7 @@ main .key-visualBox{
 
 .book-list-img .overlay{
     position: absolute;
-    font-family:"Martel Sans", sans-serif, "微軟正黑體";
+    font-family: "Noto Sans JP", sans-serif;
     top: 50%;
     left: 50%;
     transform: translate(-50%,-50%);
@@ -211,7 +215,8 @@ main .key-visualBox{
     top: 35%;
     left: 50%;
     transform: translate(-50%,-50%);
-    font-size: 14px;
+    font-size: 16px;
+    font-weight: 600;
     text-align: center;
 }
 

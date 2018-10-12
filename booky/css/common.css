@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Cinzel');
 @import url('https://fonts.googleapis.com/css?family=Martel+Sans:200');
+@import url('https://fonts.googleapis.com/css?family=Noto+Sans+JP:100,300,400,500,700,900');
 /* reset */
 
 html, body, div, span, applet, object, iframe,
@@ -32,7 +33,7 @@ table, caption, tbody, tfoot, thead, tr, th, td {
 
 body{
 	font-size:16px;
-	font-family:"Noto Sans TC", "微軟正黑體", arial, sans-serif;
+	font-family:"Noto Sans JP", arial, sans-serif;
     color:#3f3a3a;   
     background-color: #F1F1F3;
     /* background-image: linear-gradient(rgba(182,144,223, .4),rgba(182,144,223, .2), #F1F1F3); */
@@ -123,7 +124,7 @@ img{
     font-family: "Cinzel", serif, "NSimSun";
     font-weight: 500;
     letter-spacing: 2px;
-    font-size: 20px;
+    font-size: 18px;
     cursor: pointer;
 }
 
@@ -152,8 +153,6 @@ header .btn_menu img{
     width: 25px;
     height: 25px;
     cursor: pointer;
-    /* background-color:white; */
-    /* border-radius:50%;   */
 }
 
 header .btn_logo{
@@ -191,7 +190,6 @@ header .btn_search input{
 #addbook{
     width: 35px;
     height: 35px;
-    /* border-radius: 50%; */
     background: url("../img/add_btn.svg") center no-repeat transparent;
     background-size: 50%;
     position: absolute;
@@ -206,7 +204,6 @@ header .btn_search input{
 #scanbook{
     width: 35px;
     height: 35px;
-    /* border-radius: 50%; */
     background: url("../img/scan.png") center no-repeat transparent;
     background-size: 60%;
     position: absolute;
@@ -265,7 +262,7 @@ header .btn_search input{
     border: 0;
     padding: 12px 0;
     border-bottom: 1px solid #B9B144;
-    font-family: "微軟正黑體";
+    font-family: "Noto Sans JP", sans-serif;
     text-transform: uppercase;
     letter-spacing: 2px;
     font-size: 20px;
@@ -421,7 +418,7 @@ header .btn_search input{
     border: 0;
     padding: 12px 0px 10px 20px;
     border-bottom: 1px solid #B9B144;
-    font-family: "微軟正黑體";
+    font-family: "Noto Sans JP", sans-serif;
     text-transform: uppercase;
     letter-spacing: 2px;
     font-size: 20px;      
@@ -524,7 +521,7 @@ header .btn_search input{
   border: 0;
   padding: 12px 0px 10px 20px;
   border-bottom: 1px solid #B9B144;
-  font-family: "微軟正黑體";
+  font-family: "Noto Sans JP", sans-serif;
   text-transform: uppercase;
   letter-spacing: 2px;
   font-size: 20px;      
