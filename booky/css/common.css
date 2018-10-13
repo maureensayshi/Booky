@@ -492,15 +492,20 @@ header .btn_search input{
 }
 
 .scan-list .camera{
-    width: 90%;
+    width: 40%;
     height: 250px;
     background-color: #ececec;
+    /* position: relative; */
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
 .scan-list .camera button {
+    /* position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); */
     width: 140px;  
     height: 50px; 
     font-family: "Cinzel", serif, "NSimSun";
@@ -512,6 +517,7 @@ header .btn_search input{
     background-color: rgba(185, 177, 68, .4);
     cursor: pointer;
     border: 0;
+    z-index: 100;
 }
 
 .scan-shade  form{
@@ -575,7 +581,7 @@ header .btn_search input{
     flex-direction: column;
     justify-content: center;
     overflow-y: scroll;
-    overflow: hidden;
+    overflow-x: hidden;
 } 
 
 .result .result-book{

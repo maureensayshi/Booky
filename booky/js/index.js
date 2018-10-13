@@ -249,14 +249,14 @@ app.visualBookMobile = function () {
             app.get("#pre").style.display = "block";
             app.get("#next").style.display = "block";
 
-            let eachBook = app.get(".bookHref").clientWidth;
+            let eachBook = app.get(".bookListMobileImg").clientWidth;
             app.get("#pre").onclick = function () {
-                box.scrollBy(-375, 0);
+                box.scrollBy(-eachBook, 0);
                 console.log("pre");
                 console.log(eachBook);
             };
             app.get("#next").onclick = function () {
-                box.scrollBy(375, 0);
+                box.scrollBy(eachBook, 0);
                 console.log("next");
                 console.log(eachBook);
             };

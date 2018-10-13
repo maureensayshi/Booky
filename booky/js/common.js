@@ -192,7 +192,6 @@ app.scanBookInit = function () {
         scanPage.style.filter = "alpha(opacity=100)";
         app.get(".scanShade").style.minHeight = window.innerHeight + "px";
         app.scan();
-        app.scanImg();
     };
 
     close_scan_btn.onclick = function () {
@@ -237,44 +236,21 @@ app.scan = function () {
             document.getElementById("resetButton").addEventListener("click", () => {
                 document.getElementById("result").textContent = "";
                 codeReader.reset();
-                console.log("Reset.");
-            })
+                console.log("Reset");
+            });
         })
         .catch((err) => {
             console.error(err);
         });
 };
 
-app.scanImg = function () {
-    let upload = app.get("#scanimg");
-    upload.onchange = function (e) {
-        let output = app.get("#output");
-        output.src = URL.createObjectURL(e.target.files[0]);
-        console.log(output.src);
 
-        const codeReader = new ZXing.BrowserBarcodeReader("video");
-        console.log("ZXing code reader initialized");
-
-        const decodeButtons = app.get("#decodeButton");
-        const resultimg = app.get("#resultimg");
-
-        const decodeFun = function () {
-            // const parent = this.parentNode.parentNode;
-            // const img = parent.getElementsByClassName('img')[0].cloneNode(true);
-            codeReader.decodeFromImage(output).then((result) => {
-                console.log(result);
-                resultimg.textContent = result.text;
-            }).catch((err) => {
-                console.error(err);
-                resultimg.textContent = "did not get it";
-            });
-            console.log(`Started decode for image from ${output.src}`);
-        };
-        // for (let i = 0; i < decodeButtons.length; i++) {
-        decodeButtons.addEventListener("click", decodeFun, false);
-        // }
-
-    };
+// add book
+app.searchKeyWord = function () {
+    let keyWord;
+    keyWord = app.get("#keyword").value;
+    app.search_book(keyWord);
+    console.log(keyWord);
 };
 
 app.keyin_search = function () {
@@ -297,14 +273,6 @@ app.keyin_search = function () {
         booksParent.style.margin = "0px";
         app.get(".container-two h2>span").textContent = "";
         app.searchKeyWord();
-    };
-
-    // add book
-    app.searchKeyWord = function () {
-        let keyWord;
-        keyWord = app.get("#keyword").value;
-        app.search_book(keyWord);
-        console.log(keyWord);
     };
 
     app.search_book = function (keyWord) {
