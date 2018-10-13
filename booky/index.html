@@ -105,15 +105,11 @@
             <div><a href="member.html">帳號管理 / ACCOUNT</a></div>
         </div>
         <header>
-            <div class="btn_menu">
-                <img src="img/menu.svg" />
-            </div>
+            <button class="btn_menu"></button>
             <div class="btn_logo">
                 <a href="index.html"><img src="img/Booky.png" /></a>
             </div>
-            <div class="btn_search">
-                <input type="search" />
-            </div>
+            <button class="btn_search"></button>
             <button id="addbook"></button>
             <button id="scanbook"></button>
         </header>
@@ -171,7 +167,7 @@
                 <h5>SEARCH BY SCANNING</h5>
                 <div class="camera">
                     <button id="startButton">啟動相機</button>
-                    <video id="video" width="100%" height="250" style="border: 1px solid gray"></video>
+                    <video id="video" width="100%" height="250"></video>
                 </div>
                 <div id="sourceSelectPanel" style="display:none">
                     <label for="sourceSelect">Change video source:</label>
@@ -217,9 +213,9 @@
         <img src="img/load.gif" />
     </div>
 </body>
-<script type="text/javascript" src="https://unpkg.com/@zxing/library@dev"></script>
 <script src="js/common.js"></script>
 <script src="js/index.js"></script>
+<script type="text/javascript" src="https://unpkg.com/@zxing/library@dev"></script>
 
 
 </html>

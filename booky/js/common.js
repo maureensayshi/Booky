@@ -49,35 +49,39 @@ app.createElement = function (tagName, class_Name, text_Content, attr, attrText,
 
 // menu open and close
 app.menu = function () {
-    let menu_btn = app.get(".btn_menu>img");
+    let menu_btn = app.get(".btn_menu");
     let menu = app.get(".menu");
     let close_menu = app.get(".close-menu");
     let shadow = app.get(".menu-shade");
 
     menu_btn.onclick = function () {
         menu.style.left = "0";
+        menu.style.opacity = "1";
         menu_btn.style.visibility = "hidden";
+        if (window.innerWidth < 1025) {
+            menu_btn.style.visibility = "visible";
+        }
         shadow.style.left = "0%";
     };
 
     close_menu.onclick = function () {
-        if (window.innerWidth > 1200) {
+        if (window.innerWidth >= 1025) {
             menu.style.left = "-350px";
-        } else if (window.innerWidth < 1200 && window.innerWidth > 980) {
-            menu.style.left = "-320px";
-        } else if (window.innerWidth < 980 && window.innerWidth > 480) {
-            menu.style.left = "-250px";
-        } else if (window.innerWidth < 480 && window.innerWidth >= 320) {
-            menu.style.left = "-180px";
+        }
+        else if (window.innerWidth < 1025) {
+            menu.style.opacity = "0";
         }
         menu_btn.style.visibility = "visible";
+        console.log("here");
+
+        // menu.style.opacity = "1";
         shadow.style.left = "-100%";
     };
 };
 
 //search bar
 app.searchBar = function () {
-    let search_btn = app.get("header .btn_search input");
+    let search_btn = app.get(".btn_search");
     let searchPage = app.get(".search-shade");
     let close_search_btn = app.get(".searchbar-img>img");
     let result = app.get(".container-two");

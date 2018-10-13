@@ -329,7 +329,7 @@ main #pre{
     transform: translateY(-35%);
     cursor: pointer;   
     border: 0;
-    z-index: 10;
+    z-index: 5;
 }
 
 main #next{
@@ -344,7 +344,7 @@ main #next{
     transform: translateY(-35%);
     cursor: pointer;  
     border: 0; 
-    z-index: 10;
+    z-index: 5;
 }
 
 
