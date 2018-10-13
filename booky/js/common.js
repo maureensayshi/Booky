@@ -266,7 +266,7 @@ app.scanImg = function () {
                 resultimg.textContent = result.text;
             }).catch((err) => {
                 console.error(err);
-                resultimg.textContent = err;
+                resultimg.textContent = "did not get it";
             });
             console.log(`Started decode for image from ${output.src}`);
         };
