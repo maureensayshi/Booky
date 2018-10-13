@@ -192,6 +192,7 @@ app.scanBookInit = function () {
         scanPage.style.filter = "alpha(opacity=100)";
         app.get(".scanShade").style.minHeight = window.innerHeight + "px";
         app.scan();
+        app.scanImg();
     };
 
     close_scan_btn.onclick = function () {
@@ -242,6 +243,38 @@ app.scan = function () {
         .catch((err) => {
             console.error(err);
         });
+};
+
+app.scanImg = function () {
+    let upload = app.get("#scanimg");
+    upload.onchange = function (e) {
+        let output = app.get("#output");
+        output.src = URL.createObjectURL(e.target.files[0]);
+        console.log(output.src);
+
+        const codeReader = new ZXing.BrowserBarcodeReader("video");
+        console.log("ZXing code reader initialized");
+
+        const decodeButtons = app.get("#decodeButton");
+        const resultimg = app.get("#resultimg");
+
+        const decodeFun = function () {
+            // const parent = this.parentNode.parentNode;
+            // const img = parent.getElementsByClassName('img')[0].cloneNode(true);
+            codeReader.decodeFromImage(output).then((result) => {
+                console.log(result);
+                resultimg.textContent = result.text;
+            }).catch((err) => {
+                console.error(err);
+                resultimg.textContent = err;
+            });
+            console.log(`Started decode for image from ${output.src}`);
+        };
+        // for (let i = 0; i < decodeButtons.length; i++) {
+        decodeButtons.addEventListener("click", decodeFun, false);
+        // }
+
+    };
 };
 
 app.keyin_search = function () {
