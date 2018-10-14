@@ -94,7 +94,7 @@ app.visualBook = function () {
     let colorArr = ["#DCB58C", "#EAA140", "#B9B144"];
     let db = app.database;
     let dbBookList = db.ref("/members/" + app.uid + "/bookList/");
-    dbBookList.once("value", function (snapshot) {
+    dbBookList.once("value").then(snapshot => {
         //如果沒有 book list
         if (snapshot.val() == null) {
             console.log("no");
@@ -104,9 +104,9 @@ app.visualBook = function () {
                 { transform: "translate3d(0, 0, 0)" },
                 { transform: "translate3d(-" + (num * 168) + "px, 0, 0)" }
             ], {
-                    duration: (num * 168 * 1000) / 56,
-                    iterations: Infinity
-                });
+                duration: (num * 168 * 1000) / 56,
+                iterations: Infinity
+            });
 
             for (let j = 0; j < 2; j++) {
                 for (let i = 0; i < num; i++) {
@@ -148,10 +148,10 @@ app.visualBook = function () {
                 { transform: "translate3d(0, 0, 0)" },
                 { transform: "translate3d(-" + ((listShow.length + num) * 168) + "px, 0, 0)" }
             ], {
-                    // timing options
-                    duration: ((listShow.length + num) * 168 * 1000) / 56,
-                    iterations: Infinity
-                });
+                // timing options
+                duration: ((listShow.length + num) * 168 * 1000) / 56,
+                iterations: Infinity
+            });
 
             app.stopAnimation = function () { slide.pause(); };
             app.startAnimation = function () { slide.play(); };
@@ -231,7 +231,7 @@ app.visualBookMobile = function () {
             }
 
             for (let i = 0; i < listShow.length; i++) {
-                let bookBox = app.createElement("div", "bookListMobileImg", "", "", "", box)
+                let bookBox = app.createElement("div", "bookListMobileImg", "", "", "", box);
                 let bookHref = app.createElement("a", "bookHref", "", "href", "book.html?id=" + listK[i], bookBox);
                 let bookDiv = app.createElement("img", "", "", "src", listShow[i].coverURL, bookHref);
                 if (bookListArrV[i].coverURL == "./img/fakesample1.svg" ||
@@ -244,22 +244,23 @@ app.visualBookMobile = function () {
                     }
                     let bookTitle = app.createElement("div", "bookTitleMobile", listShow[i].title, "", "", bookHref);
                 }
+                app.get("#pre").style.display = "block";
+                app.get("#next").style.display = "block";
+
+                let eachBook = app.get(".bookListMobileImg").clientWidth;
+                app.get("#pre").onclick = function () {
+                    box.scrollBy(-eachBook, 0);
+                    console.log("pre");
+                    console.log(eachBook);
+                };
+                app.get("#next").onclick = function () {
+                    box.scrollBy(eachBook, 0);
+                    console.log("next");
+                    console.log(eachBook);
+                };
             }
 
-            app.get("#pre").style.display = "block";
-            app.get("#next").style.display = "block";
 
-            let eachBook = app.get(".bookListMobileImg").clientWidth;
-            app.get("#pre").onclick = function () {
-                box.scrollBy(-eachBook, 0);
-                console.log("pre");
-                console.log(eachBook);
-            };
-            app.get("#next").onclick = function () {
-                box.scrollBy(eachBook, 0);
-                console.log("next");
-                console.log(eachBook);
-            };
         }
     }).catch((error) => {
         console.log(error);
