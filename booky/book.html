@@ -35,13 +35,20 @@
         <button id="addbook"></button>
         <button id="scanbook"></button>
     </header>
-    <div class="search-shade">
+
+    <!-- search book shelf container-two 0 -->
+    <div class="search-shade searchShade">
         <div class="searchbar-img">
             <img src="img/cancel.svg" />
         </div>
-        <form method="get" class="searchbar-form">
-            <input type="text" value="" />
+        <form action="/" method="get" class="searchbar-form">
+            <input type="text" value="" placeholder="尋找放在 Booky 的書" />
+            <button></button>
         </form>
+        <div class="container-two">
+            <h2><span></span>筆搜尋結果</h2>
+            <div class="result"></div>
+        </div>
         <div class="searchbar-list">
             <h5>BROWSE CATEGORIES</h5>
             <ul class="search-ul">
@@ -53,23 +60,51 @@
         </div>
     </div>
 
-    <!-- add book by typing -->
+    <!-- add book by typing container-two 1 -->
     <div class="add-shade addShade">
         <div class="add-img">
             <img src="img/cancel.svg" />
         </div>
         <div class="addbar-list">
-            <h5>SEARCH BY</h5>
+            <h5>ADD BY</h5>
             <div class="addTabs">
                 <button class="addtab active" value="search-title">書名 Title</button>
                 <button class="addtab" value="search-author">作者 Author</button>
                 <button class="addtab" value="search-isbn">書碼 ISBN</button>
             </div>
             <form method="get" class="add-form" id="searchForm">
-                <input id="keyword" type="text" value="" placeholder="請輸入想加進 BOOKY 的書．．．" />
+                <input id="keyword" type="text" value="" placeholder="把書加進 Booky" />
                 <button id="keyin-search"></button>
+                <!-- KEYWORD 要記得改成 CLASS  -->
             </form>
 
+            <div class="container-two">
+                <h2><span></span>筆搜尋結果</h2>
+                <div class="result"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- add book by scan container-two 2 -->
+    <div class="scan-shade scanShade">
+        <div class="scan-img">
+            <img src="img/cancel.svg" />
+        </div>
+        <div class="scan-list">
+            <h5>ADD BY SCANNING</h5>
+            <div class="reminder">請將 ISBN 條碼對齊中心，將自動掃描</div>
+            <div class="camera">
+                <video id="video" width="100%" height="250"></video>
+            </div>
+            <div id="sourceSelectPanel" style="display:none">
+                <label for="sourceSelect">Change video source:</label>
+                <select id="sourceSelect" style="max-width:20%">
+                </select>
+            </div>
+            <div class="scan-btns">
+                <button id="startButton" value="start">啟動相機 / START</button>
+            </div>
+            <div id="result"></div>
             <div class="container-two">
                 <h2><span></span>筆搜尋結果</h2>
                 <div class="result"></div>
@@ -157,6 +192,8 @@
 
 </body>
 <script src="js/book.js"></script>
+<script type="text/javascript" src="https://unpkg.com/@zxing/library@dev"></script>
+
 
 
 </html>

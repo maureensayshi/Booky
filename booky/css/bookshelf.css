@@ -46,15 +46,15 @@ main .wrapper div{
 main .wrapper .visual-book{
     width: 128px;
     height: 179px;
-    padding: 13px;
+    padding: 5px;
     margin: 10px;
     background-color: white;
-    border-radius: 15px;
-    box-shadow: 5px 5px 10px #999999;
+    border-radius: 2px;
+    box-shadow: 1px 1px 10px #999999;
 }
 
 main .wrapper .visual-book img{
-    max-height: 150px;
+    max-height: 170px;
 }
 
 main .wrapper .book-title{
@@ -92,8 +92,16 @@ main .wrapper .book-title{
     main .wrapper{
         width: 90%;
         grid-template-columns: repeat(1, 1fr);
-        grid-auto-rows: minmax(270px, auto);
+        grid-auto-rows: minmax(230px, auto);
         margin-bottom: 100px;
+    }
+
+    main .wrapper .visual-book{
+        width: 100px;
+        height: 142px;
+        padding: 8px;
+        margin: 10px;   
+        box-shadow: 1px 1px 10px #999999;
     }
 }
 

@@ -143,7 +143,7 @@ app.searchDB = function () {
                     let amount = app.bookMatch.length;
                     app.containerNum = 0;
                     app.showBookResult(bookTitle, bookAuthor, bookPublisher, bookISBN, bookCover, amount, href);
-                    app.get(".view").style.display = "none";
+                    // app.get(".view").style.display = "none";
                 }
             }
         });
@@ -229,7 +229,7 @@ app.scanBookInit = function () {
 
 app.scan = function () {
     console.log("start to scan");
-    let start_btn = app.get(".camera button");
+    // let start_btn = app.get("#startButton");
 
     const codeReader = new ZXing.BrowserBarcodeReader();
     console.log("ZXing code reader initialized");

@@ -8,6 +8,7 @@ app.init = function () {
         app.menu();
         app.searchBar();
         app.addBookInit();
+        app.scanBookInit();
         app.logOut();
     });
 };
