@@ -4,14 +4,15 @@ main .view{
     display: flex;
     flex-direction: column;
     align-items: center;
+    max-width: 980px;
 }
 main .view h2{
-    width: 900px;
-    font-size: 1.75rem;
+    width: 980px;
+    font-size: 24px;
     font-weight: 600;
     font-family: "Cinzel", serif, "NSimSun";
     padding: 50px 150px 40px 150px;
-    margin-top: 60px;
+    margin-top: 30px;
     color: #544D30;
     letter-spacing: 10px;
     display: flex;
@@ -22,14 +23,14 @@ main .view h2{
 }
 
 main .wrapper{
-    width: 900px;
+    width: 980px;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-gap: 10px;
     grid-auto-rows: minmax(300px, auto);
     align-items: center;
     justify-items: center;
-    background-color: rgba(255, 255, 255, .6);
+    background-color: rgba(255, 255, 255, .8);
     margin-bottom: 60px;
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
@@ -73,21 +74,24 @@ main .wrapper .book-title{
 
 @media (max-width: 980px) and (min-width: 640px){
     main .view h2{
-        padding: 80px 150px 20px 150px;
+        width:90%;
     }
     main .wrapper{
-        width: 600px;
-        grid-template-columns: repeat(2, 1fr);
+        width: 90%;
+        grid-template-columns: repeat(3, 1fr);
     }
 }
 
 @media (max-width: 640px) and (min-width: 320px){
     main .view h2{
-        padding: 60px 50px 15px 50px;
+        width: 90%;
+        font-size: 16px;  
+        padding: 20px 0;  
     }
     main .wrapper{
-        width: 280px;
+        width: 90%;
         grid-template-columns: repeat(1, 1fr);
+        grid-auto-rows: minmax(270px, auto);
     }
 }
 
