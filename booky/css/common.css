@@ -216,9 +216,9 @@ header .btn_search{
 
 /* search */
 .search-shade{
-    position: fixed;
+    position: absolute;
     width: 100%;
-    height: 100%;
+    height: auto;
     top: 0;
     left: 0;
     margin:0;
@@ -284,6 +284,7 @@ header .btn_search{
     flex-direction: column;
     align-items: center;
     width: 80%;
+    margin: 0 0 100px 0;
 }
 .searchbar-list h5{
     padding: 20px 0 10px 0;
@@ -336,6 +337,12 @@ header .btn_search{
 .search-ul a:hover:after{
     border-bottom: 1px solid #B9B144;
     cursor: pointer;
+}
+
+.noresult {
+    width: 20%;
+    height: 10%;
+    text-align: center;
 }
 
 /* ADD BOOK */
@@ -565,7 +572,7 @@ header .btn_search{
     max-width: 1100px;
     flex-direction: column;
     align-items: center;
-    margin: 70px auto 60px auto;
+    margin: 70px auto auto auto;
 }
 
 .container-two h2 {
@@ -587,14 +594,16 @@ header .btn_search{
 
 .result{
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: center;
-    overflow-y: scroll;
-    overflow-x: hidden;
+    flex-wrap: wrap;
+    /* overflow-y: scroll; */
+    /* overflow-x: hidden; */
 } 
 
 .result .result-book{
     flex: none;
+    width: 45%;
     display: flex;
     border-bottom: 1px solid #E1E0E1;
     width: 512px;
@@ -838,11 +847,15 @@ footer .footer{
         text-align: center;
     }
 
+    .result{
+        flex-direction: column;
+    }
+
     .container-two .result .result-book{
         flex-direction: column;
         align-items: center;
         padding: 0;
-        width: 400px;
+        width: 100%;
     }
 
     .container-two>.result>.result-book>.result-book-info{
