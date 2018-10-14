@@ -56,7 +56,6 @@ app.getRedirectResult = function () {
     firebase.auth().getRedirectResult().then(function (result) {
         console.log(result);
         app.closeLoading();
-
         if (result.user && result.additionalUserInfo.isNewUser) {
             let uid = result.user.uid;
             let name = result.user.displayName;
@@ -67,8 +66,7 @@ app.getRedirectResult = function () {
                 uid: uid,
                 name: name,
                 email: email,
-                photo: photo,
-                bookList: ""
+                photo: photo
             };
             //send member data to DB
             let db = app.database;
@@ -110,8 +108,7 @@ app.visualBook = function () {
 
             for (let j = 0; j < 2; j++) {
                 for (let i = 0; i < num; i++) {
-                    let sampleBoxHref = app.createElement("a", "", "", "href", "", box);
-                    let sampleBox = app.createElement("div", "sample-book", "", "", "", sampleBoxHref);
+                    let sampleBox = app.createElement("div", "sample-book", "", "", "", box);
                     let sampleHref = app.createElement("a", "spanBox", "", "", "", sampleBox);
                     let sampleText = app.createElement("span", "overlay", "", "", "", sampleHref);
                     let sampleTitle = app.createElement("span", "", "加入書籍", "", "", sampleText);
@@ -121,6 +118,7 @@ app.visualBook = function () {
                     sampleBox.onmouseout = function () { slideNone.play(); };
                 }
             }
+            app.linkToAddBook();
         } else {
             //如果有 book list
             console.log(snapshot.val());
@@ -178,8 +176,7 @@ app.visualBook = function () {
                 }
                 if (listShow.length < 5) {
                     for (let i = 0; i < num; i++) {
-                        let sampleBoxHref = app.createElement("a", "", "", "href", "", box);
-                        let sampleBox = app.createElement("div", "sample-book", "", "", "", sampleBoxHref);
+                        let sampleBox = app.createElement("div", "sample-book", "", "", "", box);
                         let sampleHref = app.createElement("a", "spanBox", "", "", "", sampleBox);
                         let sampleText = app.createElement("span", "overlay", "", "", "", sampleHref);
                         let sampleTitle = app.createElement("span", "", "加入書籍", "", "", sampleText);
@@ -188,6 +185,7 @@ app.visualBook = function () {
                         sampleBox.onmouseover = function () { app.stopAnimation(); };
                         sampleBox.onmouseout = function () { app.startAnimation(); };
                     }
+                    app.linkToAddBook();
                 }
             }
         }
@@ -210,11 +208,10 @@ app.visualBookMobile = function () {
     dbBookList.once("value", function (snapshot) {
         if (snapshot.val() == null) {
             console.log("no book");
-            let sampleBoxHref = app.createElement("a", "", "", "href", "", box);
-            let sampleBox = app.createElement("div", "sample-book", "", "", "", sampleBoxHref);
+            let sampleBox = app.createElement("div", "sample-book", "", "", "", box);
             sampleBox.style.backgroundColor = "#EAA140";
+            app.linkToAddBook();
         } else {
-            // console.log(snapshot.val());
             let bookListArrV = Object.values(snapshot.val());
             let bookListArrK = Object.keys(snapshot.val());
 
@@ -265,6 +262,31 @@ app.visualBookMobile = function () {
     }).catch((error) => {
         console.log(error);
     });
+};
+
+app.linkToAddBook = function () {
+    let fakeBookAll = app.getAll(".sample-book");
+    let addPage = app.get(".add-shade");
+    let close_add_btn = app.get(".add-img>img");
+    let result = app.get(".container-two");
+    for (let i = 0; i < fakeBookAll.length; i++) {
+        fakeBookAll[i].onclick = function (e) {
+            console.log("hi here");
+            addPage.style.visibility = "visible";
+            addPage.style.opacity = "1";
+            addPage.style.filter = "alpha(opacity=100)";
+            app.get(".addShade").style.minHeight = window.innerHeight + "px";
+            app.typeInit();
+            app.keyin_search();
+        };
+
+        close_add_btn.onclick = function () {
+            addPage.style.visibility = "hidden";
+            addPage.style.opacity = "0";
+            addPage.style.filter = "alpha(opacity=0)";
+            result.style.display = "none";
+        };
+    }
 };
 
 window.addEventListener("DOMContentLoaded", app.init);
