@@ -195,7 +195,7 @@ app.visualBook = function () {
 };
 
 app.visualBookMobile = function () {
-    let keyVisual = app.get(".key-visual");
+    let keyVisual = app.get(".real .key-visual");
     keyVisual.classList.add("keyVisualMobile");
     keyVisual.classList.remove("key-visual");
 

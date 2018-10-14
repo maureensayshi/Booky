@@ -266,6 +266,11 @@ app.scan = function () {
                     console.log(`Started continous decode from camera with id ${firstDeviceId}`);
                 } else if (startBtn.value == "stop") {
                     codeReader.reset();
+                    let containerText = app.getAll(".container-two h2>span");
+                    let containerResult = app.getAll(".result");
+                    document.getElementById("result").textContent = "";
+                    containerText[2].textContent = "";
+                    containerResult[2].innerHTML = "";
                     startBtn.value = "start";
                     startBtn.textContent = "開啟相機 / START";
                 }
@@ -313,21 +318,21 @@ app.keyin_search = function () {
 app.search_book = function (keyWord) {
     app.containerNum = 1;
     switch (app.searchText) {
-    case "search-title":
-        app.googleBooks_title(keyWord);
-        console.log(keyWord);
-        break;
-    case "search-isbn":
-        app.googleBooks_isbn(keyWord);
-        console.log(keyWord);
-        break;
-    case "search-author":
-        app.googleBooks_author(keyWord);
-        console.log(keyWord);
-        break;
-    case "":
-        console.log("user didn't key in words");
-        break;
+        case "search-title":
+            app.googleBooks_title(keyWord);
+            console.log(keyWord);
+            break;
+        case "search-isbn":
+            app.googleBooks_isbn(keyWord);
+            console.log(keyWord);
+            break;
+        case "search-author":
+            app.googleBooks_author(keyWord);
+            console.log(keyWord);
+            break;
+        case "":
+            console.log("user didn't key in words");
+            break;
     }
 };
 
