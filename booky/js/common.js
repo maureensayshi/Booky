@@ -131,6 +131,15 @@ app.searchDB = function () {
                 console.log(mixedStr);
                 if (mixedStr.toLowerCase().indexOf(app.searchBarKeyWord.toLowerCase()) != -1) {
                     console.log(bookListArrV[i], bookListArrK[i]);
+                    let bookTitle = bookListArrV[i].title;
+                    let bookAuthor = bookListArrV[i].authors.join("、");
+                    let bookPublisher = bookListArrV[i].publisher;
+                    let bookISBN = bookListArrV[i].isbn;
+                    let bookCover = bookListArrV[i].coverURL;
+                    let href = "book.html?id=" + bookListArrK[i];
+                    let amount = 0;
+                    app.containerNum = 0;
+                    app.showBookResult(bookTitle, bookAuthor, bookPublisher, bookISBN, bookCover, amount, href);
                     app.get(".view").style.display = "none";
                 } else {
                     console.log("無搜尋結果");
@@ -226,12 +235,13 @@ app.scan = function () {
                     sourceSelect.appendChild(sourceOption);
                 });
                 const sourceSelectPanel = document.getElementById("sourceSelectPanel");
-                sourceSelectPanel.style.display = "block";
+                // sourceSelectPanel.style.display = "block";
             }
             document.getElementById("startButton").addEventListener("click", () => {
                 codeReader.decodeFromInputVideoDevice(undefined, "video").then((result) => {
                     console.log(result);
                     document.getElementById("result").textContent = result.text;
+                    app.containerNum = 2;
                     app.googleBooks_isbn(result.text);
                 }).catch((err) => {
                     console.error(err);
@@ -285,12 +295,14 @@ app.keyin_search = function () {
 };
 
 app.search_book = function (keyWord) {
+    app.containerNum = 1;
     switch (app.searchText) {
     case "search-title":
         app.googleBooks_title(keyWord);
         console.log(keyWord);
         break;
     case "search-isbn":
+
         app.googleBooks_isbn(keyWord);
         console.log(keyWord);
         break;
@@ -401,7 +413,7 @@ app.getBookData = function (data) {
             let fakeCover = fakeCovers[Math.floor(Math.random() * fakeCovers.length)];
             let cover = data.items[i].volumeInfo.imageLinks;
             bookCover = (cover != null) ? cover.thumbnail : fakeCover;
-            app.showBookResult(bookTitle, bookAuthor, bookPublisher, bookISBN, bookCover, amount);
+            app.showBookResult(bookTitle, bookAuthor, bookPublisher, bookISBN, bookCover, amount, "");
         }
     } else {
         console.log("no book");
@@ -412,39 +424,54 @@ app.getBookData = function (data) {
     }
 };
 
-app.showBookResult = function (bookTitle, bookAuthor, bookPublisher, bookISBN, bookCover, amount) {
+app.showBookResult = function (bookTitle, bookAuthor, bookPublisher, bookISBN, bookCover, amount, href) {
     console.log(bookTitle, bookAuthor, bookPublisher, bookISBN, bookCover);
+    let containerAll = app.getAll(".container-two");
+    let containerText = app.getAll(".container-two h2>span");
+    let containerResult = app.getAll(".result");
+    let i = app.containerNum;
+    console.log(i);
 
-    app.get(".container-two").style.display = "flex";
-    app.get(".container-two").scrollIntoView({ block: "start", behavior: "smooth" });
-    app.get(".container-two h2>span").textContent = amount;
-    let booksParent = app.get(".result");
-    //each book
-    let bookParent = app.createElement("div", "result-book", "", "", "", booksParent);
-    let ImageParent = app.createElement("div", "result-book-img", "", "", "", bookParent);
-    let showImage = app.createElement("img", "", "", "src", bookCover, ImageParent);
-    // each book info
-    let bookInfoParent = app.createElement("div", "result-book-info", "", "", "", bookParent);
-    let TitleParent = app.createElement("p", "", "書名：", "", "", bookInfoParent);
-    let showTitle = app.createElement("span", "", bookTitle, "", "", TitleParent);
-    let bookAuthorParent = app.createElement("p", "", "作者：", "", "", bookInfoParent);
-    let showAuthor = app.createElement("span", "", bookAuthor, "", "", bookAuthorParent);
-    let PublisherParent = app.createElement("p", "", "出版社：", "", "", bookInfoParent);
-    let showPublisher = app.createElement("span", "", bookPublisher, "", "", PublisherParent);
-    let ISBNParent = app.createElement("p", "", "ISBN-13：", "", "", bookInfoParent);
-    let showISBN = app.createElement("span", "", bookISBN, "", "", ISBNParent);
-    let addButton = app.createElement("button", "", "加入此書", "", "", bookInfoParent);
-    //加入總書櫃按鈕
-    addButton.addEventListener("click", function () {
-        app.addBook(bookTitle, bookAuthor, bookPublisher, bookISBN, bookCover);
-    });
+    if (containerAll[i]) {
+        containerAll[i].style.display = "flex";
+        containerAll[i].scrollIntoView({ block: "start", behavior: "smooth" });
+        if (i == 2) {
+            amount = 1;
+        }
+        containerText[i].textContent = amount;
+        let booksParent = containerResult[i];
+        //each book
+        let bookParent = app.createElement("div", "result-book", "", "", "", booksParent);
+        let ImageParent = app.createElement("div", "result-book-img", "", "", "", bookParent);
+        if (i == 0) {
+            let ImgHref = app.createElement("a", "", "", "href", href, ImageParent);
+            let showImage = app.createElement("img", "", "", "src", bookCover, ImgHref);
+        } else {
+            let showImage = app.createElement("img", "", "", "src", bookCover, ImageParent);
+        }
+        // each book info
+        let bookInfoParent = app.createElement("div", "result-book-info", "", "", "", bookParent);
+        let TitleParent = app.createElement("p", "", "書名：", "", "", bookInfoParent);
+        let showTitle = app.createElement("span", "", bookTitle, "", "", TitleParent);
+        let bookAuthorParent = app.createElement("p", "", "作者：", "", "", bookInfoParent);
+        let showAuthor = app.createElement("span", "", bookAuthor, "", "", bookAuthorParent);
+        let PublisherParent = app.createElement("p", "", "出版社：", "", "", bookInfoParent);
+        let showPublisher = app.createElement("span", "", bookPublisher, "", "", PublisherParent);
+        let ISBNParent = app.createElement("p", "", "ISBN-13：", "", "", bookInfoParent);
+        let showISBN = app.createElement("span", "", bookISBN, "", "", ISBNParent);
+        if (i == 1 || i == 2) {
+            let addButton = app.createElement("button", "", "加入此書", "", "", bookInfoParent);
+            //加入總書櫃按鈕
+            addButton.addEventListener("click", function () {
+                app.addBook(bookTitle, bookAuthor, bookPublisher, bookISBN, bookCover);
+            });
+        }
+    }
 };
 
 app.addBook = function (bookTitle, bookAuthor, bookPublisher, bookISBN, bookCover) {
-
     console.log(bookAuthor);
     let eachAuthor = bookAuthor.split("、");
-
     //prepare book data for DB
     let newBook = {
         authors: eachAuthor,

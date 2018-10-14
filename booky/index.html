@@ -114,15 +114,19 @@
             <button id="scanbook"></button>
         </header>
 
-        <!-- search book shelf -->
+        <!-- search book shelf container-two 0 -->
         <div class="search-shade">
             <div class="searchbar-img">
                 <img src="img/cancel.svg" />
             </div>
             <form action="/" method="get" class="searchbar-form">
-                <input type="text" value="" />
+                <input type="text" value="" placeholder="尋找放在 Booky 的書，請輸入書名、作者或 ISBN 碼" />
                 <button></button>
             </form>
+            <div class="container-two">
+                <h2><span></span>筆搜尋結果</h2>
+                <div class="result"></div>
+            </div>
             <div class="searchbar-list">
                 <h5>BROWSE CATEGORIES</h5>
                 <ul class="search-ul">
@@ -134,7 +138,7 @@
             </div>
         </div>
 
-        <!-- add book by typing -->
+        <!-- add book by typing container-two 1 -->
         <div class="add-shade addShade">
             <div class="add-img">
                 <img src="img/cancel.svg" />
@@ -147,7 +151,7 @@
                     <button class="addtab" value="search-isbn">書碼 ISBN</button>
                 </div>
                 <form method="get" class="add-form" id="searchForm">
-                    <input id="keyword" type="text" value="" placeholder="你想加入哪本書 ?" />
+                    <input id="keyword" type="text" value="" placeholder="你想把哪本書加進 Booky ?" />
                     <button id="keyin-search"></button>
                     <!-- KEYWORD 要記得改成 CLASS  -->
                 </form>
@@ -159,7 +163,7 @@
             </div>
         </div>
 
-        <!-- add book by scan -->
+        <!-- add book by scan container-two 2 -->
         <div class="scan-shade scanShade">
             <div class="scan-img">
                 <img src="img/cancel.svg" />
@@ -175,16 +179,16 @@
                     <select id="sourceSelect" style="max-width:20%">
                     </select>
                 </div>
-                <form method="get" class="add-form" id="searchForm">
-                    <!-- <input id="keyword" type="text" value="" placeholder="讀取到的 ISBN 為 ．．．" />
-                    <button></button> -->
-                </form>
+                <!-- <form method="get" class="add-form" id="searchForm">
+                    <input id="keyword" type="text" value="" placeholder="讀取到的 ISBN 為 ．．．" />
+                    <button></button>
+                </form> -->
                 <button id="resetButton">reset</button>
                 <div id="result"></div>
-                <!-- <div class="container-two">
+                <div class="container-two">
                     <h2><span></span>筆搜尋結果</h2>
                     <div class="result"></div>
-                </div> -->
+                </div>
             </div>
         </div>
 

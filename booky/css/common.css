@@ -1054,6 +1054,7 @@ header .btn_search::after{
 
     .scan-shade form{width: 100%;}
 
+    .scan-list h5{margin-bottom: 5px;}
     .scan-list .camera{width: 80%;}
 
 
