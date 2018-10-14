@@ -705,11 +705,6 @@ footer .footer{
 
 @media (max-width: 1200px) and (min-width: 1025px){
     main .container-two{max-width: 800px;}
-
-    /* main .container-two .result{
-        flex-direction: column;
-        flex-wrap: unset;
-    } */
 }
 
 @media (max-width: 1024px) and (min-width: 480px){

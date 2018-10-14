@@ -1,10 +1,12 @@
 @import "./common.css";
 
 /* welcome */
-/* 
+
 .welcome main .view{
     display: flex;
     justify-content: center;
+    /* width: 1100px; */
+    margin: 10px auto;
 }
 
 .welcome main .key-visual{
@@ -19,7 +21,7 @@
     width: 150px;
     height: 214px;
     padding: 13px;
-    margin: 110px 30px;
+    margin: 30px;
     background-color: white;
     border-radius: 15px;
     box-shadow: 5px 5px 10px #999999;
@@ -40,7 +42,7 @@
 .welcome main .introduce{
     display: flex;
     flex-direction: column;
-    margin: 20px;
+    margin: 10px;
     align-items: center;
     letter-spacing: 2px;
 }
@@ -89,14 +91,13 @@
 
 .welcome main .step p { line-height: 1; padding-top: 13px;}
 
-*/
-.welcome main .signinDiv{ display: flex; flex-direction: column; margin: 50px;}
-/* .welcome main .signin,
-}  */
+
+.welcome main .signinDiv{ display: flex; flex-direction: column; margin: 10px;}
+
 .welcome .signin{
-    width: 250px; height: 50px; align-self: center; letter-spacing: 3px; padding-left: 100px; border-radius: 5px; border:none;
-    margin: 6px; font-size: 14px; cursor: pointer; font-family: "微軟正黑體";
-    background: url("../img/google.svg") no-repeat 20px #8556B7;
+    width: 250px; height: 50px; align-self: center; letter-spacing: 3px; padding-left: 60px; border-radius: 5px; border:none;
+    margin: 6px; font-size: 14px; cursor: pointer; font-family: "Noto Sans JP", arial, sans-serif;
+    background: url("../img/google.svg") no-repeat 20px #DCB58C;
 	color: white; -webkit-box-shadow: none; -moz-box-shadow: none; box-shadow: none;
 }
 
@@ -106,18 +107,18 @@
     display: none;
 }
 
-main{
+.real main{
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-main .view{
+.real main .view{
   display: flex;
   justify-content: center;
 }
 
-main .key-visualBox{
+.real main .key-visualBox{
     display: flex;
     justify-content: center;
     margin: 0px 0 50px 0;
@@ -125,7 +126,7 @@ main .key-visualBox{
     max-width: 1000px;
 }
 
-.key-visual {
+.real .key-visual {
     overflow: hidden;
     display: flex;
     width: 840px;
@@ -488,17 +489,21 @@ main #next{
 
     /* welcome */
 
-    .welcome main .key-visual>.visual-book:nth-child(odd),
-    .welcome main .key-visual>.visual-book:nth-child(even){
-        overflow: hidden;
-        width: 150px;
-        height: 214px;
-        padding: 10px;
-        margin: 40px 15px;        
+    .welcome main .view{min-height: 200px;}
+
+    .welcome main .key-visual>.visual-book:nth-child(1),
+    .welcome main .key-visual>.visual-book:nth-child(2),
+    .welcome main .key-visual>.visual-book:nth-child(4),
+    .welcome main .key-visual>.visual-book:nth-child(5){
+        display: none;
     }
 
-    .welcome main .introduce{margin: 40px;}
+    .welcome main .key-visual>.visual-book:nth-child(3){width:128px;height: 179px;margin:0px;}
+
+    .welcome main .introduce{margin: 20px 40px;}
     .welcome main .introduce p {font-size: 14px; line-height: 2; text-align: center;}
+
+    .welcome main {margin-bottom: 60px;}
     .welcome main .steps{margin: 20px 0 10px 0;padding: 20px 0;}
     .welcome main .stepsBox{flex-direction: column;}
     .welcome main .step{margin: 20px 20px;}
