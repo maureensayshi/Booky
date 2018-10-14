@@ -247,22 +247,28 @@ app.scan = function () {
                 });
                 const sourceSelectPanel = document.getElementById("sourceSelectPanel");
             }
-            document.getElementById("startButton").addEventListener("click", () => {
-                codeReader.decodeFromInputVideoDevice(undefined, "video").then((result) => {
-                    console.log(result);
-                    document.getElementById("result").textContent = result.text;
-                    app.containerNum = 2;
-                    app.googleBooks_isbn(result.text);
-                }).catch((err) => {
-                    console.error(err);
-                    document.getElementById("result").textContent = err;
-                });
-                console.log(`Started continous decode from camera with id ${firstDeviceId}`);
-            });
-            document.getElementById("resetButton").addEventListener("click", () => {
-                document.getElementById("result").textContent = "";
-                codeReader.reset();
-                console.log("Reset");
+            let startBtn = app.get("#startButton");
+            console.log(startBtn);
+
+            startBtn.addEventListener("click", () => {
+                if (startBtn.value == "start") {
+                    startBtn.value = "stop";
+                    startBtn.textContent = "再試一次";
+                    codeReader.decodeFromInputVideoDevice(undefined, "video").then((result) => {
+                        console.log(result);
+                        document.getElementById("result").textContent = result.text;
+                        app.containerNum = 2;
+                        app.googleBooks_isbn(result.text);
+                    }).catch((err) => {
+                        console.error(err);
+                        document.getElementById("result").textContent = err;
+                    });
+                    console.log(`Started continous decode from camera with id ${firstDeviceId}`);
+                } else if (startBtn.value == "stop") {
+                    codeReader.reset();
+                    startBtn.value = "start";
+                    startBtn.textContent = "開啟相機";
+                }
             });
         })
         .catch((err) => {

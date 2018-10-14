@@ -170,8 +170,8 @@
             </div>
             <div class="scan-list">
                 <h5>ADD BY SCANNING</h5>
+                <div class="reminder">請將 ISBN 條碼對齊中心，將自動掃描</div>
                 <div class="camera">
-                    <button id="startButton">啟動相機</button>
                     <video id="video" width="100%" height="250"></video>
                 </div>
                 <div id="sourceSelectPanel" style="display:none">
@@ -179,11 +179,9 @@
                     <select id="sourceSelect" style="max-width:20%">
                     </select>
                 </div>
-                <!-- <form method="get" class="add-form" id="searchForm">
-                    <input id="keyword" type="text" value="" placeholder="讀取到的 ISBN 為 ．．．" />
-                    <button></button>
-                </form> -->
-                <button id="resetButton">reset</button>
+                <div class="scan-btns">
+                    <button id="startButton" value="start">啟動相機</button>
+                </div>
                 <div id="result"></div>
                 <div class="container-two">
                     <h2><span></span>筆搜尋結果</h2>
