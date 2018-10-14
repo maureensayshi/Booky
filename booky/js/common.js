@@ -121,36 +121,42 @@ app.searchBarGo = function () {
 app.searchDB = function () {
     console.log(app.searchBarKeyWord);
     console.log(app.uid);
-
+    app.bookMatch = [];
     let db = app.database;
     if (app.searchBarKeyWord) {
         let dbBookList = db.ref("/members/" + app.uid + "/bookList/");
         dbBookList.once("value", function (snapshot) {
-            console.log(snapshot.val());
             let bookListArrK = Object.keys(snapshot.val());
             let bookListArrV = Object.values(snapshot.val());
             let mixedStr = "";
             for (let i = 0; i < bookListArrV.length; i++) {
                 let author = bookListArrV[i].authors.toString();
                 mixedStr = bookListArrV[i].title + bookListArrV[i].publisher + bookListArrV[i].isbn + author;
-                console.log(mixedStr);
                 if (mixedStr.toLowerCase().indexOf(app.searchBarKeyWord.toLowerCase()) != -1) {
-                    console.log(bookListArrV[i], bookListArrK[i]);
+                    app.bookMatch.push(bookListArrK[i]);
                     let bookTitle = bookListArrV[i].title;
                     let bookAuthor = bookListArrV[i].authors.join("、");
                     let bookPublisher = bookListArrV[i].publisher;
                     let bookISBN = bookListArrV[i].isbn;
                     let bookCover = bookListArrV[i].coverURL;
                     let href = "book.html?id=" + bookListArrK[i];
-                    let amount = 0;
-                    app.containerNum = amount;
+                    let amount = app.bookMatch.length;
+                    app.containerNum = 0;
                     app.showBookResult(bookTitle, bookAuthor, bookPublisher, bookISBN, bookCover, amount, href);
                     app.get(".view").style.display = "none";
-                } else {
-                    console.log("無搜尋結果");
                 }
             }
         });
+        // if (app.bookMatch.length == 0) {
+        //     let containerAll = app.getAll(".container-two");
+        //     let containerText = app.getAll(".container-two h2>span");
+        //     let containerResult = app.getAll(".result");
+        //     containerAll[0].style.display = "flex";
+        //     containerAll[0].scrollIntoView({ block: "start", behavior: "smooth" });
+        //     containerResult[0].textContent = "您沒有相關書籍在 Booky";
+        //     containerResult[0].classList.add("noresult");
+        //     containerText[0].textContent = 0;
+        // }
     }
 };
 
@@ -335,7 +341,6 @@ app.googleBooks_title = function (bookTitle) {
                 let containerResult = app.getAll(".result");
                 let i = app.containerNum;
                 if (containerAll[i]) {
-                    console.log(i + "here");
                     containerAll[i].style.display = "flex";
                     containerAll[i].scrollIntoView({ block: "start", behavior: "smooth" });
                     containerResult[i].textContent = "請用其他關鍵字搜尋";

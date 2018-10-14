@@ -260,7 +260,7 @@ header .btn_search{
 .search-shade form input{
     width: 100%;
     border: 0;
-    padding: 12px 0;
+    padding: 12px 0px 10px 25px;
     border-bottom: 1px solid #B9B144;
     font-family: "Noto Sans JP", sans-serif;
     text-transform: uppercase;
@@ -323,6 +323,7 @@ header .btn_search{
     text-decoration: none;
     position: relative;
     cursor: pointer;
+    padding: 4px;
 }
 
 .search-ul a:after{
@@ -440,7 +441,7 @@ header .btn_search{
     font-family: "Noto Sans JP", sans-serif;
     text-transform: uppercase;
     letter-spacing: 2px;
-    font-size: 20px;      
+    font-size: 18px;      
 }
 
 .add-shade form button{
@@ -597,8 +598,6 @@ header .btn_search{
     flex-direction: row;
     justify-content: center;
     flex-wrap: wrap;
-    /* overflow-y: scroll; */
-    /* overflow-x: hidden; */
 } 
 
 .result .result-book{
@@ -613,7 +612,7 @@ header .btn_search{
     flex: none;
     width: 128px;
     height: 180px;
-    margin: 30px 10px 30px 40px;
+    margin: 30px 10px 30px 10px;
     background-color: white;
 }
 
@@ -696,10 +695,10 @@ footer .footer{
 @media (max-width: 1200px) and (min-width: 1025px){
     main .container-two{max-width: 800px;}
 
-    main .container-two .result{
+    /* main .container-two .result{
         flex-direction: column;
         flex-wrap: unset;
-    }
+    } */
 }
 
 @media (max-width: 1024px) and (min-width: 480px){
@@ -721,6 +720,8 @@ footer .footer{
         -webkit-transition: opacity 300ms ease; 
         transition: opacity 300ms ease;
         z-index: 10;
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
     }
 
     .menu div:nth-child(2){
@@ -847,9 +848,9 @@ footer .footer{
         text-align: center;
     }
 
-    .result{
+    /* .result{
         flex-direction: column;
-    }
+    } */
 
     .container-two .result .result-book{
         flex-direction: column;
@@ -1059,7 +1060,8 @@ header .btn_search::after{
     }
 
     .add-shade form input,
-    .scan-shade form input{
+    .scan-shade form input,
+    .search-shade form input{
         font-size:14px;
     }
 
@@ -1078,8 +1080,8 @@ header .btn_search::after{
 
   
   .container-two h2 {
-        font-size: 20px;
-        padding: 40px 80px 20px 80px;
+        font-size: 18px;
+        padding-bottom: 10px;
     }
 
     .container-two .result .result-book{
@@ -1087,6 +1089,11 @@ header .btn_search::after{
         align-items: center;
         padding: 0;
         width: 400px;
+        /* margin-top: -10px; */
+    }
+
+    .result>.result-book>.result-book-img{
+        margin: 15px 0px 30px 0px;
     }
 
     .container-two>.result>.result-book>.result-book-info{
@@ -1105,8 +1112,6 @@ header .btn_search::after{
         width: 150px;
         margin: 10px;   
     }
-
-    /* header .btn_logo img{max-width: 120px;} */
   
     .mobile-add{
         width: 100%;

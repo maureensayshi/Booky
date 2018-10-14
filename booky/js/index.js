@@ -240,7 +240,7 @@ app.visualBookMobile = function () {
                     if (document.body.clientWidth > 375) {
                         bookHref.style.width = "60%";
                     } else {
-                        bookHref.style.width = "35%";
+                        bookHref.style.width = "45%";
                     }
                     let bookTitle = app.createElement("div", "bookTitleMobile", listShow[i].title, "", "", bookHref);
                 }
