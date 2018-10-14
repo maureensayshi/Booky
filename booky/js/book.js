@@ -60,7 +60,7 @@ app.editBook = function (val, dbBookList) {
 
         if (save_btn.value == "更新資料") {
             save_btn.value = "儲存修改";
-            save_btn.style.backgroundImage = "url(../img/save.svg)";
+            save_btn.style.backgroundImage = "url(img/save.svg)";
             placeInput.disabled = false;
             lendToInput.disabled = false;
             placeInput.className = placeInput.disabled ? "input-init" : "input-edit";
@@ -74,7 +74,7 @@ app.editBook = function (val, dbBookList) {
             }
         } else if (save_btn.value == "儲存修改") {
             save_btn.value = "更新資料";
-            save_btn.style.backgroundImage = "url(../img/edit.svg)";
+            save_btn.style.backgroundImage = "url(img/edit.svg)";
             placeInput.disabled = true;
             placeInput.className = placeInput.disabled ? "input-init" : "input-edit";
             lendToInput.className = placeInput.disabled ? "input-init" : "input-edit";

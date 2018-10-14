@@ -531,16 +531,16 @@ header .btn_search{
 }
 
 #startButton{
-    width: 120px;  
-    height: 50px; 
+    width: 207px;  
+    height: 45px; 
     margin: 1%;
     font-family: "Cinzel", serif, "NSimSun";
     letter-spacing: 2px;
-    padding: 15px;
+    padding: 14px;
     text-align: center;
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 600;
-    background-color: rgba(185, 177, 68, .4);
+    background-color: rgba(185, 177, 68, 1);
     cursor: pointer;
     border: 0;
     z-index: 10;
@@ -898,7 +898,7 @@ footer .footer{
     main .bg{
         background: url("https://i.pinimg.com/564x/a1/b5/62/a1b562f6802d391acfa8b6d1e4a14c13.jpg") no-repeat;
         /* background-position: 50% 100%; */
-        background-size: 100%;
+        background-size: 120%;
         bottom: 72px;
     }
 }

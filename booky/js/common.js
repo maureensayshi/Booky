@@ -253,7 +253,7 @@ app.scan = function () {
             startBtn.addEventListener("click", () => {
                 if (startBtn.value == "start") {
                     startBtn.value = "stop";
-                    startBtn.textContent = "再試一次";
+                    startBtn.textContent = "再試一次 / TRY AGAIN";
                     codeReader.decodeFromInputVideoDevice(undefined, "video").then((result) => {
                         console.log(result);
                         document.getElementById("result").textContent = result.text;
@@ -267,7 +267,7 @@ app.scan = function () {
                 } else if (startBtn.value == "stop") {
                     codeReader.reset();
                     startBtn.value = "start";
-                    startBtn.textContent = "開啟相機";
+                    startBtn.textContent = "開啟相機 / START";
                 }
             });
         })

@@ -79,6 +79,7 @@ main .wrapper .book-title{
     main .wrapper{
         width: 90%;
         grid-template-columns: repeat(3, 1fr);
+        margin-bottom: 100px;
     }
 }
 
@@ -92,6 +93,7 @@ main .wrapper .book-title{
         width: 90%;
         grid-template-columns: repeat(1, 1fr);
         grid-auto-rows: minmax(270px, auto);
+        margin-bottom: 100px;
     }
 }
 
