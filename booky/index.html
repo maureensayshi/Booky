@@ -121,6 +121,7 @@
             </div>
             <form action="/" method="get" class="searchbar-form">
                 <input type="text" value="" />
+                <button></button>
             </form>
             <div class="searchbar-list">
                 <h5>BROWSE CATEGORIES</h5>
@@ -139,7 +140,7 @@
                 <img src="img/cancel.svg" />
             </div>
             <div class="addbar-list">
-                <h5>SEARCH BY</h5>
+                <h5>ADD BY</h5>
                 <div class="addTabs">
                     <button class="addtab active" value="search-title">書名 Title</button>
                     <button class="addtab" value="search-author">作者 Author</button>
@@ -147,8 +148,8 @@
                 </div>
                 <form method="get" class="add-form" id="searchForm">
                     <input id="keyword" type="text" value="" placeholder="你想加入哪本書 ?" />
-                    <button id="
-                        keyin-search"></button>
+                    <button id="keyin-search"></button>
+                    <!-- KEYWORD 要記得改成 CLASS  -->
                 </form>
 
                 <div class="container-two">
@@ -164,7 +165,7 @@
                 <img src="img/cancel.svg" />
             </div>
             <div class="scan-list">
-                <h5>SEARCH BY SCANNING</h5>
+                <h5>ADD BY SCANNING</h5>
                 <div class="camera">
                     <button id="startButton">啟動相機</button>
                     <video id="video" width="100%" height="250"></video>
@@ -175,8 +176,8 @@
                     </select>
                 </div>
                 <form method="get" class="add-form" id="searchForm">
-                    <input id="keyword" type="text" value="" placeholder="讀取到的 ISBN 為 ．．．" />
-                    <button id="keyin-search"></button>
+                    <!-- <input id="keyword" type="text" value="" placeholder="讀取到的 ISBN 為 ．．．" />
+                    <button></button> -->
                 </form>
                 <button id="resetButton">reset</button>
                 <div id="result"></div>

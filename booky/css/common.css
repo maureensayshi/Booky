@@ -84,7 +84,7 @@ img{
 }
 
 .menu{
-    display: flex;
+    display: none;
     position: fixed;
     width: 350px;
     height: 100%;
@@ -98,7 +98,7 @@ img{
     -webkit-transition: left 0.5s; 
     transition: left 0.5s;
     overflow: scroll;
-    z-index: 200;
+    z-index: 100;
     opacity: 0;
 }
 
@@ -254,6 +254,7 @@ header .btn_search{
 
 .search-shade  form{
     width: 80%;
+    position: relative;
 }
 
 .search-shade form input{
@@ -265,6 +266,18 @@ header .btn_search{
     text-transform: uppercase;
     letter-spacing: 2px;
     font-size: 18px;
+}
+
+.search-shade form>button{
+    width: 20px;
+    height: 20px;
+    background: url(../img/search.svg) no-repeat;
+    background-size: 100%;
+    border: 0;
+    position: absolute;
+    top: 30%;
+    right: 2%;
+    cursor: pointer;
 }
 .searchbar-list{
     display: flex;
@@ -366,7 +379,6 @@ header .btn_search{
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: 0px 0 60px 0;
     width: 80%;
 }
 .addbar-list h5{
@@ -891,12 +903,12 @@ footer .footer{
     }
 
     .menu div:nth-child(2){
-        margin-top: 80px;
+        margin-top: 60px;
     }
 
     .menu div {
         width: 75%;
-        padding: 17px;
+        padding: 10px;
         display: flex;
         justify-content: center;
         color: #B9B144;
@@ -955,7 +967,10 @@ header .btn_search::after{
     letter-spacing: 1px;
 }
 
-.add-shade .add-img{margin-bottom: 60px;}
+.add-shade .add-img,
+.scan-shade .scan-img{
+    margin-bottom: 50px;
+}
     
     #addbook{
         position: fixed;
@@ -1002,8 +1017,10 @@ header .btn_search::after{
     }
 
     .searchbar-img{
-        margin-bottom: 150px;
+        margin-bottom: 70px;
     }
+
+    .searchbar-img>img{right: 35px;}
 
     .addTabs{
         flex-direction: column;align-items: center;
@@ -1012,7 +1029,7 @@ header .btn_search::after{
     .addtab{
         font-size: 14px;
         padding: 10px;
-        width: 65%;
+        width: 75%;
         margin: 5px;
     }
 
@@ -1020,6 +1037,8 @@ header .btn_search::after{
     .scan-shade .scan-img>img{
         right: 35px;
     }
+
+    .add-shade form{margin-top: 30px;}
 
     .add-shade form button,
     .scan-shade form button{
@@ -1036,6 +1055,7 @@ header .btn_search::after{
     .scan-shade form{width: 100%;}
 
     .scan-list .camera{width: 80%;}
+
 
     .container-two{
         width: 100%;

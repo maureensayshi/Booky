@@ -57,6 +57,7 @@ app.menu = function () {
     menu_btn.onclick = function () {
         menu.style.left = "0";
         menu.style.opacity = "1";
+        menu.style.display = "flex";
         menu_btn.style.visibility = "hidden";
         if (window.innerWidth < 1025) {
             menu_btn.style.visibility = "visible";
@@ -70,11 +71,12 @@ app.menu = function () {
         }
         else if (window.innerWidth < 1025) {
             menu.style.opacity = "0";
+            menu.style.display = "none";
         }
         menu_btn.style.visibility = "visible";
         console.log("here");
 
-        // menu.style.opacity = "1";
+        menu.style.opacity = "1";
         shadow.style.left = "-100%";
     };
 };
@@ -129,7 +131,6 @@ app.searchDB = function () {
                 console.log(mixedStr);
                 if (mixedStr.toLowerCase().indexOf(app.searchBarKeyWord.toLowerCase()) != -1) {
                     console.log(bookListArrV[i], bookListArrK[i]);
-                    // window.location = "index.html?search=" + app.searchBarKeyWord;
                     app.get(".view").style.display = "none";
                 } else {
                     console.log("無搜尋結果");
@@ -151,8 +152,8 @@ app.addBookInit = function () {
         addPage.style.opacity = "1";
         addPage.style.filter = "alpha(opacity=100)";
         app.get(".addShade").style.minHeight = window.innerHeight + "px";
-        app.keyin_search();
         app.typeInit();
+        app.keyin_search();
     };
 
     close_add_btn.onclick = function () {
@@ -231,6 +232,7 @@ app.scan = function () {
                 codeReader.decodeFromInputVideoDevice(undefined, "video").then((result) => {
                     console.log(result);
                     document.getElementById("result").textContent = result.text;
+                    app.googleBooks_isbn(result.text);
                 }).catch((err) => {
                     console.error(err);
                     document.getElementById("result").textContent = err;
@@ -249,13 +251,7 @@ app.scan = function () {
 };
 
 
-// add book
-app.searchKeyWord = function () {
-    let keyWord;
-    keyWord = app.get("#keyword").value;
-    app.search_book(keyWord);
-    console.log(keyWord);
-};
+
 
 app.keyin_search = function () {
     // 直接按 Enter 搜尋
@@ -270,32 +266,42 @@ app.keyin_search = function () {
     };
 
     // 點擊搜尋鍵搜尋
-    let clickKeyInSearch = app.get("#keyin-search");
-    clickKeyInSearch.onclick = function () {
-        let booksParent = app.get(".result");
-        booksParent.innerHTML = "";
-        booksParent.style.margin = "0px";
-        app.get(".container-two h2>span").textContent = "";
-        app.searchKeyWord();
-    };
+    // let clickKeyInSearch = app.get("#keyin-search");
+    // clickKeyInSearch.onclick = function () {
+    //     let booksParent = app.get(".result");
+    //     booksParent.innerHTML = "";
+    //     booksParent.style.margin = "0px";
+    //     app.get(".container-two h2>span").textContent = "";
+    //     app.searchKeyWord();
+    // };
 
-    app.search_book = function (keyWord) {
-        console.log(app.searchText);
-        switch (app.searchText) {
-            case "search-title":
-                app.googleBooks_title(keyWord);
-                break;
-            case "search-isbn":
-                app.googleBooks_isbn(keyWord);
-                break;
-            case "search-author":
-                app.googleBooks_author(keyWord);
-                break;
-            case "":
-                console.log("user didn't key in words");
-                break;
-        }
+    // add book
+    app.searchKeyWord = function () {
+        let keyWord;
+        keyWord = app.get("#keyword").value;
+        app.search_book(keyWord);
+        console.log(keyWord);
     };
+};
+
+app.search_book = function (keyWord) {
+    switch (app.searchText) {
+    case "search-title":
+        app.googleBooks_title(keyWord);
+        console.log(keyWord);
+        break;
+    case "search-isbn":
+        app.googleBooks_isbn(keyWord);
+        console.log(keyWord);
+        break;
+    case "search-author":
+        app.googleBooks_author(keyWord);
+        console.log(keyWord);
+        break;
+    case "":
+        console.log("user didn't key in words");
+        break;
+    }
 };
 
 // 找書名
