@@ -33,7 +33,19 @@ app.showMemberInfo = function () {
 app.logOut = function () {
     let logout_btn = app.get("#logout");
     logout_btn.onclick = function () {
-        firebase.auth().signOut();
+        firebase.auth().signOut().then(function () {
+            // Sign-out successful.
+            console.log("Logout successful");
+
+            //localStorage.clear(); This works but not recommended 
+            //localStorage.removeItem("firebase:host:project-xxxxxxxxxx.firebaseio.com"); This is currently am doing in my project
+            window.location = "index.html";
+
+        }, function (error) {
+            // An error happened.
+            console.log(error);
+
+        });
     };
 };
 

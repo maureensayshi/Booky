@@ -120,7 +120,7 @@ app.editBook = function (val, dbBookList) {
             } else {
                 console.log("刪除此書!");
                 alert("刪除此書!");
-                window.location = "/";
+                window.location = "bookshelf.html?status=all";
             }
         });
     });

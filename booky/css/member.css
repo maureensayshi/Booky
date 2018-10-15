@@ -8,8 +8,7 @@ main .view{
     margin-top: 50px;
     margin-bottom: 150px;
     background-color: rgba(255, 255, 255, .8);
-    border-top-left-radius: 2px;
-    border-top-right-radius: 2px;
+   border-radius: 10px;
 }
 
 main .member-img{
