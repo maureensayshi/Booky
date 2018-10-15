@@ -149,7 +149,8 @@ app.searchDB = function () {
                 let containerAll = app.getAll(".container-two");
                 let containerText = app.getAll(".container-two h2>span");
                 let containerResult = app.getAll(".result");
-                containerAll[0].style.display = "flex";
+                containerAll[0].style.display = "block";
+                containerAll[0].style.textAlign = "center";
                 containerAll[0].scrollIntoView({ block: "start", behavior: "smooth" });
                 containerResult[0].textContent = "您沒有相關書籍在 Booky";
                 containerResult[0].classList.add("noresult");
@@ -518,7 +519,8 @@ app.showBookResult = function (bookTitle, bookAuthor, bookPublisher, bookISBN, b
     console.log(i);
 
     if (containerAll[i]) {
-        containerAll[i].style.display = "flex";
+        containerAll[i].style.display = "block";
+        containerAll[i].style.textAlign = "center";
         containerAll[i].scrollIntoView({ block: "start", behavior: "smooth" });
         if (i == 2) {
             amount = 1;

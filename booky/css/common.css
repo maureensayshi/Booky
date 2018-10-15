@@ -280,10 +280,8 @@ header .btn_search{
     cursor: pointer;
 }
 .searchbar-list{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 80%;
+    display: block;
+    text-align: center;
     margin: 0 0 100px 0;
 }
 .searchbar-list h5{
@@ -296,10 +294,6 @@ header .btn_search{
 .searchbar-list ul{
     list-style: none;
     margin-top: 10px;
-    display: flex;
-    width:80%;
-    flex-direction: column;
-    /* align-items: flex-start; */
 }
 
 .searchbar-list li{
@@ -401,7 +395,7 @@ header .btn_search{
     display: flex;
     justify-content: center; 
     width: 80%;
-    height: 100%;
+    /* height: 100%; */
     border-radius: 2px;
 }
 
@@ -409,8 +403,7 @@ header .btn_search{
     flex: none;
     width: 25%;   
     font-family: "Cinzel", serif, "NSimSun";
-    /* display: flex;
-    justify-content: space-around; */
+    height: 50px;
     letter-spacing: 2px;
     padding: 15px;
     margin: 10px 15px;
@@ -431,7 +424,7 @@ header .btn_search{
 
   .add-shade  form{
       width: 100%;
-      margin-top: 50px;
+      margin-top: 70px;
       position: relative;
   }
 
@@ -516,10 +509,11 @@ header .btn_search{
     text-align: center;
     margin: 0 0 15px 0;
     width: 100%;
+    font-weight: 500;
 }
 .scan-list .camera{
     width: 100%;
-    height: 250px;
+    height: 300px;
     background-color: #ececec;
     display: flex;
     justify-content: center;
@@ -530,11 +524,11 @@ header .btn_search{
     width: 100%;
     display: flex;
     justify-content: center;
-    margin-top: 20px;
+    margin-top: 30px;
 }
 
 #startButton{
-    width: 207px;  
+    width: 220px;  
     height: 45px; 
     margin: 1%;
     font-family: "Cinzel", serif, "NSimSun";
@@ -615,10 +609,9 @@ header .btn_search{
 
 .result .result-book{
     flex: none;
-    width: 45%;
+    width: 50%;
     display: flex;
     border-bottom: 1px solid #E1E0E1;
-    width: 512px;
 }
 
 .result>.result-book>.result-book-img{
@@ -841,7 +834,7 @@ footer .footer{
     /* header end */
 
     .addTabs{
-        flex-direction: column;align-items: center;
+        display: inline-block;text-align: center;width:400px;
     }
 
     .addtab{width: 200px;}
@@ -852,7 +845,6 @@ footer .footer{
 
     .container-two h2 {
         font-size: 20px;
-        padding: 40px 150px 20px 150px;
         text-align: center;
         width: 80%;
     }
@@ -1048,12 +1040,11 @@ header .btn_search::after{
     .searchbar-img>img{right: 35px;}
 
     .addTabs{
-        flex-direction: column;align-items: center;
+        display: inline-block;text-align: center;
     }
 
     .addtab{
         font-size: 14px;
-        padding: 10px;
         width: 75%;
         margin: 5px;
     }
@@ -1081,7 +1072,7 @@ header .btn_search::after{
     .scan-shade form{width: 100%;}
 
     .scan-list h5{margin-bottom: 0px;}
-    .scan-list .camera{height: 300px;}
+    .scan-list .camera{height: 400px;}
 
 
     .container-two{
@@ -1092,15 +1083,15 @@ header .btn_search::after{
   
   .container-two h2 {
         font-size: 18px;
-        padding-bottom: 10px;
+        padding: 0 0 10px 0;
+        width: 90%;
     }
 
     .container-two .result .result-book{
         flex-direction: column;
         align-items: center;
         padding: 0;
-        width: 300px;
-        /* margin-top: -10px; */
+        width: 90%;
     }
 
     .result>.result-book>.result-book-img{
@@ -1108,7 +1099,7 @@ header .btn_search::after{
     }
 
     .container-two>.result>.result-book>.result-book-info{
-        width: 180px;
+        width: 250px;
         margin: 10px;
         display: flex;
         flex-direction: column;
@@ -1116,7 +1107,8 @@ header .btn_search::after{
     }
 
     .container-two>.result>.result-book>.result-book-info>p{
-        width: 100%;
+        width: 90%;
+        text-align: left;
     }
 
     .container-two .result-book-info button{

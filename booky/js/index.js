@@ -88,12 +88,13 @@ app.getRedirectResult = function () {
 app.visualBook = function () {
     let slideBG = app.get(".sliding-background");
     let box = app.get(".book-list");
-    box.innerHTML = "";
+
     let num = 0;
     let colorArr = ["#DCB58C", "#EAA140", "#B9B144"];
     let db = app.database;
     let dbBookList = db.ref("/members/" + app.uid + "/bookList/");
     dbBookList.once("value").then(snapshot => {
+        box.innerHTML = "";
         //如果沒有 book list
         if (snapshot.val() == null) {
             console.log("no");
