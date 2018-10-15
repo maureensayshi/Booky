@@ -43,7 +43,7 @@ app.googleLogin = function () {
         app.showLoading();
         if (!firebase.auth().currentUser) {
             let provider = new firebase.auth.GoogleAuthProvider();
-            provider.addScope("https://www.googleapis.com/auth/plus.login");
+            provider.addScope("https://www.googleapis.com/auth/plus.login,https://www.googleapis.com/auth/calendar.events");
             //啟動 login 程序   
             firebase.auth().signInWithRedirect(provider);
         } else {
@@ -88,6 +88,7 @@ app.getRedirectResult = function () {
 app.visualBook = function () {
     let slideBG = app.get(".sliding-background");
     let box = app.get(".book-list");
+    box.innerHTML = "";
     let num = 0;
     let colorArr = ["#DCB58C", "#EAA140", "#B9B144"];
     let db = app.database;
@@ -120,6 +121,8 @@ app.visualBook = function () {
             }
             app.linkToAddBook();
         } else {
+            console.log("222222222");
+
             //如果有 book list
             console.log(snapshot.val());
             let bookListArrV = Object.values(snapshot.val());
@@ -157,6 +160,7 @@ app.visualBook = function () {
             //repeat twice
             for (let j = 0; j < 2; j++) {
                 for (let i = 0; i < listShow.length; i++) {
+
                     let bookRead = listShow[i].readStatus == 1 ? "閱讀中" : "未讀";
                     //every book
                     let bookDivHref = app.createElement("a", "", "", "href", "book.html?id=" + listShow[i], box);
@@ -241,10 +245,12 @@ app.visualBookMobile = function () {
                     }
                     let bookTitle = app.createElement("div", "bookTitleMobile", listShow[i].title, "", "", bookHref);
                 }
+            }
+            window.setTimeout(function () {
                 app.get("#pre").style.display = "block";
                 app.get("#next").style.display = "block";
 
-                let eachBook = app.get(".bookListMobileImg").clientWidth;
+                let eachBook = app.get(".bookListMobileImg").offsetWidth;
                 app.get("#pre").onclick = function () {
                     box.scrollBy(-eachBook, 0);
                     console.log("pre");
@@ -255,7 +261,7 @@ app.visualBookMobile = function () {
                     console.log("next");
                     console.log(eachBook);
                 };
-            }
+            }, 1000);
 
 
         }

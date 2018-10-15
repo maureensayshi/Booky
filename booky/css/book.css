@@ -303,7 +303,7 @@ main .lend-or-not .container .checkmark:after {
 }
 
 @media (max-width: 640px) and (min-width: 320px){
-    main .view {flex-direction: column;width: 100%;max-width: 300px;}
+    main .view {flex-direction: column;width: 100%;max-width: 300px;margin-bottom: 120px;}
     main .visual-book{align-self: center;margin: 10px;width: 100px;height: 142px;}
     main .book-detail-wrapper{display: flex; justify-content: center;}
     main .book-detail{width: 300px;margin:0px;}

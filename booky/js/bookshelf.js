@@ -14,38 +14,39 @@ app.init = function () {
 
 app.getStatus = function () {
 
-    let readStatus = window.location.search.split("?status=")[1];
-    console.log(readStatus);
+    app.readStatus = window.location.search.split("?status=")[1];
+    console.log(app.readStatus);
     let bsTitle = app.get(".view>h2");
-    if (readStatus == "all") {
+    if (app.readStatus == "all") {
         bsTitle.textContent = "總書櫃  /  ALL";
-    } else if (readStatus == 0) {
+    } else if (app.readStatus == 0) {
         bsTitle.textContent = "未讀 / UNREAD";
-    } else if (readStatus == 1) {
+    } else if (app.readStatus == 1) {
         bsTitle.textContent = "閱讀中 / READING";
-    } else if (readStatus == 2) {
+    } else if (app.readStatus == 2) {
         bsTitle.textContent = "已讀 / READ";
-    } else if (readStatus == "twice") {
+    } else if (app.readStatus == "twice") {
         bsTitle.textContent = "值得二讀 / TWICE";
-    } else if (readStatus == "lend") {
+    } else if (app.readStatus == "lend") {
         bsTitle.textContent = "出借的書 / LENT";
     }
-    app.allocateBS(readStatus);
+    app.allocateBS();
 };
 
-app.allocateBS = function (readStatus) {
-
+app.allocateBS = function () {
+    app.get(".wrapper").innerHTML = "";
     let dbMember = app.database.ref("/members/" + app.uid + "/bookList/");
-    if (readStatus >= 0) {
-        dbMember.orderByChild("readStatus").equalTo(readStatus).once("value").then((snapshot) => {
+    if (app.readStatus >= 0) {
+        dbMember.orderByChild("readStatus").equalTo(app.readStatus).once("value").then((snapshot) => {
             app.showBook(snapshot.val());
+
         }).catch((error) => {
             app.get(".wrapper").textContent = "此書櫃暫無書籍";
             app.get(".wrapper").style.gridTemplateColumns = "repeat(1, 1fr)";
             console.log("no books " + error);
             app.closeLoading();
         });
-    } else if (readStatus == "all") {
+    } else if (app.readStatus == "all") {
         dbMember.orderByChild("readStatus").once("value").then((snapshot) => {
             app.showBook(snapshot.val());
         }).catch((error) => {
@@ -54,7 +55,7 @@ app.allocateBS = function (readStatus) {
             app.get(".wrapper").style.gridTemplateColumns = "repeat(1, 1fr)";
             app.closeLoading();
         });
-    } else if (readStatus == "twice") {
+    } else if (app.readStatus == "twice") {
         dbMember.orderByChild("twice").equalTo(true).once("value").then((snapshot) => {
             app.showBook(snapshot.val());
         }).catch((error) => {
@@ -63,7 +64,7 @@ app.allocateBS = function (readStatus) {
             app.get(".wrapper").style.gridTemplateColumns = "repeat(1, 1fr)";
             app.closeLoading();
         });
-    } else if (readStatus == "lend") {
+    } else if (app.readStatus == "lend") {
         dbMember.orderByChild("lend").equalTo(true).once("value").then((snapshot) => {
             app.showBook(snapshot.val());
         }).catch((error) => {

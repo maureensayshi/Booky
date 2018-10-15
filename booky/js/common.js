@@ -143,20 +143,19 @@ app.searchDB = function () {
                     let amount = app.bookMatch.length;
                     app.containerNum = 0;
                     app.showBookResult(bookTitle, bookAuthor, bookPublisher, bookISBN, bookCover, amount, href);
-                    // app.get(".view").style.display = "none";
                 }
             }
+            if (app.bookMatch.length == 0) {
+                let containerAll = app.getAll(".container-two");
+                let containerText = app.getAll(".container-two h2>span");
+                let containerResult = app.getAll(".result");
+                containerAll[0].style.display = "flex";
+                containerAll[0].scrollIntoView({ block: "start", behavior: "smooth" });
+                containerResult[0].textContent = "您沒有相關書籍在 Booky";
+                containerResult[0].classList.add("noresult");
+                containerText[0].textContent = 0;
+            }
         });
-        // if (app.bookMatch.length == 0) {
-        //     let containerAll = app.getAll(".container-two");
-        //     let containerText = app.getAll(".container-two h2>span");
-        //     let containerResult = app.getAll(".result");
-        //     containerAll[0].style.display = "flex";
-        //     containerAll[0].scrollIntoView({ block: "start", behavior: "smooth" });
-        //     containerResult[0].textContent = "您沒有相關書籍在 Booky";
-        //     containerResult[0].classList.add("noresult");
-        //     containerText[0].textContent = 0;
-        // }
     }
 };
 
@@ -296,16 +295,6 @@ app.keyin_search = function () {
         return false;
     };
 
-    // 點擊搜尋鍵搜尋
-    // let clickKeyInSearch = app.get("#keyin-search");
-    // clickKeyInSearch.onclick = function () {
-    //     let booksParent = app.get(".result");
-    //     booksParent.innerHTML = "";
-    //     booksParent.style.margin = "0px";
-    //     app.get(".container-two h2>span").textContent = "";
-    //     app.searchKeyWord();
-    // };
-
     // add book
     app.searchKeyWord = function () {
         let keyWord;
@@ -318,27 +307,27 @@ app.keyin_search = function () {
 app.search_book = function (keyWord) {
     app.containerNum = 1;
     switch (app.searchText) {
-        case "search-title":
-            app.googleBooks_title(keyWord);
-            console.log(keyWord);
-            break;
-        case "search-isbn":
-            app.googleBooks_isbn(keyWord);
-            console.log(keyWord);
-            break;
-        case "search-author":
-            app.googleBooks_author(keyWord);
-            console.log(keyWord);
-            break;
-        case "":
-            console.log("user didn't key in words");
-            break;
+    case "search-title":
+        app.googleBooks_title(keyWord);
+        console.log(keyWord);
+        break;
+    case "search-isbn":
+        app.googleBooks_isbn(keyWord);
+        console.log(keyWord);
+        break;
+    case "search-author":
+        app.googleBooks_author(keyWord);
+        console.log(keyWord);
+        break;
+    case "":
+        console.log("user didn't key in words");
+        break;
     }
 };
 
 // 找書名
 app.googleBooks_title = function (bookTitle) {
-    fetch("https://www.googleapis.com/books/v1/volumes?q=intitle:" + bookTitle + "&maxResults=40&key=AIzaSyAIhKztMyiZescidKArwy41HAZirttLUHg")
+    fetch("https://www.googleapis.com/books/v1/volumes?q=intitle:" + bookTitle + "&maxResults=40&key=AIzaSyALgpVirl6lyBvOK9W--e5QycFeMFzcPLg")
         .then(function (response) {
             return response.json();
         })
@@ -378,7 +367,7 @@ app.googleBooks_title = function (bookTitle) {
 
 // 找 ISBN
 app.googleBooks_isbn = function (bookISBN) {
-    fetch("https://www.googleapis.com/books/v1/volumes?q=isbn:" + bookISBN + "&maxResults=40&key=AIzaSyAIhKztMyiZescidKArwy41HAZirttLUHg")
+    fetch("https://www.googleapis.com/books/v1/volumes?q=isbn:" + bookISBN + "&maxResults=40&key=AIzaSyALgpVirl6lyBvOK9W--e5QycFeMFzcPLg")
         .then(function (response) {
             return response.json();
         })
@@ -419,7 +408,7 @@ app.googleBooks_isbn = function (bookISBN) {
 
 // 找作者
 app.googleBooks_author = function (bookAuthor) {
-    fetch("https://www.googleapis.com/books/v1/volumes?q=inauthor:" + bookAuthor + "&maxResults=40&key=AIzaSyAIhKztMyiZescidKArwy41HAZirttLUHg")
+    fetch("https://www.googleapis.com/books/v1/volumes?q=inauthor:" + bookAuthor + "&maxResults=40&key=AIzaSyALgpVirl6lyBvOK9W--e5QycFeMFzcPLg")
         .then(function (response) {
             return response.json();
         })
@@ -589,6 +578,15 @@ app.addBook = function (bookTitle, bookAuthor, bookPublisher, bookISBN, bookCove
         } else {
             console.log("Set book data okay.");
             alert("加入 " + newBook.title + " 到總書櫃");
+            if (app.visualBook || app.visualBookMobile) {
+                if (document.body.clientWidth > 1024) {
+                    app.visualBook();
+                } else {
+                    app.visualBookMobile();
+                }
+            } else if (app.allocateBS) {
+                app.allocateBS();
+            }
         }
     }).then(function (res) {
         console.log(res);

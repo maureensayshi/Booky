@@ -39,7 +39,7 @@ app.logOut = function () {
 
             //localStorage.clear(); This works but not recommended 
             //localStorage.removeItem("firebase:host:project-xxxxxxxxxx.firebaseio.com"); This is currently am doing in my project
-            window.location = "index.html";
+            window.location = "/";
 
         }, function (error) {
             // An error happened.

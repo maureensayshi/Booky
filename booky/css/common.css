@@ -216,14 +216,14 @@ header .btn_search{
 
 /* search */
 .search-shade{
-    position: absolute;
+    position: fixed;
     width: 100%;
-    height: auto;
+    height: 100%;
     top: 0;
     left: 0;
     margin:0;
     background-color: white;
-    overflow: hidden;
+    overflow: auto;
     z-index: 100;
     display: flex;
     flex-direction: column;
@@ -348,9 +348,10 @@ header .btn_search{
 
 /* ADD BOOK */
 .add-shade{
-    position: absolute;
+    position: fixed;
     width: 100%;
-    height: auto;
+    height: 100%;
+    overflow: auto;
     top: 0;
     left: 0;
     margin:0;
@@ -408,8 +409,8 @@ header .btn_search{
     flex: none;
     width: 25%;   
     font-family: "Cinzel", serif, "NSimSun";
-    display: flex;
-    justify-content: space-around;
+    /* display: flex;
+    justify-content: space-around; */
     letter-spacing: 2px;
     padding: 15px;
     margin: 10px 15px;
@@ -459,9 +460,10 @@ header .btn_search{
 
 /* SCAN BOOK */
 .scan-shade{
-    position: absolute;
+    position: fixed;
     width: 100%;
-    height: auto;
+    height: 100%;
+    overflow: auto;
     top: 0;
     left: 0;
     margin:0;
@@ -1097,7 +1099,7 @@ header .btn_search::after{
         flex-direction: column;
         align-items: center;
         padding: 0;
-        width: 400px;
+        width: 300px;
         /* margin-top: -10px; */
     }
 
