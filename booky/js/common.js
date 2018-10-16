@@ -252,8 +252,11 @@ app.scan = function () {
                     startBtn.textContent = "再試一次 / TRY AGAIN";
                     codeReader.decodeFromInputVideoDevice(undefined, "video").then((result) => {
                         console.log(result);
-                        // app.resultText = result.text;
-                        // app.getAll(".result")[2].style.justifyContent = "flex-start";
+                        let containerText = app.getAll(".container-two h2>span");
+                        let containerResult = app.getAll(".result");
+                        containerResult[2].style.justifyContent = "flex-start";
+                        containerText[2].textContent = "";
+                        containerResult[2].innerHTML = "";
                         document.getElementById("result").textContent = result.text;
                         app.containerNum = 2;
                         app.googleBooks_isbn(result.text);
@@ -264,13 +267,11 @@ app.scan = function () {
                     console.log(`Started continous decode from camera with id ${firstDeviceId}`);
                 } else if (startBtn.value == "stop") {
                     codeReader.reset();
-                    document.getElementById("result").textContent = "";
-                    // if (app.resultText) {
-                    let containerAll = app.getAll(".container-two");
-                    containerAll[2].textContent = "";
-                    // }
                     startBtn.value = "start";
                     startBtn.textContent = "開啟相機 / START";
+                    document.getElementById("result").textContent = "";
+
+
                 }
             });
         })
