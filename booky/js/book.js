@@ -101,6 +101,9 @@ app.editBook = function (val, dbBookList) {
         let twiceChoicesChecked = app.get("main .twice-or-not .container input:checked");
         let lendChoices = app.getAll("main .lend-or-not .container input");
         let lendChoicesChecked = app.get("main .lend-or-not .container input:checked");
+        let lentStatus = app.get("#lent");
+        let lentNo = app.get("#nolent");
+
 
         if (save_btn.value == "更新資料") {
             save_btn.value = "儲存修改";
@@ -113,11 +116,6 @@ app.editBook = function (val, dbBookList) {
             for (let i = 0; i < container.length; i++) {
                 container[i].style.opacity = "1";
             }
-
-            placeInput.disabled = false;
-            lendToInput.disabled = false;
-            placeInput.className = placeInput.disabled ? "input-init" : "input-edit";
-            lendToInput.className = placeInput.disabled ? "input-init" : "input-edit";
             for (let i = 0; i < readChoices.length; i++) {
                 readChoices[i].disabled = false;
             }
@@ -127,6 +125,29 @@ app.editBook = function (val, dbBookList) {
             for (let i = 0; i < lendChoices.length; i++) {
                 lendChoices[i].disabled = false;
             }
+
+            placeInput.disabled = false;
+            placeInput.className = placeInput.disabled ? "input-init" : "input-edit";
+
+            if (lendChoicesChecked.value == "true") {
+                lendToInput.disabled = false;
+                lendToInput.className = lendToInput.disabled ? "input-init" : "input-edit";
+            }
+
+            lentStatus.onclick = function () {
+                lendToInput.disabled = false;
+                lendToInput.className = lendToInput.disabled ? "input-init" : "input-edit";
+            };
+
+            lentNo.onclick = function () {
+                lendToInput.disabled = true;
+                lendToInput.className = lendToInput.disabled ? "input-init" : "input-edit";
+                lendToInput.value = "無";
+                console.log(lendToInput);
+
+            };
+
+
         } else if (save_btn.value == "儲存修改") {
             save_btn.value = "更新資料";
             save_btn.style.backgroundImage = "url(img/edit.svg)";
