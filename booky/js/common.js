@@ -110,7 +110,7 @@ app.searchBarGo = function () {
     formSearchBar.onsubmit = function () {
         let containerText = app.getAll(".container-two h2>span");
         let containerResult = app.getAll(".result");
-        containerResult[0].justifyContent = "flex-start";
+        containerResult[0].style.justifyContent = "flex-start";
         containerText[0].textContent = "";
         containerResult[0].innerHTML = "";
         app.searchBarKeyWord = app.get(".searchbar-form>input").value;
@@ -253,7 +253,7 @@ app.scan = function () {
                     codeReader.decodeFromInputVideoDevice(undefined, "video").then((result) => {
                         console.log(result);
                         // app.resultText = result.text;
-                        app.getAll(".result")[2].style.justifyContent = "flex-start";
+                        // app.getAll(".result")[2].style.justifyContent = "flex-start";
                         document.getElementById("result").textContent = result.text;
                         app.containerNum = 2;
                         app.googleBooks_isbn(result.text);

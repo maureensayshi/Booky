@@ -840,18 +840,18 @@ footer .footer{
         width: 100%;
     }
 
-    .container-two>.result>.result-book>.result-book-info{
+    .result>.result-book>.result-book-info{
         width: 250px;
         margin: 10px;
         display: flex;
         flex-direction: column;
     }
 
-    .container-two>.result>.result-book>.result-book-info>p{
+    .result>.result-book>.result-book-info>p{
         width: 100%;
     }
 
-    .container-two .result-book-info button{
+    .result-book-info button{
         width: 150px;
         margin: 10px;   
         align-self: center;
@@ -1077,9 +1077,10 @@ header .btn_search::after{
 
     .result>.result-book>.result-book-img{
         margin: 15px 0px 30px 0px;
+        width: 40%;
     }
 
-    .container-two>.result>.result-book>.result-book-info{
+    .result>.result-book>.result-book-info{
         width: 250px;
         margin: 10px;
         display: flex;
@@ -1087,12 +1088,12 @@ header .btn_search::after{
         align-items: center;
     }
 
-    .container-two>.result>.result-book>.result-book-info>p{
+    .result>.result-book>.result-book-info>p{
         width: 90%;
         text-align: left;
     }
 
-    .container-two .result-book-info button{
+    .result-book-info button{
         width: 150px;
         margin: 10px;   
     }
