@@ -246,23 +246,40 @@ app.scan = function () {
                 const sourceSelectPanel = document.getElementById("sourceSelectPanel");
             }
             let startBtn = app.get("#startButton");
+            let line = app.get(".line");
             startBtn.addEventListener("click", () => {
+                let containerText = app.getAll(".container-two h2>span");
+                let containerResult = app.getAll(".result");
+                containerResult[2].style.justifyContent = "flex-start";
+                containerText[2].textContent = "";
+                containerResult[2].textContent = "";
                 if (startBtn.value == "start") {
+
                     startBtn.value = "stop";
-                    startBtn.textContent = "再試一次 / TRY AGAIN";
+                    startBtn.textContent = "停止掃描 / STOP";
+                    line.textContent = "SEARCHING......";
+                    line.classList.add("typewriter");
                     codeReader.decodeFromInputVideoDevice(undefined, "video").then((result) => {
+
+                        if (result) {
+                            line.textContent = "";
+                            line.classList.remove("typewriter");
+                            startBtn.textContent = "重新掃描 / RESET";
+                            let containerText = app.getAll(".container-two h2>span");
+                            let containerResult = app.getAll(".result");
+                            containerResult[2].style.justifyContent = "flex-start";
+                            containerText[2].textContent = "";
+                            containerResult[2].textContent = "";
+                            document.getElementById("result").textContent = "ISBN : " + result.text;
+                            app.containerNum = 2;
+                            app.googleBooks_isbn(result.text);
+                        }
                         console.log(result);
-                        let containerText = app.getAll(".container-two h2>span");
-                        let containerResult = app.getAll(".result");
-                        containerResult[2].style.justifyContent = "flex-start";
-                        containerText[2].textContent = "";
-                        containerResult[2].innerHTML = "";
-                        document.getElementById("result").textContent = result.text;
-                        app.containerNum = 2;
-                        app.googleBooks_isbn(result.text);
+
                     }).catch((err) => {
                         console.error(err);
-                        // document.getElementById("result").textContent = "查無此書";
+                        document.getElementById("result").textContent = "查無此書";
+                        startBtn.textContent = "重新掃描 / RESET";
                     });
                     console.log(`Started continous decode from camera with id ${firstDeviceId}`);
                 } else if (startBtn.value == "stop") {
@@ -270,8 +287,6 @@ app.scan = function () {
                     startBtn.value = "start";
                     startBtn.textContent = "開啟相機 / START";
                     document.getElementById("result").textContent = "";
-
-
                 }
             });
         })

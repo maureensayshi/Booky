@@ -491,10 +491,8 @@ header .btn_search{
 
 .scan-list{
     text-align: center;
-    margin: 0px 0 60px 0;
     width: 80%;
-    height: 500px;
-    border: 1px solid red;
+    height: 400px;
 }
 .scan-list h5{
     padding: 20px 0 10px 0;
@@ -517,11 +515,37 @@ header .btn_search{
     background-color: #ececec;
 }
 
+.line{
+    font-size: 14px;
+    width: 250px;
+    height: 20px;
+    margin: 10px auto;
+    border-right: 2px solid rgba(255,255,255,.75);
+    text-align: center;
+    overflow: hidden;
+    letter-spacing: 4px;
+    border: 1px solid red;
+}
+
+/* Animation */
+.typewriter{
+  animation: typewriter 3s steps(44) infinite normal,
+            blinkTextCursor 500ms steps(44) infinite normal
+}
+@keyframes typewriter{
+  from{width: 0;}
+  to{width: 250px;}
+}
+@keyframes blinkTextCursor{
+  from{border-right-color: black;}
+  to{border-right-color: transparent;}
+}
+
 .scan-btns{
     width: 100%;
     display: flex;
     justify-content: center;
-    margin-top: 30px;
+    margin-top: 10px;
 }
 
 #startButton{
