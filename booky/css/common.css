@@ -520,7 +520,6 @@ header .btn_search{
     width: 250px;
     height: 20px;
     margin: 10px auto;
-    border-right: 2px solid rgba(255,255,255,.75);
     text-align: center;
     overflow: hidden;
     letter-spacing: 4px;
@@ -528,16 +527,11 @@ header .btn_search{
 
 /* Animation */
 .typewriter{
-  animation: typewriter 3s steps(44) infinite normal,
-            blinkTextCursor 500ms steps(44) infinite normal
+  animation: typewriter 3s steps(44) infinite normal
 }
 @keyframes typewriter{
   from{width: 0;}
   to{width: 250px;}
-}
-@keyframes blinkTextCursor{
-  from{border-right-color: black;}
-  to{border-right-color: transparent;}
 }
 
 .scan-btns{

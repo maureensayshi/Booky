@@ -248,7 +248,7 @@ app.scan = function () {
             let startBtn = app.get("#startButton");
             let line = app.get(".line");
             startBtn.addEventListener("click", () => {
-                let container = app.get(".container-two");
+                let container = app.getAll(".container-two");
                 let containerText = app.getAll(".container-two h2>span");
                 let containerResult = app.getAll(".result");
                 container[2].style.display = "none";
@@ -261,7 +261,7 @@ app.scan = function () {
                     setTimeout(function () {
                         line.textContent = "SEARCHING......";
                         line.classList.add("typewriter");
-                    }, 5000);
+                    }, 3000);
 
                     codeReader.decodeFromInputVideoDevice(undefined, "video").then((result) => {
 
@@ -291,6 +291,8 @@ app.scan = function () {
                     codeReader.reset();
                     startBtn.value = "start";
                     startBtn.textContent = "開啟相機 / START";
+                    line.textContent = "";
+                    line.classList.remove("typewriter");
                     document.getElementById("result").textContent = "";
                 }
             });
