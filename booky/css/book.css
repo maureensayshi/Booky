@@ -133,17 +133,19 @@ main .lend-to>span:nth-child(1){
 main .reading-status .container,
 main .twice-or-not .container,
 main .lend-or-not .container {
-    display: flex;
+    /* display: none; */
+    opacity: 0;
     position: relative;
     padding-left: 36px;
-    /* cursor: pointer; */
+    cursor: pointer;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+    transition: all 300ms ease;
 }
 
-main .status-choice {display: flex;margin-left: -7px;}
+main .status-choice {display: none;margin-left: -7px;}
 /* Hide the browser's default radio button */
 main .reading-status .container input,
 main .twice-or-not .container input,
@@ -161,9 +163,8 @@ main .reading-status .checkmark{
     width: 20px;
     background-color: white;
     border-radius: 2px;
-    /* border: 1px solid #ececec; */
+    border: 1px solid #ececec;
     margin-left: 8px;
-    background-color: #F8F8F4;
 }
 
 main .twice-or-not .checkmark,
@@ -175,23 +176,23 @@ main .lend-or-not .checkmark{
     width: 20px;
     background-color: white;
     border-radius: 2px;
-    background-color: #F8F8F4;
-    /* border: 1px solid #cacece; */
+    border: 1px solid #ececec;
 }
 
 main .lend-to{align-items: center;}
 
 /* On mouse-over, add a grey background color */
-/* main .reading-status .container:hover input ~ .checkmark,
+main .reading-status .container:hover input ~ .checkmark,
+main .twice-or-not .container:hover input ~ .checkmark,
 main .lend-or-not .container:hover input ~ .checkmark{
     background-color: #F1F1F3;
-} */
+}
 
 /* When the radio button is checked, add a blue background */
 main .reading-status .container input:checked ~ .checkmark,
 main .twice-or-not .container input:checked ~ .checkmark
 main .lend-or-not .container input:checked ~ .checkmark{
-    background-color: #F8F8F4;
+    background-color: white;
 }
 
 /* Create the indicator (the dot/circle - hidden when not checked) */
