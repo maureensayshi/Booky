@@ -143,8 +143,6 @@ app.editBook = function (val, dbBookList) {
                 lendToInput.disabled = true;
                 lendToInput.className = lendToInput.disabled ? "input-init" : "input-edit";
                 lendToInput.value = "無";
-                console.log(lendToInput);
-
             };
 
 

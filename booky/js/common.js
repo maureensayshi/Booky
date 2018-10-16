@@ -110,6 +110,7 @@ app.searchBarGo = function () {
     formSearchBar.onsubmit = function () {
         let containerText = app.getAll(".container-two h2>span");
         let containerResult = app.getAll(".result");
+        containerResult[0].justifyContent = "flex-start";
         containerText[0].textContent = "";
         containerResult[0].innerHTML = "";
         app.searchBarKeyWord = app.get(".searchbar-form>input").value;
@@ -153,7 +154,7 @@ app.searchDB = function () {
                 containerAll[0].style.textAlign = "center";
                 containerAll[0].scrollIntoView({ block: "start", behavior: "smooth" });
                 containerResult[0].textContent = "您沒有相關書籍在 Booky";
-                containerResult[0].classList.add("noresult");
+                containerResult[0].style.justifyContent = "center";
                 containerText[0].textContent = 0;
             }
         });
@@ -252,6 +253,7 @@ app.scan = function () {
                     codeReader.decodeFromInputVideoDevice(undefined, "video").then((result) => {
                         console.log(result);
                         // app.resultText = result.text;
+                        app.getAll(".result")[2].style.justifyContent = "flex-start";
                         document.getElementById("result").textContent = result.text;
                         app.containerNum = 2;
                         app.googleBooks_isbn(result.text);
@@ -284,6 +286,7 @@ app.keyin_search = function () {
     formSearch.onsubmit = function () {
         let containerText = app.getAll(".container-two h2>span");
         let containerResult = app.getAll(".result");
+        containerResult[1].style.justifyContent = "flex-start";
         containerText[1].textContent = "";
         containerResult[1].innerHTML = "";
         app.searchKeyWord();
@@ -339,7 +342,7 @@ app.googleBooks_title = function (bookTitle) {
                     containerAll[i].style.display = "flex";
                     containerAll[i].scrollIntoView({ block: "start", behavior: "smooth" });
                     containerResult[i].textContent = "請用其他關鍵字搜尋";
-                    containerResult[i].classList.add("noresult");
+                    containerResult[i].style.justifyContent = "center";
                     containerText[i].textContent = 0;
                 }
             }
@@ -354,7 +357,7 @@ app.googleBooks_title = function (bookTitle) {
                 containerAll[i].style.display = "flex";
                 containerAll[i].scrollIntoView({ block: "start", behavior: "smooth" });
                 containerResult[i].textContent = "請用其他關鍵字搜尋";
-                containerResult[i].classList.add("noresult");
+                containerResult[i].style.justifyContent = "center";
                 containerText[i].textContent = 0;
             }
         });
@@ -381,7 +384,7 @@ app.googleBooks_isbn = function (bookISBN) {
                     containerAll[i].style.textAlign = "center";
                     containerResult[i].textContent = "查無此書";
                     containerTextBox[i].style.textAlign = "center";
-                    containerResult[i].classList.add("noresult");
+                    containerResult[i].style.justifyContent = "center";
                     containerText[i].style.textAlign = "center";
                     containerText[i].textContent = 0;
                 }
@@ -398,7 +401,7 @@ app.googleBooks_isbn = function (bookISBN) {
                 containerAll[i].style.display = "flex";
                 containerAll[i].scrollIntoView({ block: "start", behavior: "smooth" });
                 containerResult[i].textContent = "查無此書";
-                containerResult[i].classList.add("noresult");
+                containerResult[i].style.justifyContent = "center";
                 containerText[i].textContent = 0;
             }
         });
@@ -424,7 +427,7 @@ app.googleBooks_author = function (bookAuthor) {
                     containerAll[i].style.display = "flex";
                     containerAll[i].scrollIntoView({ block: "start", behavior: "smooth" });
                     containerResult[i].textContent = "請用其他關鍵字搜尋";
-                    containerResult[i].classList.add("noresult");
+                    containerResult[i].style.justifyContent = "center";
                     containerText[i].textContent = 0;
                 }
             }
@@ -441,7 +444,7 @@ app.googleBooks_author = function (bookAuthor) {
                 containerAll[i].style.display = "flex";
                 containerAll[i].scrollIntoView({ block: "start", behavior: "smooth" });
                 containerResult[i].textContent = "查無此書";
-                containerResult[i].classList.add("noresult");
+                containerResult[i].style.justifyContent = "center";
                 containerText[i].textContent = 0;
             }
         });
@@ -498,7 +501,7 @@ app.getBookData = function (data) {
             containerAll[i].style.display = "flex";
             containerAll[i].scrollIntoView({ block: "start", behavior: "smooth" });
             containerResult[i].textContent = "查無此書";
-            containerResult[i].classList.add("noresult");
+            containerResult[i].style.justifyContent = "center";
             containerText[i].textContent = 0;
         }
     }
