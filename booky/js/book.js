@@ -64,6 +64,8 @@ app.editBook = function (val, dbBookList) {
         let twiceCheckAll = app.getAll("main .twice-or-not .checkmark");
         let lendCheckAll = app.getAll("main .lend-or-not .checkmark");
 
+        let container = app.getAll(".container");
+
         let placeInput = app.get("main .book-place input");
         let lendToInput = app.get("main .lend-to input");
         let readChoices = app.getAll("main .reading-status .container input");
@@ -76,6 +78,10 @@ app.editBook = function (val, dbBookList) {
         if (save_btn.value == "更新資料") {
             save_btn.value = "儲存修改";
             save_btn.style.backgroundImage = "url(img/save.svg)";
+
+            for (let i = 0; i < container.length; i++) {
+                container[i].style.cursor = "pointer";
+            }
 
             for (let i = 0; i < readingCheckAll.length; i++) {
                 readingCheckAll[i].style.border = "1px solid #ececec";
@@ -106,6 +112,10 @@ app.editBook = function (val, dbBookList) {
         } else if (save_btn.value == "儲存修改") {
             save_btn.value = "更新資料";
             save_btn.style.backgroundImage = "url(img/edit.svg)";
+
+            for (let i = 0; i < container.length; i++) {
+                container[i].style.cursor = "unset";
+            }
 
             for (let i = 0; i < readingCheckAll.length; i++) {
                 readingCheckAll[i].style.border = "0";

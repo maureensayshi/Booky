@@ -136,7 +136,7 @@ main .lend-or-not .container {
     display: flex;
     position: relative;
     padding-left: 36px;
-    cursor: pointer;
+    /* cursor: pointer; */
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
@@ -150,7 +150,6 @@ main .twice-or-not .container input,
 main .lend-or-not .container input {
     position: absolute;
     opacity: 0;
-    cursor: pointer;
 }
 
 /* Create a custom radio button */
