@@ -6,18 +6,19 @@ main .view{
     flex-direction: row;
    max-width: 800px;
    margin-top: 30px;
-   background-color: rgba(255, 255, 255, .8);
-   border-radius: 10px;
+   background-color: rgba(255, 255, 255, 1);
+   border-radius: 2px;
    flex-wrap: wrap;
+   margin-bottom: 100px;
 }
 main .visual-book{
     flex: none;
     width: 200px;
-    height: 280px;
-    padding: 13px;
-    margin: 50px 20px;
+    height: 285px;
+    padding: 1px 13px;
+    margin: 45px 0px 0 55px;
     background-color: white;
-    border-radius: 5px;
+    border-radius: 2px;
 }
 
 main .visual-book>img{max-height: 255px;}
@@ -31,8 +32,7 @@ main .view .line{
 
 main .book-detail{
     display: flex;
-    width: 500px;
-    margin: 20px 10px;
+    margin: 16px 10px;
 }
 
 main .move-book-detail{
@@ -43,6 +43,7 @@ main .move-book-detail>div{
     margin: 30px;
     line-height: 1.25;
     display: flex;
+    font-family: "Noto Sans JP", sans-serif;
 }
 
 main .move-book-detail>div>span{line-height: 1.5;}
@@ -54,50 +55,42 @@ main .move-book-detail>div>span:nth-child(1){
 }
 
 main #title,
-main #author{
+main #author,
+main #publisher{
     width: 350px;
 }
 
 main .move-book-detail>div:nth-child(1)>span:nth-child(1),
 main .move-book-detail>div:nth-child(2)>span:nth-child(1){
     padding: 0;
-    width: 50px;
+    width: 100px;
+    color:#BBBBBB;
 }
 
-main #publisher{width: 330px;}
 main .move-book-detail>div:nth-child(3)>span:nth-child(1){
-    width:65px;
+    width:100px;
     padding: 0;
+    color:#BBBBBB;
 }
 
+main .move-book-detail>div:nth-child(4)>span:nth-child(1),
 main .move-book-detail>div:nth-child(5)>span:nth-child(1),
+main .move-book-detail>div:nth-child(6)>span:nth-child(1),
 main .move-book-detail>div:nth-child(7)>span:nth-child(1),
 main .move-book-detail>div:nth-child(8)>span:nth-child(1){
     width:100px;
+    color:#BBBBBB;
 }
 
 main .move-book-detail>div>span>span{margin-right: 20px;}
 
-main .book-place{
-    display: flex;
-    height: 25px; 
-    align-items: center;
-}
-
-main .book-place img{
-    width: 5%;
-    margin-right: 10px;
-}
-
-
 .input-edit{
     width: 310px;
-    height: 30px;
+    height: 25px;
     border-radius: 8px;
     background-color: white;
-    border: solid 1px #BBBBBB;
-    padding: 0px 6px;
-    margin: 0 10px;
+    border: solid 1px #ececec;
+    padding: 15px 6px;
     font-size: 14px;
     font-family: "Noto Sans JP", sans-serif;
 }
@@ -105,11 +98,11 @@ main .book-place img{
 /* 無法變更的樣式 */
 .input-init{
     width: 310px;
-    height: 30px;
+    height: 25px;
     background-color:transparent;
     border: none;
-    margin: 0 10px;
     font-size: 16px;
+    padding-bottom: 5px;
     font-family: "Noto Sans JP", sans-serif;
 }
 
@@ -123,34 +116,22 @@ main .lend-or-not{
     align-items: center;    
 }
 
+main .twice-or-not{
+    position: relative;
+}
+
+main .book-place>span:nth-child(1),
+main .lend-to>span:nth-child(1),
 main .reading-status>span:nth-child(1),
+main .twice-or-not>span:nth-child(1),
 main .lend-or-not>span:nth-child(1),
 main .lend-to>span:nth-child(1){
     margin-left: -9px;
 }
 
-main .twice-or-not>input{
-    width: 10px;
-    height: 10px;
-    background-color: white;
-    border: 1px solid #cacece;
-    padding: 9px;
-    border-radius: 12px;
-    margin-left: 20px;
-    outline: 0;
-    cursor: pointer;
-    -moz-appearance: none;
-    -webkit-appearance: none;
-}
-
-main .twice-or-not>input:checked{
-    background: #fafafa no-repeat center/12px url(../img/tick.svg);
-    outline: 0;
-    overflow: visible;
-}
-
 /* The container */
 main .reading-status .container,
+main .twice-or-not .container,
 main .lend-or-not .container {
     display: flex;
     position: relative;
@@ -165,6 +146,7 @@ main .lend-or-not .container {
 main .status-choice {display: flex;margin-left: -7px;}
 /* Hide the browser's default radio button */
 main .reading-status .container input,
+main .twice-or-not .container input,
 main .lend-or-not .container input {
     position: absolute;
     opacity: 0;
@@ -179,11 +161,13 @@ main .reading-status .checkmark{
     height: 20px;
     width: 20px;
     background-color: white;
-    border-radius: 12px;
-    border: 1px solid #cacece;
+    border-radius: 2px;
+    /* border: 1px solid #ececec; */
     margin-left: 8px;
+    background-color: #F8F8F4;
 }
 
+main .twice-or-not .checkmark,
 main .lend-or-not .checkmark{
     position: absolute;
     top: -2px;
@@ -191,27 +175,29 @@ main .lend-or-not .checkmark{
     height: 20px;
     width: 20px;
     background-color: white;
-    border-radius: 12px;
-    border: 1px solid #cacece;
-    /* margin-left: 8px; */
+    border-radius: 2px;
+    background-color: #F8F8F4;
+    /* border: 1px solid #cacece; */
 }
 
 main .lend-to{align-items: center;}
 
 /* On mouse-over, add a grey background color */
-main .reading-status .container:hover input ~ .checkmark,
+/* main .reading-status .container:hover input ~ .checkmark,
 main .lend-or-not .container:hover input ~ .checkmark{
     background-color: #F1F1F3;
-}
+} */
 
 /* When the radio button is checked, add a blue background */
 main .reading-status .container input:checked ~ .checkmark,
+main .twice-or-not .container input:checked ~ .checkmark
 main .lend-or-not .container input:checked ~ .checkmark{
-    background-color: white;
+    background-color: #F8F8F4;
 }
 
 /* Create the indicator (the dot/circle - hidden when not checked) */
 main .reading-status .checkmark:after,
+main .twice-or-not .checkmark:after,
 main .lend-or-not .checkmark:after{
     content: "";
     position: absolute;
@@ -220,12 +206,14 @@ main .lend-or-not .checkmark:after{
 
 /* Show the indicator (dot/circle) when checked */
 main .reading-status .container input:checked ~ .checkmark:after,
+main .twice-or-not .container input:checked ~ .checkmark:after,
 main .lend-or-not .container input:checked ~ .checkmark:after {
     display: block;
 }
 
 /* Style the indicator (dot/circle) */
 main .reading-status .container .checkmark:after,
+main .twice-or-not .container .checkmark:after,
 main .lend-or-not .container .checkmark:after {
  	top: 4px;
 	left: 4px;
@@ -234,25 +222,19 @@ main .lend-or-not .container .checkmark:after {
     background: transparent no-repeat center/12px url(../img/tick.svg);
 }
 
-.view-button{
-    display: flex;
-    flex-direction: row;
-    justify-content: center;    
-}
-
 .book-button{
     width: 800px;
     margin-bottom: 20px;
-    padding-bottom: 30px;  
+    padding-bottom: 30px; 
+    text-align: center; 
 }
 
 .book-button input{
-    width: 240px;
-    height: 35px;
+    width: 210px;
+    height: 40px;
     align-self: center;
     letter-spacing: 2px;
     padding-left: 70px;
-    border-radius: 10px;
     border: none;
     margin: 10px;
     font-size: 14px;
@@ -264,47 +246,47 @@ main .lend-or-not .container .checkmark:after {
     box-shadow: none;
 }
 
-.book-button input:nth-child(1):hover{ padding-left: 0;background: url(../img/edit.svg) no-repeat 35px rgba(185, 177, 68, 1); background-size: 10%;}
-.book-button input:nth-child(2):hover{ padding-left: 0;background: url(../img/delete.svg) no-repeat 35px rgba(185, 177, 68, 1); background-size: 10%;}
+.book-button input:nth-child(1):hover{ padding-left: 35px;background: url(../img/edit.svg) no-repeat 50px rgba(185, 177, 68, 1); background-size: 10%;}
+.book-button input:nth-child(2):hover{ padding-left: 35px;background: url(../img/delete.svg) no-repeat 50px rgba(185, 177, 68, 1); background-size: 10%;}
 .book-button input:nth-child(3):hover{ background: url(../img/calendar.svg) no-repeat 35px rgba(185, 177, 68, 1); background-size: 10%;}
 
-.book-button input:nth-child(1){ padding-left: 0;background: url(../img/edit.svg) no-repeat 35px rgba(185, 177, 68, .8); background-size: 10%;}
-.book-button input:nth-child(2){ padding-left: 0;background: url(../img/delete.svg) no-repeat 35px rgba(185, 177, 68, .8); background-size: 10%;}
+.book-button input:nth-child(1){ padding-left: 35px;background: url(../img/edit.svg) no-repeat 50px rgba(185, 177, 68, .8); background-size: 10%;}
+.book-button input:nth-child(2){ padding-left: 35px;background: url(../img/delete.svg) no-repeat 50px rgba(185, 177, 68, .8); background-size: 10%;}
 .book-button input:nth-child(3){ background: url(../img/calendar.svg) no-repeat 35px rgba(185, 177, 68, .8); background-size: 10%;}
 
 /* RWD */
 
 @media (max-width: 980px) and (min-width: 640px){
     main .view {flex-direction: column;width: 90%;}
-    main .visual-book{align-self: center;margin: 50px 20px 0px 20px;}
+    main .visual-book{align-self: center;margin: 30px 20px 0px 20px;height: auto;}
     main .book-detail-wrapper{display: flex; justify-content: center;}
     main .book-detail{width: 400px;}
     main .move-book-detail>div>span{line-height: 1.5;}
-    main .move-book-detail>div>span:nth-child(1){width: 50px;}    
-    main .move-book-detail>div:nth-child(1)>span:nth-child(1){width: 50px; margin-right: 0;} 
-    main .move-book-detail>div:nth-child(2)>span:nth-child(1){width: 50px; margin-right: 0;}   
+    main .move-book-detail>div>span:nth-child(1){width: 100px;}    
+    main .move-book-detail>div:nth-child(1)>span:nth-child(1){width: 100px; margin-right: 0;} 
+    main .move-book-detail>div:nth-child(2)>span:nth-child(1){width: 100px; margin-right: 0;}   
     main .move-book-detail>div>span:nth-child(2){width: 300px; flex-wrap: wrap;}
-    main .move-book-detail>div:nth-child(3)>span:nth-child(1){width: 70px;margin-right: 0;}
+    main .move-book-detail>div:nth-child(3)>span:nth-child(1){width: 100px;margin-right: 0;}
     main .move-book-detail>div:nth-child(3)>span:nth-child(2){width: 290px;flex-wrap: wrap;}
     main .reading-status>span:nth-child(1), main .lend-or-not>span:nth-child(1), main .lend-to>span:nth-child(1){margin-left: 0;}
     main .move-book-detail>div:nth-child(5)>span:nth-child(1){width:100px; padding: 0;}
     main .reading-status{align-items: center;}
     main .status-choice{width: 273px; justify-content: space-around; margin: 8px 0 10px 6px;}
     main .reading-status .container{margin-left: -40px;}
-    main .twice-or-not{align-items: center;}
-    main .twice-or-not>input{margin-left: 25px;}
     main .move-book-detail>div:nth-child(7){align-items: center;}
     main .move-book-detail>div:nth-child(7)>span:nth-child(1){width:80px;padding: 0;}
-    main .move-book-detail>div:nth-child(8)>span:nth-child(1){width:80px;padding: 0;}
+    main .move-book-detail>div:nth-child(8)>span:nth-child(1){width:100px;padding: 0;}
+    main .twice-or-not .container:nth-child(2){margin-left: 5px;}
+    main .twice-or-not .container:nth-child(3){margin-left: 17px;}
     main .lend-or-not .container{margin-left: 17px;}
     main .checkmark-two{margin-left: -4px;}
-    .book-button{display: flex; flex-direction: column;}
+    .book-button{width: auto;}
     footer .background-img{padding: 20%; background-size: 100%;}
 }
 
 @media (max-width: 640px) and (min-width: 320px){
     main .view {flex-direction: column;width: 100%;max-width: 300px;margin-bottom: 120px;}
-    main .visual-book{align-self: center;margin: 10px;width: 100px;height: 142px;}
+    main .visual-book{align-self: center;margin: 20px;width: 100px;height: 142px;padding: 0px;}
     main .book-detail-wrapper{display: flex; justify-content: center;}
     main .book-detail{width: 300px;margin:0px;}
     .input-init{width: 160px;font-size: 14px;}
@@ -313,27 +295,27 @@ main .lend-or-not .container .checkmark:after {
     main #author{width: 200px;line-height: 1.5;}
     main .move-book-detail{font-size: 14px;}
     main .move-book-detail>div{margin: 15px 20px;}
-    main .move-book-detail>div>span:nth-child(1){width: 60px;}    
-    main .move-book-detail>div:nth-child(1)>span:nth-child(1){width: 50px; margin-right: 0;} 
-    main .move-book-detail>div:nth-child(2)>span:nth-child(1){width: 50px; margin-right: 0;}   
+    main .move-book-detail>div:nth-child(1)>span:nth-child(1){width: 80px; margin-right: 0;} 
+    main .move-book-detail>div:nth-child(2)>span:nth-child(1){width: 80px; margin-right: 0;}   
     main #title{width: 200px; flex-wrap: wrap;}
-    main .move-book-detail>div:nth-child(3)>span:nth-child(1){width: 55px;margin-right: 0;}
+    main .move-book-detail>div:nth-child(3)>span:nth-child(1){width: 80px;margin-right: 0;}
+    main .move-book-detail>div:nth-child(4)>span:nth-child(1){width: 88px;margin-right: 0;}
     main #publisher{width: 180px;flex-wrap: wrap;}
     main .reading-status>span:nth-child(1), main .lend-or-not>span:nth-child(1), main .lend-to>span:nth-child(1){margin-left: 0;}
-    main .move-book-detail>div:nth-child(5)>span:nth-child(1){width:100px; padding: 0;}
+    main .move-book-detail>div:nth-child(5)>span:nth-child(1){width:80px; padding: 0;}
     main .reading-status{flex-direction: column;}
     main .reading-status>span{align-self: flex-start;}
     main .status-choice{width: 260px;justify-content: space-between; margin: 8px 0 10px 6px;}
     main .reading-status .container{margin-left: -15px;}
-    main .twice-or-not{align-items: center;}
-    main .twice-or-not>input{margin-left: 32px;}
     main .move-book-detail>div:nth-child(7){align-items: center;}
     main .move-book-detail>div:nth-child(7)>span:nth-child(1){width:80px;padding: 0;}
     main .move-book-detail>div:nth-child(8)>span:nth-child(1){width:80px;padding: 6px 0 1px 0;}
+    main .twice-or-not .container:nth-child(2){margin-left: 4px;}
+    main .twice-or-not .container:nth-child(3){margin-left: 16px;}
     main .lend-or-not .container{margin-left: 16px;}
     main .checkmark-two{margin-left: -4px;}
     main .lend-to>span{align-self: flex-start;margin-bottom: 5px;}
-    .book-button{display: flex; flex-direction: column;}
+    .book-button{width: auto;}
     footer .background-img{padding: 20%; background-size: 100%;}
 
 }

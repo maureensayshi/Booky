@@ -27,11 +27,18 @@ app.showBook = function () {
         //顯示資料庫原本的資料
         app.get("main .book-place input").value = val.place;
         app.get("main .lend-to input").value = val.lendTo;
-        app.get("main .twice-or-not>input").checked = val.twice;
+
         let readChoices = app.getAll("main .reading-status .container input");
         for (let i = 0; i < readChoices.length; i++) {
             if (readChoices[i].value == val.readStatus) {
                 readChoices[i].checked = true;
+            }
+        }
+        let twiceChoices = app.getAll("main .twice-or-not .container input");
+        for (let i = 0; i < twiceChoices.length; i++) {
+            let twiceChoiceDB = twiceChoices[i].value === "true" ? true : false;
+            if (twiceChoiceDB == val.twice) {
+                twiceChoices[i].checked = true;
             }
         }
         let lendChoices = app.getAll("main .lend-or-not .container input");
@@ -51,17 +58,38 @@ app.editBook = function (val, dbBookList) {
 
     //儲存/修改資料
     save_btn.addEventListener("click", function () {
+
+        //radio邊框
+        let readingCheckAll = app.getAll("main .reading-status .checkmark");
+        let twiceCheckAll = app.getAll("main .twice-or-not .checkmark");
+        let lendCheckAll = app.getAll("main .lend-or-not .checkmark");
+
         let placeInput = app.get("main .book-place input");
         let lendToInput = app.get("main .lend-to input");
         let readChoices = app.getAll("main .reading-status .container input");
         let readChoicesChecked = app.get("main .reading-status .container input:checked");
-        let twiceButton = app.get("main .twice-or-not>input");
+        let twiceChoices = app.getAll("main .twice-or-not .container input");
+        let twiceChoicesChecked = app.get("main .twice-or-not .container input:checked");
         let lendChoices = app.getAll("main .lend-or-not .container input");
         let lendChoicesChecked = app.get("main .lend-or-not .container input:checked");
 
         if (save_btn.value == "更新資料") {
             save_btn.value = "儲存修改";
             save_btn.style.backgroundImage = "url(img/save.svg)";
+
+            for (let i = 0; i < readingCheckAll.length; i++) {
+                readingCheckAll[i].style.border = "1px solid #ececec";
+                readingCheckAll[i].style.backgroundColor = "white";
+            }
+            for (let i = 0; i < twiceCheckAll.length; i++) {
+                twiceCheckAll[i].style.border = "1px solid #ececec";
+                twiceCheckAll[i].style.backgroundColor = "white";
+            }
+            for (let j = 0; j < lendCheckAll.length; j++) {
+                lendCheckAll[j].style.border = "1px solid #ececec";
+                lendCheckAll[j].style.backgroundColor = "white";
+            }
+
             placeInput.disabled = false;
             lendToInput.disabled = false;
             placeInput.className = placeInput.disabled ? "input-init" : "input-edit";
@@ -69,13 +97,29 @@ app.editBook = function (val, dbBookList) {
             for (let i = 0; i < readChoices.length; i++) {
                 readChoices[i].disabled = false;
             }
-            twiceButton.disabled = false;
+            for (let i = 0; i < twiceChoices.length; i++) {
+                twiceChoices[i].disabled = false;
+            }
             for (let i = 0; i < lendChoices.length; i++) {
                 lendChoices[i].disabled = false;
             }
         } else if (save_btn.value == "儲存修改") {
             save_btn.value = "更新資料";
             save_btn.style.backgroundImage = "url(img/edit.svg)";
+
+            for (let i = 0; i < readingCheckAll.length; i++) {
+                readingCheckAll[i].style.border = "0";
+                readingCheckAll[i].style.backgroundColor = "#F8F8F4";
+            }
+            for (let i = 0; i < twiceCheckAll.length; i++) {
+                twiceCheckAll[i].style.border = "0";
+                twiceCheckAll[i].style.backgroundColor = "#F8F8F4";
+            }
+            for (let j = 0; j < lendCheckAll.length; j++) {
+                lendCheckAll[j].style.border = "0";
+                lendCheckAll[j].style.backgroundColor = "#F8F8F4";
+            }
+
             placeInput.disabled = true;
             placeInput.className = placeInput.disabled ? "input-init" : "input-edit";
             lendToInput.className = placeInput.disabled ? "input-init" : "input-edit";
@@ -83,7 +127,13 @@ app.editBook = function (val, dbBookList) {
             for (let i = 0; i < readChoices.length; i++) {
                 readChoices[i].disabled = true;
             }
-            twiceButton.disabled = true;
+            for (let i = 0; i < twiceChoices.length; i++) {
+                twiceChoices[i].disabled = true;
+                console.log(twiceChoices[i].value);
+            }
+            let twiceChoiceSelected = twiceChoicesChecked.value === "true" ? true : false;
+            console.log(twiceChoiceSelected);
+
             for (let i = 0; i < lendChoices.length; i++) {
                 lendChoices[i].disabled = true;
                 console.log(lendChoices[i].value);
@@ -93,7 +143,7 @@ app.editBook = function (val, dbBookList) {
             //重新賦值書籍資料
             val.place = placeInput.value; //放置地點 string
             val.readStatus = readChoicesChecked.value; //閱讀狀態數字 0/1/2 string
-            val.twice = twiceButton.checked; //值得二讀 true/false
+            val.twice = twiceChoiceSelected; //值得二讀 true/false
             val.lend = lendChoiceSelected; //是否有借人 true/false
             val.lendTo = lendChoiceSelected == true ? lendToInput.value : "無"; //借出對象 string
 

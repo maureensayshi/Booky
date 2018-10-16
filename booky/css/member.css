@@ -57,7 +57,7 @@ main .view button{
 }
 
 @media (max-width: 640px) and (min-width:319px) {
-    main .view{width:90%;font-size: 14px;margin-bottom: 0px;}
+    main .view{width:90%;font-size: 14px;margin-bottom: 200px;height: 350px;}
     main .member-info{margin-top:20px;}
 }
 

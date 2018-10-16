@@ -228,9 +228,6 @@ app.scanBookInit = function () {
 };
 
 app.scan = function () {
-    console.log("start to scan");
-    // let start_btn = app.get("#startButton");
-
     const codeReader = new ZXing.BrowserBarcodeReader();
     console.log("ZXing code reader initialized");
 
@@ -248,29 +245,28 @@ app.scan = function () {
                 const sourceSelectPanel = document.getElementById("sourceSelectPanel");
             }
             let startBtn = app.get("#startButton");
-            console.log(startBtn);
-
             startBtn.addEventListener("click", () => {
                 if (startBtn.value == "start") {
                     startBtn.value = "stop";
                     startBtn.textContent = "再試一次 / TRY AGAIN";
                     codeReader.decodeFromInputVideoDevice(undefined, "video").then((result) => {
                         console.log(result);
+                        // app.resultText = result.text;
                         document.getElementById("result").textContent = result.text;
                         app.containerNum = 2;
                         app.googleBooks_isbn(result.text);
                     }).catch((err) => {
                         console.error(err);
-                        document.getElementById("result").textContent = err;
+                        // document.getElementById("result").textContent = "查無此書";
                     });
                     console.log(`Started continous decode from camera with id ${firstDeviceId}`);
                 } else if (startBtn.value == "stop") {
                     codeReader.reset();
-                    let containerText = app.getAll(".container-two h2>span");
-                    let containerResult = app.getAll(".result");
                     document.getElementById("result").textContent = "";
-                    containerText[2].textContent = "";
-                    containerResult[2].innerHTML = "";
+                    // if (app.resultText) {
+                    let containerAll = app.getAll(".container-two");
+                    containerAll[2].textContent = "";
+                    // }
                     startBtn.value = "start";
                     startBtn.textContent = "開啟相機 / START";
                 }
@@ -280,8 +276,6 @@ app.scan = function () {
             console.error(err);
         });
 };
-
-
 
 
 app.keyin_search = function () {
@@ -308,21 +302,21 @@ app.keyin_search = function () {
 app.search_book = function (keyWord) {
     app.containerNum = 1;
     switch (app.searchText) {
-    case "search-title":
-        app.googleBooks_title(keyWord);
-        console.log(keyWord);
-        break;
-    case "search-isbn":
-        app.googleBooks_isbn(keyWord);
-        console.log(keyWord);
-        break;
-    case "search-author":
-        app.googleBooks_author(keyWord);
-        console.log(keyWord);
-        break;
-    case "":
-        console.log("user didn't key in words");
-        break;
+        case "search-title":
+            app.googleBooks_title(keyWord);
+            console.log(keyWord);
+            break;
+        case "search-isbn":
+            app.googleBooks_isbn(keyWord);
+            console.log(keyWord);
+            break;
+        case "search-author":
+            app.googleBooks_author(keyWord);
+            console.log(keyWord);
+            break;
+        case "":
+            console.log("user didn't key in words");
+            break;
     }
 };
 
@@ -378,14 +372,17 @@ app.googleBooks_isbn = function (bookISBN) {
                 app.getBookData(data);
             } else {
                 let containerAll = app.getAll(".container-two");
+                let containerTextBox = app.getAll(".container-two h2");
                 let containerText = app.getAll(".container-two h2>span");
                 let containerResult = app.getAll(".result");
                 let i = app.containerNum;
                 if (containerAll[i]) {
-                    containerAll[i].style.display = "flex";
-                    containerAll[i].scrollIntoView({ block: "start", behavior: "smooth" });
-                    containerResult[i].textContent = "請用其他關鍵字搜尋";
+                    containerAll[i].style.display = "block";
+                    containerAll[i].style.textAlign = "center";
+                    containerResult[i].textContent = "查無此書";
+                    containerTextBox[i].style.textAlign = "center";
                     containerResult[i].classList.add("noresult");
+                    containerText[i].style.textAlign = "center";
                     containerText[i].textContent = 0;
                 }
             }
@@ -468,19 +465,16 @@ app.getBookData = function (data) {
             //作者 or 作者群
             let authors = data.items[i].volumeInfo.authors;
             bookAuthor = (authors != null) ? authors.join("、") : "暫無資料";
-            // console.log(authors);
-
             //出版社
             let publisher = data.items[i].volumeInfo.publisher;
             bookPublisher = (publisher != null) ? publisher : "暫無資料";
             // ISBN
             let isbn = data.items[i].volumeInfo.industryIdentifiers;
             if (isbn != null) {
-                // console.log(isbn);
                 let tmpISBN;
                 for (let i = 0; i < isbn.length; i++) {
                     if (isbn[i].type == "ISBN_13")
-                        tmpISBN = isbn[i].identifier;  //console.log(isbn[i].identifier); 
+                        tmpISBN = isbn[i].identifier;
                 }
                 bookISBN = (tmpISBN != "" && tmpISBN != null) ? tmpISBN : "暫無資料";
             } else if (isbn == null) {
@@ -525,6 +519,7 @@ app.showBookResult = function (bookTitle, bookAuthor, bookPublisher, bookISBN, b
         if (i == 2) {
             amount = 1;
         }
+        containerText[i].style.textAlign = "center";
         containerText[i].textContent = amount;
         let booksParent = containerResult[i];
         //each book

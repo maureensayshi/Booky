@@ -490,11 +490,11 @@ header .btn_search{
 }
 
 .scan-list{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    text-align: center;
     margin: 0px 0 60px 0;
     width: 80%;
+    height: 500px;
+    border: 1px solid red;
 }
 .scan-list h5{
     padding: 20px 0 10px 0;
@@ -515,9 +515,6 @@ header .btn_search{
     width: 100%;
     height: 300px;
     background-color: #ececec;
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
 
 .scan-btns{
@@ -528,7 +525,7 @@ header .btn_search{
 }
 
 #startButton{
-    width: 220px;  
+    width: 250px;  
     height: 45px; 
     margin: 1%;
     font-family: "Cinzel", serif, "NSimSun";
@@ -542,35 +539,6 @@ header .btn_search{
     border: 0;
     z-index: 10;
     border-radius: 2px;
-}
-
-.scan-shade  form{
-    width: 80%;
-    margin-top: 50px;
-    position: relative;
-}
-
-.scan-shade form input{
-  width: 100%;
-  border: 0;
-  padding: 12px 0px 10px 20px;
-  border-bottom: 1px solid #B9B144;
-  font-family: "Noto Sans JP", sans-serif;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  font-size: 20px;      
-}
-
-.scan-shade form button{
-  width: 20px;
-  height: 20px;
-  background: url(../img/search.svg) no-repeat;
-  background-size: 100%; 
-  border: 0;
-  position: absolute;
-  top: 30%;
-  right: 2%;
-  cursor: pointer;
 }
 
 /* 搜尋結果 */
@@ -839,19 +807,13 @@ footer .footer{
 
     .addtab{width: 200px;}
 
-    .scan-list .camera{width: 80%;}
-    .scan-shade form input{font-size: 16px;}
-    .scan-shade form button{right:6%;}
+    /* .scan-list .camera{width: 80%;} */
 
     .container-two h2 {
         font-size: 20px;
         text-align: center;
         width: 80%;
     }
-
-    /* .result{
-        flex-direction: column;
-    } */
 
     .container-two .result .result-book{
         flex-direction: column;
@@ -1072,7 +1034,7 @@ header .btn_search::after{
     .scan-shade form{width: 100%;}
 
     .scan-list h5{margin-bottom: 0px;}
-    .scan-list .camera{height: 400px;}
+    .scan-list .camera{height: 300px;}
 
 
     .container-two{
