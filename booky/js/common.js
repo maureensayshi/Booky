@@ -519,6 +519,7 @@ app.showBookResult = function (bookTitle, bookAuthor, bookPublisher, bookISBN, b
     if (containerAll[i]) {
         containerAll[i].style.display = "block";
         containerAll[i].style.textAlign = "center";
+        containerAll[i].style.paddingBottom = "500px";
         containerAll[i].scrollIntoView({ block: "start", behavior: "smooth" });
         if (i == 2) {
             amount = 1;

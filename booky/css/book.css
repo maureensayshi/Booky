@@ -93,6 +93,7 @@ main .move-book-detail>div>span>span{margin-right: 20px;}
     padding: 15px 6px;
     font-size: 14px;
     font-family: "Noto Sans JP", sans-serif;
+    color: black;
 }
 
 /* 無法變更的樣式 */
@@ -104,6 +105,7 @@ main .move-book-detail>div>span>span{margin-right: 20px;}
     font-size: 16px;
     padding-bottom: 5px;
     font-family: "Noto Sans JP", sans-serif;
+    color: black;
 }
 
 
