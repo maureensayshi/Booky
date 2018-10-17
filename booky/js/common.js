@@ -358,6 +358,7 @@ app.decodeFun = function (ev) {
         // parent.getElementsByClassName('result')[0].textContent = result.text;
     }).catch((err) => {
         console.error(err);
+        app.get(".imgLoad").textContent = "no result";
         // parent.getElementsByClassName('result')[0].textContent = err;
         // app.get(".imgLoad").textContent = result.txt;
     });
