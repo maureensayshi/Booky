@@ -290,7 +290,6 @@ app.scan = function () {
                     startBtn.textContent = "開啟相機 / START";
                     line.textContent = "";
                     line.classList.remove("typewriter");
-                    document.getElementById("result").textContent = "";
                 }
             });
         })
