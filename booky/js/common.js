@@ -632,6 +632,10 @@ app.showBookResult = function (bookTitle, bookAuthor, bookPublisher, bookISBN, b
             });
         }
     }
+
+    if (amount == 1) {
+        app.get(".result .result-book").style.width = "100%";
+    }
 };
 
 app.addBook = function (bookTitle, bookAuthor, bookPublisher, bookISBN, bookCover) {
