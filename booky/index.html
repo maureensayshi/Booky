@@ -144,9 +144,9 @@
             <div class="addbar-list">
                 <h5>ADD BY</h5>
                 <div class="addTabs">
-                    <button class="addtab active" value="search-title">書名 Title</button>
-                    <button class="addtab" value="search-author">作者 Author</button>
-                    <button class="addtab" value="search-isbn">書碼 ISBN</button>
+                    <button class="addtab active" value="search-title">書名</button>
+                    <button class="addtab" value="search-author">作者</button>
+                    <button class="addtab" value="search-isbn">書碼</button>
                 </div>
                 <form method="get" class="add-form" id="searchForm">
                     <input id="keyword" type="text" value="" placeholder="把書加進 Booky" />
@@ -168,10 +168,12 @@
             <div class="scan-img">
                 <img src="img/cancel.svg" />
             </div>
+
+            <!-- 電腦版掃描搜尋 -->
             <div class="scan-list">
                 <h5>ADD BY SCANNING</h5>
                 <div class="reminder">請將 ISBN 條碼對齊中心，將自動掃描</div>
-                <div class="reminder">溫馨提醒 : 此功能建議在手機上使用，iOS 系統請使用 Safari 瀏覽器</div>
+                <div class="reminder">溫馨提醒&nbsp&nbsp:&nbsp&nbspiOS&nbsp系統請使用 Safari 瀏覽器</div>
                 <div class="camera">
                     <video id="video" width="100%" height="250"></video>
                 </div>
@@ -181,15 +183,10 @@
                 </div>
 
                 <div class="scan-btns">
-                    <button id="startButton" value="start">啟動相機 / START</button>
+                    <button id="startButton" value="start">打開相機</button>
                 </div>
 
                 <div class="line"></div>
-
-                <input type="file" id="file" name="file" accept="image/*" capture />
-                <div id="img-result"><img /></div>
-                <button class="decode" value="decode">decode</button>
-                <p class="imgLoad"></p>
 
                 <div class="container-two">
                     <h2><span></span>筆搜尋結果</h2>
@@ -197,8 +194,23 @@
                         <div class="result"></div>
                     </div>
                 </div>
+            </div>
 
+            <!-- 手機板拍照搜尋 -->
+            <div class="shot-list" id="hide">
+                <h5>ADD BY PHOTO</h5>
+                <div class="reminder">請將 ISBN 條碼對齊中心，</br>拍照後將自動搜尋</div>
+                <label for="file">拍攝照片</label>
+                <input type="file" id="file" name="file" accept="image/*" capture />
+                <div id="img-result"><img /></div>
+                <div class="imgLoad"></div>
 
+                <div class="container-two">
+                    <h2><span></span>筆搜尋結果</h2>
+                    <div class="resultOuter">
+                        <div class="result"></div>
+                    </div>
+                </div>
             </div>
 
         </div>

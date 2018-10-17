@@ -205,6 +205,30 @@ app.switchType = function (e) {
     console.log(app.searchText);
 };
 
+
+app.keyin_search = function () {
+    // 直接按 Enter 搜尋
+    let formSearch = app.get("#searchForm");
+    formSearch.onsubmit = function () {
+        let containerText = app.getAll(".container-two h2>span");
+        let containerResult = app.getAll(".result");
+        containerResult[1].style.justifyContent = "flex-start";
+        containerText[1].textContent = "";
+        containerResult[1].innerHTML = "";
+        app.searchKeyWord();
+        return false;
+    };
+
+    // add book
+    app.searchKeyWord = function () {
+        let keyWord;
+        keyWord = app.get("#keyword").value;
+        app.search_book(keyWord);
+        console.log(keyWord);
+    };
+};
+
+
 //掃描書
 app.scanBookInit = function () {
     let scan_btn = app.get("#scanbook");
@@ -217,8 +241,13 @@ app.scanBookInit = function () {
         scanPage.style.opacity = "1";
         scanPage.style.filter = "alpha(opacity=100)";
         app.get(".scanShade").style.minHeight = window.innerHeight + "px";
-        app.scan();
-        app.imgScan();
+        if (document.body.clientWidth > 1024) {
+            app.get(".scan-list").style.display = "block";
+            app.scan();
+        } else {
+            app.get(".shot-list").style.display = "block";
+            app.imgScan();
+        }
     };
 
     close_scan_btn.onclick = function () {
@@ -229,6 +258,7 @@ app.scanBookInit = function () {
     };
 };
 
+//桌機版:掃描搜尋
 app.scan = function () {
     const codeReader = new ZXing.BrowserBarcodeReader();
     console.log("ZXing code reader initialized");
@@ -259,7 +289,7 @@ app.scan = function () {
                 containerResult[2].textContent = "";
                 if (startBtn.value == "start") {
                     startBtn.value = "stop";
-                    startBtn.textContent = "停止掃描 / STOP";
+                    startBtn.textContent = "停止掃描";
                     setTimeout(function () {
                         line.textContent = "SEARCHING......";
                         line.classList.add("typewriter");
@@ -269,7 +299,7 @@ app.scan = function () {
                         if (result) {
                             line.textContent = "ISBN : " + result.text;
                             line.classList.remove("typewriter");
-                            startBtn.textContent = "重新掃描 / RESET";
+                            startBtn.textContent = "重新掃描";
                             container[2].style.display = "block";
                             containerResult[2].style.justifyContent = "center";
                             containerText[2].textContent = "";
@@ -282,12 +312,12 @@ app.scan = function () {
                     }).catch((err) => {
                         console.error(err);
                         line.textContent = "查無此書";
-                        startBtn.textContent = "重新掃描 / RESET";
+                        startBtn.textContent = "重新掃描";
                     });
                     console.log(`Started continous decode from camera with id ${firstDeviceId}`);
                 } else if (startBtn.value == "stop") {
                     startBtn.value = "start";
-                    startBtn.textContent = "開啟相機 / START";
+                    startBtn.textContent = "打開相機";
                     line.textContent = "";
                     line.classList.remove("typewriter");
                     codeReader.reset();
@@ -299,31 +329,13 @@ app.scan = function () {
         });
 };
 
+//拍照搜尋
 app.imgScan = function () {
     console.log("scan img");
-
     function ProcessFile(e) {
         let file = document.getElementById("file").files[0];
         app.get("#img-result>img").src = URL.createObjectURL(file);
         console.log(app.get("#img-result>img").src);
-
-        //     console.log(file);
-        //     let reader;
-        //     let fileImg = app.get("#img-result>img");
-        //     if (file) {
-        //         reader = new FileReader();
-        //         reader.onload = function (event) {
-        //             let txt = event.target.result;
-        //             let fileImg = app.get("#img-result>img");
-        //             fileImg.src = txt;
-        //             app.imgSrc = txt;
-        //             fileImg.onload = function () {
-        //                 app.imgSearch();
-        //             };
-        //         };
-        //     }
-        //     reader.readAsDataURL(file);
-        // }
     }
     document.getElementById("file").addEventListener("change",
         ProcessFile, false);
@@ -331,62 +343,43 @@ app.imgScan = function () {
     app.get("#img-result>img").onload = function () {
         app.decodeFun();
     };
-    // const decodeButton = document.querySelector(".decode");
-
-    // decodeButton.addEventListener("click", app.decodeFun, false);
 };
 
+//拍照後搜尋資料庫
 app.decodeFun = function (ev) {
-    console.log(app.imgSrc);
     const codeReader = new ZXing.BrowserBarcodeReader("video");
     console.log("ZXing code reader initialized");
-    // const parent = this.parentNode.parentNode;
-    // const img = parent.getElementsByClassName('img')[0].cloneNode(true);
     let fileImg = app.get("#img-result>img");
-    // fileImg.src = app.imgSrc;
     console.log(fileImg);
+
+    let container = app.getAll(".container-two");
+    let containerText = app.getAll(".container-two h2>span");
+    let containerResult = app.getAll(".result");
+    let uploadBtn = app.get(".shot-list label");
 
     codeReader.decodeFromImage(fileImg).then((result) => {
         console.log(result);
-        app.get(".imgLoad").textContent = result.text;
+        app.get(".imgLoad").textContent = "ISBN : " + result.text;
         console.log(result.text);
-        console.log(app.get(".imgLoad"));
-        // app.containerNum = 2;
-        // app.googleBooks_isbn(result.text);
-
-
-        // parent.getElementsByClassName('result')[0].textContent = result.text;
+        container[3].style.display = "block";
+        containerResult[3].style.justifyContent = "center";
+        containerText[3].textContent = "";
+        containerResult[3].textContent = "";
+        app.containerNum = 3;
+        app.googleBooks_isbn(result.text);
+        uploadBtn.textContent = "重新拍攝";
     }).catch((err) => {
         console.error(err);
-        app.get(".imgLoad").textContent = "no result";
-        // parent.getElementsByClassName('result')[0].textContent = err;
-        // app.get(".imgLoad").textContent = result.txt;
+        app.get(".imgLoad").textContent = "";
+        container[3].style.display = "block";
+        containerResult[3].style.justifyContent = "center";
+        containerText[3].textContent = "0";
+        containerResult[3].textContent = "無搜尋結果，請重新拍攝";
+        uploadBtn.textContent = "重新拍攝";
     });
     console.log(`Started decode for image from ${fileImg.src}`);
 };
 
-
-app.keyin_search = function () {
-    // 直接按 Enter 搜尋
-    let formSearch = app.get("#searchForm");
-    formSearch.onsubmit = function () {
-        let containerText = app.getAll(".container-two h2>span");
-        let containerResult = app.getAll(".result");
-        containerResult[1].style.justifyContent = "flex-start";
-        containerText[1].textContent = "";
-        containerResult[1].innerHTML = "";
-        app.searchKeyWord();
-        return false;
-    };
-
-    // add book
-    app.searchKeyWord = function () {
-        let keyWord;
-        keyWord = app.get("#keyword").value;
-        app.search_book(keyWord);
-        console.log(keyWord);
-    };
-};
 
 app.search_book = function (keyWord) {
     app.containerNum = 1;
@@ -631,7 +624,7 @@ app.showBookResult = function (bookTitle, bookAuthor, bookPublisher, bookISBN, b
         let showPublisher = app.createElement("span", "", bookPublisher, "", "", PublisherParent);
         let ISBNParent = app.createElement("p", "", "ISBN-13：", "", "", bookInfoParent);
         let showISBN = app.createElement("span", "", bookISBN, "", "", ISBNParent);
-        if (i == 1 || i == 2) {
+        if (i == 1 || i == 2 || i == 3) {
             let addButton = app.createElement("button", "", "加入此書", "", "", bookInfoParent);
             //加入總書櫃按鈕
             addButton.addEventListener("click", function () {

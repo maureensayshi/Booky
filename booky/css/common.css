@@ -401,19 +401,19 @@ header .btn_search{
 
 .addtab {
     flex: none;
-    width: 25%;   
-    font-family: "Cinzel", serif, "NSimSun";
-    height: 50px;
+    width: 80px;   
+    font-family: "Noto Sans JP", sans-serif;
+    height: 40px;
     letter-spacing: 2px;
-    padding: 15px;
     margin: 10px 15px;
     text-align: center;
     font-size: 20px;
-    font-weight: 600;
+    font-weight: normal;
     background-color: rgba(185, 177, 68, .4);
     cursor: pointer;
     border: 0;
-    transition: all transform .75s;   
+    transition: all transform .75s;  
+    color: #3f3a3a; 
 }
 
 .active{
@@ -489,12 +489,15 @@ header .btn_search{
     cursor: pointer;   
 }
 
-.scan-list{
+.scan-list,
+.shot-list{
+    display: none;
     text-align: center;
     width: 80%;
     height: 1000px;
 }
-.scan-list h5{
+.scan-list h5,
+.shot-list h5{
     padding: 20px 0 10px 0;
     font-size: 20px;
     font-family: "Martel Sans", sans-serif;
@@ -520,7 +523,8 @@ header .btn_search{
     background-color: #ececec;   
 }
 
-.line{
+.line,
+.imgLoad{
     font-size: 14px;
     width: auto;
     height: 25px;
@@ -546,27 +550,50 @@ header .btn_search{
     margin-top: 10px;
 }
 
+
+#startButton{
+    width: 150px;  
+    height: 45px; 
+    margin: 1%;
+    font-family: "Noto Sans JP", arial, sans-serif;
+    letter-spacing: 4px;
+    padding: 14px;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 400;
+    color: white;
+    background-color: rgba(185, 177, 68, 1);
+    cursor: pointer;
+    border: 0;
+    z-index: 10;
+    border-radius: 2px;
+}
+
+#img-result>img{
+    display: none;
+}
+
 #file{
     width: 300px;
     height: 50px;
 }
 
-.imgLoad{
-    width: 100px;
-    height: 50px;
-    margin-bottom: 50px;
+#hide input[type=file] {
+    display:none;
+    margin:10px;
 }
-
-#startButton{
-    width: 250px;  
+#hide label {
+    display:inline-block;
+    width: 150px;  
     height: 45px; 
     margin: 1%;
-    font-family: "Cinzel", serif, "NSimSun";
-    letter-spacing: 2px;
+    font-family: "Noto Sans JP", arial, sans-serif;
+    letter-spacing: 4px;
     padding: 14px;
     text-align: center;
-    font-size: 14px;
-    font-weight: 600;
+    font-size: 16px;
+    font-weight: 400;
+    color: white;
     background-color: rgba(185, 177, 68, 1);
     cursor: pointer;
     border: 0;
@@ -1050,13 +1077,8 @@ header .btn_search::after{
         margin-bottom: 70px;
     }
 
-    .addTabs{
-        display: inline-block;text-align: center;
-    }
-
     .addtab{
         font-size: 14px;
-        width: 75%;
         margin: 5px;
     }
 
