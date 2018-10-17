@@ -18,15 +18,14 @@ app.checkingIndex = function () {
             app.get(".real").style.display = "block";
             if (document.body.clientWidth > 1024) {
                 app.visualBook();
-                app.closeLoading();
             } else {
                 app.visualBookMobile();
-                app.closeLoading();
             }
             app.menu();
             app.searchBar();
             app.addBookInit();
             app.scanBookInit();
+            app.closeLoading();
         } else {
             // User is signed out or haven't sign up.
             app.get(".welcome").style.display = "block";
@@ -202,15 +201,15 @@ app.visualBook = function () {
 app.visualBookMobile = function () {
     let keyVisual = app.get(".real .key-visual");
     keyVisual.classList.add("keyVisualMobile");
-    keyVisual.classList.remove("key-visual");
-
+    // keyVisual.classList.remove("key-visual");
     let box = app.get(".book-list");
     box.classList.add("bookListMobile");
-    box.classList.remove("book-list");
+    // box.classList.remove("book-list");
 
     let db = app.database;
     let dbBookList = db.ref("/members/" + app.uid + "/bookList/");
     dbBookList.once("value", function (snapshot) {
+        box.innerHTML = "";
         if (snapshot.val() == null) {
             console.log("no book");
             let sampleBox = app.createElement("div", "sample-book", "", "", "", box);
