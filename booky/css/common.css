@@ -517,8 +517,8 @@ header .btn_search{
 
 .line{
     font-size: 14px;
-    width: 250px;
-    height: 20px;
+    width: auto;
+    height: 25px;
     margin: 10px auto;
     text-align: center;
     overflow: hidden;
@@ -539,11 +539,6 @@ header .btn_search{
     display: flex;
     justify-content: center;
     margin-top: 10px;
-}
-
-.scan-result{
-    width: auto;
-    height: 25px;
 }
 
 #startButton{
