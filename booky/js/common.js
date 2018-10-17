@@ -218,6 +218,7 @@ app.scanBookInit = function () {
         scanPage.style.filter = "alpha(opacity=100)";
         app.get(".scanShade").style.minHeight = window.innerHeight + "px";
         app.scan();
+        app.imgScan();
     };
 
     close_scan_btn.onclick = function () {
@@ -285,17 +286,70 @@ app.scan = function () {
                     });
                     console.log(`Started continous decode from camera with id ${firstDeviceId}`);
                 } else if (startBtn.value == "stop") {
-                    codeReader.reset();
                     startBtn.value = "start";
                     startBtn.textContent = "開啟相機 / START";
                     line.textContent = "";
                     line.classList.remove("typewriter");
+                    codeReader.reset();
                 }
             });
         })
         .catch((err) => {
             console.error(err);
         });
+};
+
+app.imgScan = function () {
+    console.log("scan img");
+
+    function ProcessFile(e) {
+        let file = document.getElementById("file").files[0];
+        let reader;
+        let fileImg = app.get("#img-result>img");
+        if (file) {
+            reader = new FileReader();
+            reader.onload = function (event) {
+                let txt = event.target.result;
+                fileImg.src = txt;
+                app.imgSrc = txt;
+                app.imgSearch();
+            };
+        }
+        reader.readAsDataURL(file);
+    }
+    document.getElementById("file").addEventListener("change",
+        ProcessFile, false);
+
+};
+
+app.imgSearch = function () {
+    console.log(app.imgSrc);
+    const codeReader = new ZXing.BrowserBarcodeReader("video");
+    console.log("ZXing code reader initialized");
+    const decodeButton = document.querySelector(".decode");
+    const decodeFun = function (ev) {
+        // const parent = this.parentNode.parentNode;
+        // const img = parent.getElementsByClassName('img')[0].cloneNode(true);
+        let fileImg = app.get("#img-result>img");
+        codeReader.decodeFromImage(fileImg).then((result) => {
+            console.log(result);
+            app.get(".imgLoad").textContent = result.text;
+            console.log(result.text);
+            console.log(app.get(".imgLoad"));
+            app.containerNum = 2;
+            app.googleBooks_isbn(result.text);
+
+
+            // parent.getElementsByClassName('result')[0].textContent = result.text;
+        }).catch((err) => {
+            console.error(err);
+            // parent.getElementsByClassName('result')[0].textContent = err;
+            // app.get(".imgLoad").textContent = result.txt;
+        });
+        console.log(`Started decode for image from ${fileImg.src}`);
+    };
+
+    decodeButton.addEventListener("click", decodeFun, false);
 };
 
 

@@ -5,7 +5,6 @@ app.init = function () {
     app.checkingIndex();
     app.getRedirectResult();
     console.log(window.innerHeight);
-
 };
 
 app.checkingIndex = function () {
@@ -19,14 +18,15 @@ app.checkingIndex = function () {
             app.get(".real").style.display = "block";
             if (document.body.clientWidth > 1024) {
                 app.visualBook();
+                app.closeLoading();
             } else {
                 app.visualBookMobile();
+                app.closeLoading();
             }
             app.menu();
             app.searchBar();
             app.addBookInit();
             app.scanBookInit();
-            app.closeLoading();
         } else {
             // User is signed out or haven't sign up.
             app.get(".welcome").style.display = "block";
@@ -104,9 +104,9 @@ app.visualBook = function () {
                 { transform: "translate3d(0, 0, 0)" },
                 { transform: "translate3d(-" + (num * 168) + "px, 0, 0)" }
             ], {
-                duration: (num * 168 * 1000) / 56,
-                iterations: Infinity
-            });
+                    duration: (num * 168 * 1000) / 56,
+                    iterations: Infinity
+                });
 
             for (let j = 0; j < 2; j++) {
                 for (let i = 0; i < num; i++) {
@@ -150,10 +150,10 @@ app.visualBook = function () {
                 { transform: "translate3d(0, 0, 0)" },
                 { transform: "translate3d(-" + ((listShow.length + num) * 168) + "px, 0, 0)" }
             ], {
-                // timing options
-                duration: ((listShow.length + num) * 168 * 1000) / 56,
-                iterations: Infinity
-            });
+                    // timing options
+                    duration: ((listShow.length + num) * 168 * 1000) / 56,
+                    iterations: Infinity
+                });
 
             app.stopAnimation = function () { slide.pause(); };
             app.startAnimation = function () { slide.play(); };

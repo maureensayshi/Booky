@@ -247,7 +247,7 @@ header .btn_search{
     width: 20px;
     height: 20px;
     position: absolute;
-    top: 35px;
+    top: 25px;
     right: 65px;
     cursor: pointer;   
 }
@@ -373,7 +373,7 @@ header .btn_search{
       width: 20px;
       height: 20px;
       position: absolute;
-      top: 35px;
+      top: 25px;
       right: 65px;
       cursor: pointer;   
   }
@@ -484,7 +484,7 @@ header .btn_search{
     width: 20px;
     height: 20px;
     position: absolute;
-    top: 35px;
+    top: 25px;
     right: 65px;
     cursor: pointer;   
 }
@@ -492,7 +492,7 @@ header .btn_search{
 .scan-list{
     text-align: center;
     width: 80%;
-    height: 400px;
+    height: 1000px;
 }
 .scan-list h5{
     padding: 20px 0 10px 0;
@@ -508,6 +508,11 @@ header .btn_search{
     margin: 0 0 15px 0;
     width: 100%;
     font-weight: 500;
+}
+
+.scan-list div:nth-child(3){
+    font-size: 12px;
+    font-weight: normal;
 }
 .scan-list .camera{
     width: 100%;
@@ -539,6 +544,12 @@ header .btn_search{
     display: flex;
     justify-content: center;
     margin-top: 10px;
+}
+
+#file{
+    width: 300px;
+    height: 100px;
+    margin:100px;
 }
 
 #startButton{
@@ -1034,8 +1045,6 @@ header .btn_search::after{
         margin-bottom: 70px;
     }
 
-    .searchbar-img>img{right: 35px;}
-
     .addTabs{
         display: inline-block;text-align: center;
     }
@@ -1046,9 +1055,10 @@ header .btn_search::after{
         margin: 5px;
     }
 
+    .searchbar-img>img,
     .add-shade .add-img>img,
     .scan-shade .scan-img>img{
-        right: 35px;
+        right: 25px;
     }
 
     .add-shade form{margin-top: 30px;}
@@ -1069,7 +1079,7 @@ header .btn_search::after{
     .scan-shade form{width: 100%;}
 
     .scan-list h5{margin-bottom: 0px;}
-    .scan-list .camera{height: 250px;}
+    .scan-list .camera{height: 250px;padding: 10px 0 10px 0;}
 
 
     .container-two{
