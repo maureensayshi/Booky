@@ -304,12 +304,15 @@ app.imgScan = function () {
 
     function ProcessFile(e) {
         let file = document.getElementById("file").files[0];
+        console.log(file);
         let reader;
         let fileImg = app.get("#img-result>img");
         if (file) {
             reader = new FileReader();
             reader.onload = function (event) {
                 let txt = event.target.result;
+                let fileImg = app.createElement("img");
+                app.get("#img-result").appendChild(fileImg);
                 fileImg.src = txt;
                 app.imgSrc = txt;
                 app.imgSearch();
@@ -331,13 +334,16 @@ app.imgSearch = function () {
         // const parent = this.parentNode.parentNode;
         // const img = parent.getElementsByClassName('img')[0].cloneNode(true);
         let fileImg = app.get("#img-result>img");
+        fileImg.src = app.imgSrc;
+        console.log(fileImg);
+
         codeReader.decodeFromImage(fileImg).then((result) => {
             console.log(result);
             app.get(".imgLoad").textContent = result.text;
             console.log(result.text);
             console.log(app.get(".imgLoad"));
-            app.containerNum = 2;
-            app.googleBooks_isbn(result.text);
+            // app.containerNum = 2;
+            // app.googleBooks_isbn(result.text);
 
 
             // parent.getElementsByClassName('result')[0].textContent = result.text;
