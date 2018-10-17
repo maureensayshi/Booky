@@ -247,10 +247,11 @@ app.scan = function () {
             }
             let startBtn = app.get("#startButton");
             let line = app.get(".line");
+            let container = app.getAll(".container-two");
+            let containerText = app.getAll(".container-two h2>span");
+            let containerResult = app.getAll(".result");
+
             startBtn.addEventListener("click", () => {
-                let container = app.getAll(".container-two");
-                let containerText = app.getAll(".container-two h2>span");
-                let containerResult = app.getAll(".result");
                 container[2].style.display = "none";
                 containerResult[2].style.justifyContent = "flex-start";
                 containerText[2].textContent = "";
@@ -264,18 +265,14 @@ app.scan = function () {
                     }, 3000);
 
                     codeReader.decodeFromInputVideoDevice(undefined, "video").then((result) => {
-
                         if (result) {
-                            line.textContent = "";
+                            line.textContent = "ISBN : " + result.text;
                             line.classList.remove("typewriter");
                             startBtn.textContent = "重新掃描 / RESET";
-                            let containerText = app.getAll(".container-two h2>span");
-                            let containerResult = app.getAll(".result");
                             container[2].style.display = "block";
                             containerResult[2].style.justifyContent = "center";
                             containerText[2].textContent = "";
                             containerResult[2].textContent = "";
-                            document.getElementById("result").textContent = "ISBN : " + result.text;
                             app.containerNum = 2;
                             app.googleBooks_isbn(result.text);
                         }
@@ -283,7 +280,7 @@ app.scan = function () {
 
                     }).catch((err) => {
                         console.error(err);
-                        document.getElementById("result").textContent = "查無此書";
+                        line.textContent = "查無此書";
                         startBtn.textContent = "重新掃描 / RESET";
                     });
                     console.log(`Started continous decode from camera with id ${firstDeviceId}`);

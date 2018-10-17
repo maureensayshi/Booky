@@ -511,8 +511,8 @@ header .btn_search{
 }
 .scan-list .camera{
     width: 100%;
-    height: 300px;
-    background-color: #ececec;
+    height: 250px;
+    background-color: #ececec;   
 }
 
 .line{
@@ -539,6 +539,11 @@ header .btn_search{
     display: flex;
     justify-content: center;
     margin-top: 10px;
+}
+
+.scan-result{
+    width: auto;
+    height: 25px;
 }
 
 #startButton{
