@@ -11,8 +11,10 @@ app.checkingIndex = function () {
     firebase.auth().onAuthStateChanged(function (user) {
         console.log("in app.checklogin .......");
         if (user) {
+            console.log(user);
             // User is signed in.
             app.uid = user.uid;
+            app.email = user.email;
             console.log(app.uid);
             app.get(".welcome").style.display = "none";
             app.get(".real").style.display = "block";
@@ -25,6 +27,7 @@ app.checkingIndex = function () {
             app.searchBar();
             app.addBookInit();
             app.scanBookInit();
+            app.googlecal();
             app.closeLoading();
         } else {
             // User is signed out or haven't sign up.
@@ -60,12 +63,14 @@ app.getRedirectResult = function () {
             let name = result.user.displayName;
             let email = result.user.email;
             let photo = result.user.photoURL;
+            let accessToken = result.credential.accessToken;
             //prepare member data for DB
             let memberData = {
                 uid: uid,
                 name: name,
                 email: email,
-                photo: photo
+                photo: photo,
+                accesstoken: accessToken
             };
             //send member data to DB
             let db = app.database;
@@ -82,6 +87,24 @@ app.getRedirectResult = function () {
     }).catch(function (error) {
         console.log(error);
     });
+};
+
+app.googlecal = function () {
+    app.get("#googlecal").onclick = function () {
+        console.log(typeof (app.email));
+
+        fetch("https://www.googleapis.com/calendar/v3/calendars/" + app.email + "/events?key=AIzaSyALgpVirl6lyBvOK9W--e5QycFeMFzcPLg")
+            .then(function (response) {
+                return response.json();
+            })
+            .then(function (data) {
+                console.log(data);
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+
+    };
 };
 
 app.visualBook = function () {
@@ -201,10 +224,9 @@ app.visualBook = function () {
 app.visualBookMobile = function () {
     let keyVisual = app.get(".real .key-visual");
     keyVisual.classList.add("keyVisualMobile");
-    // keyVisual.classList.remove("key-visual");
+
     let box = app.get(".book-list");
     box.classList.add("bookListMobile");
-    // box.classList.remove("book-list");
 
     let db = app.database;
     let dbBookList = db.ref("/members/" + app.uid + "/bookList/");
@@ -296,5 +318,4 @@ app.linkToAddBook = function () {
 };
 
 window.addEventListener("DOMContentLoaded", app.init);
-
 

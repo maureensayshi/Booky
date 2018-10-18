@@ -1,13 +1,27 @@
 "use strict";
 // initialize firebase
-firebase.initializeApp({
+let config = {
     apiKey: "AIzaSyALgpVirl6lyBvOK9W--e5QycFeMFzcPLg",
     authDomain: "booky-217508.firebaseapp.com",
     databaseURL: "https://booky-217508.firebaseio.com",
     projectId: "booky-217508",
     storageBucket: "booky-217508.appspot.com",
-    messagingSenderId: "757419169220"
-});
+    messagingSenderId: "757419169220",
+
+    clientId: "757419169220-9ehr4saki2pbqpp4c2imqa3qd8nbuf0q.apps.googleusercontent.com",
+
+    scopes: [
+        "email",
+        "profile",
+        "https://www.googleapis.com/auth/calendar",
+        "https://www.googleapis.com/auth/calendar.events"
+    ],
+    discoveryDocs: [
+        "https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest"
+    ]
+};
+
+firebase.initializeApp(config);
 
 // initialize app structure
 let app = {
