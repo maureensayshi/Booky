@@ -9,8 +9,100 @@ app.init = function () {
         app.searchBar();
         app.addBookInit();
         app.scanBookInit();
+        // app.handleClientLoad();
     });
 };
+
+// function handleClientLoad() {
+//     console.log("hi");
+
+//     // Client ID and API key from the Developer Console
+//     var CLIENT_ID = "757419169220-9ehr4saki2pbqpp4c2imqa3qd8nbuf0q.apps.googleusercontent.com";
+//     var API_KEY = "AIzaSyALgpVirl6lyBvOK9W--e5QycFeMFzcPLg";
+
+//     // Array of API discovery doc URLs for APIs used by the quickstart
+//     var DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest"];
+
+//     // Authorization scopes required by the API; multiple scopes can be
+//     // included, separated by spaces.
+//     var SCOPES = "https://www.googleapis.com/auth/calendar.events";
+
+//     var authorizeButton = document.getElementById("authorize_button");
+//     var signoutButton = document.getElementById("signout_button");
+
+//     gapi.load("client:auth2", initClient);
+
+//     function initClient() {
+//         gapi.client.init({
+//             apiKey: API_KEY,
+//             clientId: CLIENT_ID,
+//             discoveryDocs: DISCOVERY_DOCS,
+//             scope: SCOPES
+//         }).then(function () {
+//             // Listen for sign-in state changes.
+//             gapi.auth2.getAuthInstance().isSignedIn.listen(updateSigninStatus);
+
+//             // Handle the initial sign-in state.
+//             updateSigninStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
+//             authorizeButton.onclick = handleAuthClick;
+//             signoutButton.onclick = handleSignoutClick;
+//         });
+//     }
+
+//     function updateSigninStatus(isSignedIn) {
+//         if (isSignedIn) {
+//             authorizeButton.style.display = "none";
+//             signoutButton.style.display = "block";
+//             insertEvent();
+//         } else {
+//             authorizeButton.style.display = "block";
+//             signoutButton.style.display = "none";
+//         }
+//     }
+
+//     function handleAuthClick(event) {
+//         gapi.auth2.getAuthInstance().signIn();
+//     }
+
+//     function handleSignoutClick(event) {
+//         gapi.auth2.getAuthInstance().signOut();
+//     }
+
+//     function insertEvent() {
+//         var event = {
+//             "summary": "Google I/O 2015",
+//             "location": "800 Howard St., San Francisco, CA 94103",
+//             "description": "A chance to hear more about Google\"s developer products.",
+//             "start": {
+//                 "dateTime": "2018-10-18T09:00:00-07:00",
+//                 "timeZone": "America/Los_Angeles"
+//             },
+//             "end": {
+//                 "dateTime": "2018-10-28T17:00:00-07:00",
+//                 "timeZone": "America/Los_Angeles"
+//             },
+//             "recurrence": [
+//                 "RRULE:FREQ=DAILY;COUNT=2"
+//             ],
+//             "reminders": {
+//                 "useDefault": false,
+//                 "overrides": [
+//                     { "method": "email", "minutes": 24 * 60 },
+//                     { "method": "popup", "minutes": 10 }
+//                 ]
+//             }
+//         };
+
+//         var request = gapi.client.calendar.events.insert({
+//             "calendarId": "primary",
+//             "resource": event
+//         });
+
+//         request.execute(function (event) {
+//             appendPre("Event created: " + event.htmlLink);
+//         });
+//     }
+// }
 
 app.showBook = function () {
     let bookID = location.search.split("id=")[1];

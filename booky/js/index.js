@@ -27,7 +27,7 @@ app.checkingIndex = function () {
             app.searchBar();
             app.addBookInit();
             app.scanBookInit();
-            app.googlecal();
+            // app.googlecal();
             app.closeLoading();
         } else {
             // User is signed out or haven't sign up.
@@ -89,23 +89,23 @@ app.getRedirectResult = function () {
     });
 };
 
-app.googlecal = function () {
-    app.get("#googlecal").onclick = function () {
-        console.log(typeof (app.email));
+// app.googlecal = function () {
+//     app.get("#googlecal").onclick = function () {
+//         console.log(typeof (app.email));
 
-        fetch("https://www.googleapis.com/calendar/v3/calendars/" + app.email + "/events?key=AIzaSyALgpVirl6lyBvOK9W--e5QycFeMFzcPLg")
-            .then(function (response) {
-                return response.json();
-            })
-            .then(function (data) {
-                console.log(data);
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
+//         fetch("https://www.googleapis.com/calendar/v3/calendars/" + app.email + "/events?key=AIzaSyALgpVirl6lyBvOK9W--e5QycFeMFzcPLg")
+//             .then(function (response) {
+//                 return response.json();
+//             })
+//             .then(function (data) {
+//                 console.log(data);
+//             })
+//             .catch(function (error) {
+//                 console.log(error);
+//             });
 
-    };
-};
+//     };
+// };
 
 app.visualBook = function () {
     let slideBG = app.get(".sliding-background");
