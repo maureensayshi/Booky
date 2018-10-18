@@ -222,6 +222,7 @@
                 <input id="calendar" type="button" value="加到 Google 日曆" />
                 <button id="authorize_button" style="display: none;">Authorize</button>
                 <button id="signout_button" style="display: none;">Sign Out</button>
+                <p id="calendarLink"></p>
             </div>
             <!-- </div> -->
 
@@ -240,14 +241,14 @@
     </div>
 
     <!--Add buttons to initiate auth sequence and sign out-->
-    <button id="authorize_button" style="display: none;">Authorize</button>
-    <button id="signout_button" style="display: none;">Sign Out</button>
+    <!-- <button id="authorize_button" style="display: none;">Authorize</button>
+    <button id="signout_button" style="display: none;">Sign Out</button> -->
 
 
 
-    <script type="text/javascript">
-        // Client ID and API key from the Developer Console
-        // app.clientId = '757419169220-9ehr4saki2pbqpp4c2imqa3qd8nbuf0q.apps.googleusercontent.com';
+    <!-- <script type="text/javascript"></script> -->
+    <!-- // Client ID and API key from the Developer Console -->
+    <!-- // app.clientId = '757419169220-9ehr4saki2pbqpp4c2imqa3qd8nbuf0q.apps.googleusercontent.com';
         // app.apiKey = 'AIzaSyALgpVirl6lyBvOK9W--e5QycFeMFzcPLg';
 
         // Array of API discovery doc URLs for APIs used by the quickstart
@@ -352,7 +353,7 @@
     //         });
     //     }
 
-    </script>
+    </script> -->
 
 
 
@@ -361,7 +362,7 @@
 <script type="text/javascript" src="https://unpkg.com/@zxing/library@dev"></script>
 <!-- <script async defer src="https://apis.google.com/js/api.js" onload="this.onload=function(){};handleClientLoad()" -->
 <!-- onreadystatechange="if (this.readyState === 'complete') this.onload()"> </script> -->
-<script async defer src="https://apis.google.com/js/api.js" onload="this.onload=function(){};app.googleCal()"
+<script async defer src="https://apis.google.com/js/api.js" onload="this.onload=function(){};app.handleClientLoad()"
     onreadystatechange="if (this.readyState === 'complete') this.onload()"> </script>
 
 </html>
