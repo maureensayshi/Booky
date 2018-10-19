@@ -9,7 +9,6 @@ app.init = function () {
         app.searchBar();
         app.addBookInit();
         app.scanBookInit();
-
     });
 };
 
@@ -18,21 +17,10 @@ app.handleClientLoad = function () {
 };
 
 app.initClient = function () {
-    // Client ID and API key from the Developer Console
     app.clientId = "757419169220-9ehr4saki2pbqpp4c2imqa3qd8nbuf0q.apps.googleusercontent.com";
     app.apiKey = "AIzaSyALgpVirl6lyBvOK9W--e5QycFeMFzcPLg";
-
-    // Array of API discovery doc URLs for APIs used by the quickstart
     app.discoveryDoc = ["https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest"];
-
-    // Authorization scopes required by the API; multiple scopes can be
-    // included, separated by spaces.
     app.scopes = "https://www.googleapis.com/auth/calendar.events";
-    // app.handleClientLoad();
-    console.log(app.clientId);
-    console.log(app.apiKey);
-    console.log(app.discoveryDoc);
-    console.log(app.scopes);
 
     gapi.client.init({
         apiKey: app.apiKey,
@@ -42,109 +30,33 @@ app.initClient = function () {
     }).then(function () {
         // Listen for sign-in state changes.
         gapi.auth2.getAuthInstance().isSignedIn.listen(updateSigninStatus);
-
         // Handle the initial sign-in state.
         updateSigninStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
-        app.get("#authorize_button").onclick = handleAuthClick;
-        app.get("#signout_button").onclick = handleSignoutClick;
+        app.get("#calendar").onclick = handleAuthClick;
+        app.get("#logoutgoogle").onclick = handleSignoutClick;
     });
-
-    /**
-  *  Sign in the user upon button click.
-  */
+    //sign in
     function handleAuthClick(event) {
         gapi.auth2.getAuthInstance().signIn();
+        let calPage = app.get(".remindShade");
+        calPage.style.visibility = "visible";
+        calPage.style.opacity = "1";
+        calPage.style.filter = "alpha(opacity=100)";
+        calPage.style.minHeight = window.innerHeight + "px";
+        //預先顯示書名
+        app.get("#eventTitle").value = "閱讀" + app.bookTitle;
+        console.log(app.bookTitle);
+        app.fillForm();
     }
-
-    /**
-     *  Sign out the user upon button click.
-     */
     function handleSignoutClick(event) {
         gapi.auth2.getAuthInstance().signOut();
     }
-
-    app.get("#calendar").onclick = insertEventNoRemind;
-
-    app.get("#start").onchange = function () {
-        console.log(app.get("#start").value);
-    };
-
-    app.get("#setTime").onchange = function () {
-        console.log(app.get("#setTime").value);
-    };
-
-    app.get("#setTimeFini").onchange = function () {
-        console.log(app.get("#setTimeFini").value);
-    };
-
-    //如果不要每天提醒
-    function insertEventNoRemind() {
-        let event = {
-            "summary": "reading with no remind",
-            "location": "800 Howard St., San Francisco, CA 94103",
-            "description": "A chance to hear more about Google\"s developer products.",
-            "start": {
-                "date": "2018-10-20",
-                "timeZone": "Asia/Taipei"
-            },
-            "end": {
-                "date": "2018-10-23",
-                "timeZone": "Asia/Taipei"
-            }
-        };
-
-        let request = gapi.client.calendar.events.insert({
-            "calendarId": "primary",
-            "resource": event
-        });
-
-        request.execute(function (event) {
-            app.get("#calendarLink").textContent = event.htmlLink;
-        });
-    }
-
-    //如果要每天提醒
-    function insertEvent() {
-        let event = {
-            "summary": "reading",
-            "location": "800 Howard St., San Francisco, CA 94103",
-            "description": "A chance to hear more about Google\"s developer products.",
-            "start": {
-                "dateTime": "2018-10-20T21:00:00.000+08:00",
-                "timeZone": "Asia/Taipei"
-            },
-            "end": {
-                "dateTime": "2018-10-20T22:00:00.000+08:00",
-                "timeZone": "Asia/Taipei"
-            },
-            "recurrence": [
-                "RRULE:FREQ=DAILY;UNTIL=20181025"
-            ],
-            "reminders": {
-                "useDefault": false,
-                "overrides": [
-                    { "method": "popup", "minutes": 10 }
-                ]
-            }
-        };
-
-        let request = gapi.client.calendar.events.insert({
-            "calendarId": "primary",
-            "resource": event
-        });
-
-        request.execute(function (event) {
-            app.get("#calendarLink").textContent = event.htmlLink;
-        });
-    }
-
     function updateSigninStatus(isSignedIn) {
         if (isSignedIn) {
-            app.get("#authorize_button").style.display = "none";
-            app.get("#signout_button").style.display = "block";
+            //還要預加讀取 href來判定是否要打開
+            console.log("sign in");
         } else {
-            app.get("#authorize_button").style.display = "block";
-            app.get("#signout_button").style.display = "none";
+            console.log("未成功 sign in");
         }
     }
 };
@@ -157,9 +69,14 @@ app.showBook = function () {
     let dbBookList = db.ref("/members/" + app.uid + "/bookList/" + bookID);
     dbBookList.once("value", function (snapshot) {
         let val = snapshot.val();
+        app.get("#calLink").href = val.calLink;
+        app.calLink = val.calLink;
+        console.log(val.calLink);
+
         // console.log(val);
         app.get("main .visual-book>img").src = val.coverURL;
         app.get("#title").textContent = val.title;
+        app.bookTitle = val.title;
         app.get("#author").textContent = val.authors.join("、");
         app.get("#publisher").textContent = val.publisher;
         //顯示資料庫原本的資料
@@ -371,6 +288,142 @@ app.editBook = function (val, dbBookList) {
         });
     });
 
+};
+
+
+app.fillForm = function () {
+    //獲取表單資訊
+    //事件名稱
+    app.get("#eventTitle").onchange = function () {
+        console.log(app.get("#eventTitle").value);
+        app.eventTitle = app.get("#eventTitle").value;
+    };
+    //開始日期
+    app.get("#start").onchange = function () {
+        console.log(app.get("#start").value);
+        app.startDate = app.get("#start").value;
+    };
+    //結束日期
+    app.get("#end").onchange = function () {
+        console.log(app.get("#end").value);
+        app.endDate = app.get("#end").value;
+    };
+    //每天提醒 是或否
+    let reminderChoice = app.get("main .remind-or-not .container input:checked");
+    console.log(reminderChoice);
+
+    if (reminderChoice.value == true) {
+        app.get(".remind-time").style.display = "block";
+        app.get("#addToCalendar").onclick = app.insertEvent;
+    }
+    else {
+        console.log("不設定每日提醒");
+        app.get("#addToCalendar").onclick = app.insertEventNoRemind;
+    }
+};
+
+//如果要每天提醒
+app.insertEvent = function () {
+    //開始閱讀時間
+    app.get("#setTime").onchange = function () {
+        console.log(app.get("#setTime").value);
+        app.setTime = app.get("#setTime").value;
+    };
+    //結束閱讀時間
+    app.get("#setTimeFini").onchange = function () {
+        console.log(app.get("#setTimeFini").value);
+        app.setTimeFini = app.get("#setTimeFini").value;
+    };
+    //提醒分鐘數
+    app.get("#remindBefore").onchange = function () {
+        console.log(app.get("#remindBefore").value);
+        app.remindMin = app.get("#remindBefore").value;
+    };
+
+    let event = {
+        "summary": "test yes",
+        "location": "800 Howard St., San Francisco, CA 94103",
+        "description": "A chance to hear more about Google\"s developer products.",
+        "start": {
+            "dateTime": "2018-10-20T21:00:00.000+08:00",
+            "timeZone": "Asia/Taipei"
+        },
+        "end": {
+            "dateTime": "2018-10-20T22:00:00.000+08:00",
+            "timeZone": "Asia/Taipei"
+        },
+        "recurrence": [
+            "RRULE:FREQ=DAILY;UNTIL=20181025"
+        ],
+        "reminders": {
+            "useDefault": false,
+            "overrides": [
+                { "method": "popup", "minutes": 10 }
+            ]
+        }
+    };
+
+    let request = gapi.client.calendar.events.insert({
+        "calendarId": "primary",
+        "resource": event
+    });
+
+    request.execute(function (event) {
+        app.get("#calLink").href = event.htmlLink;
+        console.log(event.htmlLink);
+        let bookID = location.search.split("id=")[1];
+        console.log(bookID);
+        let db = app.database;
+        let dbBookList = db.ref("/members/" + app.uid + "/bookList/" + bookID).orderByChild("calLink");
+        dbBookList.set(event.htmlLink, function (error) {
+            if (error) {
+                console.log("將活動連結加進 db");
+            } else {
+                console.log("未將活動連結加進 db");
+                alert("日曆活動未建立");
+            }
+        });
+    });
+};
+
+//如果不要每天提醒
+app.insertEventNoRemind = function () {
+    let event = {
+        "summary": "reading with no remind test no",
+        "location": "800 Howard St., San Francisco, CA 94103",
+        "description": "A chance to hear more about Google\"s developer products.",
+        "start": {
+            "date": "2018-10-20",
+            "timeZone": "Asia/Taipei"
+        },
+        "end": {
+            "date": "2018-10-23",
+            "timeZone": "Asia/Taipei"
+        }
+    };
+
+    let request = gapi.client.calendar.events.insert({
+        "calendarId": "primary",
+        "resource": event
+    });
+
+    request.execute(function (event) {
+        console.log(event.htmlLink);
+        let bookID = location.search.split("id=")[1];
+        let link = event.htmlLink;
+        console.log(bookID);
+        let db = app.database;
+        let dbBookList = db.ref("/members/" + app.uid + "/bookList/" + bookID + "/calLink");
+        dbBookList.set(link, function (error) {
+            if (error) {
+                console.log("未將活動連結加進 db");
+            } else {
+                console.log("日曆活動建立");
+                alert("日曆活動建立");
+            }
+        });
+
+    });
 };
 
 

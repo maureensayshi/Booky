@@ -220,13 +220,11 @@
                 <input id="save-and-edit" type="button" value="更新資料" />
                 <input id="delete" type="button" value="刪除此書" />
                 <input id="calendar" type="button" value="加到 Google 日曆" />
-                <button id="authorize_button" style="display: none;">Authorize</button>
-                <button id="signout_button" style="display: none;">Sign Out</button>
+                <a href="" id="calLink"><input type="button" value="編輯 Google 日曆" /></a>
+                <button id="logoutgoogle">log out</button>
             </div>
 
             <!-- google calendar section -->
-
-            <!-- add book by typing container-two 1 -->
             <div class="remind-shade remindShade">
                 <div class="remind-img">
                     <img src="img/cancel.svg" />
@@ -236,7 +234,7 @@
                     <div class="reminder-check">
                         <div class="remind-title">
                             <label for="eventTitle">事件名稱</label>
-                            <input type="input" id="eventTitle" name="trip" value="閱讀此書" class="title-init" />
+                            <input type="input" id="eventTitle" name="trip" value="" class="title-init" />
                         </div>
                         <div class="remind-start">
                             <label for="start">開始日期</label>
@@ -262,7 +260,7 @@
                         </div>
 
                         <!-- 有要每天提醒才出現 -->
-                        <div class="remind-time">
+                        <div class="remind-time" style="display: none;">
                             <div class="read-time">
                                 <label for="setTime">開始時間</label>
                                 <input type="time" id="setTime" name="time" value="13:30" />
@@ -278,10 +276,8 @@
                                 <span>分鐘</span>
                             </div>
                         </div>
-
                         <!-- 確認按鍵 -->
                         <input id="addToCalendar" type="button" value="確認" />
-                        <p id="calendarLink"></p>
                     </div>
                 </div>
             </div>

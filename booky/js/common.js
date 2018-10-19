@@ -398,21 +398,21 @@ app.decodeFun = function (ev) {
 app.search_book = function (keyWord) {
     app.containerNum = 1;
     switch (app.searchText) {
-        case "search-title":
-            app.googleBooks_title(keyWord);
-            console.log(keyWord);
-            break;
-        case "search-isbn":
-            app.googleBooks_isbn(keyWord);
-            console.log(keyWord);
-            break;
-        case "search-author":
-            app.googleBooks_author(keyWord);
-            console.log(keyWord);
-            break;
-        case "":
-            console.log("user didn't key in words");
-            break;
+    case "search-title":
+        app.googleBooks_title(keyWord);
+        console.log(keyWord);
+        break;
+    case "search-isbn":
+        app.googleBooks_isbn(keyWord);
+        console.log(keyWord);
+        break;
+    case "search-author":
+        app.googleBooks_author(keyWord);
+        console.log(keyWord);
+        break;
+    case "":
+        console.log("user didn't key in words");
+        break;
     }
 };
 
@@ -667,6 +667,7 @@ app.addBook = function (bookTitle, bookAuthor, bookPublisher, bookISBN, bookCove
         title: bookTitle,
         twice: false,
         isbn: bookISBN,
+        calLink: "",
     };
     //send book data to DB
     let db = app.database;
