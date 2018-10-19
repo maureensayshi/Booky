@@ -38,15 +38,19 @@ app.initClient = function () {
     //sign in
     function handleAuthClick(event) {
         gapi.auth2.getAuthInstance().signIn();
-        let calPage = app.get(".remindShade");
-        calPage.style.visibility = "visible";
-        calPage.style.opacity = "1";
-        calPage.style.filter = "alpha(opacity=100)";
-        calPage.style.minHeight = window.innerHeight + "px";
-        //預先顯示書名
-        app.get("#eventTitle").value = "閱讀" + app.bookTitle;
-        console.log(app.bookTitle);
-        app.fillForm();
+        if (app.calLink == "") {
+            let calPage = app.get(".remindShade");
+            calPage.style.visibility = "visible";
+            calPage.style.opacity = "1";
+            calPage.style.filter = "alpha(opacity=100)";
+            calPage.style.minHeight = window.innerHeight + "px";
+            //預先顯示書名
+            app.get("#eventTitle").value = "閱讀" + app.bookTitle;
+            console.log(app.bookTitle);
+            app.fillForm();
+        } else {
+            console.log("已經有網址 :" + app.calLink);
+        }
     }
     function handleSignoutClick(event) {
         gapi.auth2.getAuthInstance().signOut();
@@ -54,7 +58,7 @@ app.initClient = function () {
     function updateSigninStatus(isSignedIn) {
         if (isSignedIn) {
             //還要預加讀取 href來判定是否要打開
-            console.log("sign in");
+            console.log("ready to sign in");
         } else {
             console.log("未成功 sign in");
         }
@@ -312,14 +316,18 @@ app.fillForm = function () {
     let reminderChoice = app.get("main .remind-or-not .container input:checked");
     console.log(reminderChoice);
 
-    if (reminderChoice.value == true) {
-        app.get(".remind-time").style.display = "block";
-        app.get("#addToCalendar").onclick = app.insertEvent;
-    }
-    else {
-        console.log("不設定每日提醒");
-        app.get("#addToCalendar").onclick = app.insertEventNoRemind;
-    }
+    reminderChoice.onchange = function () {
+        if (reminderChoice.value == true) {
+            app.get(".remind-time").style.display = "block";
+            app.get("#addToCalendar").onclick = app.insertEvent;
+        }
+        else {
+            console.log("不設定每日提醒");
+            app.get("#addToCalendar").onclick = app.insertEventNoRemind;
+        }
+    };
+
+
 };
 
 //如果要每天提醒
