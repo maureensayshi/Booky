@@ -305,7 +305,7 @@ main .remind-or-not .container .checkmark:after {
 .remind-img{
   width: 100%;
   position: relative;
-  margin-bottom: 200px;
+  margin-bottom: 70px;
 }
 
 .remind-img>img{
@@ -318,17 +318,14 @@ main .remind-or-not .container .checkmark:after {
 }
 
 .remindbar-list{
-    border: 1px solid red;
     display: block;
     text-align: center;
     margin: 0 0 100px 0;
     width:100%;
 }
 .remindbar-list h5{
-    border: 1px solid blue;
     word-spacing: 5px;
-    padding: 20px 0 10px 0;
-    margin: 5% 0 0 0;
+    padding: 30px 0 20px 0;
     font-size: 20px;
     font-family: "Martel Sans", sans-serif;
     font-weight: 400;
@@ -344,9 +341,10 @@ main .remind-or-not .container .checkmark:after {
 .daily-title,
 .remind-time label {
     display: inline-block;
-    width: 100px;
+    width: 70px;
     color: #BBBBBB;
     font-size: 14px;
+    text-align: left;
 }
 
 
@@ -357,13 +355,6 @@ main .remind-or-not .container .checkmark:after {
 .remind-or-not>span {
     margin-right: 15px;
 }
-
-/* .reminder-check {
-    width: 300px;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-} */
 
 .title-init,
 .remindBeforeOuter input{
@@ -382,7 +373,7 @@ main .remind-or-not .container .checkmark:after {
     text-align: left;
     padding: 0 0 0 15px ;
     border: none;
-    margin: 15px 0 20px 0;
+    margin: 10px 0 15px 0;
     font-size: 14px;
     font-family: "Noto Sans JP", sans-serif;
     color: #333333;
@@ -399,7 +390,7 @@ main .remind-or-not .container .checkmark:after {
     text-align: center;
     padding: 0 0 0 10px ;
     border: none;
-    margin: 5px 0 10px 0;
+    margin: 10px 0 15px 0;
     font-size: 14px;
     font-family: "Noto Sans JP", sans-serif;
     color: #333333;
@@ -420,7 +411,7 @@ main .remind-or-not .container .checkmark:after {
     letter-spacing: 2px;
     text-align: center;
     border: none;
-    margin: 5px 0 10px 0;
+    margin: 10px 0 15px 0;
     font-size: 14px;
     font-family: "Noto Sans JP", sans-serif;
     color: #333333;
@@ -433,20 +424,6 @@ main .remind-or-not .container .checkmark:after {
 .remindBeforeOuter span:nth-child(3){
     font-size: 14px;
     color: #333333;
-}
-
-#addToCalendar {
-    width: 210px;
-    height: 40px;
-    text-align: center;
-    letter-spacing: 2px;
-    border: none;
-    margin: 10px;
-    font-size: 14px;
-    cursor: pointer;
-    font-family: "Noto Sans JP", sans-serif;
-    color: white;
-    background-color: rgba(185, 177, 68, 1);
 }
 
 input[type=date]::-webkit-inner-spin-button {
@@ -479,8 +456,8 @@ input[type="time"]{
     text-align: left;
     padding: 0 0 0 10px ;
     border: none;
-    margin: 0 0 5px 0;
-    font-size: 12px;
+    margin: 10px 0 15px 0;
+    font-size: 14px;
     cursor: pointer;
     font-family: "Noto Sans JP", sans-serif;
     color: #333333;
@@ -495,6 +472,23 @@ input[type=time]::-webkit-outer-spin-button {
   /* -webkit-appearance: none;  */
   margin-top: 3px; 
   display: block;
+}
+
+#addToCalendar {
+    /* width: 20%; */
+    height: 40px;
+    text-align: center;
+    letter-spacing: 5px;
+    padding: 5px 50px;
+    border: none;
+    margin: 30px;
+    font-size: 14px;
+    cursor: pointer;
+    font-family: "Noto Sans JP", sans-serif;
+    color: white;
+    /* color: #333333; */
+    background-color: rgba(185, 177, 68, 1);
+    /* border: 1px solid rgba(185, 177, 68, 1); */
 }
 
 
