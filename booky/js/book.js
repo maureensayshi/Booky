@@ -15,7 +15,7 @@ app.init = function () {
 
 app.handleClientLoad = function () {
     gapi.load("client:auth2", app.initClient);
-}
+};
 
 app.initClient = function () {
     // Client ID and API key from the Developer Console
@@ -63,41 +63,78 @@ app.initClient = function () {
         gapi.auth2.getAuthInstance().signOut();
     }
 
-    app.get("#calendar").onclick = insertEvent;
+    app.get("#calendar").onclick = insertEventNoRemind;
 
-    function insertEvent() {
-        var event = {
-            "summary": "Google I/O 2015",
+    app.get("#start").onchange = function () {
+        console.log(app.get("#start").value);
+    };
+
+    app.get("#setTime").onchange = function () {
+        console.log(app.get("#setTime").value);
+    };
+
+    app.get("#setTimeFini").onchange = function () {
+        console.log(app.get("#setTimeFini").value);
+    };
+
+    //如果不要每天提醒
+    function insertEventNoRemind() {
+        let event = {
+            "summary": "reading with no remind",
             "location": "800 Howard St., San Francisco, CA 94103",
             "description": "A chance to hear more about Google\"s developer products.",
             "start": {
-                "dateTime": "2018-10-28T09:00:00-07:00",
-                "timeZone": "America/Los_Angeles"
+                "date": "2018-10-20",
+                "timeZone": "Asia/Taipei"
             },
             "end": {
-                "dateTime": "2018-10-29T17:00:00-07:00",
-                "timeZone": "America/Los_Angeles"
-            },
-            "recurrence": [
-                "RRULE:FREQ=DAILY;COUNT=2"
-            ],
-            "reminders": {
-                "useDefault": false,
-                "overrides": [
-                    { "method": "email", "minutes": 24 * 60 },
-                    { "method": "popup", "minutes": 10 }
-                ]
+                "date": "2018-10-23",
+                "timeZone": "Asia/Taipei"
             }
         };
 
-        var request = gapi.client.calendar.events.insert({
+        let request = gapi.client.calendar.events.insert({
             "calendarId": "primary",
             "resource": event
         });
 
         request.execute(function (event) {
             app.get("#calendarLink").textContent = event.htmlLink;
-            // appendPre("Event created: " + event.htmlLink);
+        });
+    }
+
+    //如果要每天提醒
+    function insertEvent() {
+        let event = {
+            "summary": "reading",
+            "location": "800 Howard St., San Francisco, CA 94103",
+            "description": "A chance to hear more about Google\"s developer products.",
+            "start": {
+                "dateTime": "2018-10-20T21:00:00.000+08:00",
+                "timeZone": "Asia/Taipei"
+            },
+            "end": {
+                "dateTime": "2018-10-20T22:00:00.000+08:00",
+                "timeZone": "Asia/Taipei"
+            },
+            "recurrence": [
+                "RRULE:FREQ=DAILY;UNTIL=20181025"
+            ],
+            "reminders": {
+                "useDefault": false,
+                "overrides": [
+                    { "method": "popup", "minutes": 10 }
+                ]
+            }
+        };
+
+        let request = gapi.client.calendar.events.insert({
+            "calendarId": "primary",
+            "resource": event
+        });
+
+        request.execute(function (event) {
+            app.get("#calendarLink").textContent = event.htmlLink;
         });
     }
 
@@ -110,7 +147,7 @@ app.initClient = function () {
             app.get("#signout_button").style.display = "none";
         }
     }
-}
+};
 
 
 app.showBook = function () {

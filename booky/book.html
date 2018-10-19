@@ -215,7 +215,7 @@
                 </div>
             </div>
 
-            <!-- <div class="view-button"> -->
+
             <div class="book-button">
                 <input id="save-and-edit" type="button" value="更新資料" />
                 <input id="delete" type="button" value="刪除此書" />
@@ -223,19 +223,72 @@
                 <button id="authorize_button" style="display: none;">Authorize</button>
                 <button id="signout_button" style="display: none;">Sign Out</button>
             </div>
-            <!-- </div> -->
-            <div class="cal-button">
-                <div>
-                    <label for="start">開始日期</label>
-                    <input type="date" id="start" name="trip" value="2018-07-22" />
-                </div>
 
-                <div>
-                    <label for="end">結束日期</label>
-                    <input type="date" id="end" name="trip" value="2018-07-29" />
+            <!-- google calendar section -->
+
+            <!-- add book by typing container-two 1 -->
+            <div class="remind-shade remindShade">
+                <div class="remind-img">
+                    <img src="img/cancel.svg" />
                 </div>
-                <p id="calendarLink"></p>
+                <div class="remindbar-list">
+                    <h5>ADD to GOOGLE CALENDAR</h5>
+                    <div class="reminder-check">
+                        <div class="remind-title">
+                            <label for="eventTitle">事件名稱</label>
+                            <input type="input" id="eventTitle" name="trip" value="閱讀此書" class="title-init" />
+                        </div>
+                        <div class="remind-start">
+                            <label for="start">開始日期</label>
+                            <input type="date" id="start" name="trip" value="2018-07-22" required="required" />
+                        </div>
+                        <div class="remind-end">
+                            <label for="end">結束日期</label>
+                            <input type="date" id="end" name="trip" value="2018-07-29" required="required" />
+                        </div>
+                        <!-- 是否要每天提醒 -->
+                        <div class="remind-or-not">
+                            <span class="daily-title">每天提醒</span>
+                            <label class="container">
+                                <span>是&nbsp&nbsp&nbsp</span>
+                                <input type="radio" checked="checked" name="remind" value=true>
+                                <span class="checkmark checkmark-two"></span>
+                            </label>
+                            <label class="container">
+                                <span>否&nbsp&nbsp&nbsp</span>
+                                <input type="radio" name="remind" value=false>
+                                <span class="checkmark"></span>
+                            </label>
+                        </div>
+
+                        <!-- 有要每天提醒才出現 -->
+                        <div class="remind-time">
+                            <div class="read-time">
+                                <label for="setTime">開始時間</label>
+                                <input type="time" id="setTime" name="time" value="13:30" />
+                            </div>
+
+                            <div>
+                                <label for="setTimeFini">結束時間</label>
+                                <input type="time" id="setTimeFini" name="time" value="22:30" />
+                            </div>
+                            <div class="remindBeforeOuter">
+                                <label for="remindBefore">提前提醒</label>
+                                <input type="input" id="remindBefore" name="remindTime" value="10" />
+                                <span>分鐘</span>
+                            </div>
+                        </div>
+
+                        <!-- 確認按鍵 -->
+                        <input id="addToCalendar" type="button" value="確認" />
+                        <p id="calendarLink"></p>
+                    </div>
+                </div>
             </div>
+
+
+
+            <!-- GOOGLE calendar END -->
 
             <!-- for mobile add and scan -->
             <div class="mobile-add"></div>

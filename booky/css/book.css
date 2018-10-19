@@ -147,11 +147,26 @@ main .lend-or-not .container {
     transition: all 300ms ease;
 }
 
+main .remind-or-not .container {
+    /* display: none; */
+    opacity: 1;
+    position: relative;
+    padding-left: 30px;
+    padding-right: 12px;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    transition: all 300ms ease;
+}
+
 main .status-choice {display: none;margin-left: -7px;}
 /* Hide the browser's default radio button */
 main .reading-status .container input,
 main .twice-or-not .container input,
-main .lend-or-not .container input {
+main .lend-or-not .container input,
+main .remind-or-not .container input {
     position: absolute;
     opacity: 0;
 }
@@ -181,26 +196,40 @@ main .lend-or-not .checkmark{
     border: 1px solid #ececec;
 }
 
+
+main .remind-or-not .checkmark{
+    position: absolute;
+    left: 0;
+    height: 20px;
+    width: 20px;
+    background-color: white;
+    border-radius: 2px;
+    border: 1px solid #ececec;
+}
+
 main .lend-to{align-items: center;}
 
 /* On mouse-over, add a grey background color */
 main .reading-status .container:hover input ~ .checkmark,
 main .twice-or-not .container:hover input ~ .checkmark,
-main .lend-or-not .container:hover input ~ .checkmark{
+main .lend-or-not .container:hover input ~ .checkmark,
+main .remind-or-not .container:hover input ~ .checkmark{
     background-color: #F1F1F3;
 }
 
 /* When the radio button is checked, add a blue background */
 main .reading-status .container input:checked ~ .checkmark,
-main .twice-or-not .container input:checked ~ .checkmark
-main .lend-or-not .container input:checked ~ .checkmark{
+main .twice-or-not .container input:checked ~ .checkmark,
+main .lend-or-not .container input:checked ~ .checkmark,
+main .remind-or-not .container input:checked ~ .checkmark{
     background-color: white;
 }
 
 /* Create the indicator (the dot/circle - hidden when not checked) */
 main .reading-status .checkmark:after,
 main .twice-or-not .checkmark:after,
-main .lend-or-not .checkmark:after{
+main .lend-or-not .checkmark:after,
+main .remind-or-not .checkmark:after{
     content: "";
     position: absolute;
     display: none;
@@ -209,14 +238,16 @@ main .lend-or-not .checkmark:after{
 /* Show the indicator (dot/circle) when checked */
 main .reading-status .container input:checked ~ .checkmark:after,
 main .twice-or-not .container input:checked ~ .checkmark:after,
-main .lend-or-not .container input:checked ~ .checkmark:after {
+main .lend-or-not .container input:checked ~ .checkmark:after,
+main .remind-or-not .container input:checked ~ .checkmark:after {
     display: block;
 }
 
 /* Style the indicator (dot/circle) */
 main .reading-status .container .checkmark:after,
 main .twice-or-not .container .checkmark:after,
-main .lend-or-not .container .checkmark:after {
+main .lend-or-not .container .checkmark:after,
+main .remind-or-not .container .checkmark:after {
  	top: 4px;
 	left: 4px;
 	width: 10px;
@@ -248,24 +279,224 @@ main .lend-or-not .container .checkmark:after {
     box-shadow: none;
 }
 
-.cal-button input{
-    width: 150px;
-    height: 40px;
-    align-self: center;
-    letter-spacing: 2px;
+/* google calendar  */
+.remind-shade{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    margin:0;
+    background-color: white;
+    overflow: auto;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* visibility:hidden; */
+    opacity:1;
+    filter:alpha(opacity=0);
+    -webkit-transition:300ms ease;
+    -moz-transition:300ms ease;
+    -o-transition:300ms ease;
+    transition:300ms ease;
+}
+
+.remind-img{
+  width: 100%;
+  position: relative;
+  margin-bottom: 200px;
+}
+
+.remind-img>img{
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    top: 25px;
+    right: 65px;
+    cursor: pointer;   
+}
+
+.remindbar-list{
+    border: 1px solid red;
+    display: block;
     text-align: center;
-    padding: 0 0 0 20px ;
-    border: none;
-    margin: 10px;
-    font-size: 12px;
+    margin: 0 0 100px 0;
+    width:100%;
+}
+.remindbar-list h5{
+    border: 1px solid blue;
+    word-spacing: 5px;
+    padding: 20px 0 10px 0;
+    margin: 5% 0 0 0;
+    font-size: 20px;
+    font-family: "Martel Sans", sans-serif;
+    font-weight: 400;
+}
+
+.remind-title {
+    width: 100%;
+}
+
+.remind-title label,
+.remind-start label,
+.remind-end label,
+.daily-title,
+.remind-time label {
+    display: inline-block;
+    width: 100px;
+    color: #BBBBBB;
+    font-size: 14px;
+}
+
+
+.remind-or-not {
+    margin:12px 0;
+}
+
+.remind-or-not>span {
+    margin-right: 15px;
+}
+
+/* .reminder-check {
+    width: 300px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+} */
+
+.title-init,
+.remindBeforeOuter input{
+    cursor: text;
+}
+
+.reminder-check #start,
+.reminder-check #end{
     cursor: pointer;
+}
+
+.title-init{
+    width:150px;
+    height: 30px;
+    letter-spacing: 2px;
+    text-align: left;
+    padding: 0 0 0 15px ;
+    border: none;
+    margin: 15px 0 20px 0;
+    font-size: 14px;
     font-family: "Noto Sans JP", sans-serif;
-    color: white;
+    color: #333333;
     -webkit-box-shadow: none;
     -moz-box-shadow: none;
     box-shadow: none;    
+    border-bottom:1px solid  rgba(185, 177, 68, 1);    
+}
+.reminder-check #start,
+.reminder-check #end{
+    width:150px;
+    height: 30px;
+    letter-spacing: 2px;
+    text-align: center;
+    padding: 0 0 0 10px ;
+    border: none;
+    margin: 5px 0 10px 0;
+    font-size: 14px;
+    font-family: "Noto Sans JP", sans-serif;
+    color: #333333;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;    
+    border-bottom:1px solid  rgba(185, 177, 68, 1);
+}
+
+.remind-or-not .container span:nth-child(1){
+    font-size: 14px;
+}
+
+
+.remindBeforeOuter input{
+    width:115px;
+    height: 30px;
+    letter-spacing: 2px;
+    text-align: center;
+    border: none;
+    margin: 5px 0 10px 0;
+    font-size: 14px;
+    font-family: "Noto Sans JP", sans-serif;
+    color: #333333;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;    
+    border-bottom:1px solid  rgba(185, 177, 68, 1);
+}
+
+.remindBeforeOuter span:nth-child(3){
+    font-size: 14px;
+    color: #333333;
+}
+
+#addToCalendar {
+    width: 210px;
+    height: 40px;
+    text-align: center;
+    letter-spacing: 2px;
+    border: none;
+    margin: 10px;
+    font-size: 14px;
+    cursor: pointer;
+    font-family: "Noto Sans JP", sans-serif;
+    color: white;
     background-color: rgba(185, 177, 68, 1);
 }
+
+input[type=date]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    display: none;
+}
+
+input[type="time"]::-webkit-clear-button {
+    -webkit-appearance: none;
+    display: none;
+}
+
+input[type="time"]::-ms-clear {
+    display: none;
+}
+
+input::-ms-clear {
+    width: 0;
+    height: 0;
+}
+
+input[type=text]::-ms-clear {
+    display: none;
+}
+
+input[type="time"]{
+    width:150px;
+    height: 30px;
+    letter-spacing: 2px;
+    text-align: left;
+    padding: 0 0 0 10px ;
+    border: none;
+    margin: 0 0 5px 0;
+    font-size: 12px;
+    cursor: pointer;
+    font-family: "Noto Sans JP", sans-serif;
+    color: #333333;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;    
+    border-bottom:1px solid  rgba(185, 177, 68, 1);
+ }
+
+ input[type=time]::-webkit-inner-spin-button, 
+input[type=time]::-webkit-outer-spin-button { 
+  /* -webkit-appearance: none;  */
+  margin-top: 3px; 
+  display: block;
+}
+
 
 .book-button input:nth-child(1):hover{ padding-left: 35px;background: url(../img/edit.svg) no-repeat 50px rgba(185, 177, 68, 1); background-size: 10%;}
 .book-button input:nth-child(2):hover{ padding-left: 35px;background: url(../img/delete.svg) no-repeat 50px rgba(185, 177, 68, 1); background-size: 10%;}
