@@ -87,24 +87,6 @@ app.getRedirectResult = function () {
     });
 };
 
-// app.googlecal = function () {
-//     app.get("#googlecal").onclick = function () {
-//         console.log(typeof (app.email));
-
-//         fetch("https://www.googleapis.com/calendar/v3/calendars/" + app.email + "/events?key=AIzaSyALgpVirl6lyBvOK9W--e5QycFeMFzcPLg")
-//             .then(function (response) {
-//                 return response.json();
-//             })
-//             .then(function (data) {
-//                 console.log(data);
-//             })
-//             .catch(function (error) {
-//                 console.log(error);
-//             });
-
-//     };
-// };
-
 app.visualBook = function () {
     let slideBG = app.get(".sliding-background");
     let box = app.get(".book-list");

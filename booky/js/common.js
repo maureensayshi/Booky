@@ -7,22 +7,13 @@ let config = {
     projectId: "booky-217508",
     storageBucket: "booky-217508.appspot.com",
     messagingSenderId: "757419169220",
-
-    clientId: "757419169220-9ehr4saki2pbqpp4c2imqa3qd8nbuf0q.apps.googleusercontent.com",
-
     scopes: [
         "email",
-        "profile",
-        "https://www.googleapis.com/auth/calendar",
-        "https://www.googleapis.com/auth/calendar.events"
-    ],
-    discoveryDocs: [
-        "https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest"
+        "profile"
     ]
 };
 
 firebase.initializeApp(config);
-
 // initialize app structure
 let app = {
     database: firebase.database(),
@@ -676,7 +667,8 @@ app.addBook = function (bookTitle, bookAuthor, bookPublisher, bookISBN, bookCove
             console.log("Error of setting new book data.");
         } else {
             console.log("Set book data okay.");
-            alert("加入 " + newBook.title + " 到總書櫃");
+            // swal("已加入 " + newBook.title + " 到書櫃", "You clicked the button!", "success");
+
             if (app.visualBook || app.visualBookMobile) {
                 if (document.body.clientWidth > 1024) {
                     app.visualBook();
