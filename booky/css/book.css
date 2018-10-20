@@ -267,7 +267,7 @@ main .remind-or-not .container .checkmark:after {
     height: 40px;
     align-self: center;
     letter-spacing: 2px;
-    padding-left: 70px;
+    padding-left: 60px;
     border: none;
     margin: 10px;
     font-size: 14px;
@@ -293,8 +293,8 @@ main .remind-or-not .container .checkmark:after {
     display: flex;
     flex-direction: column;
     align-items: center;
-    /* visibility:hidden;
-    opacity:0; */
+    visibility:hidden;
+    opacity:0;
     filter:alpha(opacity=0);
     -webkit-transition:300ms ease;
     -moz-transition:300ms ease;
