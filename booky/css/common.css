@@ -740,6 +740,69 @@ footer .footer{
     width: 100%;
 }   
 
+/* alert */
+.alertDiv{
+    position: absolute;
+    background-color: rgba(0,0,0,0.6);
+    width: 100vw;
+    height: 100vh;
+    z-index: 1000;
+}
+
+.alert{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    height: 280px;
+    border-radius: 5px;
+    background-color: #FFFFFF;
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-150px, -140px);
+    z-index: 1000;
+    overflow: hidden;
+}
+
+.alert>div:nth-child(1){
+    font-size: 24px;
+    font-family: "Cinzel", serif, "NSimSun";
+    font-weight: 600;
+    text-align: center;
+    padding-bottom: 15px; 
+    margin:30px 0 20px 0;
+    border-bottom: 1px solid #ececec;
+    letter-spacing: 3px;
+}
+.alert>div:nth-child(2){
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.alert>div>button:nth-child(1){
+    background-color: #B9B144;
+    color: white;
+}
+.alert>div>button{
+    width: 140px;
+    font-family: "Noto Sans JP", sans-serif;
+    height: 40px;
+    letter-spacing: 4px;
+    margin: 8px;
+    text-align: center;
+    font-size: 16px;
+    font-weight: normal;
+    background-color:#CCCCCC;
+    cursor: pointer;
+    border: 0;
+    color:white;
+    font-weight: 200px;
+    border-radius: 5px;
+}
+
 @media (max-width: 1200px) and (min-width: 1025px){
     main .container-two{max-width: 800px;}
 }
