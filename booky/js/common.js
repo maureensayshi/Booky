@@ -389,21 +389,21 @@ app.decodeFun = function (ev) {
 app.search_book = function (keyWord) {
     app.containerNum = 1;
     switch (app.searchText) {
-    case "search-title":
-        app.googleBooks_title(keyWord);
-        console.log(keyWord);
-        break;
-    case "search-isbn":
-        app.googleBooks_isbn(keyWord);
-        console.log(keyWord);
-        break;
-    case "search-author":
-        app.googleBooks_author(keyWord);
-        console.log(keyWord);
-        break;
-    case "":
-        console.log("user didn't key in words");
-        break;
+        case "search-title":
+            app.googleBooks_title(keyWord);
+            console.log(keyWord);
+            break;
+        case "search-isbn":
+            app.googleBooks_isbn(keyWord);
+            console.log(keyWord);
+            break;
+        case "search-author":
+            app.googleBooks_author(keyWord);
+            console.log(keyWord);
+            break;
+        case "":
+            console.log("user didn't key in words");
+            break;
     }
 };
 
@@ -667,20 +667,32 @@ app.addBook = function (bookTitle, bookAuthor, bookPublisher, bookISBN, bookCove
             console.log("Error of setting new book data.");
         } else {
             console.log("Set book data okay.");
-            // swal("已加入 " + newBook.title + " 到書櫃", "You clicked the button!", "success");
-
-            if (app.visualBook || app.visualBookMobile) {
-                if (document.body.clientWidth > 1024) {
-                    app.visualBook();
-                } else {
-                    app.visualBookMobile();
-                }
-            } else if (app.allocateBS) {
-                app.allocateBS();
-            }
         }
     }).then(function (res) {
         console.log(res);
+        app.res = res;
+        let link = res.path.pieces_[3];
+
+        alert("add book");
+        //查看此書
+        // window.location = "book.html?id=" + link;
+
+        //回到首頁
+        // app.get(".addShade").style.visibility = "hidden";
+        // app.get(".addShade").style.opacity = "0";
+        // app.get(".addShade").style.minHeight = "0";
+        if (app.visualBook || app.visualBookMobile) {
+            if (document.body.clientWidth > 1024) {
+                app.visualBook();
+            } else {
+                app.visualBookMobile();
+            }
+        } else if (app.allocateBS) {
+            app.allocateBS();
+        }
+
+        //回到搜尋首頁
+
     });
 };
 
