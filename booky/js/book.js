@@ -273,7 +273,11 @@ app.initClient = function () {
             calPage.style.minHeight = window.innerHeight + "px";
             //預先顯示書名
             app.get("#eventTitle").value = "閱讀" + app.bookTitle;
-            console.log(app.bookTitle);
+            app.eventTitle = app.get("#eventTitle").value;
+            app.get("#start").value = new Date().toISOString().split("T")[0];
+            app.startDate = app.get("#start").value;
+            app.get("#end").value = new Date().toISOString().split("T")[0];
+            app.endDate = app.get("#end").value;
             app.fillForm();
         } else {
             console.log("按鈕應該已經被隱藏");
@@ -315,7 +319,36 @@ app.fillForm = function () {
     //要每天提醒
     reminderYes.onclick = function () {
         app.get(".remind-time").style.display = "block";
-        app.insertEvent();
+        app.get("#setTime").value = "20:00";
+        console.log(app.get("#setTime").value);
+        app.setTime = app.get("#setTime").value;
+        app.get("#setTimeFini").value = "21:00";
+        console.log(app.get("#setTimeFini").value);
+        app.setTimeFini = app.get("#setTimeFini").value;
+        app.get("#remindBefore").value = "10";
+        console.log(app.get("#remindBefore").value);
+        app.remindMin = app.get("#remindBefore").value;
+        //4. 開始閱讀時間
+        app.get("#setTime").onchange = function () {
+            console.log(app.get("#setTime").value);
+            app.setTime = app.get("#setTime").value;
+            console.log(app.setTime);
+            app.editEvent();
+        };
+        //5. 結束閱讀時間
+        app.get("#setTimeFini").onchange = function () {
+            console.log(app.get("#setTimeFini").value);
+            app.setTimeFini = app.get("#setTimeFini").value;
+            console.log(app.setTimeFini);
+            app.editEvent();
+        };
+        //6. 提醒分鐘數
+        app.get("#remindBefore").onchange = function () {
+            console.log(app.get("#remindBefore").value);
+            app.remindMin = app.get("#remindBefore").value;
+            console.log(app.remindMin);
+            app.editEvent();
+        };
     };
     //不要每天提醒
     reminderNo.onclick = function () {
@@ -326,28 +359,12 @@ app.fillForm = function () {
 };
 
 //如果要每天提醒
-app.insertEvent = function () {
-    //4. 開始閱讀時間
-    app.get("#setTime").onchange = function () {
-        console.log(app.get("#setTime").value);
-        app.setTime = app.get("#setTime").value;
-    };
-    //5. 結束閱讀時間
-    app.get("#setTimeFini").onchange = function () {
-        console.log(app.get("#setTimeFini").value);
-        app.setTimeFini = app.get("#setTimeFini").value;
-    };
-    //6. 提醒分鐘數
-    app.get("#remindBefore").onchange = function () {
-        console.log(app.get("#remindBefore").value);
-        app.remindMin = app.get("#remindBefore").value;
-    };
-
+app.editEvent = function () {
     //結束日期格式
     let endDateFormat = app.endDate.replace(/-/g, "");
     //from "2018-07-10" to "20180710"
-
     // 2018-10-20T22:00:00.000+08:00"
+    let remindMinInt = parseInt(app.remindMin);
 
     let event = {
         "summary": app.eventTitle,
@@ -367,21 +384,27 @@ app.insertEvent = function () {
         "reminders": {
             "useDefault": false,
             "overrides": [
-                { "method": "popup", "minutes": app.remindMin }
+                { "method": "popup", "minutes": remindMinInt }
             ]
         }
     };
 
+    app.insertEvent(event);
+};
+
+app.insertEvent = function (event) {
     app.get("#addToCalendar").onclick = function () {
         let request = gapi.client.calendar.events.insert({
             "calendarId": "primary",
             "resource": event
         });
-
+        console.log(event);
         request.execute(function (event) {
             let link = event.htmlLink;
+            console.log(event.htmlLink);
             let db = app.database;
             let dbBookList = db.ref("/members/" + app.uid + "/bookList/" + app.bookID + "/calLink");
+            console.log(dbBookList);
             dbBookList.set(link, function (error) {
                 if (error) {
                     console.log("未將活動連結加進 db");
@@ -393,10 +416,17 @@ app.insertEvent = function () {
                     calPage.style.opacity = "0";
                     calPage.style.filter = "alpha(opacity=0)";
                     calPage.style.minHeight = 0;
+                    //隨時監控 google calendar 網址變化
+                    let dbCalendar = app.database.ref("/members/" + app.uid + "/bookList/" + app.bookID + "/calLink");
+                    dbCalendar.on("value", function (snapshot) {
+                        // app.get("#calLink").href = 
+                        console.log("要即時加到編輯按鈕上的連結: " + snapshot.val());
+                    });
                 }
             });
         });
     };
+
 };
 
 
@@ -437,18 +467,19 @@ app.insertEventNoRemind = function () {
                 calPage.style.opacity = "0";
                 calPage.style.filter = "alpha(opacity=0)";
                 calPage.style.minHeight = 0;
+                //隨時監控 google calendar 網址變化
+                let dbCalendar = app.database.ref("/members/" + app.uid + "/bookList/" + app.bookID + "/calLink");
+                dbCalendar.on("value", function (snapshot) {
+                    // app.get("#calLink").href = 
+                    console.log("要即時加到編輯按鈕上的連結: " + snapshot.val());
+                });
             }
         });
 
     });
 };
 
-//隨時監控 google calendar 網址變化
-let dbCalendar = app.database.ref("/members/" + app.uid + "/bookList/" + app.bookID + "/calLink");
-dbCalendar.on("value", function (snapshot) {
-    // app.get("#calLink").href = 
-    console.log("要即時加到編輯按鈕上的連結: " + snapshot.val());
-});
+
 
 
 window.addEventListener("DOMContentLoaded", app.init);
