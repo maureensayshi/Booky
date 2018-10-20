@@ -20,13 +20,14 @@ app.showBook = function () {
     let dbBookList = db.ref("/members/" + app.uid + "/bookList/" + bookID);
     dbBookList.once("value", function (snapshot) {
         let val = snapshot.val();
-        app.get("#calLink").href = val.calLink;
         app.calLink = val.calLink;
-        console.log(val.calLink);
         if (val.calLink != "") {
             app.get("#calendar").style.display = "none";
+            app.get("#calLink").href = val.calLink;
+            console.log(val.calLink);
+        } else if (val.calLink == "") {
+            app.get("#calLink").style.display = "none";
         }
-
         // console.log(val);
         app.get("main .visual-book>img").src = val.coverURL;
         app.get("#title").textContent = val.title;
@@ -118,18 +119,10 @@ app.editBook = function (val, dbBookList) {
             currentTwice.style.display = "none";
             currentLent.style.display = "none";
 
-            for (let i = 0; i < container.length; i++) {
-                container[i].style.opacity = "1";
-            }
-            for (let i = 0; i < readChoices.length; i++) {
-                readChoices[i].disabled = false;
-            }
-            for (let i = 0; i < twiceChoices.length; i++) {
-                twiceChoices[i].disabled = false;
-            }
-            for (let i = 0; i < lendChoices.length; i++) {
-                lendChoices[i].disabled = false;
-            }
+            for (let i = 0; i < container.length; i++) { container[i].style.opacity = "1"; }
+            for (let i = 0; i < readChoices.length; i++) { readChoices[i].disabled = false; }
+            for (let i = 0; i < twiceChoices.length; i++) { twiceChoices[i].disabled = false; }
+            for (let i = 0; i < lendChoices.length; i++) { lendChoices[i].disabled = false; }
 
             placeInput.disabled = false;
             placeInput.className = placeInput.disabled ? "input-init" : "input-edit";
@@ -138,12 +131,10 @@ app.editBook = function (val, dbBookList) {
                 lendToInput.disabled = false;
                 lendToInput.className = lendToInput.disabled ? "input-init" : "input-edit";
             }
-
             lentStatus.onclick = function () {
                 lendToInput.disabled = false;
                 lendToInput.className = lendToInput.disabled ? "input-init" : "input-edit";
             };
-
             lentNo.onclick = function () {
                 lendToInput.disabled = true;
                 lendToInput.className = lendToInput.disabled ? "input-init" : "input-edit";
@@ -160,25 +151,15 @@ app.editBook = function (val, dbBookList) {
             for (let i = 0; i < container.length; i++) {
                 container[i].style.opacity = "0";
             }
-
             placeInput.disabled = true;
             placeInput.className = placeInput.disabled ? "input-init" : "input-edit";
             lendToInput.className = placeInput.disabled ? "input-init" : "input-edit";
 
-            for (let i = 0; i < readChoices.length; i++) {
-                readChoices[i].disabled = true;
-            }
-            for (let i = 0; i < twiceChoices.length; i++) {
-                twiceChoices[i].disabled = true;
-                console.log(twiceChoices[i].value);
-            }
+            for (let i = 0; i < readChoices.length; i++) { readChoices[i].disabled = true; }
+            for (let i = 0; i < twiceChoices.length; i++) { twiceChoices[i].disabled = true; }
             let twiceChoiceSelected = twiceChoicesChecked.value === "true" ? true : false;
-            console.log(twiceChoiceSelected);
 
-            for (let i = 0; i < lendChoices.length; i++) {
-                lendChoices[i].disabled = true;
-                console.log(lendChoices[i].value);
-            }
+            for (let i = 0; i < lendChoices.length; i++) { lendChoices[i].disabled = true; }
             let lendChoiceSelected = lendChoicesChecked.value === "true" ? true : false;
 
             //重新賦值書籍資料
@@ -222,7 +203,6 @@ app.editBook = function (val, dbBookList) {
 
     //刪除書籍
     let delete_btn = app.get("#delete");
-
     delete_btn.addEventListener("click", function () {
         //重新傳回資料庫
         dbBookList.remove(function (error) {
@@ -235,13 +215,10 @@ app.editBook = function (val, dbBookList) {
             }
         });
     });
-
 };
 
-
-app.handleClientLoad = function () {
-    gapi.load("client:auth2", app.initClient);
-};
+//啟動 GOOGLE CALENDAR 偵測
+app.handleClientLoad = function () { gapi.load("client:auth2", app.initClient); };
 
 app.initClient = function () {
     app.clientId = "757419169220-9ehr4saki2pbqpp4c2imqa3qd8nbuf0q.apps.googleusercontent.com";
@@ -283,12 +260,12 @@ app.initClient = function () {
             console.log("按鈕應該已經被隱藏");
         }
     }
+    //SIGN OUT
     function handleSignoutClick(event) {
         gapi.auth2.getAuthInstance().signOut();
     }
     function updateSigninStatus(isSignedIn) {
         if (isSignedIn) {
-            //還要預加讀取 href來判定是否要打開
             console.log("sign in");
         } else {
             console.log("未成功 sign in");
@@ -299,56 +276,39 @@ app.initClient = function () {
 app.fillForm = function () {
     //獲取表單資訊
     //1. 事件名稱
-    app.get("#eventTitle").onchange = function () {
-        console.log(app.get("#eventTitle").value);
-        app.eventTitle = app.get("#eventTitle").value;
-    };
+    app.get("#eventTitle").onchange = function () { app.eventTitle = app.get("#eventTitle").value; };
     //2. 開始日期
-    app.get("#start").onchange = function () {
-        console.log(app.get("#start").value);
-        app.startDate = app.get("#start").value;
-    };
+    app.get("#start").onchange = function () { app.startDate = app.get("#start").value; };
     //3. 結束日期
-    app.get("#end").onchange = function () {
-        console.log(app.get("#end").value);
-        app.endDate = app.get("#end").value;
-    };
-    //每天提醒
+    app.get("#end").onchange = function () { app.endDate = app.get("#end").value; };
+    //每天提醒選項
     let reminderYes = app.get("#remindYes");
     let reminderNo = app.get("#remindNo");
     //要每天提醒
     reminderYes.onclick = function () {
         app.get(".remind-time").style.display = "block";
         app.get("#setTime").value = "20:00";
-        console.log(app.get("#setTime").value);
         app.setTime = app.get("#setTime").value;
         app.get("#setTimeFini").value = "21:00";
-        console.log(app.get("#setTimeFini").value);
         app.setTimeFini = app.get("#setTimeFini").value;
         app.get("#remindBefore").value = "10";
-        console.log(app.get("#remindBefore").value);
         app.remindMin = app.get("#remindBefore").value;
         //4. 開始閱讀時間
         app.get("#setTime").onchange = function () {
-            console.log(app.get("#setTime").value);
             app.setTime = app.get("#setTime").value;
-            console.log(app.setTime);
             app.editEvent();
         };
         //5. 結束閱讀時間
         app.get("#setTimeFini").onchange = function () {
-            console.log(app.get("#setTimeFini").value);
             app.setTimeFini = app.get("#setTimeFini").value;
-            console.log(app.setTimeFini);
             app.editEvent();
         };
         //6. 提醒分鐘數
         app.get("#remindBefore").onchange = function () {
-            console.log(app.get("#remindBefore").value);
             app.remindMin = app.get("#remindBefore").value;
-            console.log(app.remindMin);
             app.editEvent();
         };
+        app.editEvent();
     };
     //不要每天提醒
     reminderNo.onclick = function () {
@@ -362,10 +322,7 @@ app.fillForm = function () {
 app.editEvent = function () {
     //結束日期格式
     let endDateFormat = app.endDate.replace(/-/g, "");
-    //from "2018-07-10" to "20180710"
-    // 2018-10-20T22:00:00.000+08:00"
     let remindMinInt = parseInt(app.remindMin);
-
     let event = {
         "summary": app.eventTitle,
         "location": "",
@@ -388,7 +345,6 @@ app.editEvent = function () {
             ]
         }
     };
-
     app.insertEvent(event);
 };
 
@@ -401,7 +357,6 @@ app.insertEvent = function (event) {
         console.log(event);
         request.execute(function (event) {
             let link = event.htmlLink;
-            console.log(event.htmlLink);
             let db = app.database;
             let dbBookList = db.ref("/members/" + app.uid + "/bookList/" + app.bookID + "/calLink");
             console.log(dbBookList);
@@ -419,7 +374,9 @@ app.insertEvent = function (event) {
                     //隨時監控 google calendar 網址變化
                     let dbCalendar = app.database.ref("/members/" + app.uid + "/bookList/" + app.bookID + "/calLink");
                     dbCalendar.on("value", function (snapshot) {
-                        // app.get("#calLink").href = 
+                        app.get("#calendar").style.display = "none";
+                        app.get("#calLink").href = snapshot.val();
+                        app.get("#calLink").style.display = "inline-block";
                         console.log("要即時加到編輯按鈕上的連結: " + snapshot.val());
                     });
                 }
@@ -428,7 +385,6 @@ app.insertEvent = function (event) {
     };
 
 };
-
 
 //如果不要每天提醒
 app.insertEventNoRemind = function () {
@@ -452,7 +408,6 @@ app.insertEventNoRemind = function () {
     });
 
     request.execute(function (event) {
-        console.log(event.htmlLink);
         let link = event.htmlLink;
         let db = app.database;
         let dbBookList = db.ref("/members/" + app.uid + "/bookList/" + app.bookID + "/calLink");
@@ -470,16 +425,14 @@ app.insertEventNoRemind = function () {
                 //隨時監控 google calendar 網址變化
                 let dbCalendar = app.database.ref("/members/" + app.uid + "/bookList/" + app.bookID + "/calLink");
                 dbCalendar.on("value", function (snapshot) {
-                    // app.get("#calLink").href = 
+                    app.get("#calendar").style.display = "none";
+                    app.get("#calLink").href = snapshot.val();
+                    app.get("#calLink").style.display = "inline-block";
                     console.log("要即時加到編輯按鈕上的連結: " + snapshot.val());
                 });
             }
         });
-
     });
 };
-
-
-
 
 window.addEventListener("DOMContentLoaded", app.init);
