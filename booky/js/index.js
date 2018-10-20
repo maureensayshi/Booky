@@ -63,14 +63,12 @@ app.getRedirectResult = function () {
             let name = result.user.displayName;
             let email = result.user.email;
             let photo = result.user.photoURL;
-            let accessToken = result.credential.accessToken;
             //prepare member data for DB
             let memberData = {
                 uid: uid,
                 name: name,
                 email: email,
-                photo: photo,
-                accesstoken: accessToken
+                photo: photo
             };
             //send member data to DB
             let db = app.database;
@@ -126,9 +124,9 @@ app.visualBook = function () {
                 { transform: "translate3d(0, 0, 0)" },
                 { transform: "translate3d(-" + (num * 168) + "px, 0, 0)" }
             ], {
-                    duration: (num * 168 * 1000) / 56,
-                    iterations: Infinity
-                });
+                duration: (num * 168 * 1000) / 56,
+                iterations: Infinity
+            });
 
             for (let j = 0; j < 2; j++) {
                 for (let i = 0; i < num; i++) {
@@ -172,10 +170,10 @@ app.visualBook = function () {
                 { transform: "translate3d(0, 0, 0)" },
                 { transform: "translate3d(-" + ((listShow.length + num) * 168) + "px, 0, 0)" }
             ], {
-                    // timing options
-                    duration: ((listShow.length + num) * 168 * 1000) / 56,
-                    iterations: Infinity
-                });
+                // timing options
+                duration: ((listShow.length + num) * 168 * 1000) / 56,
+                iterations: Infinity
+            });
 
             app.stopAnimation = function () { slide.pause(); };
             app.startAnimation = function () { slide.play(); };

@@ -293,8 +293,8 @@ main .remind-or-not .container .checkmark:after {
     display: flex;
     flex-direction: column;
     align-items: center;
-    visibility:hidden;
-    opacity:0;
+    /* visibility:hidden;
+    opacity:0; */
     filter:alpha(opacity=0);
     -webkit-transition:300ms ease;
     -moz-transition:300ms ease;
@@ -346,6 +346,10 @@ main .remind-or-not .container .checkmark:after {
     font-size: 14px;
     text-align: left;
 }
+.remind-title label{
+    padding-bottom: 70.5px;
+    vertical-align: bottom;
+}
 
 
 .remind-or-not {
@@ -368,10 +372,10 @@ main .remind-or-not .container .checkmark:after {
 
 .title-init{
     width:150px;
-    height: 30px;
+    height: 70px;
     letter-spacing: 2px;
     text-align: left;
-    padding: 0 0 0 15px ;
+    padding:5px ;
     border: none;
     margin: 10px 0 15px 0;
     font-size: 14px;
@@ -380,7 +384,7 @@ main .remind-or-not .container .checkmark:after {
     -webkit-box-shadow: none;
     -moz-box-shadow: none;
     box-shadow: none;    
-    border-bottom:1px solid  rgba(185, 177, 68, 1);    
+    border:1px solid  rgba(185, 177, 68, 1);    
 }
 .reminder-check #start,
 .reminder-check #end{
@@ -492,13 +496,15 @@ input[type=time]::-webkit-outer-spin-button {
 }
 
 
-.book-button input:nth-child(1):hover{ padding-left: 35px;background: url(../img/edit.svg) no-repeat 50px rgba(185, 177, 68, 1); background-size: 10%;}
-.book-button input:nth-child(2):hover{ padding-left: 35px;background: url(../img/delete.svg) no-repeat 50px rgba(185, 177, 68, 1); background-size: 10%;}
-.book-button input:nth-child(3):hover{ background: url(../img/calendar.svg) no-repeat 35px rgba(185, 177, 68, 1); background-size: 10%;}
+.book-button>input:nth-child(1):hover{ padding-left: 35px;background: url(../img/edit.svg) no-repeat 50px rgba(185, 177, 68, 1); background-size: 10%;}
+.book-button>input:nth-child(2):hover{ padding-left: 35px;background: url(../img/delete.svg) no-repeat 50px rgba(185, 177, 68, 1); background-size: 10%;}
+.book-button>input:nth-child(3):hover{ background: url(../img/calendar.svg) no-repeat 35px rgba(185, 177, 68, 1); background-size: 10%;}
+.book-button #calLink>input:hover{ background: url(../img/calendar.svg) no-repeat 35px rgba(185, 177, 68, 1); background-size: 10%;}
 
-.book-button input:nth-child(1){ padding-left: 35px;background: url(../img/edit.svg) no-repeat 50px rgba(185, 177, 68, .8); background-size: 10%;}
-.book-button input:nth-child(2){ padding-left: 35px;background: url(../img/delete.svg) no-repeat 50px rgba(185, 177, 68, .8); background-size: 10%;}
-.book-button input:nth-child(3){ background: url(../img/calendar.svg) no-repeat 35px rgba(185, 177, 68, .8); background-size: 10%;}
+.book-button>input:nth-child(1){ padding-left: 35px;background: url(../img/edit.svg) no-repeat 50px rgba(185, 177, 68, .8); background-size: 10%;}
+.book-button>input:nth-child(2){ padding-left: 35px;background: url(../img/delete.svg) no-repeat 50px rgba(185, 177, 68, .8); background-size: 10%;}
+.book-button>input:nth-child(3){ background: url(../img/calendar.svg) no-repeat 35px rgba(185, 177, 68, .8); background-size: 10%;}
+.book-button #calLink>input{ background: url(../img/calendar.svg) no-repeat 35px rgba(185, 177, 68, .8); background-size: 10%;}
 
 /* RWD */
 
