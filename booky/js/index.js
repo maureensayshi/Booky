@@ -27,11 +27,14 @@ app.checkingIndex = function () {
             app.searchBar();
             app.addBookInit();
             app.scanBookInit();
-            // app.googlecal();
             app.closeLoading();
         } else {
             // User is signed out or haven't sign up.
             app.get(".welcome").style.display = "block";
+            let downArrow = app.get("#down");
+            downArrow.onclick = function () {
+                app.get(".feature").scrollIntoView({ block: "start", behavior: "smooth" });
+            };
             app.get(".real").style.display = "none";
             app.closeLoading();
             app.googleLogin();
@@ -52,6 +55,19 @@ app.googleLogin = function () {
             console.error("sign up or login failed");
         }
     });
+    let gButtonTwo = app.get("#googleTwo");
+    gButtonTwo.addEventListener("click", function () {
+        app.showLoading();
+        if (!firebase.auth().currentUser) {
+            let provider = new firebase.auth.GoogleAuthProvider();
+            provider.addScope("https://www.googleapis.com/auth/plus.login,https://www.googleapis.com/auth/calendar.events");
+            //啟動 login 程序   
+            firebase.auth().signInWithRedirect(provider);
+        } else {
+            console.error("sign up or login failed");
+        }
+    });
+
 };
 
 app.getRedirectResult = function () {

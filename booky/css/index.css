@@ -17,6 +17,70 @@
     scroll-snap-align: start;
 }
 
+
+
+/* KEY VISUAL */
+.welcome main .view{
+    display: flex;
+    justify-content: center;
+    margin: 100px auto 20px auto;
+}
+
+.welcome main .key-visual{
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;  
+    align-items: center;
+}
+
+.welcome main .key-visual>.visual-book{
+    flex: none;
+    width: 128px;
+    height: 179px;
+    padding: 13px;
+    margin: 30px;
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: 5px 5px 10px #999999;
+}
+
+
+.welcome main .key-visual>.visual-book:nth-child(2),
+.welcome main .key-visual>.visual-book:nth-child(4){
+    width: 150px;
+    height: 214px;
+}
+
+.welcome main .key-visual>.visual-book:nth-child(3){
+   width: 200px;
+   height: auto;
+}
+
+.welcome main .introduce{
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+    align-items: center;
+    letter-spacing: 2px;
+}
+
+.welcome main .introduce p{line-height: 3;}
+
+.welcome .downDiv{
+    display: flex; flex-direction: column;align-items: center;width: 100%;
+}
+
+.welcome #down {
+    width: 250px; height: 40px; border:none;
+   cursor: pointer; 
+    background-image: url("../img/down-arrow.svg") ;
+    background-repeat: no-repeat;
+    background-size: 40px; 
+    background-position: center center;
+    -webkit-box-shadow: none; -moz-box-shadow: none; box-shadow: none;
+    background-color: transparent;
+}
+
 .welcome .feature{
     width: 100vw;
     height: 100vh;
@@ -132,69 +196,6 @@
 }
 
 
-
-/* KEY VISUAL */
-.welcome main .view{
-    display: flex;
-    justify-content: center;
-    margin: 100px auto 20px auto;
-}
-
-.welcome main .key-visual{
-    display: flex;
-    flex-wrap: nowrap;
-    justify-content: space-between;  
-    align-items: center;
-}
-
-.welcome main .key-visual>.visual-book{
-    flex: none;
-    width: 128px;
-    height: 179px;
-    padding: 13px;
-    margin: 30px;
-    background-color: white;
-    border-radius: 15px;
-    box-shadow: 5px 5px 10px #999999;
-}
-
-
-.welcome main .key-visual>.visual-book:nth-child(2),
-.welcome main .key-visual>.visual-book:nth-child(4){
-    width: 150px;
-    height: 214px;
-}
-
-.welcome main .key-visual>.visual-book:nth-child(3){
-   width: 200px;
-   height: auto;
-}
-
-.welcome main .introduce{
-    display: flex;
-    flex-direction: column;
-    margin: 10px;
-    align-items: center;
-    letter-spacing: 2px;
-}
-
-.welcome main .introduce p{line-height: 3;}
-
-.welcome .downDiv{
-    display: flex; flex-direction: column;align-items: center;width: 100%;
-}
-
-.welcome .down {
-    width: 250px; height: 40px; border:none;
-   cursor: pointer; 
-    background-image: url("../img/down-arrow.svg") ;
-    background-repeat: no-repeat;
-    background-size: 40px; 
-    background-position: center center;
-    -webkit-box-shadow: none; -moz-box-shadow: none; box-shadow: none;
-    background-color: transparent;
-}
-
 /* .welcome main .steps{
     width: 100%;
     padding: 40px 0;
@@ -237,13 +238,27 @@
 
 .welcome main .step p { line-height: 1; padding-top: 13px;} */
 
-.welcome main .signinDiv{ display: flex; flex-direction: column; margin: 10px;}
+.welcome main .signinDiv{ display: flex; flex-direction: column; margin: 10px;cursor: pointer;}
+
+.welcome main .signinDivTwo{ display: flex; flex-direction: column; margin: 10px;cursor: pointer; z-index: 2;}
 
 .welcome .signin{
     width: 250px; height: 50px; align-self: center; letter-spacing: 3px; padding-left: 60px; border-radius: 5px; border:none;
     margin: 6px; font-size: 14px; cursor: pointer; font-family: "Noto Sans JP", arial, sans-serif;
     background: url("../img/google.svg") no-repeat 20px #DCB58C;
 	color: white; -webkit-box-shadow: none; -moz-box-shadow: none; box-shadow: none;
+}
+
+.welcome .signinTwo{
+    width: 250px; height: 50px; align-self: center; letter-spacing: 3px; padding-left: 60px; border-radius: 5px; border:none;
+    margin: 6px; font-size: 14px; cursor: pointer; font-family: "Noto Sans JP", arial, sans-serif;
+    background: url("../img/google.svg") no-repeat 20px #DCB58C;
+    color: white; -webkit-box-shadow: none; -moz-box-shadow: none; box-shadow: none;
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%);
+    z-index: 2;
 }
 
 /* real index page */
