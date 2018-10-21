@@ -683,6 +683,9 @@ app.addBook = function (bookTitle, bookAuthor, bookPublisher, bookISBN, bookCove
         //回到搜尋
         keepAdd.onclick = function () {
             app.get(".alertDiv").style.display = "none";
+            app.get(".addbar-list").scrollIntoView({ block: "start", behavior: "smooth" });
+            app.get(".scan-list").scrollIntoView({ block: "start", behavior: "smooth" });
+            app.get("#keyword").value = "";
         };
         //回到首頁
         homePage.onclick = function () {

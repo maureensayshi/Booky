@@ -20,12 +20,12 @@ app.showBook = function () {
     let dbBookList = db.ref("/members/" + app.uid + "/bookList/" + bookID);
     dbBookList.once("value", function (snapshot) {
         let val = snapshot.val();
-        app.calLink = val.calLink;
         if (val.calLink != "") {
             app.get("#calendar").style.display = "none";
             app.get("#calLink").href = val.calLink;
             console.log(val.calLink);
         } else if (val.calLink == "") {
+            app.calLink = val.calLink;
             app.get("#calLink").style.display = "none";
         }
         // console.log(val);
