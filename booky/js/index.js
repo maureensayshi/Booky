@@ -204,6 +204,7 @@ app.visualBook = function () {
 app.visualBookMobile = function () {
     let keyVisual = app.get(".real .key-visual");
     keyVisual.classList.add("keyVisualMobile");
+    keyVisual.style.width = "auto";
 
     let box = app.get(".book-list");
     box.classList.add("bookListMobile");

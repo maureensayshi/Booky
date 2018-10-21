@@ -207,6 +207,7 @@ app.editBook = function (val, dbBookList) {
                         console.log("更新書成功");
                         app.get(".editConfirmDiv").style.display = "none";
                         app.get(".afterEditDiv").style.display = "block";
+                        app.get(".afterEditDiv").scrollIntoView({ block: "center", behavior: "smooth" });
                         setTimeout(function () {
                             app.get(".afterEditDiv").style.display = "none";
                         }, 1500);
