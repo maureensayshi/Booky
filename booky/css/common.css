@@ -742,6 +742,7 @@ footer .footer{
 
 /* alert */
 .alertDiv{
+    display: none;
     position: absolute;
     background-color: rgba(0,0,0,0.6);
     width: 100vw;
@@ -788,7 +789,7 @@ footer .footer{
 }
 .alert>div>button{
     width: 140px;
-    font-family: "Noto Sans JP", sans-serif;
+    font-family: "微軟正黑體";
     height: 40px;
     letter-spacing: 4px;
     margin: 8px;

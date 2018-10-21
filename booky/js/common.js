@@ -672,27 +672,41 @@ app.addBook = function (bookTitle, bookAuthor, bookPublisher, bookISBN, bookCove
         console.log(res);
         app.res = res;
         let link = res.path.pieces_[3];
-
-        alert("add book");
+        let edit = app.get(".alert>div>button:nth-child(1)");
+        let keepAdd = app.get(".alert>div>button:nth-child(2)");
+        let homePage = app.get(".alert>div>button:nth-child(3)");
+        app.get(".alertDiv").style.display = "block";
         //查看此書
-        // window.location = "book.html?id=" + link;
-
+        edit.onclick = function () {
+            window.location = "book.html?id=" + link;
+        };
+        //回到搜尋
+        keepAdd.onclick = function () {
+            app.get(".alertDiv").style.display = "none";
+        };
         //回到首頁
-        // app.get(".addShade").style.visibility = "hidden";
-        // app.get(".addShade").style.opacity = "0";
-        // app.get(".addShade").style.minHeight = "0";
-        if (app.visualBook || app.visualBookMobile) {
-            if (document.body.clientWidth > 1024) {
-                app.visualBook();
-            } else {
-                app.visualBookMobile();
+        homePage.onclick = function () {
+            app.get(".alertDiv").style.display = "none";
+            app.get(".addShade").style.visibility = "hidden";
+            app.get(".addShade").style.opacity = "0";
+            app.get(".addShade").style.minHeight = "0";
+            if (app.visualBook || app.visualBookMobile) {
+                if (document.body.clientWidth > 1024) {
+                    app.visualBook();
+                } else {
+                    app.visualBookMobile();
+                }
+            } else if (app.allocateBS) {
+                app.allocateBS();
             }
-        } else if (app.allocateBS) {
-            app.allocateBS();
-        }
-
-        //回到搜尋首頁
-
+        };
+        //點擊外框
+        let alertDiv = app.get(".alertDiv");
+        alertDiv.addEventListener("click", function (e) {
+            if (e.target === alertDiv) {
+                alertDiv.style.display = "none";
+            }
+        });
     });
 };
 
