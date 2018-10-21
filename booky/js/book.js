@@ -364,37 +364,7 @@ app.insertEvent = function (event) {
                 if (error) {
                     console.log("未將活動連結加進 db");
                 } else {
-                    console.log("日曆活動建立");
-                    alert("日曆活動建立");
-                    let calPage = app.get(".remindShade");
-                    calPage.style.visibility = "hidden";
-                    calPage.style.opacity = "0";
-                    calPage.style.filter = "alpha(opacity=0)";
-                    calPage.style.minHeight = 0;
-                    //隨時監控 google calendar 網址變化
-                    let dbCalendar = app.database.ref("/members/" + app.uid + "/bookList/" + app.bookID + "/calLink");
-                    dbCalendar.on("value", function (snapshot) {
-                        app.get("#calendar").style.display = "none";
-                        app.get("#calLink").href = snapshot.val();
-                        app.get("#calLink").style.display = "inline-block";
-                        console.log("要即時加到編輯按鈕上的連結: " + snapshot.val());
-                    });
-                    //跳出alert視窗
-                    app.get(".gLinkDiv").style.display = "block";
-                    let back = app.get(".gLink>div>button:nth-child(1)");
-                    let toLink = app.get(".gLink>div>button:nth-child(2)");
-                    back.onclick = function () {
-                        app.get(".gLinkDiv").style.display = "none";
-                    };
-                    toLink.onclick = function () {
-                        window.location = link;
-                    };
-                    let gLinkDiv = app.get(".gLinkDiv");
-                    gLinkDiv.addEventListener("click", function (e) {
-                        if (e.target === gLinkDiv) {
-                            gLinkDiv.style.display = "none";
-                        }
-                    });
+                    app.afterSend(link);
                 }
             });
         });
@@ -431,23 +401,54 @@ app.insertEventNoRemind = function () {
             if (error) {
                 console.log("未將活動連結加進 db");
             } else {
-                console.log("日曆活動建立");
-                alert("日曆活動建立");
-                let calPage = app.get(".remindShade");
-                calPage.style.visibility = "hidden";
-                calPage.style.opacity = "0";
-                calPage.style.filter = "alpha(opacity=0)";
-                calPage.style.minHeight = 0;
-                //隨時監控 google calendar 網址變化
-                let dbCalendar = app.database.ref("/members/" + app.uid + "/bookList/" + app.bookID + "/calLink");
-                dbCalendar.on("value", function (snapshot) {
-                    app.get("#calendar").style.display = "none";
-                    app.get("#calLink").href = snapshot.val();
-                    app.get("#calLink").style.display = "inline-block";
-                    console.log("要即時加到編輯按鈕上的連結: " + snapshot.val());
-                });
+                app.afterSend(link);
             }
         });
+    });
+};
+
+//跳出 alert
+app.afterSend = function (link) {
+    console.log("日曆活動建立");
+    let calPage = app.get(".remindShade");
+    calPage.style.visibility = "hidden";
+    calPage.style.opacity = "0";
+    calPage.style.filter = "alpha(opacity=0)";
+    calPage.style.minHeight = 0;
+    //跳出alert視窗
+    app.get(".gLinkDiv").style.display = "block";
+    app.get(".gLinkDiv").style.height = document.body.clientHeight + "px";
+    app.get(".gLink").scrollIntoView({ block: "start", behavior: "smooth" });
+    let back = app.get(".gLink>div>button:nth-child(1)");
+    let toLink = app.get(".gLink>div>button:nth-child(2)");
+    back.onclick = function () {
+        console.log("back click");
+        app.get(".gLinkDiv").style.display = "none";
+        //隨時監控 google calendar 網址變化
+        let dbCalendar = app.database.ref("/members/" + app.uid + "/bookList/" + app.bookID + "/calLink");
+        dbCalendar.on("value", function (snapshot) {
+            app.get("#calendar").style.display = "none";
+            app.get("#calLink").href = snapshot.val();
+            app.get("#calLink").style.display = "inline-block";
+            console.log("要即時加到編輯按鈕上的連結: " + snapshot.val());
+        });
+    };
+    toLink.onclick = function () {
+        window.location = link;
+    };
+    let gLinkDiv = app.get(".gLinkDiv");
+    gLinkDiv.addEventListener("click", function (e) {
+        if (e.target === gLinkDiv) {
+            gLinkDiv.style.display = "none";
+            //隨時監控 google calendar 網址變化
+            let dbCalendar = app.database.ref("/members/" + app.uid + "/bookList/" + app.bookID + "/calLink");
+            dbCalendar.on("value", function (snapshot) {
+                app.get("#calendar").style.display = "none";
+                app.get("#calLink").href = snapshot.val();
+                app.get("#calLink").style.display = "inline-block";
+                console.log("要即時加到編輯按鈕上的連結: " + snapshot.val());
+            });
+        }
     });
 };
 
