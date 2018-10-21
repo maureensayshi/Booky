@@ -394,8 +394,6 @@ header .btn_search{
 .addTabs{  
     margin-top: 10px;
     display: block;
-    /* justify-content: center; 
-    width: 80%; */
     border-radius: 2px;
 }
 
@@ -409,11 +407,13 @@ header .btn_search{
     text-align: center;
     font-size: 16px;
     font-weight: normal;
-    background-color: rgba(185, 177, 68, .4);
+    background-color:#CCCCCC;
     cursor: pointer;
     border: 0;
     transition: all transform .75s;  
-    color: #3f3a3a; 
+    color: white; 
+    border-radius: 5px;
+    font-weight: normal;
 }
 
 .active{
@@ -566,7 +566,7 @@ header .btn_search{
     cursor: pointer;
     border: 0;
     z-index: 10;
-    border-radius: 2px;
+    border-radius: 5px;
 }
 
 #img-result>img{
@@ -687,10 +687,12 @@ header .btn_search{
     letter-spacing: 3px;
     text-align: center;
     border: none;
+    border-radius: 5px;
     margin: 10px 0;
     font-size: 14px;
     cursor: pointer;
-    font-family: "微軟正黑體";
+    font-family: "Noto Sans JP", sans-serif;
+    font-weight: normal;
     background: rgba(185, 177, 68, 1);
     color: white;
     -webkit-box-shadow: none;
@@ -731,8 +733,6 @@ footer .footer{
     display: none;
     padding: 10px;
     background-color: #EBE4D1;
-    /* display: flex; */
-    justify-content: center;    
     letter-spacing: 1px;
     position: fixed;
     bottom: 0;

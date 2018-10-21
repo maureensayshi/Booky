@@ -299,7 +299,6 @@ app.scan = function () {
                         line.textContent = "SEARCHING......";
                         line.classList.add("typewriter");
                     }, 3000);
-
                     codeReader.decodeFromInputVideoDevice(undefined, "video").then((result) => {
                         if (result) {
                             line.textContent = "ISBN : " + result.text;
@@ -317,6 +316,7 @@ app.scan = function () {
                     }).catch((err) => {
                         console.error(err);
                         line.textContent = "查無此書";
+                        line.classList.remove("typewriter");
                         startBtn.textContent = "重新掃描";
                     });
                     console.log(`Started continous decode from camera with id ${firstDeviceId}`);
@@ -389,21 +389,21 @@ app.decodeFun = function (ev) {
 app.search_book = function (keyWord) {
     app.containerNum = 1;
     switch (app.searchText) {
-        case "search-title":
-            app.googleBooks_title(keyWord);
-            console.log(keyWord);
-            break;
-        case "search-isbn":
-            app.googleBooks_isbn(keyWord);
-            console.log(keyWord);
-            break;
-        case "search-author":
-            app.googleBooks_author(keyWord);
-            console.log(keyWord);
-            break;
-        case "":
-            console.log("user didn't key in words");
-            break;
+    case "search-title":
+        app.googleBooks_title(keyWord);
+        console.log(keyWord);
+        break;
+    case "search-isbn":
+        app.googleBooks_isbn(keyWord);
+        console.log(keyWord);
+        break;
+    case "search-author":
+        app.googleBooks_author(keyWord);
+        console.log(keyWord);
+        break;
+    case "":
+        console.log("user didn't key in words");
+        break;
     }
 };
 
