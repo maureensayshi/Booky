@@ -204,16 +204,31 @@ app.editBook = function (val, dbBookList) {
     //刪除書籍
     let delete_btn = app.get("#delete");
     delete_btn.addEventListener("click", function () {
-        //重新傳回資料庫
-        dbBookList.remove(function (error) {
-            if (error) {
-                console.log("刪除書籍失敗");
-            } else {
-                console.log("刪除此書!");
-                alert("刪除此書!");
-                window.location = "bookshelf.html?status=all";
-            }
-        });
+        app.get(".deleteDiv").style.display = "block";
+        app.get(".deleteDiv").style.height = document.body.clientHeight + "px";
+        app.get(".deleteConfirm").scrollIntoView({ block: "center", behavior: "smooth" });
+        let yes = app.get(".deleteConfirm>div>button:nth-child(1)");
+        let no = app.get(".deleteConfirm>div>button:nth-child(2)");
+        yes.onclick = function () {
+            //重新傳回資料庫
+            dbBookList.remove(function (error) {
+                if (error) {
+                    console.log("刪除書籍失敗");
+                } else {
+                    console.log("刪除此書!");
+                    app.get(".deleteDiv").style.display = "none";
+                    app.get(".afterDeleteDiv").style.display = "block";
+                    app.get(".afterDeleteDiv").style.height = document.body.clientHeight + "px";
+                    app.get(".afterDelete").scrollIntoView({ block: "center", behavior: "smooth" });
+                    setTimeout(function () {
+                        window.location = "bookshelf.html?status=all";
+                    }, 1000);
+                }
+            });
+        };
+        no.onclick = function () {
+            app.get(".deleteDiv").style.display = "none";
+        };
     });
 };
 
@@ -418,7 +433,7 @@ app.afterSend = function (link) {
     //跳出alert視窗
     app.get(".gLinkDiv").style.display = "block";
     app.get(".gLinkDiv").style.height = document.body.clientHeight + "px";
-    app.get(".gLink").scrollIntoView({ block: "start", behavior: "smooth" });
+    app.get(".gLink").scrollIntoView({ block: "center", behavior: "smooth" });
     let back = app.get(".gLink>div>button:nth-child(1)");
     let toLink = app.get(".gLink>div>button:nth-child(2)");
     back.onclick = function () {
