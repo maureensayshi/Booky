@@ -25,6 +25,7 @@ app.showMemberInfo = function () {
         memberEmail.textContent = val.email;
         let memberPic = app.get("main .member-img");
         memberPic.style.backgroundImage = `url(${val.photo})`;
+        console.log(memberPic.style.backgroundImage);
         memberPic.style.backgroundSize = "100%";
         app.closeLoading();
     });

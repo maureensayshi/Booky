@@ -1,12 +1,143 @@
 @import "./common.css";
 
 /* welcome */
+.welcome .fullpage{
+    scroll-snap-type: y proximity;
+    overflow-y: scroll;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+.welcome main{
+    width: 100vw;
+    height: 100vh;
+    border:1px solid red;
+    scroll-snap-align: start;
+}
 
+.welcome .feature{
+    width: 100vw;
+    height: 100vh;
+    background-color: black;
+    scroll-snap-align: start;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    align-items: center;
+    justify-items: center;
+    background-color: rgba(255, 255, 255, 1);
+}
+
+.welcome .feature>div{
+    width:33.3vw;
+    height: 100%;
+    padding: 55px;
+    /* border: 1px solid green; */
+}
+
+.welcome .feature>div:nth-child(1){
+    background-color: #EBE4D1;
+    background-image: url("../img/intro2.jpg");
+    background-size:120%; 
+    background-repeat: no-repeat;
+    opacity: .7;
+}
+.welcome .feature>div:nth-child(3){
+    /* background-color: #DCB58C; */
+    background-image: url("../img/intro4.png");
+    background-size:100%; 
+    background-repeat: no-repeat;
+    background-position: center;
+    opacity: .7;
+}
+
+.welcome .feature>div:nth-child(5){
+    background-color: #F1F1F3;
+    background-image: url("../img/intro3.jpg");
+    background-size:120%; 
+    background-repeat: no-repeat;
+    opacity: .7;
+}
+
+.welcome .indentity{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.welcome .indentity>div:nth-child(1){
+    font-size:28px;
+    font-family: "Cinzel", serif, "NSimSun";
+    letter-spacing: 3px;
+    font-weight: 600;
+    padding-top: 15px;
+}
+
+.welcome .indentity>div:nth-child(2){
+    width: 40px;
+    height: 3px;
+    background-color: #ececec;
+    margin: 20px;
+}
+
+.welcome .indentity>div:nth-child(3){
+    width: 80%;
+    font-size: 16px;
+    font-family: "Noto Sans JP", sans-serif;
+    letter-spacing: 2px;
+    line-height: 2;
+    margin: 20px;
+}
+
+.welcome .feature-two{
+    width: 100vw;
+    height: 100vh;
+    background-color: white;
+    scroll-snap-align: start;
+    position: relative;
+}
+
+.welcome .feature-two div:nth-child(1){
+    width:100%;
+    height: 40%;
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    transform: translate(-50%);
+    background-image: url(../img/logo.svg);
+    background-position: center top;
+    background-size: 20%;  
+    background-repeat: no-repeat;
+    z-index: 2;
+}
+
+.welcome .feature-two div:nth-child(2){
+   color: #333333;
+    font-size: 28px;
+    position: absolute;
+    top: 35%;
+    left: 50%;
+    transform: translate(-50%);
+    font-family: "Cinzel", serif, "NSimSun";
+    font-weight: 600;
+    z-index: 2;
+}
+.welcome .feature-two div:nth-child(3){
+    width: 100%;
+    height: 100%;
+    background-color: #EBE4D1;
+    opacity: .6;
+}
+
+
+
+/* KEY VISUAL */
 .welcome main .view{
     display: flex;
     justify-content: center;
-    /* width: 1100px; */
-    margin: 50px auto;
+    margin: 100px auto 20px auto;
 }
 
 .welcome main .key-visual{
@@ -18,8 +149,8 @@
 
 .welcome main .key-visual>.visual-book{
     flex: none;
-    width: 150px;
-    height: 214px;
+    width: 128px;
+    height: 179px;
     padding: 13px;
     margin: 30px;
     background-color: white;
@@ -30,12 +161,12 @@
 
 .welcome main .key-visual>.visual-book:nth-child(2),
 .welcome main .key-visual>.visual-book:nth-child(4){
-    width: 200px;
-    height: 288px;
+    width: 150px;
+    height: 214px;
 }
 
 .welcome main .key-visual>.visual-book:nth-child(3){
-   width: 300px;
+   width: 200px;
    height: auto;
 }
 
@@ -49,7 +180,22 @@
 
 .welcome main .introduce p{line-height: 3;}
 
-.welcome main .steps{
+.welcome .downDiv{
+    display: flex; flex-direction: column;align-items: center;width: 100%;
+}
+
+.welcome .down {
+    width: 250px; height: 40px; border:none;
+   cursor: pointer; 
+    background-image: url("../img/down-arrow.svg") ;
+    background-repeat: no-repeat;
+    background-size: 40px; 
+    background-position: center center;
+    -webkit-box-shadow: none; -moz-box-shadow: none; box-shadow: none;
+    background-color: transparent;
+}
+
+/* .welcome main .steps{
     width: 100%;
     padding: 40px 0;
     margin: 30px 0 10px 0;
@@ -89,8 +235,7 @@
 .welcome main .step:nth-child(4)>div{background-image: url("../img/bookshelf.svg");}
 .welcome main .step:nth-child(5)>div{background-image: url("../img/clock.svg");}
 
-.welcome main .step p { line-height: 1; padding-top: 13px;}
-
+.welcome main .step p { line-height: 1; padding-top: 13px;} */
 
 .welcome main .signinDiv{ display: flex; flex-direction: column; margin: 10px;}
 
