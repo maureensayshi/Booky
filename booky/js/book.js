@@ -229,6 +229,12 @@ app.editBook = function (val, dbBookList) {
         no.onclick = function () {
             app.get(".deleteDiv").style.display = "none";
         };
+        let deleteDiv = app.get(".deleteDiv");
+        deleteDiv.onclick = function (e) {
+            if (e.target === deleteDiv) {
+                deleteDiv.style.display = "none";
+            }
+        };
     });
 };
 
