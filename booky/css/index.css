@@ -13,11 +13,8 @@
 .welcome main{
     width: 100vw;
     height: 100vh;
-    border:1px solid red;
     scroll-snap-align: start;
 }
-
-
 
 /* KEY VISUAL */
 .welcome main .view{
@@ -84,7 +81,6 @@
 .welcome .feature{
     width: 100vw;
     height: 100vh;
-    background-color: black;
     scroll-snap-align: start;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -98,18 +94,15 @@
     width:33.3vw;
     height: 100%;
     padding: 55px;
-    /* border: 1px solid green; */
 }
 
 .welcome .feature>div:nth-child(1){
-    background-color: #EBE4D1;
     background-image: url("../img/intro2.jpg");
     background-size:120%; 
     background-repeat: no-repeat;
     opacity: .7;
 }
 .welcome .feature>div:nth-child(3){
-    /* background-color: #DCB58C; */
     background-image: url("../img/intro4.png");
     background-size:100%; 
     background-repeat: no-repeat;
@@ -118,7 +111,6 @@
 }
 
 .welcome .feature>div:nth-child(5){
-    background-color: #F1F1F3;
     background-image: url("../img/intro3.jpg");
     background-size:120%; 
     background-repeat: no-repeat;
@@ -187,11 +179,13 @@
     font-family: "Cinzel", serif, "NSimSun";
     font-weight: 600;
     z-index: 2;
+    width: 100%;
+    text-align: center;
 }
 .welcome .feature-two div:nth-child(3){
     width: 100%;
     height: 100%;
-    background-color: #EBE4D1;
+    background-color: #F1F1F3;
     opacity: .6;
 }
 
@@ -515,6 +509,17 @@ main #next{
 @media (max-width: 1200px) and (min-width: 980px){
 
     /* welcome */
+    .welcome .feature{
+        grid-template-columns: repeat(1, 1fr);
+    }
+    .color{
+        display: none;
+    }
+    .welcome .feature>div{
+        width:60vw;
+        padding: 20px;
+    }
+   
     .welcome main .key-visual>.visual-book{
         width: 110px;
         height: 157px;
@@ -539,6 +544,17 @@ main #next{
 @media (max-width: 980px) and (min-width: 640px){
 
     /* welcome */
+    .welcome .feature{
+        grid-template-columns: repeat(1, 1fr);
+        overflow-y: scroll;
+    }
+    .color{
+        display: none;
+    }
+    .welcome .feature>div{
+        width:60vw;
+        padding: 30px 0 0 0;
+    }
 
     .welcome main .key-visual>.visual-book{
         width: 80px;
@@ -566,28 +582,6 @@ main #next{
      .welcome main .step p{ font-size: 12px;}
 
     /* real index page */
-
-    /* main .key-visualBox{
-        margin: 35px 0 30px 0;
-    }
-    main .key-visual>.visual-book{
-        width: 80px;
-        height: 114px;
-        padding: 10px;
-        margin: 40px 15px;        
-    }
-
-    main .key-visual>.visual-book:nth-child(2),
-    main .key-visual>.visual-book:nth-child(4){
-        width: 100px;
-        height: 142px;
-     }
-
-    main .key-visual>.visual-book:nth-child(3){
-        width: 130px;
-        height: auto;
-     } */
-
      .bookHref{
         width: 60%;
     }
@@ -597,6 +591,32 @@ main #next{
 @media (max-width: 640px) and (min-width: 480px){
 
     /* welcome */
+    .welcome main .view{
+        display: none;
+    }
+
+    .welcome main .signinDiv{
+        margin:150px 0 30px 0;
+    }
+    .welcome .feature{
+        grid-template-columns: repeat(1, 1fr);
+        overflow-y: scroll;
+    }
+    .color{
+        display: none;
+    }
+    .welcome .feature>div{
+        width:90vw;
+        padding: 30px 0 0 0;
+    }
+
+    .welcome .feature-two div:nth-child(1){
+        background-size: 50%;
+    }
+
+    .welcome .feature-two div:nth-child(2){
+        font-size:20px;
+    }
 
     .welcome main .key-visual>.visual-book:nth-child(odd),
     .welcome main .key-visual>.visual-book:nth-child(even){
@@ -649,16 +669,50 @@ main #next{
 
     /* welcome */
 
-    .welcome main .view{min-height: 200px;}
-
-    .welcome main .key-visual>.visual-book:nth-child(1),
-    .welcome main .key-visual>.visual-book:nth-child(2),
-    .welcome main .key-visual>.visual-book:nth-child(4),
-    .welcome main .key-visual>.visual-book:nth-child(5){
+    .welcome main .view{
         display: none;
     }
 
-    .welcome main .key-visual>.visual-book:nth-child(3){width:128px;height: 179px;margin:0px;}
+    .welcome .signin{
+        width: 180px;
+        padding-left: 70px;
+    }
+
+    .welcome main .signinDiv{
+        margin:120px 0 30px 0;
+    }
+    .welcome .feature{
+        grid-template-columns: repeat(1, 1fr);
+        overflow-y: scroll;
+    }
+
+    .welcome .indentity>div:nth-child(1){
+        font-size:20px;
+      
+    }
+
+    .welcome .indentity>div:nth-child(3){
+        margin:0;
+    }
+
+    .color{
+        display: none;
+    }
+    .welcome .feature>div{
+        width:90vw;
+        padding: 30px 0 0 0;
+    }
+
+    .welcome .feature-two div:nth-child(1){
+        background-size: 50%;
+    }
+
+    .welcome .feature-two div:nth-child(2){
+        font-size:20px;
+        width: 80%;
+        line-height: 1.25;
+        top: 30%;
+    }
 
     .welcome main .introduce{margin: 20px 40px;}
     .welcome main .introduce p {font-size: 14px; line-height: 2; text-align: center;}
