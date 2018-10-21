@@ -515,6 +515,7 @@ input[type=time]::-webkit-outer-spin-button {
     width: 100vw;
     height: 100vh;
     z-index: 1000;
+    top: 0;
 }
 
 .gLink{
@@ -580,6 +581,7 @@ input[type=time]::-webkit-outer-spin-button {
     width: 100vw;
     height: 100vh;
     z-index: 1000;
+    top: 0;
 }
 
 .deleteConfirm{
@@ -644,6 +646,7 @@ input[type=time]::-webkit-outer-spin-button {
     width: 100vw;
     height: 100vh;
     z-index: 1000;
+    top: 0;
 }
 
 .afterDelete{
@@ -675,18 +678,17 @@ input[type=time]::-webkit-outer-spin-button {
 
 .afterDelete>div:nth-child(2){
     text-align: center; letter-spacing: 2px;
-};
+}
 
 /* confirm to edit book */
-
-
 .editConfirmDiv{
-    /* display: none; */
+    display: none;
     position: absolute;
     background-color: rgba(0,0,0,0.6);
     width: 100vw;
     height: 100vh;
     z-index: 1000;
+    top: 0;
 }
 
 .editConfirm{
@@ -742,6 +744,42 @@ input[type=time]::-webkit-outer-spin-button {
     border: 0;
     font-weight: 200px;
     border-radius: 5px;
+}
+
+.afterEditDiv{
+    display: none;
+    position: absolute;
+    background-color: rgba(0,0,0,0.6);
+    width: 100vw;
+    height: 100vh;
+    z-index: 1000;
+    top:0;
+}
+
+.afterEdit{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    height: 70px;
+    border-radius: 5px;
+    background-color: #FFFFFF;
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-150px, -35px);
+    z-index: 1000;
+    overflow: hidden;
+}
+
+.afterEdit>div:nth-child(1){
+    font-size: 24px;
+    font-family: "Cinzel", serif, "NSimSun";
+    font-weight: 600;
+    text-align: center;
+    padding-bottom: 15px; 
+    margin:30px;
+    letter-spacing: 3px;
 }
 
 

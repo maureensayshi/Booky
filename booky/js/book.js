@@ -141,63 +141,86 @@ app.editBook = function (val, dbBookList) {
                 lendToInput.value = "無";
             };
         } else if (save_btn.value == "儲存修改") {
-            save_btn.value = "更新資料";
-            save_btn.style.backgroundImage = "url(img/edit.svg)";
-            readStatusBox.style.display = "none";
-            currentRead.style.display = "block";
-            currentTwice.style.display = "block";
-            currentLent.style.display = "block";
-
-            for (let i = 0; i < container.length; i++) {
-                container[i].style.opacity = "0";
+            //show confirm alert 
+            app.get(".editConfirmDiv").style.display = "block";
+            if (document.body.clientWidth < 980) {
+                app.get(".editConfirmDiv").style.height = document.body.clientHeight + "px";
             }
-            placeInput.disabled = true;
-            placeInput.className = placeInput.disabled ? "input-init" : "input-edit";
-            lendToInput.className = placeInput.disabled ? "input-init" : "input-edit";
+            app.get(".editConfirm").scrollIntoView({ block: "center", behavior: "smooth" });
+            let yes = app.get(".editConfirm>div>button:nth-child(1)");
+            let no = app.get(".editConfirm>div>button:nth-child(2)");
 
-            for (let i = 0; i < readChoices.length; i++) { readChoices[i].disabled = true; }
-            for (let i = 0; i < twiceChoices.length; i++) { twiceChoices[i].disabled = true; }
-            let twiceChoiceSelected = twiceChoicesChecked.value === "true" ? true : false;
+            yes.onclick = function () {
+                save_btn.value = "更新資料";
+                save_btn.style.backgroundImage = "url(img/edit.svg)";
+                readStatusBox.style.display = "none";
+                currentRead.style.display = "block";
+                currentTwice.style.display = "block";
+                currentLent.style.display = "block";
 
-            for (let i = 0; i < lendChoices.length; i++) { lendChoices[i].disabled = true; }
-            let lendChoiceSelected = lendChoicesChecked.value === "true" ? true : false;
-
-            //重新賦值書籍資料
-            val.place = placeInput.value; //放置地點 string
-            val.readStatus = readChoicesChecked.value; //閱讀狀態數字 0/1/2 string
-            val.twice = twiceChoiceSelected; //值得二讀 true/false
-            val.lend = lendChoiceSelected; //是否有借人 true/false
-            val.lendTo = lendChoiceSelected == true ? lendToInput.value : "無"; //借出對象 string
-
-            if (val.readStatus == 0) {
-                currentRead.textContent = "未讀";
-            } else if (val.readStatus == 1) {
-                currentRead.textContent = "閱讀中";
-            } else if (val.readStatus == 2) {
-                currentRead.textContent = "已讀";
-            }
-
-            if (val.twice == true) {
-                currentTwice.textContent = "是";
-            } else if (val.twice == false) {
-                currentTwice.textContent = "否";
-            }
-
-            if (val.lend == true) {
-                currentLent.textContent = "是";
-            } else if (val.lend == false) {
-                currentLent.textContent = "否";
-            }
-
-            //重新傳回資料庫
-            dbBookList.set(val, function (error) {
-                if (error) {
-                    console.log("更新書不成功");
-                } else {
-                    console.log("更新書成功");
-                    alert("書籍更新資料!");
+                for (let i = 0; i < container.length; i++) {
+                    container[i].style.opacity = "0";
                 }
-            });
+                placeInput.disabled = true;
+                placeInput.className = placeInput.disabled ? "input-init" : "input-edit";
+                lendToInput.className = placeInput.disabled ? "input-init" : "input-edit";
+
+                for (let i = 0; i < readChoices.length; i++) { readChoices[i].disabled = true; }
+                for (let i = 0; i < twiceChoices.length; i++) { twiceChoices[i].disabled = true; }
+                let twiceChoiceSelected = twiceChoicesChecked.value === "true" ? true : false;
+
+                for (let i = 0; i < lendChoices.length; i++) { lendChoices[i].disabled = true; }
+                let lendChoiceSelected = lendChoicesChecked.value === "true" ? true : false;
+
+                //重新賦值書籍資料
+                val.place = placeInput.value; //放置地點 string
+                val.readStatus = readChoicesChecked.value; //閱讀狀態數字 0/1/2 string
+                val.twice = twiceChoiceSelected; //值得二讀 true/false
+                val.lend = lendChoiceSelected; //是否有借人 true/false
+                val.lendTo = lendChoiceSelected == true ? lendToInput.value : "無"; //借出對象 string
+
+                if (val.readStatus == 0) {
+                    currentRead.textContent = "未讀";
+                } else if (val.readStatus == 1) {
+                    currentRead.textContent = "閱讀中";
+                } else if (val.readStatus == 2) {
+                    currentRead.textContent = "已讀";
+                }
+
+                if (val.twice == true) {
+                    currentTwice.textContent = "是";
+                } else if (val.twice == false) {
+                    currentTwice.textContent = "否";
+                }
+
+                if (val.lend == true) {
+                    currentLent.textContent = "是";
+                } else if (val.lend == false) {
+                    currentLent.textContent = "否";
+                }
+
+                //重新傳回資料庫
+                dbBookList.set(val, function (error) {
+                    if (error) {
+                        console.log("更新書不成功");
+                    } else {
+                        console.log("更新書成功");
+                        app.get(".editConfirmDiv").style.display = "none";
+                        app.get(".afterEditDiv").style.display = "block";
+                        setTimeout(function () {
+                            app.get(".afterEditDiv").style.display = "none";
+                        }, 1500);
+                    }
+                });
+            };
+            //如果不要更新
+            no.onclick = function () { app.get(".editConfirmDiv").style.display = "none"; };
+            let editConfirmDiv = app.get(".editConfirmDiv");
+            editConfirmDiv.onclick = function (e) {
+                if (e.target === editConfirmDiv) {
+                    editConfirmDiv.style.display = "none";
+                }
+            };
         }
     });
 
@@ -205,7 +228,9 @@ app.editBook = function (val, dbBookList) {
     let delete_btn = app.get("#delete");
     delete_btn.addEventListener("click", function () {
         app.get(".deleteDiv").style.display = "block";
-        app.get(".deleteDiv").style.height = document.body.clientHeight + "px";
+        if (document.body.clientWidth < 980) {
+            app.get(".deleteDiv").style.height = document.body.clientHeight + "px";
+        }
         app.get(".deleteConfirm").scrollIntoView({ block: "center", behavior: "smooth" });
         let yes = app.get(".deleteConfirm>div>button:nth-child(1)");
         let no = app.get(".deleteConfirm>div>button:nth-child(2)");
@@ -218,7 +243,9 @@ app.editBook = function (val, dbBookList) {
                     console.log("刪除此書!");
                     app.get(".deleteDiv").style.display = "none";
                     app.get(".afterDeleteDiv").style.display = "block";
-                    app.get(".afterDeleteDiv").style.height = document.body.clientHeight + "px";
+                    if (document.body.clientWidth < 980) {
+                        app.get(".afterDeleteDiv").style.height = document.body.clientHeight + "px";
+                    }
                     app.get(".afterDelete").scrollIntoView({ block: "center", behavior: "smooth" });
                     setTimeout(function () {
                         window.location = "bookshelf.html?status=all";
@@ -277,6 +304,13 @@ app.initClient = function () {
             app.get("#end").value = new Date().toISOString().split("T")[0];
             app.endDate = app.get("#end").value;
             app.fillForm();
+            let cancel = app.get(".remind-img>img");
+            cancel.onclick = function () {
+                calPage.style.visibility = "hidden";
+                calPage.style.opacity = "0";
+                calPage.style.filter = "alpha(opacity=0)";
+                calPage.style.minHeight = 0;
+            };
         } else {
             console.log("按鈕應該已經被隱藏");
         }
@@ -438,7 +472,9 @@ app.afterSend = function (link) {
     calPage.style.minHeight = 0;
     //跳出alert視窗
     app.get(".gLinkDiv").style.display = "block";
-    app.get(".gLinkDiv").style.height = document.body.clientHeight + "px";
+    if (document.body.clientWidth < 980) {
+        app.get(".gLinkDiv").style.height = document.body.clientHeight + "px";
+    }
     app.get(".gLink").scrollIntoView({ block: "center", behavior: "smooth" });
     let back = app.get(".gLink>div>button:nth-child(1)");
     let toLink = app.get(".gLink>div>button:nth-child(2)");
