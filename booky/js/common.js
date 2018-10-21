@@ -685,6 +685,7 @@ app.addBook = function (bookTitle, bookAuthor, bookPublisher, bookISBN, bookCove
             app.get(".alertDiv").style.display = "none";
             app.get(".addbar-list").scrollIntoView({ block: "start", behavior: "smooth" });
             app.get(".scan-list").scrollIntoView({ block: "start", behavior: "smooth" });
+            app.get(".shot-list").scrollIntoView({ block: "start", behavior: "smooth" });
             app.get("#keyword").value = "";
         };
         //回到首頁
@@ -693,6 +694,9 @@ app.addBook = function (bookTitle, bookAuthor, bookPublisher, bookISBN, bookCove
             app.get(".addShade").style.visibility = "hidden";
             app.get(".addShade").style.opacity = "0";
             app.get(".addShade").style.minHeight = "0";
+            app.get(".scanShade").style.visibility = "hidden";
+            app.get(".scanShade").style.opacity = "0";
+            app.get(".scanShade").style.minHeight = "0";
             if (app.visualBook || app.visualBookMobile) {
                 if (document.body.clientWidth > 1024) {
                     app.visualBook();
