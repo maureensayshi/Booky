@@ -269,6 +269,7 @@ main .remind-or-not .container .checkmark:after {
     letter-spacing: 2px;
     padding-left: 60px;
     border: none;
+    border-radius: 5px;
     margin: 10px;
     font-size: 14px;
     cursor: pointer;
@@ -505,6 +506,72 @@ input[type=time]::-webkit-outer-spin-button {
 .book-button>input:nth-child(2){ padding-left: 35px;background: url(../img/delete.svg) no-repeat 50px rgba(185, 177, 68, .8); background-size: 10%;}
 .book-button>input:nth-child(3){ background: url(../img/calendar.svg) no-repeat 35px rgba(185, 177, 68, .8); background-size: 10%;}
 .book-button #calLink>input{ background: url(../img/calendar.svg) no-repeat 35px rgba(185, 177, 68, .8); background-size: 10%;}
+
+/* new button alert */
+.gLinkDiv{
+    display: none;
+    position: absolute;
+    background-color: rgba(0,0,0,0.6);
+    width: 100vw;
+    height: 100vh;
+    z-index: 1000;
+}
+
+.gLink{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 310px;
+    height: 240px;
+    border-radius: 5px;
+    background-color: #FFFFFF;
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-150px, -120px);
+    z-index: 1000;
+    overflow: hidden;
+}
+
+.gLink>div:nth-child(1){
+    font-size: 24px;
+    font-family: "Cinzel", serif, "NSimSun";
+    font-weight: 600;
+    text-align: center;
+    padding-bottom: 15px; 
+    margin:30px 0 20px 0;
+    border-bottom: 1px solid #ececec;
+    letter-spacing: 3px;
+}
+
+.gLink>div:nth-child(2){
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.gLink>div>button:nth-child(1){
+    background-color:  #B9B144;
+}
+
+.gLink>div>button{
+    width: 140px;
+    font-family: "微軟正黑體";
+    height: 40px;
+    letter-spacing: 4px;
+    margin: 8px;
+    text-align: center;
+    font-size: 14px;
+    font-weight: normal;
+    background-color: #cccccc;
+    color: white;
+    cursor: pointer;
+    border: 0;
+    font-weight: 200px;
+    border-radius: 5px;
+}
+
 
 /* RWD */
 

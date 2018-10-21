@@ -379,6 +379,22 @@ app.insertEvent = function (event) {
                         app.get("#calLink").style.display = "inline-block";
                         console.log("要即時加到編輯按鈕上的連結: " + snapshot.val());
                     });
+                    //跳出alert視窗
+                    app.get(".gLinkDiv").style.display = "block";
+                    let back = app.get(".gLink>div>button:nth-child(1)");
+                    let toLink = app.get(".gLink>div>button:nth-child(2)");
+                    back.onclick = function () {
+                        app.get(".gLinkDiv").style.display = "none";
+                    };
+                    toLink.onclick = function () {
+                        window.location = link;
+                    };
+                    let gLinkDiv = app.get(".gLinkDiv");
+                    gLinkDiv.addEventListener("click", function (e) {
+                        if (e.target === gLinkDiv) {
+                            gLinkDiv.style.display = "none";
+                        }
+                    });
                 }
             });
         });
