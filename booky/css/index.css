@@ -2,7 +2,7 @@
 
 /* welcome */
 .welcome .fullpage{
-    scroll-snap-type: y proximity;
+    /* scroll-snap-type: y proximity; */
     overflow-y: scroll;
     position: absolute;
     top: 0;
@@ -13,7 +13,7 @@
 .welcome main{
     width: 100vw;
     height: 100vh;
-    scroll-snap-align: start;
+    /* scroll-snap-align: start; */
 }
 
 /* KEY VISUAL */
@@ -81,7 +81,7 @@
 .welcome .feature{
     width: 100vw;
     height: 100vh;
-    scroll-snap-align: start;
+    /* scroll-snap-align: start; */
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(2, 1fr);
@@ -124,7 +124,7 @@
 }
 
 .welcome .indentity>div:nth-child(1){
-    font-size:28px;
+    font-size:22px;
     font-family: "Cinzel", serif, "NSimSun";
     letter-spacing: 3px;
     font-weight: 600;
@@ -181,6 +181,7 @@
     z-index: 2;
     width: 100%;
     text-align: center;
+    letter-spacing: 2px;
 }
 .welcome .feature-two div:nth-child(3){
     width: 100%;
@@ -188,49 +189,6 @@
     background-color: #F1F1F3;
     opacity: .6;
 }
-
-
-/* .welcome main .steps{
-    width: 100%;
-    padding: 40px 0;
-    margin: 30px 0 10px 0;
-    background-color: rgba(255, 255, 255, .5);    
-    display: flex;
-    justify-content: center;
-}
-
-.welcome main .stepsBox{
-    flex: none;
-    display: flex;
-    justify-content: space-between;
-}
-
-.welcome main .step{
-    flex: none;
-    width: 128px;
-    height: auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin: 0 20px;
-}
-.welcome main .step>div{
-    width: 110px;
-    height: 110px;
-    background-color: white;
-    border-radius: 50%;
-    background-position: center center;    
-    background-repeat: no-repeat;
-    background-size: 50%;
-}
-
-.welcome main .step:nth-child(1)>div{background-image: url("../img/user.svg");}
-.welcome main .step:nth-child(2)>div{background-image: url("../img/bar.svg");}
-.welcome main .step:nth-child(3)>div{background-image: url("../img/book.svg");}
-.welcome main .step:nth-child(4)>div{background-image: url("../img/bookshelf.svg");}
-.welcome main .step:nth-child(5)>div{background-image: url("../img/clock.svg");}
-
-.welcome main .step p { line-height: 1; padding-top: 13px;} */
 
 .welcome main .signinDiv{ display: flex; flex-direction: column; margin: 10px;cursor: pointer;}
 
@@ -286,19 +244,6 @@
     width: 840px;
     height: 300px;
 }
-
-/* .sliding-background{
-   
-} */
-/* 
-@keyframes slide {
-    0%{
-      transform: translate3d(0, 0, 0);
-    }
-    100%{
-      transform: translate3d(-2352px, 0, 0);
-    }
-  } */
 
 .book-list {   
     width: auto;

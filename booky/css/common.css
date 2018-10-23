@@ -39,7 +39,6 @@ body{
 	font-family:"Noto Sans JP", arial, sans-serif;
     color:#3f3a3a;   
     background-color: #F1F1F3;
-    /* background-image: linear-gradient(rgba(182,144,223, .4),rgba(182,144,223, .2), #F1F1F3); */
 }
 form{
 	margin:0px;padding:0px;
@@ -187,6 +186,21 @@ header .btn_search{
     z-index: 10;
 }
 
+header .btn_search:hover::after{
+    width: 100px;
+    content: "搜尋站內書籍";
+    position: absolute;
+    right: -40px;
+    top: 45px;
+    padding: 8px 10px;
+    background-color: white;
+    border-radius: 5px;
+    font-family: "Noto Sans JP", arial, sans-serif;
+    letter-spacing: 2px;
+    color: #333333;
+    margin-top: 5px;
+}
+
 #addbook{
     width: 35px;
     height: 35px;
@@ -201,6 +215,20 @@ header .btn_search{
     z-index: 10;
 }
 
+#addbook:hover::after{
+    width: 100px;
+    content: "用關鍵字加書";
+    position: absolute;
+    right: -40px;
+    top: 45px;
+    padding: 8px 10px;
+    background-color: white;
+    border-radius: 5px;
+    font-family: "Noto Sans JP", arial, sans-serif;
+    letter-spacing: 2px;
+    color: #333333;
+}
+
 #scanbook{
     width: 35px;
     height: 35px;
@@ -213,6 +241,20 @@ header .btn_search{
     cursor: pointer;   
     border: 0;
     z-index: 10;
+}
+
+#scanbook:hover::after{
+    width: 100px;
+    content: "用掃描加書";
+    position: absolute;
+    right: -40px;
+    top: 45px;
+    padding: 8px 10px;
+    background-color: white;
+    border-radius: 5px;
+    font-family: "Noto Sans JP", arial, sans-serif;
+    letter-spacing: 2px;
+    color: #333333;
 }
 
 /* search */
