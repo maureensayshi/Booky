@@ -547,6 +547,13 @@ header .btn_search:hover::after{
     margin-bottom: 10px;
 }
 
+
+.scan-list #mac>img{
+    width: 400px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
 .shot-list #iphone>img{
     width: 250px;
     margin-bottom: 15px;
