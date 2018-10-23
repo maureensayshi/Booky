@@ -394,12 +394,11 @@ app.editEvent = function () {
 };
 
 app.insertEvent = function (event) {
-    app.get("#addToCalendar").onclick = function () {
+    app.get("#addToCalendar").addEventListener("click", function () {
         let request = gapi.client.calendar.events.insert({
             "calendarId": "primary",
             "resource": event
         });
-        console.log(event);
         request.execute(function (event) {
             let link = event.htmlLink;
             let db = app.database;
@@ -413,8 +412,7 @@ app.insertEvent = function (event) {
                 }
             });
         });
-    };
-
+    });
 };
 
 //如果不要每天提醒
@@ -454,11 +452,8 @@ app.insertEventNoRemind = function () {
 
 //跳出 alert
 app.afterSend = function (link) {
-    console.log("日曆活動建立");
     let calPage = app.get(".remindShade");
-    calPage.style.visibility = "hidden";
-    calPage.style.opacity = "0";
-    calPage.style.filter = "alpha(opacity=0)";
+    calPage.classList.remove("lightbox");
     calPage.style.minHeight = 0;
     //跳出alert視窗
     app.get(".gLinkDiv").style.display = "block";
@@ -468,8 +463,7 @@ app.afterSend = function (link) {
     app.get(".gLink").scrollIntoView({ block: "center", behavior: "smooth" });
     let back = app.get(".gLink>div>button:nth-child(1)");
     let toLink = app.get(".gLink>div>button:nth-child(2)");
-    back.onclick = function () {
-        console.log("back click");
+    back.addEventListener("click", function () {
         app.get(".gLinkDiv").style.display = "none";
         //隨時監控 google calendar 網址變化
         let dbCalendar = app.database.ref("/members/" + app.uid + "/bookList/" + app.bookID + "/calLink");
@@ -477,12 +471,11 @@ app.afterSend = function (link) {
             app.get("#calendar").style.display = "none";
             app.get("#calLink").href = snapshot.val();
             app.get("#calLink").style.display = "inline-block";
-            console.log("要即時加到編輯按鈕上的連結: " + snapshot.val());
         });
-    };
-    toLink.onclick = function () {
+    });
+    toLink.addEventListener("click", function () {
         window.location = link;
-    };
+    });
     let gLinkDiv = app.get(".gLinkDiv");
     gLinkDiv.addEventListener("click", function (e) {
         if (e.target === gLinkDiv) {
@@ -493,7 +486,6 @@ app.afterSend = function (link) {
                 app.get("#calendar").style.display = "none";
                 app.get("#calLink").href = snapshot.val();
                 app.get("#calLink").style.display = "inline-block";
-                console.log("要即時加到編輯按鈕上的連結: " + snapshot.val());
             });
         }
     });
