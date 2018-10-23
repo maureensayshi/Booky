@@ -652,7 +652,7 @@ header .btn_search:hover::after{
     cursor: pointer;
     border: 0;
     z-index: 10;
-    border-radius: 2px;
+    border-radius: 5px;
 }
 
 /* 搜尋結果 */
@@ -766,8 +766,6 @@ main .bg{
     left:0;
     width: 100%;
     background: url("../img/background.jpg") bottom center no-repeat  ;
-    /* background: url("https://i.pinimg.com/564x/a1/b5/62/a1b562f6802d391acfa8b6d1e4a14c13.jpg") bottom center ; */
-    /* background-size: 65%; */
     background-attachment: fixed;
     opacity: 0.8;
    z-index: -1;
@@ -867,6 +865,7 @@ footer .footer{
 }
 
 @media (max-width: 1024px) and (min-width: 480px){
+
     .menu .close-menu {
         width: 20px;
         height: 20px;
@@ -947,6 +946,12 @@ footer .footer{
         font-family: "Martel Sans", sans-serif;  
         font-weight: 600;   
         letter-spacing: 1px;
+    }
+
+    header .btn_search:hover::after,
+    #addbook:hover::after,
+    #scanbook:hover::after{
+        display: none;
     }
     
     #addbook{
@@ -1122,6 +1127,12 @@ header .btn_menu:after{
 }
 header .btn_logo{
     max-width: 150px;
+}
+
+header .btn_search:hover::after,
+#addbook:hover::after,
+#scanbook:hover::after{
+    display: none;
 }
 
 header .btn_search{

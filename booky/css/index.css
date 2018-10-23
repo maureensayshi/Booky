@@ -2,8 +2,7 @@
 
 /* welcome */
 .welcome .fullpage{
-    /* scroll-snap-type: y proximity; */
-    overflow-y: scroll;
+    /* overflow-y: scroll; */
     position: absolute;
     top: 0;
     bottom: 0;
@@ -13,43 +12,43 @@
 .welcome main{
     width: 100vw;
     height: 100vh;
-    /* scroll-snap-align: start; */
 }
 
 /* KEY VISUAL */
 .welcome main .view{
+    max-width: 900px;
     display: flex;
     justify-content: center;
-    margin: 100px auto 20px auto;
+    margin: 30px auto 10px auto;
 }
 
 .welcome main .key-visual{
     display: flex;
     flex-wrap: nowrap;
     justify-content: space-between;  
-    align-items: center;
+    align-items: flex-end;
 }
 
 .welcome main .key-visual>.visual-book{
     flex: none;
-    width: 128px;
-    height: 179px;
-    padding: 13px;
+    width: 12%;
+    height: auto;
+    /* padding: 5px; */
     margin: 30px;
-    background-color: white;
-    border-radius: 15px;
-    box-shadow: 5px 5px 10px #999999;
+    /* background-color: white; */
+    /* border-radius: 15px; */
+    box-shadow: 1px 1px 10px #999999;
 }
 
 
 .welcome main .key-visual>.visual-book:nth-child(2),
 .welcome main .key-visual>.visual-book:nth-child(4){
-    width: 150px;
-    height: 214px;
+    width: 13%;
+    height: auto;
 }
 
 .welcome main .key-visual>.visual-book:nth-child(3){
-   width: 200px;
+   width: 16%;
    height: auto;
 }
 
@@ -61,7 +60,7 @@
     letter-spacing: 2px;
 }
 
-.welcome main .introduce p{line-height: 3;}
+.welcome main .introduce p{line-height: 2;}
 
 .welcome .downDiv{
     display: flex; flex-direction: column;align-items: center;width: 100%;
@@ -81,7 +80,6 @@
 .welcome .feature{
     width: 100vw;
     height: 100vh;
-    /* scroll-snap-align: start; */
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(2, 1fr);
@@ -93,7 +91,7 @@
 .welcome .feature>div{
     width:33.3vw;
     height: 100%;
-    padding: 55px;
+    padding: 20px;
 }
 
 .welcome .feature>div:nth-child(1){
@@ -136,22 +134,22 @@
     height: 3px;
     background-color: #ececec;
     margin: 20px;
+    color: #333333;
 }
 
 .welcome .indentity>div:nth-child(3){
     width: 80%;
-    font-size: 16px;
+    font-size: 14px;
     font-family: "Noto Sans JP", sans-serif;
     letter-spacing: 2px;
     line-height: 2;
-    margin: 20px;
+    color: #333333;
 }
 
 .welcome .feature-two{
     width: 100vw;
     height: 100vh;
     background-color: white;
-    scroll-snap-align: start;
     position: relative;
 }
 
@@ -171,7 +169,7 @@
 
 .welcome .feature-two div:nth-child(2){
    color: #333333;
-    font-size: 28px;
+    font-size: 20px;
     position: absolute;
     top: 35%;
     left: 50%;
@@ -190,7 +188,7 @@
     opacity: .6;
 }
 
-.welcome main .signinDiv{ display: flex; flex-direction: column; margin: 10px;cursor: pointer;}
+.welcome main .signinDiv{ display: flex; flex-direction: column;cursor: pointer;}
 
 .welcome main .signinDivTwo{ display: flex; flex-direction: column; margin: 10px;cursor: pointer; z-index: 2;}
 
@@ -560,35 +558,44 @@ main #next{
         display: none;
     }
 
-    .welcome .signin{
+    .welcome .signin,
+    .welcome .signinTwo{
         width: 180px;
-        padding-left: 60px;
         background-size:20%
     }
 
     .welcome main .signinDiv{
-        margin:120px 0 30px 0;
+        margin:90px 0 10px 0;
     }
+ 
     .welcome .feature{
         grid-template-columns: repeat(1, 1fr);
-        overflow-y: scroll;
+        height: 135vh;
     }
 
     .welcome .indentity>div:nth-child(1){
-        font-size:20px;
-      
+        font-size:18px;
+        padding-top: 0;
+    }
+
+    .welcome .indentity>div:nth-child(2){
+        margin: 15px;
     }
 
     .welcome .indentity>div:nth-child(3){
         margin:0;
+        font-size: 14px;
+        line-height: 1.75;
     }
+
+    
 
     .color{
         display: none;
     }
     .welcome .feature>div{
         width:90vw;
-        padding: 30px 0 0 0;
+        padding: 20px 0 50px 0;
     }
 
     .welcome .feature-two div:nth-child(1){
@@ -602,7 +609,7 @@ main #next{
         top: 30%;
     }
 
-    .welcome main .introduce{margin: 20px 40px;}
+    /* .welcome main .introduce{margin: 20px;} */
     .welcome main .introduce p {font-size: 14px; line-height: 2; text-align: center;}
 
     /* real index page */
