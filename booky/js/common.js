@@ -35,7 +35,6 @@ app.checkLogin = function () {
 };
 
 // Other Func
-
 app.get = function (selector) {
     return document.querySelector(selector);
 };
