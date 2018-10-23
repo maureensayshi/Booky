@@ -15,7 +15,6 @@ app.init = function () {
 app.showBook = function () {
     let bookID = location.search.split("id=")[1];
     app.bookID = bookID;
-    console.log(bookID);
     let db = app.database;
     let dbBookList = db.ref("/members/" + app.uid + "/bookList/" + bookID);
     dbBookList.once("value", function (snapshot) {
@@ -23,12 +22,10 @@ app.showBook = function () {
         if (val.calLink != "") {
             app.get("#calendar").style.display = "none";
             app.get("#calLink").href = val.calLink;
-            console.log(val.calLink);
         } else if (val.calLink == "") {
             app.calLink = val.calLink;
             app.get("#calLink").style.display = "none";
         }
-        // console.log(val);
         app.get("main .visual-book>img").src = val.coverURL;
         app.get("#title").textContent = val.title;
         app.bookTitle = val.title;
@@ -98,7 +95,6 @@ app.editBook = function (val, dbBookList) {
         let currentRead = app.get(".current-read");
         let currentTwice = app.get(".current-twice");
         let currentLent = app.get(".current-lent");
-
         let readStatusBox = app.get(".status-choice");
         let placeInput = app.get("main .book-place input");
         let lendToInput = app.get("main .lend-to input");
@@ -225,7 +221,7 @@ app.editBook = function (val, dbBookList) {
         }
     });
 
-    //刪除書籍
+    //delete book
     let delete_btn = app.get("#delete");
     delete_btn.addEventListener("click", function () {
         app.get(".deleteDiv").style.display = "block";
@@ -233,15 +229,14 @@ app.editBook = function (val, dbBookList) {
             app.get(".deleteDiv").style.height = document.body.clientHeight + "px";
         }
         app.get(".deleteConfirm").scrollIntoView({ block: "center", behavior: "smooth" });
-        let yes = app.get(".deleteConfirm>div>button:nth-child(1)");
-        let no = app.get(".deleteConfirm>div>button:nth-child(2)");
-        yes.onclick = function () {
-            //重新傳回資料庫
+        let yesSave = app.get(".deleteConfirm>div>button:nth-child(1)");
+        let noSave = app.get(".deleteConfirm>div>button:nth-child(2)");
+        yesSave.addEventListener("click", function () {
+            //set to database
             dbBookList.remove(function (error) {
                 if (error) {
-                    console.log("刪除書籍失敗");
+                    console.log(error);
                 } else {
-                    console.log("刪除此書!");
                     app.get(".deleteDiv").style.display = "none";
                     app.get(".afterDeleteDiv").style.display = "block";
                     if (document.body.clientWidth < 980) {
@@ -253,16 +248,15 @@ app.editBook = function (val, dbBookList) {
                     }, 1000);
                 }
             });
-        };
-        no.onclick = function () {
+        });
+        noSave.addEventListener("click", function () {
             app.get(".deleteDiv").style.display = "none";
-        };
-        let deleteDiv = app.get(".deleteDiv");
-        deleteDiv.onclick = function (e) {
-            if (e.target === deleteDiv) {
-                deleteDiv.style.display = "none";
+        })
+        app.get(".deleteDiv").addEventListener("click", function (e) {
+            if (e.target === app.get(".deleteDiv")) {
+                app.get(".deleteDiv").style.display = "none";
             }
-        };
+        });
     });
 };
 
@@ -293,9 +287,7 @@ app.initClient = function () {
         gapi.auth2.getAuthInstance().signIn();
         if (app.calLink == "") {
             let calPage = app.get(".remindShade");
-            calPage.style.visibility = "visible";
-            calPage.style.opacity = "1";
-            calPage.style.filter = "alpha(opacity=100)";
+            calPage.classList.add("lightbox");
             calPage.style.minHeight = window.innerHeight + "px";
             //預先顯示書名
             app.get("#eventTitle").value = "閱讀" + app.bookTitle;
@@ -307,9 +299,7 @@ app.initClient = function () {
             app.fillForm();
             let cancel = app.get(".remind-img>img");
             cancel.onclick = function () {
-                calPage.style.visibility = "hidden";
-                calPage.style.opacity = "0";
-                calPage.style.filter = "alpha(opacity=0)";
+                calPage.classList.remove("lightbox");
                 calPage.style.minHeight = 0;
             };
         } else {
@@ -341,7 +331,7 @@ app.fillForm = function () {
     let reminderYes = app.get("#remindYes");
     let reminderNo = app.get("#remindNo");
     //要每天提醒
-    reminderYes.onclick = function () {
+    reminderYes.addEventListener("click", function () {
         app.get(".remind-time").style.display = "block";
         app.get("#setTime").value = "20:00";
         app.setTime = app.get("#setTime").value;
@@ -365,13 +355,12 @@ app.fillForm = function () {
             app.editEvent();
         };
         app.editEvent();
-    };
+    });
     //不要每天提醒
-    reminderNo.onclick = function () {
-        console.log("不設定每日提醒");
+    reminderNo.addEventListener("click", function () {
         app.get(".remind-time").style.display = "none";
         app.get("#addToCalendar").onclick = app.insertEventNoRemind;
-    };
+    });
 };
 
 //如果要每天提醒

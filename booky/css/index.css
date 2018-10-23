@@ -96,13 +96,13 @@
 
 .welcome .feature>div:nth-child(1){
     background-image: url("../img/intro2.jpg");
-    background-size:120%; 
+    background-size:cover; 
     background-repeat: no-repeat;
     opacity: .7;
 }
 .welcome .feature>div:nth-child(3){
     background-image: url("../img/intro4.png");
-    background-size:100%; 
+    background-size:cover; 
     background-repeat: no-repeat;
     background-position: center;
     opacity: .7;
@@ -110,7 +110,7 @@
 
 .welcome .feature>div:nth-child(5){
     background-image: url("../img/intro3.jpg");
-    background-size:120%; 
+    background-size:cover; 
     background-repeat: no-repeat;
     opacity: .7;
 }

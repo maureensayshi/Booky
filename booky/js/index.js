@@ -122,9 +122,9 @@ app.visualBook = function () {
                 { transform: "translate3d(0, 0, 0)" },
                 { transform: "translate3d(-" + (num * 168) + "px, 0, 0)" }
             ], {
-                duration: (num * 168 * 1000) / 56,
-                iterations: Infinity
-            });
+                    duration: (num * 168 * 1000) / 56,
+                    iterations: Infinity
+                });
 
             for (let j = 0; j < 2; j++) {
                 for (let i = 0; i < num; i++) {
@@ -168,10 +168,10 @@ app.visualBook = function () {
                 { transform: "translate3d(0, 0, 0)" },
                 { transform: "translate3d(-" + ((listShow.length + num) * 168) + "px, 0, 0)" }
             ], {
-                // timing options
-                duration: ((listShow.length + num) * 168 * 1000) / 56,
-                iterations: Infinity
-            });
+                    // timing options
+                    duration: ((listShow.length + num) * 168 * 1000) / 56,
+                    iterations: Infinity
+                });
 
             app.stopAnimation = function () { slide.pause(); };
             app.startAnimation = function () { slide.play(); };
@@ -297,18 +297,14 @@ app.linkToAddBook = function () {
     for (let i = 0; i < fakeBookAll.length; i++) {
         fakeBookAll[i].onclick = function (e) {
             console.log("hi here");
-            addPage.style.visibility = "visible";
-            addPage.style.opacity = "1";
-            addPage.style.filter = "alpha(opacity=100)";
+            addPage.classList.add("lightbox");
             app.get(".addShade").style.minHeight = window.innerHeight + "px";
             app.typeInit();
             app.keyin_search();
         };
 
         close_add_btn.onclick = function () {
-            addPage.style.visibility = "hidden";
-            addPage.style.opacity = "0";
-            addPage.style.filter = "alpha(opacity=0)";
+            addPage.classList.remove("lightbox");
             result.style.display = "none";
         };
     }
