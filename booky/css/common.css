@@ -547,6 +547,11 @@ header .btn_search:hover::after{
     margin-bottom: 10px;
 }
 
+.shot-list #iphone>img{
+    width: 250px;
+    margin-bottom: 15px;
+}
+
 .reminder{
     font-size: 14px;
     text-align: center;
