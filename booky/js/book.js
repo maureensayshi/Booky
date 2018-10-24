@@ -14,8 +14,9 @@ app.init = function () {
 
 app.eachBook.model = function () {
     app.bookID = location.search.split("id=")[1];
-    app.eachBook.dbBookList = function (callback) { app.database.ref("/members/" + app.uid + "/bookList/" + app.bookID).once("value", function (snapshot) { callback(snapshot.val()); }); };
-    app.eachBook.dbBookList(app.eachBook.show);
+    app.dbBookList = app.database.ref("/members/" + app.uid + "/bookList/" + app.bookID);
+    app.eachBook.info = function (callback) { app.database.ref("/members/" + app.uid + "/bookList/" + app.bookID).once("value", function (snapshot) { callback(snapshot.val()); }); };
+    app.eachBook.info(app.eachBook.show);
 };
 
 app.eachBook.show = function (book) {

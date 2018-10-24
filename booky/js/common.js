@@ -18,8 +18,7 @@ firebase.initializeApp(config);
 let app = {
     database: firebase.database(),
     apiKey: "AIzaSyALgpVirl6lyBvOK9W--e5QycFeMFzcPLg",
-    googleCal: {},
-    eachBook: {},
+    eachBook: { googleCal: {}, },
     googleBooks: {},
 };
 
@@ -128,9 +127,8 @@ app.searchDB = function () {
     console.log(app.searchBarKeyWord);
     console.log(app.uid);
     app.bookMatch = [];
-    let db = app.database;
     if (app.searchBarKeyWord) {
-        let dbBookList = db.ref("/members/" + app.uid + "/bookList/");
+        let dbBookList = app.database.ref("/members/" + app.uid + "/bookList/");
         dbBookList.once("value", function (snapshot) {
             let bookListArrK = Object.keys(snapshot.val());
             let bookListArrV = Object.values(snapshot.val());
@@ -148,7 +146,7 @@ app.searchDB = function () {
                     let href = "book.html?id=" + bookListArrK[i];
                     let amount = app.bookMatch.length;
                     app.containerNum = 0;
-                    app.showBookResult(bookTitle, bookAuthor, bookPublisher, bookISBN, bookCover, amount, href);
+                    app.googleBooks.show(bookTitle, bookAuthor, bookPublisher, bookISBN, bookCover, amount, href);
                 }
             }
             if (app.bookMatch.length == 0) {
@@ -305,7 +303,12 @@ app.scan = function () {
                             containerText[2].textContent = "";
                             containerResult[2].textContent = "";
                             app.containerNum = 2;
-                            app.googleBooks_isbn(result.text);
+                            app.googleBooks.fetch("isbn", result.text).then(function (data) {
+                                app.googleBooks.getData(data);
+                            }).catch(function (error) {
+                                app.googleBooks.errorHandler(error);
+                            });
+                            // app.googleBooks_isbn(result.text);
                         }
                     }).catch((err) => {
                         console.error(err);
@@ -359,7 +362,11 @@ app.decodeFun = function (ev) {
         containerText[3].textContent = "";
         containerResult[3].textContent = "";
         app.containerNum = 3;
-        app.googleBooks_isbn(result.text);
+        app.googleBooks.fetch("isbn", result.text).then(function (data) {
+            app.googleBooks.getData(data);
+        }).catch(function (error) {
+            app.googleBooks.errorHandler(error);
+        });
         uploadBtn.textContent = "重新拍攝";
     }).catch((err) => {
         app.get(".imgLoad").textContent = "未偵測到條碼";
@@ -407,6 +414,8 @@ app.googleBooks.fetch = function (searchType, keyword) {
                 return response.json();
             })
             .then(function (data) {
+                console.log(data);
+
                 if (data.items) {
                     resolve(data);
                 } else {
@@ -436,58 +445,41 @@ app.googleBooks.errorHandler = function (error) {
 };
 
 app.googleBooks.getData = function (data) {
-    console.log(data);
     let amount = 0;
-    if (data.items) {
-        // 抓到需要的不同資料
-        for (let i = 0; i < data.items.length; i++) {
-            amount = data.items.length;
-            let bookTitle;  // 1. 書名
-            let bookAuthor;  // 2. 作者
-            let bookPublisher; // 3. 出版社
-            let bookISBN;  // 4. ISBN-13
-            let bookCover; // 5. 書封照片
-            //書名
-            let title = data.items[i].volumeInfo.title;
-            bookTitle = title; //存取書名       
-            //作者 or 作者群
-            let authors = data.items[i].volumeInfo.authors;
-            bookAuthor = (authors != null) ? authors.join("、") : "暫無資料";
-            //出版社
-            let publisher = data.items[i].volumeInfo.publisher;
-            bookPublisher = (publisher != null) ? publisher : "暫無資料";
-            // ISBN
-            let isbn = data.items[i].volumeInfo.industryIdentifiers;
-            if (isbn != null) {
-                let tmpISBN;
-                for (let i = 0; i < isbn.length; i++) {
-                    if (isbn[i].type == "ISBN_13")
-                        tmpISBN = isbn[i].identifier;
-                }
-                bookISBN = (tmpISBN != "" && tmpISBN != null) ? tmpISBN : "暫無資料";
-            } else if (isbn == null) {
-                bookISBN = "暫無資料";
+    for (let i = 0; i < data.items.length; i++) {
+        amount = data.items.length;
+        let bookTitle;  // 1. 書名
+        let bookAuthor;  // 2. 作者
+        let bookPublisher; // 3. 出版社
+        let bookISBN;  // 4. ISBN-13
+        let bookCover; // 5. 書封照片
+        //書名
+        let title = data.items[i].volumeInfo.title;
+        bookTitle = title; //存取書名       
+        //作者 or 作者群
+        let authors = data.items[i].volumeInfo.authors;
+        bookAuthor = (authors != null) ? authors.join("、") : "暫無資料";
+        //出版社
+        let publisher = data.items[i].volumeInfo.publisher;
+        bookPublisher = (publisher != null) ? publisher : "暫無資料";
+        // ISBN
+        let isbn = data.items[i].volumeInfo.industryIdentifiers;
+        if (isbn != null) {
+            let tmpISBN;
+            for (let i = 0; i < isbn.length; i++) {
+                if (isbn[i].type == "ISBN_13")
+                    tmpISBN = isbn[i].identifier;
             }
-            // 書封照片
-            let fakeCovers = ["./img/fakesample1.svg", "./img/fakesample2.svg", "./img/fakesample3.svg"];
-            let fakeCover = fakeCovers[Math.floor(Math.random() * fakeCovers.length)];
-            let cover = data.items[i].volumeInfo.imageLinks;
-            bookCover = (cover != null) ? cover.thumbnail : fakeCover;
-            app.googleBooks.show(bookTitle, bookAuthor, bookPublisher, bookISBN, bookCover, amount, "");
+            bookISBN = (tmpISBN != "" && tmpISBN != null) ? tmpISBN : "暫無資料";
+        } else if (isbn == null) {
+            bookISBN = "暫無資料";
         }
-    } else {
-        console.log("no book");
-        let containerAll = app.getAll(".container-two");
-        let containerText = app.getAll(".container-two h2>span");
-        let containerResult = app.getAll(".result");
-        let i = app.containerNum;
-        if (containerAll[i]) {
-            containerAll[i].style.display = "flex";
-            containerAll[i].scrollIntoView({ block: "start", behavior: "smooth" });
-            containerResult[i].textContent = "查無此書";
-            containerResult[i].style.justifyContent = "center";
-            containerText[i].textContent = 0;
-        }
+        // 書封照片
+        let fakeCovers = ["./img/fakesample1.svg", "./img/fakesample2.svg", "./img/fakesample3.svg"];
+        let fakeCover = fakeCovers[Math.floor(Math.random() * fakeCovers.length)];
+        let cover = data.items[i].volumeInfo.imageLinks;
+        bookCover = (cover != null) ? cover.thumbnail : fakeCover;
+        app.googleBooks.show(bookTitle, bookAuthor, bookPublisher, bookISBN, bookCover, amount, "");
     }
 };
 
