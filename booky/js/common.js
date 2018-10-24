@@ -260,8 +260,10 @@ app.scanBookInit = function () {
         codeReader.reset();
     });
 };
+
 const codeReader = new ZXing.BrowserBarcodeReader();
 console.log("ZXing code reader initialized");
+
 //桌機版:掃描搜尋
 app.scan = function () {
     codeReader.getVideoInputDevices()
@@ -376,27 +378,24 @@ app.search_book = function (keyWord) {
     switch (app.searchText) {
         case "search-title":
             app.googleBooks.fetch("intitle", keyWord).then(function (data) {
-                app.getBookData(data);
+                app.googleBooks.getData(data);
             }).catch(function (error) {
                 app.googleBooks.errorHandler(error);
             });
             break;
         case "search-isbn":
             app.googleBooks.fetch("isbn", keyWord).then(function (data) {
-                app.getBookData(data);
+                app.googleBooks.getData(data);
             }).catch(function (error) {
                 app.googleBooks.errorHandler(error);
             });
             break;
         case "search-author":
             app.googleBooks.fetch("inauthor", keyWord).then(function (data) {
-                app.getBookData(data);
+                app.googleBooks.getData(data);
             }).catch(function (error) {
                 app.googleBooks.errorHandler(error);
             });
-            break;
-        case "":
-            console.log("請輸入關鍵字");
             break;
     }
 };
@@ -436,7 +435,7 @@ app.googleBooks.errorHandler = function (error) {
     console.log(error);
 };
 
-app.getBookData = function (data) {
+app.googleBooks.getData = function (data) {
     console.log(data);
     let amount = 0;
     if (data.items) {
@@ -474,7 +473,7 @@ app.getBookData = function (data) {
             let fakeCover = fakeCovers[Math.floor(Math.random() * fakeCovers.length)];
             let cover = data.items[i].volumeInfo.imageLinks;
             bookCover = (cover != null) ? cover.thumbnail : fakeCover;
-            app.showBookResult(bookTitle, bookAuthor, bookPublisher, bookISBN, bookCover, amount, "");
+            app.googleBooks.show(bookTitle, bookAuthor, bookPublisher, bookISBN, bookCover, amount, "");
         }
     } else {
         console.log("no book");
@@ -492,7 +491,7 @@ app.getBookData = function (data) {
     }
 };
 
-app.showBookResult = function (bookTitle, bookAuthor, bookPublisher, bookISBN, bookCover, amount, href) {
+app.googleBooks.show = function (bookTitle, bookAuthor, bookPublisher, bookISBN, bookCover, amount, href) {
     console.log(bookTitle, bookAuthor, bookPublisher, bookISBN, bookCover);
     let containerAll = app.getAll(".container-two");
     let containerText = app.getAll(".container-two h2>span");
@@ -533,7 +532,7 @@ app.showBookResult = function (bookTitle, bookAuthor, bookPublisher, bookISBN, b
         if (i == 1 || i == 2 || i == 3) {
             let addButton = app.createElement("button", "", "加入此書", "", "", bookInfoParent);
             addButton.addEventListener("click", function () {
-                app.addBook(bookTitle, bookAuthor, bookPublisher, bookISBN, bookCover);
+                app.googleBooks.update(bookTitle, bookAuthor, bookPublisher, bookISBN, bookCover);
             });
         }
     }
@@ -542,7 +541,7 @@ app.showBookResult = function (bookTitle, bookAuthor, bookPublisher, bookISBN, b
     }
 };
 
-app.addBook = function (bookTitle, bookAuthor, bookPublisher, bookISBN, bookCover) {
+app.googleBooks.update = function (bookTitle, bookAuthor, bookPublisher, bookISBN, bookCover) {
     let eachAuthor = bookAuthor.split("、");
     //prepare book data for DB
     let newBook = {
