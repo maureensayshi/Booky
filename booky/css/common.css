@@ -143,6 +143,9 @@ img{
 }
 
 /* header */
+.hidden{
+    display: none !important;
+}
 
 header{
     display: flex;
