@@ -955,10 +955,26 @@ footer .footer{
         letter-spacing: 1px;
     }
 
-    header .btn_search:hover::after,
-    #addbook:hover::after,
-    #scanbook:hover::after{
-        display: none;
+    header .btn_search:hover::after{
+        /* remove desktop style */
+        width: unset;
+        right: unset;
+        top: unset;
+        padding: 0;
+        background-color: transparent;
+        border-radius: 0;
+        color: #333333;
+        margin-top: 0;
+        /* add new style */
+        content: "SEARCH";
+        position: absolute;
+        left: 100%;
+        z-index: 10;
+        transform: translate(-80%, 0);
+        font-size: 14px;
+        font-family: "Martel Sans", sans-serif;
+        font-weight: 600;
+        letter-spacing: 1px;
     }
     
     #addbook{
@@ -982,6 +998,29 @@ footer .footer{
         font-weight: 600;
         letter-spacing: 1px;
     }
+
+    #addbook:hover::after{
+        /* remove desktop style */
+        width: unset;
+        right: unset;
+        top: unset;
+        padding: 0;
+        background-color: transparent;
+        border-radius: 0;
+        color: #333333;
+        margin-top: 0;
+        /* add new style */
+        content: "ADD";
+        position: absolute;
+        left: 45%;
+        bottom: -20px;
+        z-index: 10;
+        transform: translate(-45%, 0);
+        font-size: 14px;
+        font-family: "Martel Sans", sans-serif;
+        font-weight: 600;
+        letter-spacing: 1px;  
+      }
     
     #scanbook{
         position: fixed;
@@ -1004,6 +1043,29 @@ footer .footer{
         font-weight: 600;
         letter-spacing: 1px;
     }
+
+    #scanbook:hover::after{
+        /* remove desktop style */
+          width: unset;
+          right: unset;
+          top: unset;
+          padding: 0;
+          background-color: transparent;
+          border-radius: 0;
+          color: #333333;
+          margin-top: 0;
+         /* add new style */
+          content: "SCAN";
+          position: fixed;
+          left: 50%;
+          bottom: -20px;
+          z-index: 10;
+          transform: translate(-50%, 0);
+          font-size: 14px;
+          font-family: "Martel Sans", sans-serif;
+          font-weight: 600;
+          letter-spacing: 1px;
+        }
 
     main{margin-top:50px;}
 
@@ -1136,12 +1198,6 @@ header .btn_logo{
     max-width: 150px;
 }
 
-header .btn_search:hover::after,
-#addbook:hover::after,
-#scanbook:hover::after{
-    display: none;
-}
-
 header .btn_search{
     position: fixed;
     background-size: 60%;
@@ -1162,6 +1218,28 @@ header .btn_search::after{
     font-family: "Martel Sans", sans-serif;  
     font-weight: 600;   
     letter-spacing: 1px;
+} 
+
+header .btn_search:hover::after{
+    /* remove desktop style */
+    width: unset;
+    right: unset;
+    top: unset;
+    padding: 0;
+    background-color: transparent;
+    border-radius: 0;
+    color: #333333;
+    margin-top: 0;
+    /* add new style */
+    content: "SEARCH";
+    position: absolute;
+    left: 100%;
+    z-index: 10;
+    transform: translate(-80%, 0);
+    font-size: 14px;
+    font-family: "Martel Sans", sans-serif;
+    font-weight: 600;
+    letter-spacing: 1px;
 }
 
 .add-shade .add-img,
@@ -1169,148 +1247,194 @@ header .btn_search::after{
     margin-bottom: 50px;
 }
     
-    #addbook{
-        position: fixed;
-        background-size: 60%;
-        left: 37.5%;
-        bottom: 32px;
-        top: unset;
-        transform: translate(-37.5%, 0);
-    }
+#addbook{
+    position: fixed;
+    background-size: 60%;
+    left: 37.5%;
+    bottom: 32px;
+    top: unset;
+    transform: translate(-37.5%, 0);
+}    
 
-    #addbook::after{
-        content: "ADD";
-        position: fixed;
-        left: 45%;
-        bottom: -20px;
-        z-index: 10;
-        transform: translate(-45%, 0);
-        font-size: 14px;
-        font-family: "Martel Sans", sans-serif;
-        font-weight: 600;
-        letter-spacing: 1px;
-    }
+#addbook::after{
+    content: "ADD";
+    position: fixed;
+    left: 45%;
+    bottom: -20px;
+    z-index: 10;
+    transform: translate(-45%, 0);
+    font-size: 14px;
+    font-family: "Martel Sans", sans-serif;
+    font-weight: 600;
+    letter-spacing: 1px;
+}    
+
+#addbook:hover::after{
+  /* remove desktop style */
+  width: unset;
+  right: unset;
+  top: unset;
+  padding: 0;
+  background-color: transparent;
+  border-radius: 0;
+  color: #333333;
+  margin-top: 0;
+  /* add new style */
+  content: "ADD";
+  position: absolute;
+  left: 45%;
+  bottom: -20px;
+  z-index: 10;
+  transform: translate(-45%, 0);
+  font-size: 14px;
+  font-family: "Martel Sans", sans-serif;
+  font-weight: 600;
+  letter-spacing: 1px;  
+}
     
-    #scanbook{
-        position: fixed;
-        background-size: 60%;
-        left: 62.5%;
-        top: unset;
-        bottom: 33px;
-        transform: translate(-62.5%, 0);
-    }
+#scanbook{
+    position: fixed;
+    background-size: 60%;
+    left: 62.5%;
+    top: unset;
+    bottom: 33px;
+    transform: translate(-62.5%, 0);
+}    
 
-    #scanbook::after{
-        content: "SCAN";
-        position: fixed;
-        left: 50%;
-        bottom: -20px;
-        z-index: 10;
-        transform: translate(-50%, 0);
-        font-size: 14px;
-        font-family: "Martel Sans", sans-serif;
-        font-weight: 600;
-        letter-spacing: 1px;
-    }
+#scanbook::after{
+    content: "SCAN";
+    position: fixed;
+    left: 50%;
+    bottom: -20px;
+    z-index: 10;
+    transform: translate(-50%, 0);
+    font-size: 14px;
+    font-family: "Martel Sans", sans-serif;
+    font-weight: 600;
+    letter-spacing: 1px;
+}  
 
-    .searchbar-img{
-        margin-bottom: 70px;
-    }
+#scanbook:hover::after{
+/* remove desktop style */
+  width: unset;
+  right: unset;
+  top: unset;
+  padding: 0;
+  background-color: transparent;
+  border-radius: 0;
+  color: #333333;
+  margin-top: 0;
+ /* add new style */
+  content: "SCAN";
+  position: fixed;
+  left: 50%;
+  bottom: -20px;
+  z-index: 10;
+  transform: translate(-50%, 0);
+  font-size: 14px;
+  font-family: "Martel Sans", sans-serif;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
 
-    .addtab{
-        font-size: 14px;
-        margin: 5px;
-        width: 60px;
-    }
+.searchbar-img{
+    margin-bottom: 70px;
+}
 
-    .searchbar-img>img,
-    .add-shade .add-img>img,
-    .scan-shade .scan-img>img{
-        right: 25px;
-    }
+.addtab{
+    font-size: 14px;
+    margin: 5px;
+    width: 60px;
+}
 
-    .add-shade form{margin-top: 30px;}
+.searchbar-img>img,
+.add-shade .add-img>img,
+.scan-shade .scan-img>img{
+    right: 25px;
+}
 
-    .add-shade form button,
-    .scan-shade form button{
-        right: 6%; top: 25%;
-    }
+.add-shade form{margin-top: 30px;}
 
-    .add-shade form input,
-    .scan-shade form input,
-    .search-shade form input{
-        font-size:14px;
-    }
+.add-shade form button,
+.scan-shade form button{
+    right: 6%; top: 25%;
+}
 
-    .searchbar-list li{font-size: 14px; margin: 5px;}
+.add-shade form input,
+.scan-shade form input,
+.search-shade form input{
+    font-size:14px;
+}
 
-    .scan-shade form{width: 100%;}
+.searchbar-list li{font-size: 14px; margin: 5px;}
 
-    .scan-list h5{margin-bottom: 0px;}
-    .scan-list .camera{height: 250px;padding: 10px 0 10px 0;}
+.scan-shade form{width: 100%;}
+
+.scan-list h5{margin-bottom: 0px;}
+.scan-list .camera{height: 250px;padding: 10px 0 10px 0;}
 
 
-    .container-two{
-        width: 100%;
-        max-width: 250px;
-    }
+.container-two{
+    width: 100%;
+    max-width: 250px;
+}
 
-  
-  .container-two h2 {
-        font-size: 18px;
-        padding: 0 0 10px 0;
-        width: 100%;
-    }
 
-    
-    .container-two .result .result-book{
-        flex-direction: column;
-        align-items: center;
-        padding: 0;
-        width: 100%;
-    }
+.container-two h2 {
+    font-size: 18px;
+    padding: 0 0 10px 0;
+    width: 100%;
+}
 
-    .result>.result-book>.result-book-img{
-        margin: 15px 0px 30px 0px;
-        width: 40%;
-    }
 
-    .result>.result-book>.result-book-info{
-        width: 250px;
-        margin: 10px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
+.container-two .result .result-book{
+    flex-direction: column;
+    align-items: center;
+    padding: 0;
+    width: 100%;
+}
 
-    .result>.result-book>.result-book-info>p{
-        width: 90%;
-        text-align: left;
-    }
+.result>.result-book>.result-book-img{
+    margin: 15px 0px 30px 0px;
+    width: 40%;
+}
 
-    .result-book-info button{
-        width: 150px;
-        margin: 10px;   
-    }
-  
-    .mobile-add{
-        width: 100%;
-        height: 80px;
-        background-color: white;
-        position: fixed;
-        left: 0;
-        bottom: 0;
-        z-index: 2;
-    }
+.result>.result-book>.result-book-info{
+    width: 250px;
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 
-    main .bg{
-        /* background: url("../img/background.jpg") no-repeat;
-        background-position: 50% 100%; */
-        background: url("https://i.pinimg.com/564x/a1/b5/62/a1b562f6802d391acfa8b6d1e4a14c13.jpg") no-repeat center bottom;
-        background-size: 100%;
-        bottom: 72px;
-    }
+.result>.result-book>.result-book-info>p{
+    width: 90%;
+    text-align: left;
+}
 
-  
-    footer .footer{padding: 10px;}
+.result-book-info button{
+    width: 150px;
+    margin: 10px;   
+}
+
+.mobile-add{
+    width: 100%;
+    height: 80px;
+    background-color: white;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    z-index: 2;
+}
+
+main .bg{
+    /* background: url("../img/background.jpg") no-repeat;
+    background-position: 50% 100%; */
+    background: url("https://i.pinimg.com/564x/a1/b5/62/a1b562f6802d391acfa8b6d1e4a14c13.jpg") no-repeat center bottom;
+    background-size: 100%;
+    bottom: 72px;
+}
+
+
+footer .footer{padding: 10px;}
 }
