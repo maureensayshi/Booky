@@ -213,11 +213,11 @@ app.eachBook.update.edit = function (val) {
             noEdit.addEventListener("click", function () {
                 app.get(".editConfirmDiv").style.display = "none";
             });
-            app.get(".editConfirmDiv").onclick = function (e) {
-                if (e.target === app.get(".editConfirmDiv")) {
-                    app.get(".editConfirmDiv").style.display = "none";
-                }
-            };
+            // app.get(".editConfirmDiv").onclick = function (e) {
+            //     if (e.target === app.get(".editConfirmDiv")) {
+            //         app.get(".editConfirmDiv").style.display = "none";
+            //     }
+            // };
         }
     });
 };
