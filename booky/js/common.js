@@ -21,6 +21,7 @@ let app = {
     eachBook: { googleCal: {}, },
     googleBooks: {},
     addBook: {},
+    scanBook: {},
 };
 
 app.checkLogin = function () {
@@ -156,8 +157,8 @@ app.addBook.Init = function () {
 
     closeBtn.addEventListener("click", function (e) {
         addPage.classList.remove("lightbox");
-        app.get("#keyword").value = "";
         app.getAll(".container-two")[1].classList.remove("show-container");
+        app.get("#keyword").value = "";
     });
 };
 
@@ -227,35 +228,35 @@ app.addBook.search = function (keyWord) {
 };
 
 // scan book --------------------------------------------------------------------------------------
-app.scanBookInit = function () {
-    let scan_btn = app.get("#scanbook");
+app.scanBook.Init = function () {
+    let scanBtn = app.get("#scanbook");
     let scanPage = app.get(".scan-shade");
-    let close_scan_btn = app.get(".scan-img>img");
-    let result = app.getAll(".container-two");
-    scan_btn.addEventListener("click", function () {
+    let closeBtn = app.get(".scan-img>img");
+    scanBtn.addEventListener("click", function () {
         scanPage.classList.add("lightbox");
         app.get(".scanShade").style.minHeight = window.innerHeight + "px";
         if (document.body.clientWidth > 1024) {
             app.get(".scan-list").style.display = "block";
-            app.scan();
+            app.scanBook.scan();
         } else {
             app.get(".shot-list").style.display = "block";
-            app.imgScan();
+            app.scanBook.imgScan();
         }
     });
-
-    close_scan_btn.addEventListener("click", function () {
+    closeBtn.addEventListener("click", function () {
         scanPage.classList.remove("lightbox");
-        result[2].textContent = "";
+        app.getAll(".container-two")[app.containerNum].classList.remove("show-container");
+        if (app.get(".line")) { app.get(".line").textContent = ""; }
+        if (app.get(".imgLoad")) { app.get(".imgLoad").textContent = ""; }
         codeReader.reset();
     });
 };
 
 const codeReader = new ZXing.BrowserBarcodeReader();
 console.log("ZXing code reader initialized");
-
 // scan book ( Desktop ) --------------------------------------------------------------------------------------
-app.scan = function () {
+app.scanBook.scan = function () {
+    let startBtn = app.get("#startButton");
     codeReader.getVideoInputDevices()
         .then((videoInputDevices) => {
             const sourceSelect = document.getElementById("sourceSelect");
@@ -267,19 +268,15 @@ app.scan = function () {
                     sourceOption.value = element.deviceId;
                     sourceSelect.appendChild(sourceOption);
                 });
-                const sourceSelectPanel = document.getElementById("sourceSelectPanel");
             }
-            let startBtn = app.get("#startButton");
-            let line = app.get(".line");
-            let container = app.getAll(".container-two");
-            let containerText = app.getAll(".container-two h2>span");
-            let containerResult = app.getAll(".result");
-
             startBtn.addEventListener("click", () => {
-                container[2].style.display = "none";
-                containerResult[2].style.justifyContent = "flex-start";
-                containerText[2].textContent = "";
-                containerResult[2].textContent = "";
+                app.containerNum = 2;
+                let line = app.get(".line");
+                app.getAll(".container-two")[2].classList.remove("show-container");
+                // app.getAll(".container-two")[2].style.display = "none";
+                // app.getAll(".container-two h2>span")[2].textContent = "";
+                app.getAll(".result")[2].textContent = "";
+                app.getAll(".result")[2].style.justifyContent = "flex-start";
                 if (startBtn.value == "start") {
                     startBtn.value = "stop";
                     startBtn.textContent = "停止掃描";
@@ -290,11 +287,10 @@ app.scan = function () {
                             line.textContent = "ISBN : " + result.text;
                             line.classList.remove("typewriter");
                             startBtn.textContent = "重新掃描";
-                            container[2].style.display = "block";
-                            containerResult[2].style.justifyContent = "center";
-                            containerText[2].textContent = "";
-                            containerResult[2].textContent = "";
-                            app.containerNum = 2;
+                            app.getAll(".container-two")[2].style.display = "block";
+                            app.getAll(".container-two h2>span")[2].textContent = "";
+                            app.getAll(".result")[2].textContent = "";
+                            app.getAll(".result")[2].style.justifyContent = "center";
                             app.googleBooks.fetch("isbn", result.text).then(function (data) {
                                 app.googleBooks.getData(data);
                             }).catch(function (error) {
@@ -323,11 +319,12 @@ app.scan = function () {
 };
 
 // add book ( mobile )--------------------------------------------------------------------------------------
-app.imgScan = function () {
-    console.log("scan img");
+app.scanBook.imgScan = function () {
+    app.containerNum = 3;
     function ProcessFile(e) {
         let file = document.getElementById("file").files[0];
         app.get("#img-result>img").src = URL.createObjectURL(file);
+        app.getAll(".result")[3].textContent = "";
     }
     document.getElementById("file").addEventListener("change",
         ProcessFile, false);
@@ -339,20 +336,14 @@ app.imgScan = function () {
 //拍照後搜尋資料庫
 app.decodeFun = function (ev) {
     const codeReader = new ZXing.BrowserBarcodeReader("video");
-    console.log("ZXing code reader initialized");
     let fileImg = app.get("#img-result>img");
-    let container = app.getAll(".container-two");
-    let containerText = app.getAll(".container-two h2>span");
-    let containerResult = app.getAll(".result");
     let uploadBtn = app.get(".shot-list label");
-
     codeReader.decodeFromImage(fileImg).then((result) => {
-        app.get(".imgLoad").textContent = "ISBN : " + result.text;
-        container[3].style.display = "block";
-        containerResult[3].style.justifyContent = "center";
-        containerText[3].textContent = "";
-        containerResult[3].textContent = "";
         app.containerNum = 3;
+        app.get(".imgLoad").textContent = "ISBN : " + result.text;
+        app.getAll(".container-two")[3].classList.add("show-container");
+        app.getAll(".container-two h2>span")[3].textContent = "";
+        app.getAll(".container-two h2>span")[3].textContent = "";
         app.googleBooks.fetch("isbn", result.text).then(function (data) {
             app.googleBooks.getData(data);
         }).catch(function (error) {
@@ -360,11 +351,11 @@ app.decodeFun = function (ev) {
         });
         uploadBtn.textContent = "重新拍攝";
     }).catch((err) => {
+        app.containerNum = 3;
         app.get(".imgLoad").textContent = "未偵測到條碼";
-        container[3].style.display = "block";
-        containerResult[3].style.justifyContent = "center";
-        containerText[3].textContent = "0";
-        containerResult[3].textContent = "無搜尋結果，請重新拍攝";
+        app.getAll(".container-two")[3].classList.add("show-container");
+        app.getAll(".container-two h2>span")[3].textContent = "0";
+        app.getAll(".result")[3].textContent = "無搜尋結果，請重新拍攝";
         uploadBtn.textContent = "重新拍攝";
     });
     console.log(`Started decode for image from ${fileImg.src}`);
@@ -427,50 +418,44 @@ app.googleBooks.getData = function (data) {
 };
 
 app.googleBooks.show = function (bookTitle, bookAuthor, bookPublisher, bookISBN, bookCover, amount, href) {
-    let containerAll = app.getAll(".container-two");
-    let containerText = app.getAll(".container-two h2>span");
-    let containerResult = app.getAll(".result");
     let i = app.containerNum;
-    if (containerAll[i]) {
-        app.getAll(".container-two")[i].classList.add("show-container");
-        containerAll[i].style.paddingBottom = "500px";
-        containerAll[i].scrollIntoView({ block: "start", behavior: "smooth" });
-        if (i == 2) { amount = 1; }
-        containerText[i].style.textAlign = "center";
-        containerText[i].textContent = amount;
-        let booksParent = containerResult[i];
-        //each book
-        let bookParent = app.createElement("div", "result-book", "", "", "", booksParent);
-        let ImageParent = app.createElement("div", "result-book-img", "", "", "", bookParent);
-        if (i == 0) {
-            let ImgHref = app.createElement("a", "", "", "href", href, ImageParent);
-            app.createElement("img", "", "", "src", bookCover, ImgHref);
-        } else { app.createElement("img", "", "", "src", bookCover, ImageParent); }
-        // each book info
-        let bookInfoParent = app.createElement("div", "result-book-info", "", "", "", bookParent);
-        let TitleParent = app.createElement("p", "", "書名：", "", "", bookInfoParent);
-        app.createElement("span", "", bookTitle, "", "", TitleParent);
-        let bookAuthorParent = app.createElement("p", "", "作者：", "", "", bookInfoParent);
-        app.createElement("span", "", bookAuthor, "", "", bookAuthorParent);
-        let PublisherParent = app.createElement("p", "", "出版社：", "", "", bookInfoParent);
-        app.createElement("span", "", bookPublisher, "", "", PublisherParent);
-        let ISBNParent = app.createElement("p", "", "ISBN-13：", "", "", bookInfoParent);
-        app.createElement("span", "", bookISBN, "", "", ISBNParent);
-        if (i == 1 || i == 2 || i == 3) {
-            let addButton = app.createElement("button", "", "加入此書", "", "", bookInfoParent);
-            addButton.addEventListener("click", function () {
-                app.googleBooks.update(bookTitle, bookAuthor, bookPublisher, bookISBN, bookCover);
-            });
-        }
+    console.log(app.containerNum);
+
+    app.getAll(".container-two")[i].classList.add("show-container");
+    app.getAll(".container-two")[i].style.paddingBottom = "500px";
+    app.getAll(".container-two")[i].scrollIntoView({ block: "start", behavior: "smooth" });
+    if (i == 2) { amount = 1; }
+    app.getAll(".container-two h2>span")[i].textContent = amount;
+    app.getAll(".container-two h2>span")[i].style.textAlign = "center";
+    //each book
+    let booksParent = app.getAll(".result")[i];
+    let bookParent = app.createElement("div", "result-book", "", "", "", booksParent);
+    let ImageParent = app.createElement("div", "result-book-img", "", "", "", bookParent);
+    if (i == 0) {
+        let ImgHref = app.createElement("a", "", "", "href", href, ImageParent);
+        app.createElement("img", "", "", "src", bookCover, ImgHref);
+    } else { app.createElement("img", "", "", "src", bookCover, ImageParent); }
+    let bookInfoParent = app.createElement("div", "result-book-info", "", "", "", bookParent);
+    let TitleParent = app.createElement("p", "", "書名：", "", "", bookInfoParent);
+    app.createElement("span", "", bookTitle, "", "", TitleParent);
+    let bookAuthorParent = app.createElement("p", "", "作者：", "", "", bookInfoParent);
+    app.createElement("span", "", bookAuthor, "", "", bookAuthorParent);
+    let PublisherParent = app.createElement("p", "", "出版社：", "", "", bookInfoParent);
+    app.createElement("span", "", bookPublisher, "", "", PublisherParent);
+    let ISBNParent = app.createElement("p", "", "ISBN-13：", "", "", bookInfoParent);
+    app.createElement("span", "", bookISBN, "", "", ISBNParent);
+    if (i == 1 || i == 2 || i == 3) {
+        let addButton = app.createElement("button", "", "加入此書", "", "", bookInfoParent);
+        addButton.addEventListener("click", function () {
+            app.googleBooks.addToDB(bookTitle, bookAuthor, bookPublisher, bookISBN, bookCover);
+        });
     }
     if (amount == 1) { app.get(".result .result-book").style.width = "100%"; }
 };
 
-app.googleBooks.update = function (bookTitle, bookAuthor, bookPublisher, bookISBN, bookCover) {
-    let eachAuthor = bookAuthor.split("、");
-    //prepare book data for DB
+app.googleBooks.addToDB = function (bookTitle, bookAuthor, bookPublisher, bookISBN, bookCover) {
     let newBook = {
-        authors: eachAuthor,
+        authors: bookAuthor.split("、"),
         coverURL: bookCover,
         lend: false,
         lendTo: "無",
@@ -483,8 +468,7 @@ app.googleBooks.update = function (bookTitle, bookAuthor, bookPublisher, bookISB
         calLink: "",
     };
     //send book data to DB
-    let db = app.database;
-    db.ref("/members/" + app.uid + "/bookList/").push(newBook, function (error) {
+    app.database.ref("/members/" + app.uid + "/bookList/").push(newBook, function (error) {
         if (error) { console.log("Error of setting new book data."); }
         else { console.log("Set book data okay."); }
     }).then(function (res) {
@@ -501,11 +485,14 @@ app.googleBooks.update = function (bookTitle, bookAuthor, bookPublisher, bookISB
         //search next book
         keepAdd.addEventListener("click", function () {
             app.get(".alertDiv").style.display = "none";
-            app.getAll(".lightbox-list")[app.containerNum].scrollIntoView({ block: "start", behavior: "smooth" });
-            // app.get(".searchbar-list").scrollIntoView({ block: "start", behavior: "smooth" });
-            // app.get(".addbar-list").scrollIntoView({ block: "start", behavior: "smooth" });
-            // app.get(".scan-list").scrollIntoView({ block: "start", behavior: "smooth" });
-            // app.get(".shot-list").scrollIntoView({ block: "start", behavior: "smooth" });
+            if (app.getAll(".lightbox-list")[app.containerNum - 1]) {
+                app.getAll(".lightbox-list")[app.containerNum - 1].scrollIntoView({ block: "start", behavior: "smooth" });
+            }
+            if (app.get(".shot-list")) { app.get(".shot-list").scrollIntoView({ block: "start", behavior: "smooth" }); }
+            if (app.get(".imgLoad")) { app.get(".imgLoad").textContent = ""; }
+            app.getAll(".container-two")[app.containerNum].classList.remove("show-container");
+            //waiting test
+            if (app.get("#startButton")) { codeReader.reset(); app.get("#startButton").value = "重新掃描"; }
             app.get("#keyword").value = "";
         });
         //back to homepage
@@ -515,6 +502,9 @@ app.googleBooks.update = function (bookTitle, bookAuthor, bookPublisher, bookISB
             app.get(".addShade").style.minHeight = "0";
             app.get(".scanShade").classList.remove("lightbox");
             app.get(".scanShade").style.minHeight = "0";
+            app.getAll(".container-two")[app.containerNum].classList.remove("show-container");
+            if (app.get(".line")) { app.get(".line").textContent = ""; }
+            if (app.get(".imgLoad")) { app.get(".imgLoad").textContent = ""; }
             if (app.visualBook || app.visualBookMobile) {
                 if (document.body.clientWidth > 1024) {
                     app.visualBook();

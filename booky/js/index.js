@@ -26,7 +26,7 @@ app.checkingIndex = function () {
             app.menu();
             app.searchBar();
             app.addBook.Init();
-            app.scanBookInit();
+            app.scanBook.Init();
             app.closeLoading();
         } else {
             // User is signed out or haven't sign up.
@@ -140,8 +140,6 @@ app.visualBook = function () {
             }
             app.linkToAddBook();
         } else {
-            console.log("222222222");
-
             //如果有 book list
             console.log(snapshot.val());
             let bookListArrV = Object.values(snapshot.val());
@@ -293,19 +291,18 @@ app.linkToAddBook = function () {
     let fakeBookAll = app.getAll(".sample-book");
     let addPage = app.get(".add-shade");
     let close_add_btn = app.get(".add-img>img");
-    let result = app.get(".container-two");
+    // let result = app.get(".container-two");
     for (let i = 0; i < fakeBookAll.length; i++) {
         fakeBookAll[i].onclick = function (e) {
             console.log("hi here");
             addPage.classList.add("lightbox");
             app.get(".addShade").style.minHeight = window.innerHeight + "px";
-            app.typeInit();
-            app.keyin_search();
+            app.addBook.typeListener();
+            app.addBook.getInput();
         };
-
         close_add_btn.onclick = function () {
             addPage.classList.remove("lightbox");
-            result.style.display = "none";
+            app.get(".container-two")[1].style.display = "none";
         };
     }
 };
