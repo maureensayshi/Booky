@@ -14,17 +14,15 @@ app.init = function () {
 };
 
 app.showMemberInfo = function () {
-    let db = app.database;
-    let dbMember = db.ref("/members/" + app.uid);
-    dbMember.on("value", function (snapshot) {
+    app.database.ref("/members/" + app.uid).once("value", function (snapshot) {
         let val = snapshot.val();
-        let memberName = app.get(".member-info>div:nth-child(1)>span");
-        memberName.textContent = val.name;
-        let memberEmail = app.get(".member-info>div:nth-child(2)>span");
-        memberEmail.textContent = val.email;
-        let memberPic = app.get("main .member-img");
-        memberPic.style.backgroundImage = `url(${val.photo})`;
-        memberPic.style.backgroundSize = "100%";
+        // let memberName = app.get(".member-info>div:nth-child(1)>span");
+        app.get("#name").textContent = val.name;
+        // let memberEmail = app.get(".member-info>div:nth-child(2)>span");
+        app.get("#email").textContent = val.email;
+        // let memberPic = app.get("main .member-img");
+        app.get("#pic").style.backgroundImage = `url(${val.photo})`;
+        app.get("#pic").style.backgroundSize = "100%";
         app.closeLoading();
     });
 };

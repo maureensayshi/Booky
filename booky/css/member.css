@@ -26,10 +26,20 @@ main .member-img{
 
 main .member-info{
     margin-top: 50px;
+    margin-left: 35%;
+    width: 70%;   
 }
 
 main .member-info>div{
     margin-top: 20px;
+    word-wrap: break-word;
+    width: 100%;
+}
+
+main .member-info>div>span:nth-child(1){
+    display: inline-block;
+    width: 60px;
+    color: #bbbbbb;
 }
 
 main .view button{
@@ -42,7 +52,7 @@ main .view button{
     margin: 40px 20px;
     font-size: 14px;
     cursor: pointer;
-    font-family: "微軟正黑體";
+    font-family:"Noto Sans JP", arial, sans-serif;
     background: url(../img/logout.svg) no-repeat 35px rgba(185, 177, 68, 1);
     background-size: 10%;
     color: white;
@@ -54,10 +64,11 @@ main .view button{
 
 @media (max-width: 980px) and (min-width:640px) {
     main .view{width:80%;}
+    main .member-info{margin-top:20px;  margin-left: 0; width: 70%; }
 }
 
 @media (max-width: 640px) and (min-width:319px) {
-    main .view{width:90%;font-size: 14px;margin-bottom: 200px;height: 350px;}
-    main .member-info{margin-top:20px;}
+    main .view{width:90%;font-size: 14px;margin-bottom: 200px;}
+    main .member-info{margin-top:20px;  margin-left: 0; width: 70%; }
 }
 

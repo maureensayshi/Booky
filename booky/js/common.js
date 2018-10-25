@@ -37,14 +37,14 @@ app.checkLogin = function () {
     });
 };
 
-// Other Func
+// for selecting HTML DOM
 app.get = function (selector) {
     return document.querySelector(selector);
 };
 app.getAll = function (selector) {
     return document.querySelectorAll(selector);
 };
-
+// for creating HTML Element
 app.createElement = function (tagName, class_Name, text_Content, attr, attrText, parentElement) {
     let obj = document.createElement(tagName);
     obj.className = class_Name;
@@ -56,87 +56,67 @@ app.createElement = function (tagName, class_Name, text_Content, attr, attrText,
 
 // menu open and close
 app.menu = function () {
-    let menu_btn = app.get(".btn_menu");
+    let menuBtn = app.get(".btn_menu");
     let menu = app.get(".menu");
-    let close_menu = app.get(".close-menu");
+    let closeBtn = app.get(".close-menu");
     let shadow = app.get(".menu-shade");
-
-    menu_btn.onclick = function () {
+    menu.style.display = (window.innerWidth < 1025) ? "none" : "flex";
+    menuBtn.addEventListener("click", function () {
         menu.style.left = "0";
         menu.style.opacity = "1";
         menu.style.display = "flex";
-        menu_btn.style.visibility = "hidden";
-        if (window.innerWidth < 1025) {
-            menu_btn.style.visibility = "visible";
-        }
+        menuBtn.style.visibility = (window.innerWidth < 1025) ? "visible" : "hidden";
         shadow.style.left = "0%";
-    };
-
-    close_menu.onclick = function () {
-        if (window.innerWidth >= 1025) {
-            menu.style.left = "-350px";
-        }
-        else if (window.innerWidth < 1025) {
-            menu.style.opacity = "0";
-            menu.style.display = "none";
-        }
-        menu_btn.style.visibility = "visible";
-        menu.style.opacity = "1";
+    });
+    closeBtn.addEventListener("click", function () {
+        if (window.innerWidth >= 1025) { menu.style.left = "-350px"; }
+        else if (window.innerWidth < 1025) { menu.style.display = "none"; }
+        menuBtn.style.visibility = "visible";
         shadow.style.left = "-100%";
-    };
+    });
 };
 
 //search bar
 app.searchBar = function () {
-    let search_btn = app.get(".btn_search");
+    let searchBtn = app.get(".btn_search");
     let searchPage = app.get(".search-shade");
-    let close_search_btn = app.get(".searchbar-img>img");
+    let closeBtn = app.get(".searchbar-img>img");
     let searchText = app.get(".searchbar-form>input");
-    let result = app.getAll(".container-two");
-
-    search_btn.addEventListener("click", function () {
+    searchBtn.addEventListener("click", function () {
         searchPage.classList.add("lightbox");
         app.get(".searchShade").style.minHeight = window.innerHeight + "px";
     });
-
-    close_search_btn.addEventListener("click", function () {
+    closeBtn.addEventListener("click", function () {
         searchPage.classList.remove("lightbox");
-        result[0].style.display = "none";
+        app.getAll(".container-two")[0].style.display = "none";
         searchText.value = "";
     });
-    app.searchBarGo();
+    app.searchBar.getInput();
 };
 
 //get keyword by user key-in
-app.searchBarGo = function () {
+app.searchBar.getInput = function () {
     let formSearchBar = app.get(".searchbar-form");
     formSearchBar.onsubmit = function () {
-        let containerText = app.getAll(".container-two h2>span");
-        let containerResult = app.getAll(".result");
-        containerResult[0].style.justifyContent = "flex-start";
-        containerText[0].textContent = "";
-        containerResult[0].innerHTML = "";
-        app.searchBarKeyWord = app.get(".searchbar-form>input").value;
-        app.searchDB();
+        app.searchBar.input = app.get(".searchbar-form>input").value;
+        app.searchBar.getResult();
+        app.getAll(".result")[0].innerHTML = "";
         return false;
     };
 };
 
 //search keyword in booky database
-app.searchDB = function () {
-    console.log(app.searchBarKeyWord);
-    console.log(app.uid);
+app.searchBar.getResult = function () {
     app.bookMatch = [];
-    if (app.searchBarKeyWord) {
-        let dbBookList = app.database.ref("/members/" + app.uid + "/bookList/");
-        dbBookList.once("value", function (snapshot) {
+    if (app.searchBar.input) {
+        app.database.ref("/members/" + app.uid + "/bookList/").once("value", function (snapshot) {
             let bookListArrK = Object.keys(snapshot.val());
             let bookListArrV = Object.values(snapshot.val());
             let mixedStr = "";
             for (let i = 0; i < bookListArrV.length; i++) {
                 let author = bookListArrV[i].authors.toString();
                 mixedStr = bookListArrV[i].title + bookListArrV[i].publisher + bookListArrV[i].isbn + author;
-                if (mixedStr.toLowerCase().indexOf(app.searchBarKeyWord.toLowerCase()) != -1) {
+                if (mixedStr.toLowerCase().indexOf(app.searchBar.input.toLowerCase()) != -1) {
                     app.bookMatch.push(bookListArrK[i]);
                     let bookTitle = bookListArrV[i].title;
                     let bookAuthor = bookListArrV[i].authors.join("、");
@@ -308,7 +288,6 @@ app.scan = function () {
                             }).catch(function (error) {
                                 app.googleBooks.errorHandler(error);
                             });
-                            // app.googleBooks_isbn(result.text);
                         }
                     }).catch((err) => {
                         console.error(err);
@@ -414,8 +393,6 @@ app.googleBooks.fetch = function (searchType, keyword) {
                 return response.json();
             })
             .then(function (data) {
-                console.log(data);
-
                 if (data.items) {
                     resolve(data);
                 } else {
@@ -448,57 +425,40 @@ app.googleBooks.getData = function (data) {
     let amount = 0;
     for (let i = 0; i < data.items.length; i++) {
         amount = data.items.length;
-        let bookTitle;  // 1. 書名
-        let bookAuthor;  // 2. 作者
-        let bookPublisher; // 3. 出版社
-        let bookISBN;  // 4. ISBN-13
-        let bookCover; // 5. 書封照片
-        //書名
-        let title = data.items[i].volumeInfo.title;
-        bookTitle = title; //存取書名       
-        //作者 or 作者群
+        let bookTitle = data.items[i].volumeInfo.title;
         let authors = data.items[i].volumeInfo.authors;
-        bookAuthor = (authors != null) ? authors.join("、") : "暫無資料";
-        //出版社
+        let bookAuthor = (authors != null) ? authors.join("、") : "暫無資料";
         let publisher = data.items[i].volumeInfo.publisher;
-        bookPublisher = (publisher != null) ? publisher : "暫無資料";
-        // ISBN
+        let bookPublisher = (publisher != null) ? publisher : "暫無資料";
         let isbn = data.items[i].volumeInfo.industryIdentifiers;
+        let bookISBN;
         if (isbn != null) {
             let tmpISBN;
             for (let i = 0; i < isbn.length; i++) {
                 if (isbn[i].type == "ISBN_13")
                     tmpISBN = isbn[i].identifier;
             }
-            bookISBN = (tmpISBN != "" && tmpISBN != null) ? tmpISBN : "暫無資料";
-        } else if (isbn == null) {
-            bookISBN = "暫無資料";
-        }
-        // 書封照片
+            bookISBN = (tmpISBN) ? tmpISBN : "暫無資料";
+        } else if (isbn == null) { bookISBN = "暫無資料"; }
         let fakeCovers = ["./img/fakesample1.svg", "./img/fakesample2.svg", "./img/fakesample3.svg"];
         let fakeCover = fakeCovers[Math.floor(Math.random() * fakeCovers.length)];
         let cover = data.items[i].volumeInfo.imageLinks;
-        bookCover = (cover != null) ? cover.thumbnail : fakeCover;
+        let bookCover = (cover != null) ? cover.thumbnail : fakeCover;
         app.googleBooks.show(bookTitle, bookAuthor, bookPublisher, bookISBN, bookCover, amount, "");
     }
 };
 
 app.googleBooks.show = function (bookTitle, bookAuthor, bookPublisher, bookISBN, bookCover, amount, href) {
-    console.log(bookTitle, bookAuthor, bookPublisher, bookISBN, bookCover);
     let containerAll = app.getAll(".container-two");
     let containerText = app.getAll(".container-two h2>span");
     let containerResult = app.getAll(".result");
     let i = app.containerNum;
     if (containerAll[i]) {
-        console.log("show" + app.containerNum);
-
         containerAll[i].style.display = "block";
         containerAll[i].style.textAlign = "center";
         containerAll[i].style.paddingBottom = "500px";
         containerAll[i].scrollIntoView({ block: "start", behavior: "smooth" });
-        if (i == 2) {
-            amount = 1;
-        }
+        if (i == 2) { amount = 1; }
         containerText[i].style.textAlign = "center";
         containerText[i].textContent = amount;
         let booksParent = containerResult[i];
@@ -508,9 +468,7 @@ app.googleBooks.show = function (bookTitle, bookAuthor, bookPublisher, bookISBN,
         if (i == 0) {
             let ImgHref = app.createElement("a", "", "", "href", href, ImageParent);
             app.createElement("img", "", "", "src", bookCover, ImgHref);
-        } else {
-            app.createElement("img", "", "", "src", bookCover, ImageParent);
-        }
+        } else { app.createElement("img", "", "", "src", bookCover, ImageParent); }
         // each book info
         let bookInfoParent = app.createElement("div", "result-book-info", "", "", "", bookParent);
         let TitleParent = app.createElement("p", "", "書名：", "", "", bookInfoParent);
@@ -528,9 +486,7 @@ app.googleBooks.show = function (bookTitle, bookAuthor, bookPublisher, bookISBN,
             });
         }
     }
-    if (amount == 1) {
-        app.get(".result .result-book").style.width = "100%";
-    }
+    if (amount == 1) { app.get(".result .result-book").style.width = "100%"; }
 };
 
 app.googleBooks.update = function (bookTitle, bookAuthor, bookPublisher, bookISBN, bookCover) {
@@ -552,11 +508,8 @@ app.googleBooks.update = function (bookTitle, bookAuthor, bookPublisher, bookISB
     //send book data to DB
     let db = app.database;
     db.ref("/members/" + app.uid + "/bookList/").push(newBook, function (error) {
-        if (error) {
-            console.log("Error of setting new book data.");
-        } else {
-            console.log("Set book data okay.");
-        }
+        if (error) { console.log("Error of setting new book data."); }
+        else { console.log("Set book data okay."); }
     }).then(function (res) {
         app.res = res;
         let link = res.path.pieces_[3];
@@ -564,20 +517,20 @@ app.googleBooks.update = function (bookTitle, bookAuthor, bookPublisher, bookISB
         let keepAdd = app.get(".alert>div>button:nth-child(2)");
         let homePage = app.get(".alert>div>button:nth-child(3)");
         app.get(".alertDiv").style.display = "block";
-        //查看此書
-        edit.onclick = function () {
+        //edit book info
+        edit.addEventListener("click", function () {
             window.location = "book.html?id=" + link;
-        };
-        //回到搜尋
-        keepAdd.onclick = function () {
+        });
+        //search next book
+        keepAdd.addEventListener("click", function () {
             app.get(".alertDiv").style.display = "none";
             app.get(".addbar-list").scrollIntoView({ block: "start", behavior: "smooth" });
             app.get(".scan-list").scrollIntoView({ block: "start", behavior: "smooth" });
             app.get(".shot-list").scrollIntoView({ block: "start", behavior: "smooth" });
             app.get("#keyword").value = "";
-        };
-        //回到首頁
-        homePage.onclick = function () {
+        });
+        //back to homepage
+        homePage.addEventListener("click", function () {
             app.get(".alertDiv").style.display = "none";
             app.get(".addShade").classList.remove("lightbox");
             app.get(".addShade").style.minHeight = "0";
@@ -592,8 +545,8 @@ app.googleBooks.update = function (bookTitle, bookAuthor, bookPublisher, bookISB
             } else if (app.allocateBS) {
                 app.allocateBS();
             }
-        };
-        //點擊外框
+        });
+        //click on black shadow
         let alertDiv = app.get(".alertDiv");
         alertDiv.addEventListener("click", function (e) {
             if (e.target === alertDiv) {
