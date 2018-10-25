@@ -20,6 +20,7 @@ let app = {
     apiKey: "AIzaSyALgpVirl6lyBvOK9W--e5QycFeMFzcPLg",
     eachBook: { googleCal: {}, },
     googleBooks: {},
+    addBook: {},
 };
 
 app.checkLogin = function () {
@@ -88,7 +89,7 @@ app.searchBar = function () {
     });
     closeBtn.addEventListener("click", function () {
         searchPage.classList.remove("lightbox");
-        app.getAll(".container-two")[0].style.display = "none";
+        app.getAll(".container-two")[0].classList.remove("show-container");
         searchText.value = "";
     });
     app.searchBar.getInput();
@@ -129,92 +130,103 @@ app.searchBar.getResult = function () {
                     app.googleBooks.show(bookTitle, bookAuthor, bookPublisher, bookISBN, bookCover, amount, href);
                 }
             }
-            if (app.bookMatch.length == 0) {
-                let containerAll = app.getAll(".container-two");
-                let containerText = app.getAll(".container-two h2>span");
-                let containerResult = app.getAll(".result");
-                containerAll[0].style.display = "block";
-                containerAll[0].style.textAlign = "center";
-                containerAll[0].scrollIntoView({ block: "start", behavior: "smooth" });
-                containerResult[0].textContent = "您沒有相關書籍在 Booky";
-                containerResult[0].style.justifyContent = "center";
-                containerText[0].textContent = 0;
+            if (app.bookMatch.length === 0) {
+                app.getAll(".container-two")[0].classList.add("show-container");
+                app.getAll(".container-two")[0].scrollIntoView({ block: "start", behavior: "smooth" });
+                app.getAll(".container-two h2>span")[0].textContent = 0;
+                app.getAll(".result")[0].textContent = "您沒有相關書籍在 Booky";
+                app.getAll(".result")[0].style.justifyContent = "center";
+
             }
         });
     }
 };
 
-// add book
-app.addBookInit = function () {
-    let add_btn = app.get("#addbook");
+// add book --------------------------------------------------------------------------------------
+app.addBook.Init = function () {
+    let addBtn = app.get("#addbook");
     let addPage = app.get(".add-shade");
-    let close_add_btn = app.get(".add-img>img");
-    let result = app.getAll(".container-two");
-    let keyword = app.get("#keyword");
-
-    add_btn.addEventListener("click", function () {
+    let closeBtn = app.get(".add-img>img");
+    addBtn.addEventListener("click", function () {
         addPage.classList.add("lightbox");
         app.get(".addShade").style.minHeight = window.innerHeight + "px";
-        app.typeInit();
-        app.keyin_search();
+        app.addBook.typeListener();
+        app.addBook.getInput();
     });
 
-    close_add_btn.addEventListener("click", function (e) {
+    closeBtn.addEventListener("click", function (e) {
         addPage.classList.remove("lightbox");
-        result[1].style.display = "none";
-        keyword.value = "";
+        app.get("#keyword").value = "";
+        app.getAll(".container-two")[1].classList.remove("show-container");
     });
 };
 
-//先判斷使用者選擇哪種搜尋方式
-app.typeInit = function () {
+//sort type init
+app.addBook.typeListener = function () {
     let threeType = app.getAll(".addtab");
-    console.log(threeType);
     app.searchText = app.get(".active").value;
     for (let i = 0; i < threeType.length; i++) {
-        threeType[i].addEventListener("click", app.switchType);
+        threeType[i].addEventListener("click", app.addBook.typeSelected);
     }
 };
 
-app.switchType = function (e) {
+app.addBook.typeSelected = function (e) {
     let threeType = app.getAll(".addtab");
-    for (let i = 0; i < threeType.length; i++) {
-        threeType[i].classList.remove("active");
-    }
+    for (let i = 0; i < threeType.length; i++) { threeType[i].classList.remove("active"); }
     e.currentTarget.classList.add("active");
     app.searchText = e.target.value;
-    console.log(app.searchText);
 };
 
-
-app.keyin_search = function () {
-    // 直接按 Enter 搜尋
+app.addBook.getInput = function () {
+    //press enter
     let formSearch = app.get("#searchForm");
-    let container = app.getAll(".container-two");
-    let containerText = app.getAll(".container-two h2>span");
-    let containerResult = app.getAll(".result");
     formSearch.onsubmit = function () {
-        containerResult[1].style.justifyContent = "flex-start";
-        containerText[1].textContent = "";
-        containerResult[1].innerHTML = "";
-        app.searchKeyWord();
+        app.getAll(".container-two h2>span")[1].textContent = "";
+        app.getAll(".result")[1].style.justifyContent = "flex-start";
+        app.getAll(".result")[1].innerHTML = "";
+        app.addBook.input();
         return false;
     };
-    // get key word
-    app.searchKeyWord = function () {
-        let keyWord;
-        keyWord = app.get("#keyword").value;
+    // get keyin word
+    app.addBook.input = function () {
+        let keyWord = app.get("#keyword").value;
         if (keyWord) {
-            app.search_book(keyWord);
+            app.addBook.search(keyWord);
         } else {
-            container[1].style.display = "none";
-            console.log("使用者沒輸入文字");
+            //user didn't enter keyword
+            app.getAll(".container-two")[1].classList.remove("show-container");
         }
     };
 };
 
+app.addBook.search = function (keyWord) {
+    app.containerNum = 1;
+    switch (app.searchText) {
+        case "search-title":
+            app.googleBooks.fetch("intitle", keyWord).then(function (data) {
+                app.googleBooks.getData(data);
+            }).catch(function (error) {
+                app.googleBooks.errorHandler(error);
+            });
+            break;
+        case "search-isbn":
+            app.googleBooks.fetch("isbn", keyWord).then(function (data) {
+                app.googleBooks.getData(data);
+            }).catch(function (error) {
+                app.googleBooks.errorHandler(error);
+            });
+            break;
+        case "search-author":
+            app.googleBooks.fetch("inauthor", keyWord).then(function (data) {
+                app.googleBooks.getData(data);
+            }).catch(function (error) {
+                app.googleBooks.errorHandler(error);
+            });
+            break;
+    }
+};
 
-//掃描書
+// scan book --------------------------------------------------------------------------------------
 app.scanBookInit = function () {
     let scan_btn = app.get("#scanbook");
     let scanPage = app.get(".scan-shade");
@@ -242,7 +254,7 @@ app.scanBookInit = function () {
 const codeReader = new ZXing.BrowserBarcodeReader();
 console.log("ZXing code reader initialized");
 
-//桌機版:掃描搜尋
+// scan book ( Desktop ) --------------------------------------------------------------------------------------
 app.scan = function () {
     codeReader.getVideoInputDevices()
         .then((videoInputDevices) => {
@@ -310,7 +322,7 @@ app.scan = function () {
         });
 };
 
-//拍照搜尋
+// add book ( mobile )--------------------------------------------------------------------------------------
 app.imgScan = function () {
     console.log("scan img");
     function ProcessFile(e) {
@@ -358,34 +370,6 @@ app.decodeFun = function (ev) {
     console.log(`Started decode for image from ${fileImg.src}`);
 };
 
-
-app.search_book = function (keyWord) {
-    app.containerNum = 1;
-    switch (app.searchText) {
-        case "search-title":
-            app.googleBooks.fetch("intitle", keyWord).then(function (data) {
-                app.googleBooks.getData(data);
-            }).catch(function (error) {
-                app.googleBooks.errorHandler(error);
-            });
-            break;
-        case "search-isbn":
-            app.googleBooks.fetch("isbn", keyWord).then(function (data) {
-                app.googleBooks.getData(data);
-            }).catch(function (error) {
-                app.googleBooks.errorHandler(error);
-            });
-            break;
-        case "search-author":
-            app.googleBooks.fetch("inauthor", keyWord).then(function (data) {
-                app.googleBooks.getData(data);
-            }).catch(function (error) {
-                app.googleBooks.errorHandler(error);
-            });
-            break;
-    }
-};
-
 app.googleBooks.fetch = function (searchType, keyword) {
     return new Promise(function (resolve, reject) {
         fetch("https://www.googleapis.com/books/v1/volumes?q=" + searchType + ":" + keyword + "&maxResults=40&key=" + app.apiKey)
@@ -406,18 +390,12 @@ app.googleBooks.fetch = function (searchType, keyword) {
 };
 
 app.googleBooks.errorHandler = function (error) {
-    let containerAll = app.getAll(".container-two");
-    let containerText = app.getAll(".container-two h2>span");
-    let containerResult = app.getAll(".result");
     let i = app.containerNum;
-    if (containerAll[i]) {
-        containerAll[i].style.display = "flex";
-        containerAll[i].scrollIntoView({ block: "start", behavior: "smooth" });
-        containerResult[i].textContent = "請用其他關鍵字搜尋";
-        console.log(containerResult[i]);
-        containerResult[i].style.justifyContent = "center";
-        containerText[i].textContent = 0;
-    }
+    app.getAll(".container-two")[i].classList.add("show-container");
+    app.getAll(".container-two")[i].scrollIntoView({ block: "start", behavior: "smooth" });
+    app.getAll(".result")[i].textContent = "請用其他關鍵字搜尋";
+    app.getAll(".result")[i].style.justifyContent = "center";
+    app.getAll(".container-two h2>span")[i].textContent = 0;
     console.log(error);
 };
 
@@ -454,8 +432,7 @@ app.googleBooks.show = function (bookTitle, bookAuthor, bookPublisher, bookISBN,
     let containerResult = app.getAll(".result");
     let i = app.containerNum;
     if (containerAll[i]) {
-        containerAll[i].style.display = "block";
-        containerAll[i].style.textAlign = "center";
+        app.getAll(".container-two")[i].classList.add("show-container");
         containerAll[i].style.paddingBottom = "500px";
         containerAll[i].scrollIntoView({ block: "start", behavior: "smooth" });
         if (i == 2) { amount = 1; }
@@ -524,9 +501,11 @@ app.googleBooks.update = function (bookTitle, bookAuthor, bookPublisher, bookISB
         //search next book
         keepAdd.addEventListener("click", function () {
             app.get(".alertDiv").style.display = "none";
-            app.get(".addbar-list").scrollIntoView({ block: "start", behavior: "smooth" });
-            app.get(".scan-list").scrollIntoView({ block: "start", behavior: "smooth" });
-            app.get(".shot-list").scrollIntoView({ block: "start", behavior: "smooth" });
+            app.getAll(".lightbox-list")[app.containerNum].scrollIntoView({ block: "start", behavior: "smooth" });
+            // app.get(".searchbar-list").scrollIntoView({ block: "start", behavior: "smooth" });
+            // app.get(".addbar-list").scrollIntoView({ block: "start", behavior: "smooth" });
+            // app.get(".scan-list").scrollIntoView({ block: "start", behavior: "smooth" });
+            // app.get(".shot-list").scrollIntoView({ block: "start", behavior: "smooth" });
             app.get("#keyword").value = "";
         });
         //back to homepage

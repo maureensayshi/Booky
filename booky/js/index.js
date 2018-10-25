@@ -25,7 +25,7 @@ app.checkingIndex = function () {
             }
             app.menu();
             app.searchBar();
-            app.addBookInit();
+            app.addBook.Init();
             app.scanBookInit();
             app.closeLoading();
         } else {

@@ -7,7 +7,7 @@ app.init = function () {
         app.showMemberInfo();
         app.menu();
         app.searchBar();
-        app.addBookInit();
+        app.addBook.Init();
         app.scanBookInit();
         app.logOut();
     });

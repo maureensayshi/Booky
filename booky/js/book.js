@@ -7,7 +7,7 @@ app.init = function () {
         app.eachBook.model();
         app.menu();
         app.searchBar();
-        app.addBookInit();
+        app.addBook.Init();
         app.scanBookInit();
     });
 };

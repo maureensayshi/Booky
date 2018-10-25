@@ -54,6 +54,10 @@ img{
     width: 100%;   
 }
 
+.show-container{
+    display: block !important;
+    text-align: center !important;
+}
 /* opacity */
 .lightbox{
     visibility: visible !important;
