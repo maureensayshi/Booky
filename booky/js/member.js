@@ -6,7 +6,7 @@ app.init = function () {
         app.uid = uid;
         app.member.info(app.member.showMemberInfo);
         app.menu();
-        app.searchBar();
+        app.searchBook.Init();
         app.addBook.Init();
         app.scanBook.Init();
         app.logOut();

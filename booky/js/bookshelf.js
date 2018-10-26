@@ -4,18 +4,16 @@ app.init = function () {
     app.showLoading();
     app.checkLogin().then(uid => {
         app.uid = uid;
-        app.getStatus();
+        app.bookShelf.getCategory();
         app.menu();
-        app.searchBar();
+        app.searchBook.Init();
         app.addBook.Init();
         app.scanBook.Init();
     });
 };
 
-app.getStatus = function () {
-
+app.bookShelf.getCategory = function () {
     app.readStatus = window.location.search.split("?status=")[1];
-    console.log(app.readStatus);
     let bsTitle = app.get(".view>h2");
     if (app.readStatus == "all") {
         bsTitle.textContent = "總書櫃  /  ALL";
@@ -30,53 +28,46 @@ app.getStatus = function () {
     } else if (app.readStatus == "lend") {
         bsTitle.textContent = "出借的書 / LENT";
     }
-    app.allocateBS();
+    app.bookShelf.allocateBS();
 };
 
-app.allocateBS = function () {
+// app.bookShelf.model = function (Callback) {
+//     app.database.ref("/members/" + app.uid + "/bookList/").once("value", function (snapshot) {
+//         Callback(snapshot.val());
+//     });
+// };
+
+app.bookShelf.allocateBS = function () {
     app.get(".wrapper").innerHTML = "";
     let dbMember = app.database.ref("/members/" + app.uid + "/bookList/");
     if (app.readStatus >= 0) {
         dbMember.orderByChild("readStatus").equalTo(app.readStatus).once("value").then((snapshot) => {
-            app.showBook(snapshot.val());
-
+            app.bookShelf.showBook(snapshot.val());
         }).catch((error) => {
-            app.get(".wrapper").textContent = "此書櫃暫無書籍";
-            app.get(".wrapper").style.gridTemplateColumns = "repeat(1, 1fr)";
-            console.log("no books " + error);
-            app.closeLoading();
+            app.bookShelf.noBookHandler(error);
         });
-    } else if (app.readStatus == "all") {
+    } else if (app.readStatus === "all") {
         dbMember.orderByChild("readStatus").once("value").then((snapshot) => {
-            app.showBook(snapshot.val());
+            app.bookShelf.showBook(snapshot.val());
         }).catch((error) => {
-            console.log("no books " + error);
-            app.get(".wrapper").textContent = "此書櫃暫無書籍";
-            app.get(".wrapper").style.gridTemplateColumns = "repeat(1, 1fr)";
-            app.closeLoading();
+            app.bookShelf.noBookHandler(error);
         });
-    } else if (app.readStatus == "twice") {
+    } else if (app.readStatus === "twice") {
         dbMember.orderByChild("twice").equalTo(true).once("value").then((snapshot) => {
-            app.showBook(snapshot.val());
+            app.bookShelf.showBook(snapshot.val());
         }).catch((error) => {
-            console.log("no books " + error);
-            app.get(".wrapper").textContent = "此書櫃暫無書籍";
-            app.get(".wrapper").style.gridTemplateColumns = "repeat(1, 1fr)";
-            app.closeLoading();
+            app.bookShelf.noBookHandler(error);
         });
-    } else if (app.readStatus == "lend") {
+    } else if (app.readStatus === "lend") {
         dbMember.orderByChild("lend").equalTo(true).once("value").then((snapshot) => {
-            app.showBook(snapshot.val());
+            app.bookShelf.showBook(snapshot.val());
         }).catch((error) => {
-            console.log("no books " + error);
-            app.get(".wrapper").textContent = "此書櫃暫無書籍";
-            app.get(".wrapper").style.gridTemplateColumns = "repeat(1, 1fr)";
-            app.closeLoading();
+            app.bookShelf.noBookHandler(error);
         });
     }
 };
 
-app.showBook = function (bookList) {
+app.bookShelf.showBook = function (bookList) {
     let bookSelected = Object.values(bookList);
     let bookKey = Object.keys(bookList);
     for (let i = 0; i < bookSelected.length; i++) {
@@ -88,6 +79,13 @@ app.showBook = function (bookList) {
         app.createElement("div", "book-title", bookSelected[i].title, "", "", nav);
         app.closeLoading();
     }
+};
+
+app.bookShelf.noBookHandler = function (error) {
+    app.get(".wrapper").textContent = "此書櫃暫無書籍";
+    app.get(".wrapper").style.gridTemplateColumns = "repeat(1, 1fr)";
+    app.closeLoading();
+    console.log("no books " + error);
 };
 
 window.addEventListener("DOMContentLoaded", app.init);

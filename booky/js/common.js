@@ -17,11 +17,13 @@ firebase.initializeApp(config);
 // initialize app structure
 let app = {
     database: firebase.database(),
-    apiKey: "AIzaSyALgpVirl6lyBvOK9W--e5QycFeMFzcPLg",
-    eachBook: { googleCal: {}, },
-    googleBooks: {},
+    apiKey: config.apiKey,
+    searchBook: {},
     addBook: {},
     scanBook: {},
+    googleBooks: {},
+    bookShelf: {},
+    eachBook: { googleCal: {}, },
     member: {},
 };
 
@@ -33,7 +35,6 @@ app.checkLogin = function () {
                 resolve(user.uid);
                 console.log(user.uid);
             } else {
-                // User is signed out or haven"t sign up.
                 reject(window.location = "/");
             }
         });
@@ -79,8 +80,8 @@ app.menu = function () {
     });
 };
 
-//search bar
-app.searchBar = function () {
+//search bar------------------------------------------------------------------------------
+app.searchBook.Init = function () {
     let searchBtn = app.get(".btn_search");
     let searchPage = app.get(".search-shade");
     let closeBtn = app.get(".searchbar-img>img");
@@ -88,30 +89,33 @@ app.searchBar = function () {
     searchBtn.addEventListener("click", function () {
         searchPage.classList.add("lightbox");
         app.get(".searchShade").style.minHeight = window.innerHeight + "px";
+        app.searchBook.getInput();
     });
     closeBtn.addEventListener("click", function () {
         searchPage.classList.remove("lightbox");
         app.getAll(".container-two")[0].classList.remove("show-container");
         searchText.value = "";
     });
-    app.searchBar.getInput();
+
 };
 
 //get keyword by user key-in
-app.searchBar.getInput = function () {
+app.searchBook.getInput = function () {
     let formSearchBar = app.get(".searchbar-form");
-    formSearchBar.onsubmit = function () {
-        app.searchBar.input = app.get(".searchbar-form>input").value;
-        app.searchBar.getResult();
+    formSearchBar.addEventListener("submit", function (e) {
+        e.preventDefault();
+        app.searchBook.input = app.get(".searchbar-form>input").value;
+        app.searchBook.getResult();
+        app.getAll(".container-two")[0].classList.remove("show-container");
         app.getAll(".result")[0].innerHTML = "";
         return false;
-    };
+    });
 };
 
 //search keyword in booky database
-app.searchBar.getResult = function () {
+app.searchBook.getResult = function () {
     app.bookMatch = [];
-    if (app.searchBar.input) {
+    if (app.searchBook.input) {
         app.database.ref("/members/" + app.uid + "/bookList/").once("value", function (snapshot) {
             let bookListArrK = Object.keys(snapshot.val());
             let bookListArrV = Object.values(snapshot.val());
@@ -119,17 +123,19 @@ app.searchBar.getResult = function () {
             for (let i = 0; i < bookListArrV.length; i++) {
                 let author = bookListArrV[i].authors.toString();
                 mixedStr = bookListArrV[i].title + bookListArrV[i].publisher + bookListArrV[i].isbn + author;
-                if (mixedStr.toLowerCase().indexOf(app.searchBar.input.toLowerCase()) != -1) {
-                    app.bookMatch.push(bookListArrK[i]);
-                    let bookTitle = bookListArrV[i].title;
-                    let bookAuthor = bookListArrV[i].authors.join("、");
-                    let bookPublisher = bookListArrV[i].publisher;
-                    let bookISBN = bookListArrV[i].isbn;
-                    let bookCover = bookListArrV[i].coverURL;
-                    let href = "book.html?id=" + bookListArrK[i];
-                    let amount = app.bookMatch.length;
+                if (mixedStr.toLowerCase().indexOf(app.searchBook.input.toLowerCase()) != -1) {
                     app.containerNum = 0;
-                    app.googleBooks.show(bookTitle, bookAuthor, bookPublisher, bookISBN, bookCover, amount, href);
+                    app.bookMatch.push(bookListArrK[i]);
+                    let book = {
+                        amount: app.bookMatch.length,
+                        title: bookListArrV[i].title,
+                        author: bookListArrV[i].authors.join("、"),
+                        publisher: bookListArrV[i].publisher,
+                        isbn: bookListArrV[i].isbn,
+                        coverURL: bookListArrV[i].coverURL,
+                        href: "book.html?id=" + bookListArrK[i],
+                    };
+                    app.googleBooks.show(book);
                 }
             }
             if (app.bookMatch.length === 0) {
@@ -138,7 +144,6 @@ app.searchBar.getResult = function () {
                 app.getAll(".container-two h2>span")[0].textContent = 0;
                 app.getAll(".result")[0].textContent = "您沒有相關書籍在 Booky";
                 app.getAll(".result")[0].style.justifyContent = "center";
-
             }
         });
     }
@@ -177,54 +182,45 @@ app.addBook.typeSelected = function (e) {
     for (let i = 0; i < threeType.length; i++) { threeType[i].classList.remove("active"); }
     e.currentTarget.classList.add("active");
     app.searchText = e.target.value;
+    console.log(app.searchText);
 };
 
 app.addBook.getInput = function () {
-    //press enter
     let formSearch = app.get("#searchForm");
-    formSearch.onsubmit = function () {
-        app.getAll(".container-two h2>span")[1].textContent = "";
+    formSearch.addEventListener("submit", function (e) {
+        e.preventDefault();
+        app.getAll(".container-two")[1].classList.remove("show-container");
         app.getAll(".result")[1].style.justifyContent = "flex-start";
         app.getAll(".result")[1].innerHTML = "";
-        app.addBook.input();
-        return false;
-    };
-    // get keyin word
-    app.addBook.input = function () {
+
         let keyWord = app.get("#keyword").value;
-        if (keyWord) {
-            app.addBook.search(keyWord);
-        } else {
-            //user didn't enter keyword
-            app.getAll(".container-two")[1].classList.remove("show-container");
+        if (keyWord) { app.addBook.search(keyWord); }
+        return false;
+    });
+};
+
+app.addBook.fetchBook = function (searchingType, keyWord) {
+    app.googleBooks.fetch(searchingType, keyWord).then(function (data) {
+        for (let i = 0; i < data.items.length; i++) {
+            app.googleBooks.show(app.googleBooks.getData(data, i));
         }
-    };
+    }).catch(function (error) {
+        app.googleBooks.errorHandler(error);
+    });
 };
 
 app.addBook.search = function (keyWord) {
     app.containerNum = 1;
     switch (app.searchText) {
-    case "search-title":
-        app.googleBooks.fetch("intitle", keyWord).then(function (data) {
-            app.googleBooks.getData(data);
-        }).catch(function (error) {
-            app.googleBooks.errorHandler(error);
-        });
-        break;
-    case "search-isbn":
-        app.googleBooks.fetch("isbn", keyWord).then(function (data) {
-            app.googleBooks.getData(data);
-        }).catch(function (error) {
-            app.googleBooks.errorHandler(error);
-        });
-        break;
-    case "search-author":
-        app.googleBooks.fetch("inauthor", keyWord).then(function (data) {
-            app.googleBooks.getData(data);
-        }).catch(function (error) {
-            app.googleBooks.errorHandler(error);
-        });
-        break;
+        case "search-title":
+            app.addBook.fetchBook("intitle", keyWord);
+            break;
+        case "search-isbn":
+            app.addBook.fetchBook("isbn", keyWord);
+            break;
+        case "search-author":
+            app.addBook.fetchBook("inauthor", keyWord);
+            break;
     }
 };
 
@@ -275,7 +271,7 @@ app.scanBook.scan = function () {
                 let line = app.get(".line");
                 app.getAll(".container-two")[2].classList.remove("show-container");
                 // app.getAll(".container-two")[2].style.display = "none";
-                // app.getAll(".container-two h2>span")[2].textContent = "";
+                app.getAll(".container-two h2>span")[2].textContent = "";
                 app.getAll(".result")[2].textContent = "";
                 app.getAll(".result")[2].style.justifyContent = "flex-start";
                 if (startBtn.value == "start") {
@@ -297,7 +293,9 @@ app.scanBook.scan = function () {
                             app.getAll(".result")[2].textContent = "";
                             app.getAll(".result")[2].style.justifyContent = "center";
                             app.googleBooks.fetch("isbn", result.text).then(function (data) {
-                                app.googleBooks.getData(data);
+                                for (let i = 0; i < data.items.length; i++) {
+                                    app.googleBooks.show(app.googleBooks.getData(data, i));
+                                }
                             }).catch(function (error) {
                                 app.googleBooks.errorHandler(error);
                             });
@@ -332,8 +330,8 @@ app.scanBook.scan = function () {
 
 // add book ( mobile )--------------------------------------------------------------------------------------
 app.scanBook.imgScan = function () {
-    app.containerNum = 3;
     function ProcessFile(e) {
+        app.containerNum = 3;
         let file = document.getElementById("file").files[0];
         app.get("#img-result>img").src = URL.createObjectURL(file);
         app.getAll(".result")[3].textContent = "";
@@ -357,7 +355,9 @@ app.scanBook.imgScan.decodeFun = function (ev) {
         app.getAll(".container-two h2>span")[3].textContent = "";
         app.getAll(".container-two h2>span")[3].textContent = "";
         app.googleBooks.fetch("isbn", result.text).then(function (data) {
-            app.googleBooks.getData(data);
+            for (let i = 0; i < data.items.length; i++) {
+                app.googleBooks.show(app.googleBooks.getData(data, i));
+            }
         }).catch(function (error) {
             app.googleBooks.errorHandler(error);
         });
@@ -373,6 +373,7 @@ app.scanBook.imgScan.decodeFun = function (ev) {
     console.log(`Started decode for image from ${fileImg.src}`);
 };
 
+//fetch to google books API--------------------------------------------------------------
 app.googleBooks.fetch = function (searchType, keyword) {
     return new Promise(function (resolve, reject) {
         fetch("https://www.googleapis.com/books/v1/volumes?q=" + searchType + ":" + keyword + "&maxResults=40&key=" + app.apiKey)
@@ -402,88 +403,91 @@ app.googleBooks.errorHandler = function (error) {
     console.log(error);
 };
 
-app.googleBooks.getData = function (data) {
-    let amount = 0;
-    for (let i = 0; i < data.items.length; i++) {
-        amount = data.items.length;
-        let bookTitle = data.items[i].volumeInfo.title;
-        let authors = data.items[i].volumeInfo.authors;
-        let bookAuthor = (authors != null) ? authors.join("、") : "暫無資料";
-        let publisher = data.items[i].volumeInfo.publisher;
-        let bookPublisher = (publisher != null) ? publisher : "暫無資料";
-        let isbn = data.items[i].volumeInfo.industryIdentifiers;
-        let bookISBN;
-        if (isbn != null) {
-            let tmpISBN;
-            for (let i = 0; i < isbn.length; i++) {
-                if (isbn[i].type == "ISBN_13")
-                    tmpISBN = isbn[i].identifier;
-            }
-            bookISBN = (tmpISBN) ? tmpISBN : "暫無資料";
-        } else if (isbn == null) { bookISBN = "暫無資料"; }
-        let fakeCovers = ["./img/fakesample1.svg", "./img/fakesample2.svg", "./img/fakesample3.svg"];
-        let fakeCover = fakeCovers[Math.floor(Math.random() * fakeCovers.length)];
-        let cover = data.items[i].volumeInfo.imageLinks;
-        let bookCover = (cover != null) ? cover.thumbnail : fakeCover;
-        app.googleBooks.show(bookTitle, bookAuthor, bookPublisher, bookISBN, bookCover, amount, "");
-    }
+// get data from google books API -------------------------------------------------------
+app.googleBooks.getData = function (data, i) {
+    let authors = data.items[i].volumeInfo.authors;
+    let publisher = data.items[i].volumeInfo.publisher;
+    let isbn = data.items[i].volumeInfo.industryIdentifiers;
+    let cover = data.items[i].volumeInfo.imageLinks;
+    let fakeCovers = ["./img/fakesample1.svg", "./img/fakesample2.svg", "./img/fakesample3.svg"];
+    let fakeCover = fakeCovers[Math.floor(Math.random() * fakeCovers.length)];
+
+    let book = {
+        amount: data.items.length,
+        title: data.items[i].volumeInfo.title,
+        author: (authors != null) ? authors.join("、") : "暫無資料",
+        publisher: (publisher != null) ? publisher : "暫無資料",
+        isbn: "",
+        coverURL: (cover != null) ? cover.thumbnail : fakeCover,
+        href: "",
+    };
+
+    if (isbn != null) {
+        let tmpISBN;
+        for (let i = 0; i < isbn.length; i++) {
+            if (isbn[i].type == "ISBN_13")
+                tmpISBN = isbn[i].identifier;
+        }
+        book.isbn = (tmpISBN) ? tmpISBN : "暫無資料";
+    } else if (isbn == null) { book.isbn = "暫無資料"; }
+
+    console.log(book);
+    return book;
 };
 
-app.googleBooks.show = function (bookTitle, bookAuthor, bookPublisher, bookISBN, bookCover, amount, href) {
+// Show data from google books API ---------------------------------------------
+app.googleBooks.show = function (book) {
     let i = app.containerNum;
-    console.log(app.containerNum);
-
     app.getAll(".container-two")[i].classList.add("show-container");
     app.getAll(".container-two")[i].style.paddingBottom = "500px";
     app.getAll(".container-two")[i].scrollIntoView({ block: "start", behavior: "smooth" });
-    if (app.get("#startButton")) {
-        codeReader.reset();
-        app.get("#startButton").textContent = "重新掃描";
-        // app.get("#startButton").value = "stop";
-        console.log("show value" + app.get("#startButton").value);
-        console.log("only stop here, didnt go to start stop again");
-    }
-    if (i == 2) { amount = 1; }
-    app.getAll(".container-two h2>span")[i].textContent = amount;
+    // if (app.get("#startButton")) {
+    //     codeReader.reset();
+    //     app.get("#startButton").textContent = "重新掃描";
+    //     console.log("show value" + app.get("#startButton").value);
+    //     console.log("only stop here, didnt go to start stop again");
+    // }
+    if (i === 2) { book.amount = 1; }
+    app.getAll(".container-two h2>span")[i].textContent = book.amount;
     app.getAll(".container-two h2>span")[i].style.textAlign = "center";
     //each book
     let booksParent = app.getAll(".result")[i];
     let bookParent = app.createElement("div", "result-book", "", "", "", booksParent);
     let ImageParent = app.createElement("div", "result-book-img", "", "", "", bookParent);
     if (i == 0) {
-        let ImgHref = app.createElement("a", "", "", "href", href, ImageParent);
-        app.createElement("img", "", "", "src", bookCover, ImgHref);
-    } else { app.createElement("img", "", "", "src", bookCover, ImageParent); }
+        let ImgHref = app.createElement("a", "", "", "href", book.href, ImageParent);
+        app.createElement("img", "", "", "src", book.coverURL, ImgHref);
+    } else { app.createElement("img", "", "", "src", book.coverURL, ImageParent); }
     let bookInfoParent = app.createElement("div", "result-book-info", "", "", "", bookParent);
     let TitleParent = app.createElement("p", "", "書名：", "", "", bookInfoParent);
-    app.createElement("span", "", bookTitle, "", "", TitleParent);
+    app.createElement("span", "", book.title, "", "", TitleParent);
     let bookAuthorParent = app.createElement("p", "", "作者：", "", "", bookInfoParent);
-    app.createElement("span", "", bookAuthor, "", "", bookAuthorParent);
+    app.createElement("span", "", book.author, "", "", bookAuthorParent);
     let PublisherParent = app.createElement("p", "", "出版社：", "", "", bookInfoParent);
-    app.createElement("span", "", bookPublisher, "", "", PublisherParent);
+    app.createElement("span", "", book.publisher, "", "", PublisherParent);
     let ISBNParent = app.createElement("p", "", "ISBN-13：", "", "", bookInfoParent);
-    app.createElement("span", "", bookISBN, "", "", ISBNParent);
+    app.createElement("span", "", book.isbn, "", "", ISBNParent);
     if (i == 1 || i == 2 || i == 3) {
         let addButton = app.createElement("button", "", "加入此書", "", "", bookInfoParent);
         addButton.addEventListener("click", function () {
-            app.googleBooks.addToDB(bookTitle, bookAuthor, bookPublisher, bookISBN, bookCover);
+            app.googleBooks.addToDB(book);
         });
     }
-    if (amount == 1) { app.get(".result .result-book").style.width = "100%"; }
+    if (book.amount == 1) { app.get(".result .result-book").style.width = "100%"; }
 };
 
-app.googleBooks.addToDB = function (bookTitle, bookAuthor, bookPublisher, bookISBN, bookCover) {
+app.googleBooks.addToDB = function (book) {
     let newBook = {
-        authors: bookAuthor.split("、"),
-        coverURL: bookCover,
+        authors: book.author.split("、"),
+        coverURL: book.coverURL,
         lend: false,
         lendTo: "無",
         place: "尚未更新存放地點",
-        publisher: bookPublisher,
+        publisher: book.publisher,
         readStatus: "0",
-        title: bookTitle,
+        title: book.title,
         twice: false,
-        isbn: bookISBN,
+        isbn: book.isbn,
         calLink: "",
     };
     //send book data to DB

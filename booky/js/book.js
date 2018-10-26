@@ -6,7 +6,7 @@ app.init = function () {
         app.uid = uid;
         app.eachBook.model();
         app.menu();
-        app.searchBar();
+        app.searchBook.Init();
         app.addBook.Init();
         app.scanBook.Init();
     });
@@ -48,17 +48,8 @@ app.eachBook.show = function (book) {
         currentRead.textContent = "已讀";
     }
 
-    if (book.twice == true) {
-        currentTwice.textContent = "是";
-    } else if (book.twice == false) {
-        currentTwice.textContent = "否";
-    }
-
-    if (book.lend == true) {
-        currentLent.textContent = "是";
-    } else if (book.lend == false) {
-        currentLent.textContent = "否";
-    }
+    currentTwice.textContent = (book.twice === true) ? "是" : "否";
+    currentLent.textContent = (book.lend == true) ? "是" : "否";
 
     let readChoices = app.getAll("main .reading-status .container input");
     for (let i = 0; i < readChoices.length; i++) {
@@ -317,17 +308,13 @@ app.initClient = function () {
 };
 
 app.eachBook.googleCal.fillForm = function () {
-    //獲取表單資訊
-    //1. 事件名稱
+    //form info
     app.get("#eventTitle").onchange = function () { app.eventTitle = app.get("#eventTitle").value; };
-    //2. 開始日期
     app.get("#start").onchange = function () { app.startDate = app.get("#start").value; };
-    //3. 結束日期
     app.get("#end").onchange = function () { app.endDate = app.get("#end").value; };
-    //每天提醒選項
     let reminderYes = app.get("#remindYes");
     let reminderNo = app.get("#remindNo");
-    //要每天提醒
+    //daily remind
     reminderYes.addEventListener("click", function () {
         app.get(".remind-time").style.display = "block";
         app.get("#setTime").value = "20:00";
@@ -336,33 +323,29 @@ app.eachBook.googleCal.fillForm = function () {
         app.setTimeFini = app.get("#setTimeFini").value;
         app.get("#remindBefore").value = "10";
         app.remindMin = app.get("#remindBefore").value;
-        //4. 開始閱讀時間
         app.get("#setTime").onchange = function () {
             app.setTime = app.get("#setTime").value;
             app.eachBook.googleCal.edit();
         };
-        //5. 結束閱讀時間
         app.get("#setTimeFini").onchange = function () {
             app.setTimeFini = app.get("#setTimeFini").value;
             app.eachBook.googleCal.edit();
         };
-        //6. 提醒分鐘數
         app.get("#remindBefore").onchange = function () {
             app.remindMin = app.get("#remindBefore").value;
             app.eachBook.googleCal.edit();
         };
         app.eachBook.googleCal.edit();
     });
-    //不要每天提醒
+    //no daily remind
     reminderNo.addEventListener("click", function () {
         app.get(".remind-time").style.display = "none";
         app.get("#addToCalendar").onclick = app.eachBook.googleCal.insertEventNoRemind;
     });
 };
 
-//如果要每天提醒
+//prepare daily remind data for google calendar API
 app.eachBook.googleCal.edit = function () {
-    //結束日期格式
     let endDateFormat = app.endDate.replace(/-/g, "");
     let remindMinInt = parseInt(app.remindMin);
     let event = {
@@ -412,7 +395,7 @@ app.eachBook.googleCal.insertEvent = function (event) {
     });
 };
 
-//如果不要每天提醒
+//prepare and send no daily remind data for google calendar API
 app.eachBook.googleCal.insertEventNoRemind = function () {
     let event = {
         "summary": app.eventTitle,
@@ -435,8 +418,7 @@ app.eachBook.googleCal.insertEventNoRemind = function () {
 
     request.execute(function (event) {
         let link = event.htmlLink;
-        let db = app.database;
-        let dbBookList = db.ref("/members/" + app.uid + "/bookList/" + app.bookID + "/calLink");
+        let dbBookList = app.database.ref("/members/" + app.uid + "/bookList/" + app.bookID + "/calLink");
         dbBookList.set(link, function (error) {
             if (error) {
                 console.log("未將活動連結加進 db");
@@ -447,32 +429,35 @@ app.eachBook.googleCal.insertEventNoRemind = function () {
     });
 };
 
-//跳出 alert
+//alert after insert event to google calendar
 app.eachBook.googleCal.afterSend = function (link) {
     let calPage = app.get(".remindShade");
     calPage.classList.remove("lightbox");
     calPage.style.minHeight = 0;
-    //跳出alert視窗
+    //show up alert
     app.get(".gLinkDiv").style.display = "block";
     if (document.body.clientWidth < 980) {
         app.get(".gLinkDiv").style.height = document.body.clientHeight + "px";
     }
+
     app.get(".gLink").scrollIntoView({ block: "center", behavior: "smooth" });
+
     let back = app.get(".gLink>div>button:nth-child(1)");
     let toLink = app.get(".gLink>div>button:nth-child(2)");
+    let gLinkDiv = app.get(".gLinkDiv");
+
     back.addEventListener("click", function () {
         app.get(".gLinkDiv").style.display = "none";
-        //隨時監控 google calendar 網址變化
         app.eachBook.googleCal.addLinkOnBtn();
     });
+
     toLink.addEventListener("click", function () {
         window.location = link;
     });
-    let gLinkDiv = app.get(".gLinkDiv");
+
     gLinkDiv.addEventListener("click", function (e) {
         if (e.target === gLinkDiv) {
             gLinkDiv.style.display = "none";
-            //隨時監控 google calendar 網址變化
             app.eachBook.googleCal.addLinkOnBtn();
         }
     });
