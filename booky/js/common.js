@@ -22,6 +22,7 @@ let app = {
     googleBooks: {},
     addBook: {},
     scanBook: {},
+    member: {},
 };
 
 app.checkLogin = function () {
@@ -203,27 +204,27 @@ app.addBook.getInput = function () {
 app.addBook.search = function (keyWord) {
     app.containerNum = 1;
     switch (app.searchText) {
-        case "search-title":
-            app.googleBooks.fetch("intitle", keyWord).then(function (data) {
-                app.googleBooks.getData(data);
-            }).catch(function (error) {
-                app.googleBooks.errorHandler(error);
-            });
-            break;
-        case "search-isbn":
-            app.googleBooks.fetch("isbn", keyWord).then(function (data) {
-                app.googleBooks.getData(data);
-            }).catch(function (error) {
-                app.googleBooks.errorHandler(error);
-            });
-            break;
-        case "search-author":
-            app.googleBooks.fetch("inauthor", keyWord).then(function (data) {
-                app.googleBooks.getData(data);
-            }).catch(function (error) {
-                app.googleBooks.errorHandler(error);
-            });
-            break;
+    case "search-title":
+        app.googleBooks.fetch("intitle", keyWord).then(function (data) {
+            app.googleBooks.getData(data);
+        }).catch(function (error) {
+            app.googleBooks.errorHandler(error);
+        });
+        break;
+    case "search-isbn":
+        app.googleBooks.fetch("isbn", keyWord).then(function (data) {
+            app.googleBooks.getData(data);
+        }).catch(function (error) {
+            app.googleBooks.errorHandler(error);
+        });
+        break;
+    case "search-author":
+        app.googleBooks.fetch("inauthor", keyWord).then(function (data) {
+            app.googleBooks.getData(data);
+        }).catch(function (error) {
+            app.googleBooks.errorHandler(error);
+        });
+        break;
     }
 };
 
@@ -278,7 +279,11 @@ app.scanBook.scan = function () {
                 app.getAll(".result")[2].textContent = "";
                 app.getAll(".result")[2].style.justifyContent = "flex-start";
                 if (startBtn.value == "start") {
-                    startBtn.value = "stop";
+                    if (startBtn.textContent === "重新掃描") {
+                        console.log("重新掃描: " + startBtn.value);
+                    } else {
+                        startBtn.value = "stop";
+                    }
                     startBtn.textContent = "停止掃描";
                     line.textContent = "SEARCHING......";
                     line.classList.add("typewriter");
@@ -303,13 +308,20 @@ app.scanBook.scan = function () {
                         line.classList.remove("typewriter");
                         startBtn.textContent = "重新掃描";
                     });
+                    // startBtn.value = "stop";
+                    console.log("startBtn.value" + startBtn.value);
+
                     console.log(`Started continous decode from camera with id ${firstDeviceId}`);
                 } else if (startBtn.value == "stop") {
                     startBtn.value = "start";
+                    //waiting test
+                    codeReader.reset();
                     startBtn.textContent = "打開相機";
                     line.textContent = "";
                     line.classList.remove("typewriter");
-                    codeReader.reset();
+                    //remove title
+                    app.getAll(".container-two")[2].classList.remove("show-container");
+                    console.log("startBtn.value" + startBtn.value);
                 }
             });
         })
@@ -329,12 +341,12 @@ app.scanBook.imgScan = function () {
     document.getElementById("file").addEventListener("change",
         ProcessFile, false);
     app.get("#img-result>img").onload = function () {
-        app.decodeFun();
+        app.scanBook.imgScan.decodeFun();
     };
 };
 
 //拍照後搜尋資料庫
-app.decodeFun = function (ev) {
+app.scanBook.imgScan.decodeFun = function (ev) {
     const codeReader = new ZXing.BrowserBarcodeReader("video");
     let fileImg = app.get("#img-result>img");
     let uploadBtn = app.get(".shot-list label");
@@ -424,6 +436,13 @@ app.googleBooks.show = function (bookTitle, bookAuthor, bookPublisher, bookISBN,
     app.getAll(".container-two")[i].classList.add("show-container");
     app.getAll(".container-two")[i].style.paddingBottom = "500px";
     app.getAll(".container-two")[i].scrollIntoView({ block: "start", behavior: "smooth" });
+    if (app.get("#startButton")) {
+        codeReader.reset();
+        app.get("#startButton").textContent = "重新掃描";
+        // app.get("#startButton").value = "stop";
+        console.log("show value" + app.get("#startButton").value);
+        console.log("only stop here, didnt go to start stop again");
+    }
     if (i == 2) { amount = 1; }
     app.getAll(".container-two h2>span")[i].textContent = amount;
     app.getAll(".container-two h2>span")[i].style.textAlign = "center";
@@ -486,13 +505,12 @@ app.googleBooks.addToDB = function (bookTitle, bookAuthor, bookPublisher, bookIS
         keepAdd.addEventListener("click", function () {
             app.get(".alertDiv").style.display = "none";
             if (app.getAll(".lightbox-list")[app.containerNum - 1]) {
+                //minus one due to search feature dont need lightbox-list feature
                 app.getAll(".lightbox-list")[app.containerNum - 1].scrollIntoView({ block: "start", behavior: "smooth" });
             }
             if (app.get(".shot-list")) { app.get(".shot-list").scrollIntoView({ block: "start", behavior: "smooth" }); }
             if (app.get(".imgLoad")) { app.get(".imgLoad").textContent = ""; }
             app.getAll(".container-two")[app.containerNum].classList.remove("show-container");
-            //waiting test
-            if (app.get("#startButton")) { codeReader.reset(); app.get("#startButton").value = "重新掃描"; }
             app.get("#keyword").value = "";
         });
         //back to homepage
