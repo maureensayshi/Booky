@@ -122,9 +122,9 @@ app.visualBook = function () {
                 { transform: "translate3d(0, 0, 0)" },
                 { transform: "translate3d(-" + (num * 168) + "px, 0, 0)" }
             ], {
-                duration: (num * 168 * 1000) / 56,
-                iterations: Infinity
-            });
+                    duration: (num * 168 * 1000) / 56,
+                    iterations: Infinity
+                });
 
             for (let j = 0; j < 2; j++) {
                 for (let i = 0; i < num; i++) {
@@ -166,10 +166,10 @@ app.visualBook = function () {
                 { transform: "translate3d(0, 0, 0)" },
                 { transform: "translate3d(-" + ((listShow.length + num) * 168) + "px, 0, 0)" }
             ], {
-                // timing options
-                duration: ((listShow.length + num) * 168 * 1000) / 56,
-                iterations: Infinity
-            });
+                    // timing options
+                    duration: ((listShow.length + num) * 168 * 1000) / 56,
+                    iterations: Infinity
+                });
 
             app.stopAnimation = function () { slide.pause(); };
             app.startAnimation = function () { slide.play(); };
@@ -251,7 +251,7 @@ app.visualBookMobile = function () {
             for (let i = 0; i < listShow.length; i++) {
                 let bookBox = app.createElement("div", "bookListMobileImg", "", "", "", box);
                 let bookHref = app.createElement("a", "bookHref", "", "href", "book.html?id=" + listK[i], bookBox);
-                let bookDiv = app.createElement("img", "", "", "src", listShow[i].coverURL, bookHref);
+                app.createElement("img", "", "", "src", listShow[i].coverURL, bookHref);
                 if (bookListArrV[i].coverURL == "./img/fakesample1.svg" ||
                     bookListArrV[i].coverURL == "./img/fakesample2.svg" ||
                     bookListArrV[i].coverURL == "./img/fakesample3.svg") {
@@ -260,21 +260,30 @@ app.visualBookMobile = function () {
                     } else {
                         bookHref.style.width = "45%";
                     }
-                    let bookTitle = app.createElement("div", "bookTitleMobile", listShow[i].title, "", "", bookHref);
+                    app.createElement("div", "bookTitleMobile", listShow[i].title, "", "", bookHref);
                 }
             }
             window.setTimeout(function () {
                 app.get("#pre").style.display = "block";
                 app.get("#next").style.display = "block";
+                app.visualBookMobile.count = 0;
+                app.visualBookMobile.bookLength = listShow.length;
+                app.get("#pre").style.display = "none";
 
                 let eachBook = app.get(".bookListMobileImg").offsetWidth;
+                app.visualBookMobile.eachBook = eachBook;
+
                 app.get("#pre").onclick = function () {
                     box.scrollBy(-eachBook, 0);
+                    app.visualBookMobile.count -= eachBook;
+                    app.visualBookMobile.update();
                     console.log("pre");
                     console.log(eachBook);
                 };
                 app.get("#next").onclick = function () {
                     box.scrollBy(eachBook, 0);
+                    app.visualBookMobile.count += eachBook;
+                    app.visualBookMobile.update();
                     console.log("next");
                     console.log(eachBook);
                 };
@@ -287,11 +296,24 @@ app.visualBookMobile = function () {
     });
 };
 
+app.visualBookMobile.update = function () {
+    if (app.visualBookMobile.count < (app.get(".book-list").scrollWidth / app.visualBookMobile.bookLength)) {
+        app.get("#pre").style.display = "none";
+    } else {
+        app.get("#pre").style.display = "block";
+    }
+
+    if (app.visualBookMobile.count === (app.get(".book-list").scrollWidth - app.visualBookMobile.eachBook)) {
+        app.get("#next").style.display = "none";
+    } else {
+        app.get("#next").style.display = "block";
+    }
+};
+
 app.linkToAddBook = function () {
     let fakeBookAll = app.getAll(".sample-book");
     let addPage = app.get(".add-shade");
     let close_add_btn = app.get(".add-img>img");
-    // let result = app.get(".container-two");
     for (let i = 0; i < fakeBookAll.length; i++) {
         fakeBookAll[i].onclick = function (e) {
             console.log("hi here");
