@@ -182,7 +182,6 @@ app.addBook.typeSelected = function (e) {
     for (let i = 0; i < threeType.length; i++) { threeType[i].classList.remove("active"); }
     e.currentTarget.classList.add("active");
     app.searchText = e.target.value;
-    console.log(app.searchText);
 };
 
 app.addBook.getInput = function () {
@@ -270,56 +269,41 @@ app.scanBook.scan = function () {
                 app.containerNum = 2;
                 let line = app.get(".line");
                 app.getAll(".container-two")[2].classList.remove("show-container");
-                // app.getAll(".container-two")[2].style.display = "none";
                 app.getAll(".container-two h2>span")[2].textContent = "";
                 app.getAll(".result")[2].textContent = "";
-                app.getAll(".result")[2].style.justifyContent = "flex-start";
-                if (startBtn.value == "start") {
-                    if (startBtn.textContent === "重新掃描") {
-                        console.log("重新掃描: " + startBtn.value);
-                    } else {
-                        startBtn.value = "stop";
-                    }
-                    startBtn.textContent = "停止掃描";
+                app.getAll(".result")[2].style.justifyContent = "center";
+                if (startBtn.value === "start") {
                     line.textContent = "SEARCHING......";
                     line.classList.add("typewriter");
                     codeReader.decodeFromInputVideoDevice(undefined, "video").then((result) => {
                         if (result) {
                             line.textContent = "ISBN : " + result.text;
                             line.classList.remove("typewriter");
-                            startBtn.textContent = "重新掃描";
-                            app.getAll(".container-two")[2].style.display = "block";
-                            app.getAll(".container-two h2>span")[2].textContent = "";
-                            app.getAll(".result")[2].textContent = "";
-                            app.getAll(".result")[2].style.justifyContent = "center";
-                            app.googleBooks.fetch("isbn", result.text).then(function (data) {
-                                for (let i = 0; i < data.items.length; i++) {
-                                    app.googleBooks.show(app.googleBooks.getData(data, i));
-                                }
-                            }).catch(function (error) {
-                                app.googleBooks.errorHandler(error);
-                            });
+                            app.addBook.fetchBook("isbn", result.text);
+                            codeReader.reset();
+                            startBtn.textContent = "打開相機";
+                            startBtn.value = "start";
+                            console.log(result.text + startBtn.value);
                         }
                     }).catch((err) => {
                         console.error(err);
                         line.textContent = "查無此書";
                         line.classList.remove("typewriter");
-                        startBtn.textContent = "重新掃描";
+                        codeReader.reset();
+                        startBtn.textContent = "打開相機";
+                        startBtn.value = "start";
+                        console.log(startBtn.value);
                     });
-                    // startBtn.value = "stop";
-                    console.log("startBtn.value" + startBtn.value);
-
+                    startBtn.textContent = "重新掃描";
                     console.log(`Started continous decode from camera with id ${firstDeviceId}`);
-                } else if (startBtn.value == "stop") {
-                    startBtn.value = "start";
-                    //waiting test
+                } else if (startBtn.value === "stop") {
                     codeReader.reset();
                     startBtn.textContent = "打開相機";
+                    startBtn.value = "start";
                     line.textContent = "";
                     line.classList.remove("typewriter");
                     //remove title
                     app.getAll(".container-two")[2].classList.remove("show-container");
-                    console.log("startBtn.value" + startBtn.value);
                 }
             });
         })
@@ -441,12 +425,6 @@ app.googleBooks.show = function (book) {
     app.getAll(".container-two")[i].classList.add("show-container");
     app.getAll(".container-two")[i].style.paddingBottom = "500px";
     app.getAll(".container-two")[i].scrollIntoView({ block: "start", behavior: "smooth" });
-    // if (app.get("#startButton")) {
-    //     codeReader.reset();
-    //     app.get("#startButton").textContent = "重新掃描";
-    //     console.log("show value" + app.get("#startButton").value);
-    //     console.log("only stop here, didnt go to start stop again");
-    // }
     if (i === 2) { book.amount = 1; }
     app.getAll(".container-two h2>span")[i].textContent = book.amount;
     app.getAll(".container-two h2>span")[i].style.textAlign = "center";
@@ -512,6 +490,7 @@ app.googleBooks.addToDB = function (book) {
                 //minus one due to search feature dont need lightbox-list feature
                 app.getAll(".lightbox-list")[app.containerNum - 1].scrollIntoView({ block: "start", behavior: "smooth" });
             }
+            if (app.get(".line")) { app.get(".line").textContent = ""; }
             if (app.get(".shot-list")) { app.get(".shot-list").scrollIntoView({ block: "start", behavior: "smooth" }); }
             if (app.get(".imgLoad")) { app.get(".imgLoad").textContent = ""; }
             app.getAll(".container-two")[app.containerNum].classList.remove("show-container");
