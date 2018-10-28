@@ -283,7 +283,6 @@ app.initClient = function () {
             app.startDate = app.get("#start").value;
             app.get("#end").value = new Date().toISOString().split("T")[0];
             app.endDate = app.get("#end").value;
-            // app.fillForm();
             app.eachBook.googleCal.fillForm();
             let cancel = app.get(".remind-img>img");
             cancel.onclick = function () {
@@ -309,9 +308,17 @@ app.initClient = function () {
 
 app.eachBook.googleCal.fillForm = function () {
     //form info
-    app.get("#eventTitle").onchange = function () { app.eventTitle = app.get("#eventTitle").value; };
-    app.get("#start").onchange = function () { app.startDate = app.get("#start").value; };
-    app.get("#end").onchange = function () { app.endDate = app.get("#end").value; };
+    app.get("#eventTitle").onchange = function () {
+        app.eventTitle = app.get("#eventTitle").value;
+    };
+    app.get("#start").onchange = function () {
+        app.startDate = app.get("#start").value;
+        console.log(app.get("#start").value.replace(/-/g, ""));
+    };
+    app.get("#end").onchange = function () {
+        app.endDate = app.get("#end").value;
+        console.log(app.get("#end").value.replace(/-/g, ""));
+    };
     let reminderYes = app.get("#remindYes");
     let reminderNo = app.get("#remindNo");
     //daily remind
@@ -325,10 +332,13 @@ app.eachBook.googleCal.fillForm = function () {
         app.remindMin = app.get("#remindBefore").value;
         app.get("#setTime").onchange = function () {
             app.setTime = app.get("#setTime").value;
+            console.log(app.get("#setTime").value.replace(/:/g, ""));
             app.eachBook.googleCal.edit();
         };
         app.get("#setTimeFini").onchange = function () {
             app.setTimeFini = app.get("#setTimeFini").value;
+            console.log(app.setTimeFini);
+            console.log(app.get("#setTimeFini").value.replace(/:/g, ""));
             app.eachBook.googleCal.edit();
         };
         app.get("#remindBefore").onchange = function () {
@@ -340,7 +350,16 @@ app.eachBook.googleCal.fillForm = function () {
     //no daily remind
     reminderNo.addEventListener("click", function () {
         app.get(".remind-time").style.display = "none";
-        app.get("#addToCalendar").onclick = app.eachBook.googleCal.insertEventNoRemind;
+        app.get("#addToCalendar").addEventListener("click", function () {
+            let startStr = app.get("#start").value.replace(/-/g, "");
+            let endStr = app.get("#end").value.replace(/-/g, "");
+            if (endStr < startStr) {
+                alert("結束日期不得早於開始日期");
+            } else {
+                app.eachBook.googleCal.insertEventNoRemind();
+            }
+        });
+        // app.get("#addToCalendar").onclick = app.eachBook.googleCal.insertEventNoRemind;
     });
 };
 
@@ -375,23 +394,35 @@ app.eachBook.googleCal.edit = function () {
 
 app.eachBook.googleCal.insertEvent = function (event) {
     app.get("#addToCalendar").addEventListener("click", function () {
-        let request = gapi.client.calendar.events.insert({
-            "calendarId": "primary",
-            "resource": event
-        });
-        request.execute(function (event) {
-            let link = event.htmlLink;
-            let db = app.database;
-            let dbBookList = db.ref("/members/" + app.uid + "/bookList/" + app.bookID + "/calLink");
-            console.log(dbBookList);
-            dbBookList.set(link, function (error) {
-                if (error) {
-                    console.log("未將活動連結加進 db");
-                } else {
-                    app.eachBook.googleCal.afterSend(link);
-                }
+        let startStr = app.get("#start").value.replace(/-/g, "");
+        let endStr = app.get("#end").value.replace(/-/g, "");
+        let setStr = app.get("#setTime").value.replace(/:/g, "");
+        let setFiniStr = app.get("#setTimeFini").value.replace(/:/g, "");
+        if (endStr < startStr && setFiniStr < setStr) {
+            alert("結束日期不得早於開始日期 & 結束閱讀時間不得早於開始閱讀時間");
+        } else if (endStr < startStr && setFiniStr > setStr) {
+            alert("結束日期不得早於開始日期");
+        } else if (endStr > startStr && setFiniStr < setStr) {
+            alert("結束閱讀時間不得早於開始閱讀時間");
+        } else {
+            let request = gapi.client.calendar.events.insert({
+                "calendarId": "primary",
+                "resource": event
             });
-        });
+            request.execute(function (event) {
+                let link = event.htmlLink;
+                let db = app.database;
+                let dbBookList = db.ref("/members/" + app.uid + "/bookList/" + app.bookID + "/calLink");
+                console.log(dbBookList);
+                dbBookList.set(link, function (error) {
+                    if (error) {
+                        console.log("未將活動連結加進 db");
+                    } else {
+                        app.eachBook.googleCal.afterSend(link);
+                    }
+                });
+            });
+        }
     });
 };
 
