@@ -18,16 +18,17 @@ app.checkingIndex = function () {
             console.log(app.uid);
             app.get(".welcome").style.display = "none";
             app.get(".real").style.display = "block";
-            if (document.body.clientWidth > 1024) {
-                app.visualBook();
-            } else {
+            let userAgent = navigator.userAgent;
+            let isSafari = userAgent.indexOf("Safari") > -1 && userAgent.indexOf("Chrome") < 1;
+            if (document.body.clientWidth < 1024 || navigator.userAgent.match("Edge") || isSafari) {
                 app.visualBookMobile();
+            } else {
+                app.visualBook();
             }
             app.menu();
             app.searchBook.Init();
             app.addBook.Init();
             app.scanBook.Init();
-            app.closeLoading();
         } else {
             // User is signed out or haven't sign up.
             app.get(".welcome").style.display = "block";
@@ -73,7 +74,6 @@ app.googleLogin = function () {
 app.getRedirectResult = function () {
     firebase.auth().getRedirectResult().then(function (result) {
         console.log(result);
-        app.closeLoading();
         if (result.user && result.additionalUserInfo.isNewUser) {
             let uid = result.user.uid;
             let name = result.user.displayName;
@@ -213,6 +213,7 @@ app.visualBook = function () {
     }).catch((error) => {
         console.log(error);
     });
+    app.closeLoading();
 };
 
 app.visualBookMobile = function () {
@@ -288,12 +289,11 @@ app.visualBookMobile = function () {
                     console.log(eachBook);
                 };
             }, 1000);
-
-
         }
     }).catch((error) => {
         console.log(error);
     });
+    app.closeLoading();
 };
 
 app.visualBookMobile.update = function () {
