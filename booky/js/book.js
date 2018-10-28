@@ -283,6 +283,8 @@ app.initClient = function () {
             app.startDate = app.get("#start").value;
             app.get("#end").value = new Date().toISOString().split("T")[0];
             app.endDate = app.get("#end").value;
+            app.getAll("main .remind-or-not .container")[0].style.opacity = "1";
+            app.getAll("main .remind-or-not .container")[1].style.opacity = "1";
             app.eachBook.googleCal.fillForm();
             let cancel = app.get(".remind-img>img");
             cancel.onclick = function () {
@@ -313,11 +315,9 @@ app.eachBook.googleCal.fillForm = function () {
     };
     app.get("#start").onchange = function () {
         app.startDate = app.get("#start").value;
-        console.log(app.get("#start").value.replace(/-/g, ""));
     };
     app.get("#end").onchange = function () {
         app.endDate = app.get("#end").value;
-        console.log(app.get("#end").value.replace(/-/g, ""));
     };
     let reminderYes = app.get("#remindYes");
     let reminderNo = app.get("#remindNo");
