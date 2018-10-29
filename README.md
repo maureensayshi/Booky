@@ -1,6 +1,8 @@
 # Booky
 Booky is a book management website, which can help you to set your reading schedule to Google Calendar and manage information of books.
 
+![alt text](https://i.imgur.com/r6Gqsrn.png)
+
 ## Main Feature
 * **Manage Book Status**
   * You can modify Read / Reading / Unread / Worth Twice Read status of each book you own.
