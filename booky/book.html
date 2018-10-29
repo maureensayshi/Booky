@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Booky 單本設定</title>
+    <link rel="shortcut icon" href="img/favicon-32.png" type="image/x-icon">
+    <link rel="icon" href="img/favicon-32.png" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" href="css/book.css" media="all" />
+</head>
+
+<body>
+    <!-- delete alert -->
+    <div class="deleteDiv">
+        <div class="deleteConfirm">
+            <div>您確定要刪除此書 ?</div>
+            <div>
+                <button>是</button>
+                <button>否</button>
+            </div>
+        </div>
+    </div>
+    <!-- delete  alert end -->
+    <div class="afterDeleteDiv">
+        <div class="afterDelete">
+            <div>已刪除</div>
+            <div>將跳轉到總書櫃 . . .</div>
+        </div>
+    </div>
+    <!-- edit alert -->
+    <div class="editConfirmDiv">
+        <div class="editConfirm">
+            <div>您確定要更新資訊 ?</div>
+            <div>
+                <button>是</button>
+                <button>否</button>
+            </div>
+        </div>
+    </div>
+    <!-- edit  alert end -->
+    <div class="afterEditDiv">
+        <div class="afterEdit">
+            <div>已更新</div>
+        </div>
+    </div>
+    <!-- new btn alert -->
+    <div class="gLinkDiv">
+        <div class="gLink">
+            <div>已加入 Google 日曆</div>
+            <div>
+                <button>回到上頁</button>
+                <button>查看日曆</button>
+            </div>
+        </div>
+    </div>
+    <!-- new btn  alert end -->
+    <!-- alert -->
+    <div class="alertDiv">
+        <div class="alert">
+            <div>成功加入書籍</div>
+            <div>
+                <button>編輯書籍</button>
+                <button>繼續加書</button>
+                <button>回到原頁</button>
+            </div>
+        </div>
+    </div>
+    <!-- alert end -->
+    <div class="menu-shade"></div>
+    <div class="menu">
+        <img class="close-menu" src="img/cancel.svg" />
+        <div><a href="bookshelf.html?status=all">總書櫃 / ALL</a></div>
+        <div value="0"><a href="bookshelf.html?status=0">未讀 / UNREAD</a></div>
+        <div value="1"><a href="bookshelf.html?status=1">閱讀中 / READING</a></div>
+        <div value="2"><a href="bookshelf.html?status=2">已讀 / READ</a></div>
+        <div value="twice"><a href="bookshelf.html?status=twice">值得二讀 / TWICE</a></div>
+        <div value="lend"><a href="bookshelf.html?status=lend">出借的書 / LENT</a></div>
+        <div><a href="member.html">帳號管理 / ACCOUNT</a></div>
+    </div>
+    <header>
+        <button class="btn_menu"></button>
+        <div class="btn_logo">
+            <a href="index.html"><img src="img/logo.svg" /></a>
+        </div>
+        <button class="btn_search"></button>
+        <button id="addbook"></button>
+        <button id="scanbook"></button>
+    </header>
+
+    <!-- search book shelf container-two 0 -->
+    <div class="search-shade searchShade">
+        <div class="searchbar-img">
+            <img src="img/cancel.svg" />
+        </div>
+        <form action="/" method="get" class="searchbar-form">
+            <input type="text" value="" placeholder="尋找放在 Booky 的書" />
+            <button></button>
+        </form>
+        <div class="container-two">
+            <h2><span></span>筆搜尋結果</h2>
+            <div class="resultOuter">
+                <div class="result"></div>
+            </div>
+        </div>
+        <div class="searchbar-list">
+            <h5>BROWSE CATEGORIES</h5>
+            <ul class="search-ul">
+                <li><a href="bookshelf.html?status=all">總書櫃 ALL</a></li>
+                <li><a href="bookshelf.html?status=0">未讀 UNREAD</a></li>
+                <li><a href="bookshelf.html?status=1">閱讀中 READING</a></li>
+                <li><a href="bookshelf.html?status=2">已讀 READ</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- add book by typing container-two 1 -->
+    <div class="add-shade addShade">
+        <div class="add-img">
+            <img src="img/cancel.svg" />
+        </div>
+        <div class="addbar-list lightbox-list">
+            <h5>ADD BY</h5>
+            <div class="addTabs">
+                <button class="addtab active" value="search-title">書名</button>
+                <button class="addtab" value="search-author">作者</button>
+                <button class="addtab" value="search-isbn">書碼</button>
+            </div>
+            <form method="get" class="add-form" id="searchForm">
+                <input id="keyword" type="text" value="" placeholder="把書加進 Booky" />
+                <button id="keyin-search"></button>
+                <!-- KEYWORD 要記得改成 CLASS  -->
+            </form>
+
+            <div class="container-two">
+                <h2><span></span>筆搜尋結果</h2>
+                <div class="resultOuter">
+                    <div class="result"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- add book by scan container-two 2 -->
+    <div class="scan-shade scanShade">
+        <div class="scan-img">
+            <img src="img/cancel.svg" />
+        </div>
+
+        <!-- 電腦版掃描搜尋 -->
+        <div class="scan-list lightbox-list">
+            <h5>ADD BY SCANNING</h5>
+            <div class="reminder">請將 ISBN 條碼對齊中心，將自動掃描</div>
+            <div class="reminder">溫馨提醒&nbsp&nbsp:&nbsp&nbspiOS&nbsp系統請使用 Safari 瀏覽器</div>
+            <div id="mac"><img src="img/mac.png"></div>
+            <div class="scan-btns">
+                <button id="startButton" value="start">打開相機</button>
+            </div>
+            <div class="camera">
+                <video id="video" width="100%" height="250"></video>
+            </div>
+            <div id="sourceSelectPanel" style="display:none">
+                <label for="sourceSelect">Change video source:</label>
+                <select id="sourceSelect" style="max-width:20%"></select>
+            </div>
+            <div class="line"></div>
+
+            <div class="container-two">
+                <h2><span></span>筆搜尋結果</h2>
+                <div class="resultOuter">
+                    <div class="result"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 手機板拍照搜尋 -->
+        <div class="shot-list" id="hide">
+            <h5>ADD BY PHOTO</h5>
+            <div class="reminder">請橫放手機，用兩指放大 ISBN 條碼，</br>對焦拍照後將自動搜尋</div>
+            <div id="iphone"><img src="img/iphone.png"></div>
+            <label for="file">拍攝照片</label>
+            <input type="file" id="file" name="file" accept="image/*" capture />
+            <div id="img-result"><img /></div>
+            <div class="imgLoad"></div>
+
+            <div class="container-two">
+                <h2><span></span>筆搜尋結果</h2>
+                <div class="resultOuter">
+                    <div class="result"></div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <main>
+        <div class="bg"></div>
+        <div class="view">
+            <div class="visual-book">
+                <img />
+            </div>
+            <div class="book-detail-wrapper">
+                <div class="book-detail">
+                    <div class="move-book-detail">
+                        <div><span>書本名稱</span><span id="title"></span></div>
+                        <div><span>作者</span><span id="author"></span></div>
+                        <div><span>出版社</span><span id="publisher"></span></div>
+                        <div class="book-place">
+                            <span>放置地點</span>
+                            <input type="text" disabled=true value="" class="input-init">
+                        </div>
+
+                        <div class="reading-status">
+                            <span>閱讀狀態</span>
+                            <span class="current-read"></span>
+                            <div class="status-choice">
+                                <label class="container">
+                                    <span>未讀&nbsp&nbsp&nbsp</span>
+                                    <input type="radio" disabled=true checked="checked" name="reading" value="0">
+                                    <span class="checkmark"></span>
+                                </label>
+                                <label class="container">
+                                    <span>閱讀中&nbsp&nbsp&nbsp</span>
+                                    <input type="radio" disabled=true name="reading" value="1">
+                                    <span class="checkmark"></span>
+                                </label>
+                                <label class="container">
+                                    <span>已讀&nbsp&nbsp&nbsp</span>
+                                    <input type="radio" disabled=true name="reading" value="2">
+                                    <span class="checkmark"></span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="twice-or-not">
+                            <span>值得二讀</span>
+                            <span class="current-twice"></span>
+                            <label class="container">
+                                <span>否&nbsp&nbsp&nbsp</span>
+                                <input type="radio" disabled=true checked="checked" name="twice" value=false>
+                                <span class="checkmark"></span>
+                            </label>
+                            <label class="container">
+                                <span>是&nbsp&nbsp&nbsp</span>
+                                <input type="radio" disabled=true name="twice" value=true>
+                                <span class="checkmark checkmark-two"></span>
+                            </label>
+                        </div>
+                        <div class="lend-or-not">
+                            <span>是否出借</span>
+                            <span class="current-lent"></span>
+                            <label class="container">
+                                <span>否&nbsp&nbsp&nbsp</span>
+                                <input id="nolent" type="radio" disabled=true checked="checked" name="lend" value=false>
+                                <span class="checkmark"></span>
+                            </label>
+                            <label class="container">
+                                <span>是&nbsp&nbsp&nbsp</span>
+                                <input id="lent" type="radio" disabled=true name="lend" value=true>
+                                <span class="checkmark checkmark-two"></span>
+                            </label>
+                        </div>
+                        <div class="lend-to">
+                            <span>出借對象</span>
+                            <input class="input-init" type="text" disabled=true value="" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="book-button">
+                <input id="save-and-edit" type="button" value="更新資料" />
+                <input id="delete" type="button" value="刪除此書" />
+                <input id="calendar" type="button" value="加到 Google 日曆" />
+                <a href="" id="calLink" target="_blank"><input type="button" value="編輯 Google 日曆" /></a>
+                <button id="logoutgoogle" style="display: none">log out</button>
+            </div>
+
+            <!-- google calendar section -->
+            <div class="remind-shade remindShade">
+                <div class="remind-img">
+                    <img src="img/cancel.svg" />
+                </div>
+                <div class="remindbar-list">
+                    <h5>ADD to GOOGLE CALENDAR</h5>
+                    <div class="reminder-check">
+                        <div class="remind-title">
+                            <label for="eventTitle">事件名稱</label>
+                            <textarea type="input" id="eventTitle" name="trip" value="" class="title-init"></textarea>
+                        </div>
+                        <div class="remind-start">
+                            <label for="start">開始日期</label>
+                            <input type="date" id="start" name="trip" value="" required="required" />
+                        </div>
+                        <div class="remind-end">
+                            <label for="end">結束日期</label>
+                            <input type="date" id="end" name="trip" value="" required="required" />
+                        </div>
+                        <!-- 是否要每天提醒 -->
+                        <div class="remind-or-not">
+                            <span class="daily-title">每天提醒</span>
+                            <label class="container">
+                                <span>是&nbsp&nbsp&nbsp</span>
+                                <input type="radio" id="remindYes" name="remind" value=true>
+                                <span class="checkmark checkmark-two"></span>
+                            </label>
+                            <label class="container">
+                                <span>否&nbsp&nbsp&nbsp</span>
+                                <input type="radio" id="remindNo" name="remind" value=false>
+                                <span class="checkmark"></span>
+                            </label>
+                        </div>
+
+                        <!-- 有要每天提醒才出現 -->
+                        <div class="remind-time" style="display: none;">
+                            <div class="read-time">
+                                <label for="setTime">開始時間</label>
+                                <input type="time" id="setTime" name="time" value="" />
+                            </div>
+
+                            <div>
+                                <label for="setTimeFini">結束時間</label>
+                                <input type="time" id="setTimeFini" name="time" value="" />
+                            </div>
+                            <div class="remindBeforeOuter">
+                                <label for="remindBefore">提前提醒</label>
+                                <input type="input" id="remindBefore" name="remindTime" value="" />
+                                <span>分鐘</span>
+                            </div>
+                        </div>
+                        <!-- 確認按鍵 -->
+                        <input id="addToCalendar" type="button" value="確認" />
+                    </div>
+                </div>
+            </div>
+            <!-- GOOGLE calendar END -->
+            <!-- for mobile add and scan -->
+            <div class="mobile-add"></div>
+    </main>
+    <footer>
+        <div class="footer">&copy; 2018 Booky 小書僮 | Maureen Wang | maureen81711@gmail.com</div>
+    </footer>
+    <div id="loading" class="loading">
+        <img src="img/load.gif" />
+    </div>
+</body>
+<script src="https://www.gstatic.com/firebasejs/5.5.1/firebase.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.3.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.3.0/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.3.0/firebase-database.js"></script>
+<script type="text/javascript" src="https://unpkg.com/@zxing/library@dev"></script>
+<script src="js/common.js"></script>
+<script src="js/book.js"></script>
+<script async defer src="https://apis.google.com/js/api.js" onload="this.onload=function(){};app.handleClientLoad()"
+    onreadystatechange="if (this.readyState === 'complete') this.onload()"> </script>
+
+</html>

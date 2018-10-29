@@ -1,0 +1,648 @@
+@import "./common.css";
+
+/* welcome */
+.welcome .fullpage{
+    /* overflow-y: scroll; */
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+.welcome main{
+    width: 100vw;
+    height: 100vh;
+}
+
+/* KEY VISUAL */
+.welcome main .view{
+    max-width: 900px;
+    display: flex;
+    justify-content: center;
+    margin: 30px auto 10px auto;
+}
+
+.welcome main .key-visual{
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;  
+    align-items: flex-end;
+}
+
+.welcome main .key-visual>.visual-book{
+    flex: none;
+    width: 12%;
+    height: auto;
+    /* padding: 5px; */
+    margin: 30px;
+    /* background-color: white; */
+    /* border-radius: 15px; */
+    box-shadow: 1px 1px 10px #999999;
+}
+
+
+.welcome main .key-visual>.visual-book:nth-child(2),
+.welcome main .key-visual>.visual-book:nth-child(4){
+    width: 13%;
+    height: auto;
+}
+
+.welcome main .key-visual>.visual-book:nth-child(3){
+   width: 16%;
+   height: auto;
+}
+
+.welcome main .introduce{
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+    align-items: center;
+    letter-spacing: 2px;
+}
+
+.welcome main .introduce p{line-height: 2;}
+
+.welcome .downDiv{
+    display: flex; flex-direction: column;align-items: center;width: 100%;
+}
+
+.welcome #down {
+    width: 250px; height: 40px; border:none;
+   cursor: pointer; 
+    background-image: url("../img/down-arrow.svg") ;
+    background-repeat: no-repeat;
+    background-size: 40px; 
+    background-position: center center;
+    -webkit-box-shadow: none; -moz-box-shadow: none; box-shadow: none;
+    background-color: transparent;
+}
+
+.welcome .feature{
+    width: 100vw;
+    height: 100vh;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    align-items: center;
+    justify-items: center;
+    background-color: rgba(255, 255, 255, 1);
+}
+
+.welcome .feature>div{
+    width:33.3vw;
+    height: 100%;
+    padding: 20px;
+}
+
+.welcome .feature>div:nth-child(1){
+    background-image: url("../img/intro2.jpg");
+    background-size:cover; 
+    background-repeat: no-repeat;
+    opacity: .7;
+}
+.welcome .feature>div:nth-child(3){
+    background-image: url("../img/intro4.png");
+    background-size:cover; 
+    background-repeat: no-repeat;
+    background-position: center;
+    opacity: .7;
+}
+
+.welcome .feature>div:nth-child(5){
+    background-image: url("../img/intro3.jpg");
+    background-size:cover; 
+    background-repeat: no-repeat;
+    opacity: .7;
+}
+
+.welcome .indentity{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.welcome .indentity>div:nth-child(1){
+    font-size:22px;
+    font-family: "Cinzel", serif, "NSimSun";
+    letter-spacing: 3px;
+    font-weight: 600;
+    padding-top: 15px;
+}
+
+.welcome .indentity>div:nth-child(2){
+    width: 40px;
+    height: 3px;
+    background-color: #ececec;
+    margin: 20px;
+    color: #333333;
+}
+
+.welcome .indentity>div:nth-child(3){
+    width: 80%;
+    font-size: 14px;
+    font-family: "Noto Sans JP", sans-serif;
+    letter-spacing: 2px;
+    line-height: 2;
+    color: #333333;
+}
+
+.welcome .feature-two{
+    width: 100vw;
+    height: 100vh;
+    background-color: white;
+    position: relative;
+}
+
+.welcome .feature-two div:nth-child(1){
+    width:100%;
+    height: 40%;
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    transform: translate(-50%);
+    background-image: url(../img/logo.svg);
+    background-position: center top;
+    background-size: 20%;  
+    background-repeat: no-repeat;
+    z-index: 2;
+}
+
+.welcome .feature-two div:nth-child(2){
+   color: #333333;
+    font-size: 20px;
+    position: absolute;
+    top: 35%;
+    left: 50%;
+    transform: translate(-50%);
+    font-family: "Cinzel", serif, "NSimSun";
+    font-weight: 600;
+    z-index: 2;
+    width: 100%;
+    text-align: center;
+    letter-spacing: 2px;
+}
+.welcome .feature-two div:nth-child(3){
+    width: 100%;
+    height: 100%;
+    background-color: #F1F1F3;
+    opacity: .6;
+}
+
+.welcome main .signinDiv{ display: flex; flex-direction: column;cursor: pointer;}
+
+.welcome main .signinDivTwo{ display: flex; flex-direction: column; margin: 10px;cursor: pointer; z-index: 2;}
+
+.welcome .signin{
+    width: 250px; height: 50px; align-self: center; letter-spacing: 3px; padding-left: 60px; border-radius: 5px; border:none;
+    margin: 6px; font-size: 14px; cursor: pointer; font-family: "Noto Sans JP", arial, sans-serif;
+    background: url("../img/google.svg") no-repeat 20px #DCB58C;
+	color: white; -webkit-box-shadow: none; -moz-box-shadow: none; box-shadow: none;
+}
+
+.welcome .signinTwo{
+    width: 250px; height: 50px; align-self: center; letter-spacing: 3px; padding-left: 60px; border-radius: 5px; border:none;
+    margin: 6px; font-size: 14px; cursor: pointer; font-family: "Noto Sans JP", arial, sans-serif;
+    background: url("../img/google.svg") no-repeat 20px #DCB58C;
+    color: white; -webkit-box-shadow: none; -moz-box-shadow: none; box-shadow: none;
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%);
+    z-index: 2;
+}
+
+/* real index page */
+
+.welcome{
+    display: none;
+}
+
+.real main{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.real main .view{
+  display: flex;
+  justify-content: center;
+}
+
+.real main .key-visualBox{
+    display: flex;
+    justify-content: center;
+    margin: 0px 0 50px 0;
+    width: 100%;
+    max-width: 1000px;
+}
+
+.real .key-visual {
+    overflow: hidden;
+    display: flex;
+    width: 840px;
+    height: 300px;
+}
+
+.book-list {   
+    width: auto;
+    height: 260px;
+    display: flex;
+    align-items: flex-end; 
+}
+
+/* desktop */
+.book-list-img{
+    position: relative;
+    width: 128px; 
+    height: auto;
+    margin: 0 20px;
+    box-shadow: 0px 3px 10px 0px #BBBBBB; 
+}
+
+.bookTitle{
+    position: absolute;
+    top: 15%;
+    left: 35%;
+    transform: translate(-35%,-15%);
+    height: 40px;
+    overflow: hidden;
+    letter-spacing: 1px;
+    line-height: 1.5;
+    overflow: hidden;
+    font-size: 14px;
+    font-weight: 600;
+    font-family: "Noto Sans JP", sans-serif;
+}
+
+.book-list-img:hover{
+    transform-origin: bottom;
+    transform: scale(1.3);
+    transition: transform .75s;   
+    z-index: 100;
+}
+
+.book-list-img .overlay{
+    position: absolute;
+    font-family: "Noto Sans JP", sans-serif;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: 100%;
+    height: 100%;
+    padding: 10px;
+    background-color: rgba(101, 101, 101, .6);
+    color: white;
+    opacity: 0;  
+    -webkit-transition: opacity 0s, -webkit-transform 0.35s;
+    transition: opacity 0.35s, transform 0.35s;  
+    cursor: pointer;
+}
+
+.book-list-img:hover .overlay{
+    opacity: 1;     
+}
+
+.overlay>span{
+    position: absolute;  
+    color: white;
+}
+.overlay>span:nth-child(1){
+    width: 90%;
+    letter-spacing:5px;
+    text-indent: 5px;
+    top: 35%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    font-size: 16px;
+    font-weight: 600;
+    text-align: center;
+}
+
+.overlay>span:nth-child(2){
+    width: 60%;
+    top: 60%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    font-size: 12px;
+    letter-spacing:5px;
+    text-indent: 5px;
+    padding: 2px;
+    border: 1px solid white;
+    text-align: center;
+    align-self: center;  
+}
+
+.sample-book{
+    width: 128px;
+    height: 180px;  
+    margin: 0 20px;
+    background: url("../img/addbook.svg") center no-repeat;
+    background-size: 22%;
+    opacity: .6;
+    cursor: pointer;
+    position: relative;
+}
+
+.spanBox .overlay{
+    position: absolute;
+    font-family: "Martel Sans", sans-serif, "微軟正黑體";
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: 100%;
+    height: 100%;
+    padding: 10px;
+    background-color: rgba(101, 101, 101, .6);
+    color: white;
+    opacity: 0;  
+    -webkit-transition: opacity 0s, -webkit-transform 0.35s;
+    transition: opacity 0.35s, transform 0.35s;  
+    cursor: pointer;
+}
+
+.sample-book:hover {  
+    transform: scale(1.4);
+    transition: transform .75s;
+    background:white;
+    opacity: .5;
+}   
+
+.spanBox:hover .overlay{
+    opacity: 1;
+}
+
+/* mobile scroll feature*/
+
+.keyVisualMobile {
+    overflow: hidden;
+    display: flex;
+    max-width: 70%;
+    position: relative;
+}
+
+.bookListMobile{
+    /* scroll-snap-type: x mandatory; */
+    /* overflow-x: scroll;
+    overflow-y: hidden; */
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    height: 300px;
+}
+
+.bookHref{
+    position: relative;
+}
+
+.bookTitleMobile{
+    position: absolute;
+    top: 15%;
+    left: 35%;
+    transform: translate(-35%,-15%);
+    height: 45px;
+    line-height: 1.5;
+    overflow: hidden;
+    font-family: "Cinzel", serif, "微軟正黑體";
+}
+
+
+.bookListMobileImg{
+    min-width: 33.3%;
+    min-height: 100%;
+    /* scroll-snap-align: center; */
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+main #pre{
+    display: none;
+    width: 35px;
+    height: 35px;
+    background: url("../img/left.svg") bottom center no-repeat;
+    background-size: 100%;
+    position: absolute;
+    left: 7%;
+    top: 35%;
+    transform: translateY(-35%);
+    cursor: pointer;   
+    border: 0;
+    z-index: 5;
+}
+
+main #next{
+    display: none;
+    width: 35px;
+    height: 35px;
+    background: url("../img/right.svg") bottom center no-repeat;
+    background-size: 100%;
+    position: absolute;
+    right: 7%;
+    top: 35%;
+    transform: translateY(-35%);
+    cursor: pointer;  
+    border: 0; 
+    z-index: 5;
+}
+
+
+
+/* RWD */
+@media (max-width: 1200px) and (min-width: 980px){
+
+    /* welcome */
+    .welcome .feature{
+        grid-template-columns: repeat(1, 1fr);
+    }
+    .color{
+        display: none;
+    }
+    .welcome .feature>div{
+        width:60vw;
+        padding: 20px;
+    }
+}
+
+@media (max-width: 980px) and (min-width: 640px){
+
+    /* welcome */
+    .welcome .feature{
+        grid-template-columns: repeat(1, 1fr);
+        overflow-y: scroll;
+    }
+    .color{
+        display: none;
+    }
+    .welcome .feature>div{
+        width:60vw;
+        padding: 30px 0 0 0;
+    }
+     .welcome main .introduce{letter-spacing: 1px;}
+     .welcome main .introduce p{line-height: 2;}
+    /* real index page */
+     .bookHref{
+        width: 60%;
+    }
+  
+}
+
+@media (max-width: 640px) and (min-width: 480px){
+
+    /* welcome */
+    .welcome main .view{
+        display: none;
+    }
+
+    .welcome main .signinDiv{
+        margin:150px 0 30px 0;
+    }
+    .welcome .feature{
+        grid-template-columns: repeat(1, 1fr);
+        overflow-y: scroll;
+    }
+    .color{
+        display: none;
+    }
+    .welcome .feature>div{
+        width:90vw;
+        padding: 30px 0 0 0;
+    }
+
+    .welcome .feature-two div:nth-child(1){
+        background-size: 50%;
+    }
+
+    .welcome .feature-two div:nth-child(2){
+        font-size:20px;
+    }
+
+    .welcome main .introduce{margin: 40px;}
+    .welcome main .introduce p {font-size: 14px; line-height: 2; text-align: center;}
+    /* real index page */
+    main .key-visual>.visual-book:nth-child(odd),
+    main .key-visual>.visual-book:nth-child(even){
+        overflow: hidden;
+        width: 150px;
+        height: 214px;
+        padding: 10px;
+        margin: 40px 15px;        
+    }
+
+    main .key-visualBox{
+        margin: 35px 0 50px 0;
+    }
+
+    
+    /* for key visual scroll */
+    .keyVisualMobile {
+        max-width: 70%;
+    }
+    
+    
+    .bookListMobile{
+        height: 200px;
+    }
+    
+    .bookListMobileImg{
+        min-width: 50%;
+    }
+
+}
+
+@media (max-width: 480px) and (min-width: 320px){  
+
+    /* welcome */
+
+    .welcome main .view{
+        display: none;
+    }
+
+    .welcome .signin,
+    .welcome .signinTwo{
+        width: 180px;
+        background-size:20%
+    }
+
+    .welcome main .signinDiv{
+        margin:90px 0 10px 0;
+    }
+ 
+    .welcome .feature{
+        grid-template-columns: repeat(1, 1fr);
+        height: 135vh;
+    }
+
+    .welcome .indentity>div:nth-child(1){
+        font-size:18px;
+        padding-top: 0;
+    }
+
+    .welcome .indentity>div:nth-child(2){
+        margin: 15px;
+    }
+
+    .welcome .indentity>div:nth-child(3){
+        margin:0;
+        font-size: 14px;
+        line-height: 1.75;
+    }
+
+    
+
+    .color{
+        display: none;
+    }
+    .welcome .feature>div{
+        width:90vw;
+        padding: 20px 0 50px 0;
+    }
+
+    .welcome .feature-two div:nth-child(1){
+        background-size: 50%;
+    }
+
+    .welcome .feature-two div:nth-child(2){
+        font-size:20px;
+        width: 80%;
+        line-height: 1.25;
+        top: 30%;
+    }
+
+    /* .welcome main .introduce{margin: 20px;} */
+    .welcome main .introduce p {font-size: 14px; line-height: 2; text-align: center;}
+
+    /* real index page */
+    main .key-visual>.visual-book:nth-child(odd),
+    main .key-visual>.visual-book:nth-child(even){
+        overflow: hidden;
+        width: 150px;
+        height: 214px;
+        padding: 10px;
+        margin: 40px 15px;        
+    }
+
+    main .key-visualBox{
+        margin: 35px 0 50px 0;
+    }
+
+    
+    /* for key visual scroll */
+    .keyVisualMobile {
+        max-width: 90%;
+    }
+    
+    
+    .bookListMobile{
+        height: 200px;
+    }
+    
+    .bookListMobileImg{
+        min-width: 100%;
+    }
+
+    main #pre,
+    main #next{
+        transform: translateY(-20%);
+    }
+}

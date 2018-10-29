@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
-    "eslint": "^5.6.0"
+    "@zxing/library": "^0.8.3",
+    "eslint": "^5.6.0",
+    "fullpage.js": "^3.0.3"
   },
   "devDependencies": {},
   "scripts": {

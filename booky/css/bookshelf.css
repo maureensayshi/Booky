@@ -1,0 +1,107 @@
+@import "./common.css";
+
+main .view{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 980px;
+}
+main .view h2{
+    width: 980px;
+    font-size: 24px;
+    font-weight: 600;
+    font-family: "Cinzel", serif, "NSimSun";
+    padding: 50px 150px 40px 150px;
+    margin-top: 30px;
+    color: #544D30;
+    letter-spacing: 10px;
+    display: flex;
+    justify-content: center;
+    background-color: rgba(255, 255, 255, 1);
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+main .wrapper{
+    width: 980px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 10px;
+    grid-auto-rows: minmax(300px, auto);
+    align-items: center;
+    justify-items: center;
+    background-color: rgba(255, 255, 255, .8);
+    margin-bottom: 60px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+main .wrapper div{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 128px;  
+}
+
+main .wrapper .visual-book{
+    width: 128px;
+    height: 179px;
+    padding: 5px;
+    margin: 10px;
+    background-color: white;
+    border-radius: 2px;
+    box-shadow: 1px 1px 10px #999999;
+}
+
+main .wrapper .visual-book img{
+    max-height: 170px;
+}
+
+main .wrapper .book-title{
+    height: 36px;
+    margin: 20px 0 5px 0;
+    line-height: 1.25;
+    overflow: hidden;
+    width: 100%;
+    font-weight: 300;
+    font-size: 14px;
+    font-family: "Noto Sans JP", sans-serif;
+    letter-spacing: 1px;
+}
+
+
+/* RWD */
+
+@media (max-width: 980px) and (min-width: 640px){
+    main .view h2{
+        width:90%;
+    }
+    main .wrapper{
+        width: 90%;
+        grid-template-columns: repeat(3, 1fr);
+        margin-bottom: 100px;
+    }
+}
+
+@media (max-width: 640px) and (min-width: 320px){
+    main .view h2{
+        width: 90%;
+        font-size: 16px;  
+        padding: 20px 0;  
+    }
+    main .wrapper{
+        width: 90%;
+        grid-template-columns: repeat(1, 1fr);
+        grid-auto-rows: minmax(230px, auto);
+        margin-bottom: 100px;
+    }
+
+    main .wrapper .visual-book{
+        width: 100px;
+        height: 142px;
+        padding: 8px;
+        margin: 10px;   
+        box-shadow: 1px 1px 10px #999999;
+    }
+}
+

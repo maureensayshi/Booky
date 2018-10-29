@@ -1,0 +1,854 @@
+/* @import "./multiselect.css"; */
+@import "./common.css";
+
+main .view{
+    display: flex;
+    flex-direction: row;
+   max-width: 800px;
+   margin-top: 30px;
+   background-color: rgba(255, 255, 255, 1);
+   border-radius: 2px;
+   flex-wrap: wrap;
+   margin-bottom: 100px;
+}
+main .visual-book{
+    flex: none;
+    width: 200px;
+    height: 285px;
+    padding: 1px 13px;
+    margin: 45px 0px 0 55px;
+    background-color: white;
+    border-radius: 2px;
+}
+
+main .visual-book>img{max-height: 255px;}
+
+main .view .line{
+    width: 800px;
+    border: 0.5px solid #BBBBBB;
+}
+
+/* 書的資訊的區塊 */
+
+main .book-detail{
+    display: flex;
+    margin: 16px 10px;
+}
+
+main .move-book-detail{
+    width:500px;
+}
+main .move-book-detail>div{
+    width:400px;
+    margin: 30px;
+    line-height: 1.25;
+    display: flex;
+    font-family: "Noto Sans JP", sans-serif;
+}
+
+main .move-book-detail>div>span{line-height: 1.5;}
+
+main .move-book-detail>div>span:nth-child(1){
+   display: flex;
+   width: 10px;
+   padding: 0 10px;
+}
+
+main #title,
+main #author,
+main #publisher{
+    width: 350px;
+}
+
+main .move-book-detail>div:nth-child(1)>span:nth-child(1),
+main .move-book-detail>div:nth-child(2)>span:nth-child(1){
+    padding: 0;
+    width: 100px;
+    color:#BBBBBB;
+}
+
+main .move-book-detail>div:nth-child(3)>span:nth-child(1){
+    width:100px;
+    padding: 0;
+    color:#BBBBBB;
+}
+
+main .move-book-detail>div:nth-child(4)>span:nth-child(1),
+main .move-book-detail>div:nth-child(5)>span:nth-child(1),
+main .move-book-detail>div:nth-child(6)>span:nth-child(1),
+main .move-book-detail>div:nth-child(7)>span:nth-child(1),
+main .move-book-detail>div:nth-child(8)>span:nth-child(1){
+    width:100px;
+    color:#BBBBBB;
+}
+
+main .move-book-detail>div>span>span{margin-right: 20px;}
+
+.input-edit{
+    width: 310px;
+    height: 25px;
+    border-radius: 8px;
+    background-color: white;
+    border: solid 1px #ececec;
+    padding: 15px 6px;
+    font-size: 14px;
+    font-family: "Noto Sans JP", sans-serif;
+    color: black;
+}
+
+/* 無法變更的樣式 */
+.input-init{
+    width: 310px;
+    height: 25px;
+    background-color:transparent;
+    border: none;
+    font-size: 16px;
+    padding-bottom: 5px;
+    font-family: "Noto Sans JP", sans-serif;
+    color: black;
+}
+
+
+/* .input-init{width: 380px;} */
+
+main .twice-or-not,
+main .reading-status,
+main .lend-or-not{
+    display: flex;
+    align-items: center;    
+}
+
+main .twice-or-not{
+    position: relative;
+}
+
+main .book-place>span:nth-child(1),
+main .lend-to>span:nth-child(1),
+main .reading-status>span:nth-child(1),
+main .twice-or-not>span:nth-child(1),
+main .lend-or-not>span:nth-child(1),
+main .lend-to>span:nth-child(1){
+    margin-left: -9px;
+}
+
+/* The container */
+main .reading-status .container,
+main .twice-or-not .container,
+main .lend-or-not .container {
+    /* display: none; */
+    opacity: 0;
+    position: relative;
+    padding-left: 36px;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    transition: all 300ms ease;
+}
+
+main .remind-or-not .container {
+    /* display: none; */
+    opacity: 1;
+    position: relative;
+    padding-left: 30px;
+    padding-right: 12px;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    transition: all 300ms ease;
+}
+
+main .status-choice {display: none;margin-left: -7px;}
+/* Hide the browser's default radio button */
+main .reading-status .container input,
+main .twice-or-not .container input,
+main .lend-or-not .container input,
+main .remind-or-not .container input {
+    position: absolute;
+    opacity: 0;
+}
+
+/* Create a custom radio button */
+main .reading-status .checkmark{
+    position: absolute;
+    top: -2px;
+    left: 0;
+    height: 20px;
+    width: 20px;
+    background-color: white;
+    border-radius: 2px;
+    border: 1px solid #ececec;
+    margin-left: 8px;
+}
+
+main .twice-or-not .checkmark,
+main .lend-or-not .checkmark{
+    position: absolute;
+    top: -2px;
+    left: 0;
+    height: 20px;
+    width: 20px;
+    background-color: white;
+    border-radius: 2px;
+    border: 1px solid #ececec;
+}
+
+
+main .remind-or-not .checkmark{
+    position: absolute;
+    left: 0;
+    height: 20px;
+    width: 20px;
+    background-color: white;
+    border-radius: 2px;
+    border: 1px solid #ececec;
+}
+
+main .lend-to{align-items: center;}
+
+/* On mouse-over, add a grey background color */
+main .reading-status .container:hover input ~ .checkmark,
+main .twice-or-not .container:hover input ~ .checkmark,
+main .lend-or-not .container:hover input ~ .checkmark,
+main .remind-or-not .container:hover input ~ .checkmark{
+    background-color: #F1F1F3;
+}
+
+/* When the radio button is checked, add a blue background */
+main .reading-status .container input:checked ~ .checkmark,
+main .twice-or-not .container input:checked ~ .checkmark,
+main .lend-or-not .container input:checked ~ .checkmark,
+main .remind-or-not .container input:checked ~ .checkmark{
+    background-color: white;
+}
+
+/* Create the indicator (the dot/circle - hidden when not checked) */
+main .reading-status .checkmark:after,
+main .twice-or-not .checkmark:after,
+main .lend-or-not .checkmark:after,
+main .remind-or-not .checkmark:after{
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+/* Show the indicator (dot/circle) when checked */
+main .reading-status .container input:checked ~ .checkmark:after,
+main .twice-or-not .container input:checked ~ .checkmark:after,
+main .lend-or-not .container input:checked ~ .checkmark:after,
+main .remind-or-not .container input:checked ~ .checkmark:after {
+    display: block;
+}
+
+/* Style the indicator (dot/circle) */
+main .reading-status .container .checkmark:after,
+main .twice-or-not .container .checkmark:after,
+main .lend-or-not .container .checkmark:after,
+main .remind-or-not .container .checkmark:after {
+ 	top: 4px;
+	left: 4px;
+	width: 10px;
+	height: 10px;
+    background: transparent no-repeat center/12px url(../img/tick.svg);
+}
+
+.book-button{
+    width: 800px;
+    margin-bottom: 20px;
+    padding-bottom: 30px; 
+    text-align: center; 
+}
+
+.book-button input{
+    width: 210px;
+    height: 40px;
+    align-self: center;
+    letter-spacing: 2px;
+    padding-left: 60px;
+    border: none;
+    border-radius: 5px;
+    margin: 10px;
+    font-size: 14px;
+    cursor: pointer;
+    font-family: "Noto Sans JP", sans-serif;
+    color: white;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+}
+
+/* google calendar  */
+.remind-shade{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    margin:0;
+    background-color: white;
+    overflow: auto;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    visibility:hidden;
+    opacity:0;
+    filter:alpha(opacity=0);
+    -webkit-transition:300ms ease;
+    -moz-transition:300ms ease;
+    -o-transition:300ms ease;
+    transition:300ms ease;
+}
+
+.remind-img{
+  width: 100%;
+  position: relative;
+  margin-bottom: 70px;
+}
+
+.remind-img>img{
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    top: 25px;
+    right: 65px;
+    cursor: pointer;   
+}
+
+.remindbar-list{
+    display: block;
+    text-align: center;
+    margin: 0 0 100px 0;
+    width:100%;
+}
+.remindbar-list h5{
+    word-spacing: 5px;
+    padding: 30px 0 20px 0;
+    font-size: 20px;
+    font-family: "Martel Sans", sans-serif;
+    font-weight: 400;
+}
+
+.remind-title {
+    width: 100%;
+}
+
+.remind-title label,
+.remind-start label,
+.remind-end label,
+.daily-title,
+.remind-time label {
+    display: inline-block;
+    width: 70px;
+    color: #BBBBBB;
+    font-size: 14px;
+    text-align: left;
+}
+.remind-title label{
+    padding-bottom: 70.5px;
+    vertical-align: bottom;
+}
+
+
+.remind-or-not {
+    margin:12px 0;
+}
+
+.remind-or-not>span {
+    margin-right: 15px;
+}
+
+.title-init,
+.remindBeforeOuter input{
+    cursor: text;
+}
+
+.reminder-check #start,
+.reminder-check #end{
+    cursor: pointer;
+}
+
+.title-init{
+    width:150px;
+    height: 70px;
+    letter-spacing: 2px;
+    text-align: left;
+    padding:5px ;
+    border: none;
+    border-radius: 5px;
+    margin: 10px 0 15px 0;
+    font-size: 14px;
+    font-family: "Noto Sans JP", sans-serif;
+    color: #333333;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;    
+    border:1px solid  rgba(185, 177, 68, 1);    
+}
+.reminder-check #start,
+.reminder-check #end{
+    width:150px;
+    height: 30px;
+    letter-spacing: 2px;
+    text-align: center;
+    padding: 0 0 0 10px ;
+    border: none;
+    margin: 10px 0 15px 0;
+    font-size: 14px;
+    font-family: "Noto Sans JP", sans-serif;
+    color: #333333;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;    
+    border-bottom:1px solid  rgba(185, 177, 68, 1);
+}
+
+.remind-or-not .container span:nth-child(1){
+    font-size: 14px;
+}
+
+
+.remindBeforeOuter input{
+    width:115px;
+    height: 30px;
+    letter-spacing: 2px;
+    text-align: center;
+    border: none;
+    margin: 10px 0 15px 0;
+    font-size: 14px;
+    font-family: "Noto Sans JP", sans-serif;
+    color: #333333;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;    
+    border-bottom:1px solid  rgba(185, 177, 68, 1);
+}
+
+.remindBeforeOuter span:nth-child(3){
+    font-size: 14px;
+    color: #333333;
+}
+
+input[type=date]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    display: none;
+}
+
+input[type="time"]::-webkit-clear-button {
+    -webkit-appearance: none;
+    display: none;
+}
+
+input[type="time"]::-ms-clear {
+    display: none;
+}
+
+input::-ms-clear {
+    width: 0;
+    height: 0;
+}
+
+input[type=text]::-ms-clear {
+    display: none;
+}
+
+input[type="time"]{
+    width:150px;
+    height: 30px;
+    letter-spacing: 2px;
+    text-align: left;
+    padding: 0 0 0 10px ;
+    border: none;
+    margin: 10px 0 15px 0;
+    font-size: 14px;
+    cursor: pointer;
+    font-family: "Noto Sans JP", sans-serif;
+    color: #333333;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;    
+    border-bottom:1px solid  rgba(185, 177, 68, 1);
+ }
+
+ input[type=time]::-webkit-inner-spin-button, 
+input[type=time]::-webkit-outer-spin-button { 
+  /* -webkit-appearance: none;  */
+  margin-top: 3px; 
+  display: block;
+}
+
+#addToCalendar {
+    height: 40px;
+    text-align: center;
+    letter-spacing: 5px;
+    padding: 5px 50px;
+    border: none;
+    border-radius: 5px;
+    margin: 30px;
+    font-size: 14px;
+    cursor: pointer;
+    font-family: "Noto Sans JP", sans-serif;
+    color: white;
+    background-color: rgba(185, 177, 68, 1);
+}
+
+
+.book-button>input:nth-child(1):hover{ padding-left: 35px;background: url(../img/edit.svg) no-repeat 50px rgba(185, 177, 68, 1); background-size: 10%;}
+.book-button>input:nth-child(2):hover{ padding-left: 35px;background: url(../img/delete.svg) no-repeat 50px rgba(185, 177, 68, 1); background-size: 10%;}
+.book-button>input:nth-child(3):hover{ background: url(../img/calendar.svg) no-repeat 35px rgba(185, 177, 68, 1); background-size: 10%;}
+.book-button #calLink>input:hover{ background: url(../img/calendar.svg) no-repeat 35px rgba(185, 177, 68, 1); background-size: 10%;}
+
+.book-button>input:nth-child(1){ padding-left: 35px;background: url(../img/edit.svg) no-repeat 50px rgba(185, 177, 68, .8); background-size: 10%;}
+.book-button>input:nth-child(2){ padding-left: 35px;background: url(../img/delete.svg) no-repeat 50px rgba(185, 177, 68, .8); background-size: 10%;}
+.book-button>input:nth-child(3){ background: url(../img/calendar.svg) no-repeat 35px rgba(185, 177, 68, .8); background-size: 10%;}
+.book-button #calLink>input{ background: url(../img/calendar.svg) no-repeat 35px rgba(185, 177, 68, .8); background-size: 10%;}
+
+/* new button alert */
+.gLinkDiv{
+    display: none;
+    position: absolute;
+    background-color: rgba(0,0,0,0.6);
+    width: 100vw;
+    height: 100vh;
+    z-index: 1000;
+    top: 0;
+}
+
+.gLink{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 310px;
+    height: 240px;
+    border-radius: 5px;
+    background-color: #FFFFFF;
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-150px, -120px);
+    z-index: 1000;
+    overflow: hidden;
+}
+
+.gLink>div:nth-child(1){
+    font-size: 24px;
+    font-family: "Cinzel", serif, "NSimSun";
+    font-weight: 600;
+    text-align: center;
+    padding-bottom: 15px; 
+    margin:30px 0 20px 0;
+    border-bottom: 1px solid #ececec;
+    letter-spacing: 3px;
+}
+
+.gLink>div:nth-child(2){
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.gLink>div>button:nth-child(1){
+    background-color:  #B9B144;
+}
+
+.gLink>div>button{
+    width: 140px;
+    font-family: "微軟正黑體";
+    height: 40px;
+    letter-spacing: 4px;
+    margin: 8px;
+    text-align: center;
+    font-size: 14px;
+    font-weight: normal;
+    background-color: #cccccc;
+    color: white;
+    cursor: pointer;
+    border: 0;
+    font-weight: 200px;
+    border-radius: 5px;
+}
+
+/* confirm to delete book */
+.deleteDiv{
+    display: none;
+    position: absolute;
+    background-color: rgba(0,0,0,0.6);
+    width: 100vw;
+    height: 100vh;
+    z-index: 1000;
+    top: 0;
+}
+
+.deleteConfirm{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    height: 170px;
+    border-radius: 5px;
+    background-color: #FFFFFF;
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-150px, -85px);
+    z-index: 1000;
+    overflow: hidden;
+}
+
+.deleteConfirm>div:nth-child(1){
+    font-size: 24px;
+    font-family: "Cinzel", serif, "NSimSun";
+    font-weight: 600;
+    text-align: center;
+    padding-bottom: 15px; 
+    margin:30px 0 20px 0;
+    border-bottom: 1px solid #ececec;
+    letter-spacing: 3px;
+}
+
+.deleteConfirm>div:nth-child(2){
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.deleteConfirm>div>button:nth-child(2){
+    background-color:  #B9B144;
+}
+
+.deleteConfirm>div>button{
+    width: 100px;
+    font-family: "微軟正黑體";
+    height: 40px;
+    letter-spacing: 4px;
+    margin: 8px 15px;
+    text-align: center;
+    font-size: 14px;
+    font-weight: normal;
+    background-color: #cccccc;
+    color: white;
+    cursor: pointer;
+    border: 0;
+    font-weight: 200px;
+    border-radius: 5px;
+}
+
+.afterDeleteDiv{
+    display: none;
+    position: absolute;
+    background-color: rgba(0,0,0,0.6);
+    width: 100vw;
+    height: 100vh;
+    z-index: 1000;
+    top: 0;
+}
+
+.afterDelete{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    height: 140px;
+    border-radius: 5px;
+    background-color: #FFFFFF;
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-150px, -70px);
+    z-index: 1000;
+    overflow: hidden;
+}
+
+.afterDelete>div:nth-child(1){
+    font-size: 24px;
+    font-family: "Cinzel", serif, "NSimSun";
+    font-weight: 600;
+    text-align: center;
+    padding-bottom: 15px; 
+    margin:30px 0 20px 0;
+    border-bottom: 1px solid #ececec;
+    letter-spacing: 3px;
+}
+
+.afterDelete>div:nth-child(2){
+    text-align: center; letter-spacing: 2px;
+}
+
+/* confirm to edit book */
+.editConfirmDiv{
+    display: none;
+    position: absolute;
+    background-color: rgba(0,0,0,0.6);
+    width: 100vw;
+    height: 100vh;
+    z-index: 1000;
+    top: 0;
+}
+
+.editConfirm{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    height: 170px;
+    border-radius: 5px;
+    background-color: #FFFFFF;
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-150px, -85px);
+    z-index: 1000;
+    overflow: hidden;
+}
+
+.editConfirm>div:nth-child(1){
+    font-size: 24px;
+    font-family: "Cinzel", serif, "NSimSun";
+    font-weight: 600;
+    text-align: center;
+    padding-bottom: 15px; 
+    margin:30px 0 20px 0;
+    border-bottom: 1px solid #ececec;
+    letter-spacing: 3px;
+}
+
+.editConfirm>div:nth-child(2){
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.editConfirm>div>button:nth-child(1){
+    background-color:  #B9B144;
+}
+
+.editConfirm>div>button{
+    width: 100px;
+    font-family: "微軟正黑體";
+    height: 40px;
+    letter-spacing: 4px;
+    margin: 8px 15px;
+    text-align: center;
+    font-size: 14px;
+    font-weight: normal;
+    background-color: #cccccc;
+    color: white;
+    cursor: pointer;
+    border: 0;
+    font-weight: 200px;
+    border-radius: 5px;
+}
+
+.afterEditDiv{
+    display: none;
+    position: absolute;
+    background-color: rgba(0,0,0,0.6);
+    width: 100vw;
+    height: 100vh;
+    z-index: 1000;
+    top:0;
+}
+
+.afterEdit{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    height: 70px;
+    border-radius: 5px;
+    background-color: #FFFFFF;
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-150px, -35px);
+    z-index: 1000;
+    overflow: hidden;
+}
+
+.afterEdit>div:nth-child(1){
+    font-size: 24px;
+    font-family: "Cinzel", serif, "NSimSun";
+    font-weight: 600;
+    text-align: center;
+    padding-bottom: 15px; 
+    margin:30px;
+    letter-spacing: 3px;
+}
+
+
+/* RWD */
+
+@media (max-width: 980px) and (min-width: 640px){
+    main .view {flex-direction: column;width: 90%;}
+    main .visual-book{align-self: center;margin: 30px 20px 0px 20px;height: auto;}
+    main .book-detail-wrapper{display: flex; justify-content: center;}
+    main .book-detail{width: 400px;}
+    main .move-book-detail>div>span{line-height: 1.5;}
+    main .move-book-detail>div>span:nth-child(1){width: 100px;}    
+    main .move-book-detail>div:nth-child(1)>span:nth-child(1){width: 100px; margin-right: 0;} 
+    main .move-book-detail>div:nth-child(2)>span:nth-child(1){width: 100px; margin-right: 0;}   
+    main .move-book-detail>div>span:nth-child(2){flex-wrap: wrap;}
+    main .move-book-detail>div:nth-child(3)>span:nth-child(1){width: 100px;margin-right: 0;}
+    main .move-book-detail>div:nth-child(3)>span:nth-child(2){width: 290px;flex-wrap: wrap;}
+    main .reading-status>span:nth-child(1), main .lend-or-not>span:nth-child(1), main .lend-to>span:nth-child(1){margin-left: 0;}
+    main .move-book-detail>div:nth-child(5)>span:nth-child(1){width:90px; padding: 0;}
+    main .reading-status{align-items: center;}
+    main .status-choice{width: 273px; justify-content: space-around; margin: 8px 0 10px 6px;}
+    main .reading-status .container{margin-left: -31px;}
+    main .move-book-detail>div:nth-child(7){align-items: center;}
+    main .move-book-detail>div:nth-child(7)>span:nth-child(1){width:90px;padding: 0;}
+    main .move-book-detail>div:nth-child(8)>span:nth-child(1){width:90px;padding: 0;}
+    main .twice-or-not .container:nth-child(3){margin-left: 0px;}
+    main .twice-or-not .container:nth-child(4){margin-left: 17px;}
+  
+    main .lend-or-not .container:nth-child(3){margin-left: 0px;}
+    main .lend-or-not .container:nth-child(4){margin-left: 17px;}
+    main .checkmark-two{margin-left: -4px;}
+    .book-button{width: auto;display: flex; flex-direction: column;}
+    footer .background-img{padding: 20%; background-size: 100%;}
+}
+
+@media (max-width: 640px) and (min-width: 320px){
+    main .view {flex-direction: column;width: 100%;max-width: 300px;margin-bottom: 120px;}
+    main .visual-book{align-self: center;margin: 20px;width: 100px;height: 142px;padding: 0px;}
+    main .book-detail-wrapper{display: flex; justify-content: center;}
+    main .book-detail{width: 300px;margin:0px;}
+    .input-init{width: 160px;font-size: 14px;}
+    .input-edit{width: 160px;font-size: 14px;}
+    main .move-book-detail>div{width:270px;}
+    main #author{width: 200px;line-height: 1.5;}
+    main .move-book-detail{font-size: 14px;}
+    main .move-book-detail>div{margin: 15px 20px;flex-direction: row;}
+    main .move-book-detail>div:nth-child(1)>span:nth-child(1){width: 80px; margin-right: 0;} 
+    main .move-book-detail>div:nth-child(2)>span:nth-child(1){width: 80px; margin-right: 0;}   
+    main #title{width: 200px; flex-wrap: wrap;}
+    main .move-book-detail>div:nth-child(3)>span:nth-child(1){width: 80px;margin-right: 0;}
+    main .move-book-detail>div:nth-child(4)>span:nth-child(1){width: 88px;margin-right: 0;}
+    main #publisher{width: 180px;flex-wrap: wrap;}
+    main .reading-status>span:nth-child(1), main .lend-or-not>span:nth-child(1), main .lend-to>span:nth-child(1){margin-left: 0;}
+    main .move-book-detail>div:nth-child(5){flex-wrap: wrap;}
+    main .move-book-detail>div:nth-child(5)>span:nth-child(1){width:80px; padding: 0;}
+    main .move-book-detail>div:nth-child(6)>span:nth-child(1){width:90px;}
+    main .move-book-detail>div:nth-child(6) .container:nth-child(4){margin-left: 16px;}
+    main .reading-status{flex-direction: column;}
+    main .reading-status>span{align-self: flex-start;}
+    main .status-choice{width: 260px;justify-content: space-between; margin: 8px 0 10px 6px;}
+    main .reading-status .container{margin-left: -15px;}
+    main .move-book-detail>div:nth-child(7){align-items: center;}
+    main .move-book-detail>div:nth-child(7)>span:nth-child(1){width:80px;padding: 0;}
+    main .move-book-detail>div:nth-child(8)>span:nth-child(1){width:80px;padding: 6px 0 1px 0;}
+    main .twice-or-not .container:nth-child(2){margin-left: 4px;}
+    main .twice-or-not .container:nth-child(3){margin-left: 16px;}
+    main .lend-or-not .container{margin-left: 16px;}
+    main .checkmark-two{margin-left: -4px;}
+    main .lend-to>span{align-self: flex-start;margin-bottom: 5px;}
+    .book-button{width: auto;}
+    footer .background-img{padding: 20%; background-size: 100%;}
+
+}

@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Booky 小書僮</title>
+    <meta name="Description" content="Booky 小書僮幫你管理你家的書，掃描加書、連結 Google 日曆提醒，也可記錄閱讀狀態和是否借人。">
+    <link rel="shortcut icon" href="img/favicon-32.png" type="image/x-icon">
+    <link rel="icon" href="img/favicon-32.png" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" href="css/index.css" media="all" />
+
+</head>
+
+<body>
+    <!-- welcome box -->
+    <div class="welcome">
+        <header>
+            <div class="btn_logo">
+                <a><img src="img/logo.svg" /></a>
+            </div>
+        </header>
+        <div class="fullpage">
+            <!-- first section -->
+            <main>
+                <div class="view">
+                    <div class="key-visual">
+                        <div class="visual-book">
+                            <img src="./img/sample1.PNG" />
+                        </div>
+                        <div class="visual-book">
+                            <img src="./img/sample2.PNG" />
+                        </div>
+                        <div class="visual-book">
+                            <img src="./img/sample3.PNG" />
+                        </div>
+                        <div class="visual-book">
+                            <img src="./img/sample4.PNG" />
+                        </div>
+                        <div class="visual-book">
+                            <img src="./img/sample5.PNG" />
+                        </div>
+                    </div>
+                </div>
+                <div class="signinDiv">
+                    <button class="signin" id="google">註冊 / 登入</button>
+                </div>
+                <div class="introduce">
+                    <p>你也有買了書卻沒看、忘記把書借給誰的煩惱嗎?</p>
+                    <p>往下滑看 Booky 的三大特色，讓我們成為你最貼身的圖書管理小書僮!</p>
+                </div>
+
+                <div class="downDiv">
+                    <button id="down"></button>
+                </div>
+                <div class="bg"></div>
+            </main>
+            <!-- second section -->
+            <div class="feature">
+                <!-- feature one -->
+                <div class="color"></div>
+                <div class="indentity">
+                    <div>Google 日曆提醒閱讀</div>
+                    <div></div>
+                    <div>買了書卻遲遲沒看?你可以在 Booky 設定好單本書的閱讀期間、每天閱讀時間及希望提前幾分鐘提醒，我們會為你設定到 Google 日曆的事件提醒。</div>
+                </div>
+                <!-- feature one -->
+                <div class="color"></div>
+                <div class="indentity">
+                    <div>掌握每本書的閱讀進度</div>
+                    <div></div>
+                    <div>忘記哪些書還沒看? Booky 幫你管理每本書的閱讀狀態，包括未讀、閱讀中、已讀，也可以標記想要二讀的書；另外也可以記錄書本是否借人、借還對象及書本放置地點。</div>
+                </div>
+                <!-- feature one -->
+                <div class="color"></div>
+                <div class="indentity">
+                    <div>快速掃描、拍照加入書籍</div>
+                    <div></div>
+                    <div>除了能按照書名、作者、ISBN 碼搜尋你想加入的書籍之外，筆電、桌電可用前鏡頭掃描加入書籍；手機則可使用拍照加入書籍，讓你更有效率建立專屬的線上藏書閣。</div>
+                </div>
+            </div>
+            <!-- second section -->
+            <div class="feature-two">
+                <div></div>
+                <div>馬上加入 Booky，建立你的線上藏書閣！</div>
+                <div></div>
+                <div class="signinDivTwo">
+                    <button class="signinTwo" id="googleTwo">註冊 / 登入</button>
+                </div>
+            </div>
+        </div>
+        <footer>
+            <div class="footer">&copy; 2018 Booky 小書僮 | Maureen Wang | maureen81711@gmail.com</div>
+        </footer>
+    </div>
+
+    <!-- welcome box end -->
+    <div class="real">
+        <!-- alert -->
+        <div class="alertDiv">
+            <div class="alert">
+                <div>成功加入書籍</div>
+                <div>
+                    <button>編輯書籍</button>
+                    <button>繼續加書</button>
+                    <button>回到原頁</button>
+                </div>
+            </div>
+        </div>
+        <!-- alert end -->
+        <div class="menu-shade"></div>
+        <div class="menu">
+            <img class="close-menu" src="img/cancel.svg" />
+            <div><a href="bookshelf.html?status=all">總書櫃 / ALL</a></div>
+            <div value="0"><a href="bookshelf.html?status=0">未讀 / UNREAD</a></div>
+            <div value="1"><a href="bookshelf.html?status=1">閱讀中 / READING</a></div>
+            <div value="2"><a href="bookshelf.html?status=2">已讀 / READ</a></div>
+            <div value="twice"><a href="bookshelf.html?status=twice">值得二讀 / TWICE</a></div>
+            <div value="lend"><a href="bookshelf.html?status=lend">出借的書 / LENT</a></div>
+            <div><a href="member.html">帳號管理 / ACCOUNT</a></div>
+        </div>
+        <header>
+            <button class="btn_menu"></button>
+            <div class="btn_logo">
+                <a href="index.html"><img src="img/logo.svg" /></a>
+            </div>
+            <button class="btn_search"></button>
+            <button id="addbook"></button>
+            <button id="scanbook"></button>
+        </header>
+
+        <!-- search book shelf container-two 0 -->
+        <div class="search-shade searchShade">
+            <div class="searchbar-img">
+                <img src="img/cancel.svg" />
+            </div>
+            <form action="/" method="get" class="searchbar-form">
+                <input type="text" value="" placeholder="尋找放在 Booky 的書" />
+                <button></button>
+            </form>
+            <div class="container-two">
+                <h2><span></span>筆搜尋結果</h2>
+                <div class="resultOuter">
+                    <div class="result"></div>
+                </div>
+            </div>
+            <div class="searchbar-list">
+                <h5>BROWSE CATEGORIES</h5>
+                <ul class="search-ul">
+                    <li><a href="bookshelf.html?status=all">總書櫃 ALL</a></li>
+                    <li><a href="bookshelf.html?status=0">未讀 UNREAD</a></li>
+                    <li><a href="bookshelf.html?status=1">閱讀中 READING</a></li>
+                    <li><a href="bookshelf.html?status=2">已讀 READ</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- add book by typing container-two 1 -->
+        <div class="add-shade addShade">
+            <div class="add-img">
+                <img src="img/cancel.svg" />
+            </div>
+            <div class="addbar-list lightbox-list">
+                <h5>ADD BY</h5>
+                <div class="addTabs">
+                    <button class="addtab active" value="search-title">書名</button>
+                    <button class="addtab" value="search-author">作者</button>
+                    <button class="addtab" value="search-isbn">書碼</button>
+                </div>
+                <form method="get" class="add-form" id="searchForm">
+                    <input id="keyword" type="text" value="" placeholder="把書加進 Booky" />
+                    <button id="keyin-search"></button>
+                </form>
+
+                <div class="container-two">
+                    <h2><span></span>筆搜尋結果</h2>
+                    <div class="resultOuter">
+                        <div class="result"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- add book by scan container-two 2 -->
+        <div class="scan-shade scanShade">
+            <div class="scan-img">
+                <img src="img/cancel.svg" />
+            </div>
+
+            <!-- 電腦版掃描搜尋 -->
+            <div class="scan-list lightbox-list">
+                <h5>ADD BY SCANNING</h5>
+                <div class="reminder">請將 ISBN 條碼對齊中心，將自動掃描</div>
+                <div class="reminder">溫馨提醒&nbsp&nbsp:&nbsp&nbspiOS&nbsp系統請使用 Safari 瀏覽器</div>
+                <div id="mac"><img src="img/mac.png"></div>
+                <div class="scan-btns">
+                    <button id="startButton" value="start">打開相機</button>
+                </div>
+                <div class="camera">
+                    <video id="video" width="100%" height="250"></video>
+                </div>
+                <div id="sourceSelectPanel" style="display:none">
+                    <label for="sourceSelect">Change video source:</label>
+                    <select id="sourceSelect" style="max-width:20%"></select>
+                </div>
+                <div class="line"></div>
+                <div class="container-two">
+                    <h2><span></span>筆搜尋結果</h2>
+                    <div class="resultOuter">
+                        <div class="result"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 手機板拍照搜尋 -->
+            <div class="shot-list" id="hide">
+                <h5>ADD BY PHOTO</h5>
+                <div class="reminder">請橫放手機，用兩指放大 ISBN 條碼，</br>對焦拍照後將自動搜尋</div>
+                <div id="iphone"><img src="img/iphone.png"></div>
+                <label for="file">拍攝照片</label>
+                <input type="file" id="file" name="file" accept="image/*" capture />
+                <div id="img-result"><img /></div>
+                <div class="imgLoad"></div>
+
+                <div class="container-two">
+                    <h2><span></span>筆搜尋結果</h2>
+                    <div class="resultOuter">
+                        <div class="result"></div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <main>
+            <!-- key visual -->
+            <div class="bg"></div>
+            <div class="view">
+                <div class="key-visualBox">
+                    <button id="pre"></button>
+                    <button id="next"></button>
+                    <div class="key-visual">
+                        <div class="sliding-background">
+                            <div class="book-list"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- for mobile add and scan -->
+            <div class="mobile-add"></div>
+        </main>
+        <footer>
+            <div class="footer">&copy; 2018 Booky 小書僮 | Maureen Wang | maureen81711@gmail.com</div>
+        </footer>
+    </div>
+    <div id="loading" class="loading">
+        <img src="img/load.gif" />
+    </div>
+</body>
+<script src="https://www.gstatic.com/firebasejs/5.5.1/firebase.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.3.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.3.0/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.3.0/firebase-database.js"></script>
+<script src="https://cdn.firebase.com/libs/firebaseui/3.4.1/firebaseui.js"></script>
+<script src="https://apis.google.com/js/api.js"></script>
+<script type="text/javascript" src="https://unpkg.com/@zxing/library@dev"></script>
+<script src="js/common.js"></script>
+<script src="js/index.js"></script>
+
+</html>
