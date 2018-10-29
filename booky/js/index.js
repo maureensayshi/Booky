@@ -2,15 +2,13 @@
 
 app.init = function () {
     app.showLoading();
-    app.checkingIndex();
-    app.getRedirectResult();
+    app.checkLoginIndex();
+    app.googleLogin.getRedirectResult();
 };
 
-app.checkingIndex = function () {
+app.checkLoginIndex = function () {
     firebase.auth().onAuthStateChanged(function (user) {
         if (user) {
-            console.log(user);
-            // User is signed in.
             app.uid = user.uid;
             app.email = user.email;
             console.log(app.uid);
@@ -28,7 +26,6 @@ app.checkingIndex = function () {
             app.addBook.Init();
             app.scanBook.Init();
         } else {
-            // User is signed out or haven't sign up.
             app.get(".welcome").style.display = "block";
             app.get(".real").style.display = "none";
             app.get("#down").addEventListener("click", function () {
@@ -41,34 +38,27 @@ app.checkingIndex = function () {
 };
 
 app.googleLogin = function () {
-    let gButton = app.get("#google");
-    gButton.addEventListener("click", function () {
-        app.showLoading();
-        if (!firebase.auth().currentUser) {
-            let provider = new firebase.auth.GoogleAuthProvider();
-            provider.addScope("https://www.googleapis.com/auth/plus.login,https://www.googleapis.com/auth/calendar.events");
-            //啟動 login 程序   
-            firebase.auth().signInWithRedirect(provider);
-        } else {
-            console.error("sign up or login failed");
-        }
+    app.get("#google").addEventListener("click", function () {
+        app.googleLogin.process();
     });
-    let gButtonTwo = app.get("#googleTwo");
-    gButtonTwo.addEventListener("click", function () {
-        app.showLoading();
-        if (!firebase.auth().currentUser) {
-            let provider = new firebase.auth.GoogleAuthProvider();
-            provider.addScope("https://www.googleapis.com/auth/plus.login,https://www.googleapis.com/auth/calendar.events");
-            //啟動 login 程序   
-            firebase.auth().signInWithRedirect(provider);
-        } else {
-            console.error("sign up or login failed");
-        }
+    app.get("#googleTwo").addEventListener("click", function () {
+        app.googleLogin.process();
     });
-
 };
 
-app.getRedirectResult = function () {
+app.googleLogin.process = function () {
+    app.showLoading();
+    if (!firebase.auth().currentUser) {
+        let provider = new firebase.auth.GoogleAuthProvider();
+        provider.addScope("https://www.googleapis.com/auth/plus.login,https://www.googleapis.com/auth/calendar.events");
+        //啟動 login 程序   
+        firebase.auth().signInWithRedirect(provider);
+    } else {
+        console.error("sign up or login failed");
+    }
+};
+
+app.googleLogin.getRedirectResult = function () {
     firebase.auth().getRedirectResult().then(function (result) {
         console.log(result);
         if (result.user && result.additionalUserInfo.isNewUser) {
@@ -99,16 +89,13 @@ app.visualBook = function () {
     let box = app.get(".book-list");
     let num = 0;
     let colorArr = ["#DCB58C", "#EAA140", "#B9B144"];
-    let db = app.database;
-    let dbBookList = db.ref("/members/" + app.uid + "/bookList/");
-    dbBookList.once("value").then(snapshot => {
+    app.database.ref("/members/" + app.uid + "/bookList/").once("value").then(snapshot => {
         box.innerHTML = "";
-        //如果沒有 book list
+        //if book list is empty
         if (snapshot.val() == null) {
             console.log("no");
             num = 5;
             let slideNone = slideBG.animate([
-                // keyframes
                 { transform: "translate3d(0, 0, 0)" },
                 { transform: "translate3d(-" + (num * 168) + "px, 0, 0)" }
             ], {

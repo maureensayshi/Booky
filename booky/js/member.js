@@ -9,7 +9,8 @@ app.init = function () {
         app.searchBook.Init();
         app.addBook.Init();
         app.scanBook.Init();
-        app.logOut();
+        app.googleLogin.logOut();
+        app.closeLoading();
     });
 };
 
@@ -24,14 +25,14 @@ app.member.showMemberInfo = function (val) {
     app.get("#email").textContent = val.email;
     app.get("#pic").style.backgroundImage = `url(${val.photo})`;
     app.get("#pic").style.backgroundSize = "100%";
-    app.closeLoading();
 };
-app.logOut = function () {
+
+app.googleLogin.logOut = function () {
     app.get("#logout").addEventListener("click", function () {
         firebase.auth().signOut().then(function () {
             window.location = "/";
         }, function (error) {
-            console.log("未登出成功 : " + error);
+            console.log(error);
         });
     });
 };

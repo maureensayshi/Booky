@@ -31,12 +31,6 @@ app.bookShelf.getCategory = function () {
     app.bookShelf.allocateBS();
 };
 
-// app.bookShelf.model = function (Callback) {
-//     app.database.ref("/members/" + app.uid + "/bookList/").once("value", function (snapshot) {
-//         Callback(snapshot.val());
-//     });
-// };
-
 app.bookShelf.allocateBS = function () {
     app.get(".wrapper").innerHTML = "";
     let dbMember = app.database.ref("/members/" + app.uid + "/bookList/");
@@ -85,7 +79,6 @@ app.bookShelf.noBookHandler = function (error) {
     app.get(".wrapper").textContent = "此書櫃暫無書籍";
     app.get(".wrapper").style.gridTemplateColumns = "repeat(1, 1fr)";
     app.closeLoading();
-    console.log("no books " + error);
 };
 
 window.addEventListener("DOMContentLoaded", app.init);

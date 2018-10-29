@@ -4,7 +4,9 @@ app.init = function () {
     app.showLoading();
     app.checkLogin().then(uid => {
         app.uid = uid;
-        app.eachBook.model();
+        app.bookID = location.search.split("id=")[1];
+        app.dbBookList = app.database.ref("/members/" + app.uid + "/bookList/" + app.bookID);
+        app.eachBook.getData(app.eachBook.show);
         app.menu();
         app.searchBook.Init();
         app.addBook.Init();
@@ -12,11 +14,10 @@ app.init = function () {
     });
 };
 
-app.eachBook.model = function () {
-    app.bookID = location.search.split("id=")[1];
-    app.dbBookList = app.database.ref("/members/" + app.uid + "/bookList/" + app.bookID);
-    app.eachBook.info = function (callback) { app.database.ref("/members/" + app.uid + "/bookList/" + app.bookID).once("value", function (snapshot) { callback(snapshot.val()); }); };
-    app.eachBook.info(app.eachBook.show);
+app.eachBook.getData = function (callback) {
+    app.database.ref("/members/" + app.uid + "/bookList/" + app.bookID).once("value", function (snapshot) {
+        callback(snapshot.val());
+    });
 };
 
 app.eachBook.show = function (book) {
@@ -83,8 +84,8 @@ app.eachBook.update = function (val) {
 };
 
 app.eachBook.update.edit = function (val) {
-    let save_btn = app.get("#save-and-edit");
-    save_btn.addEventListener("click", function () {
+    let saveBtn = app.get("#save-and-edit");
+    saveBtn.addEventListener("click", function () {
         let container = app.getAll(".container");
         //現在狀態
         let currentRead = app.get(".current-read");
@@ -102,9 +103,9 @@ app.eachBook.update.edit = function (val) {
         let lentStatus = app.get("#lent");
         let lentNo = app.get("#nolent");
 
-        if (save_btn.value === "更新資料") {
-            save_btn.value = "儲存修改";
-            save_btn.style.backgroundImage = "url(img/save.svg)";
+        if (saveBtn.value === "更新資料") {
+            saveBtn.value = "儲存修改";
+            saveBtn.style.backgroundImage = "url(img/save.svg)";
             readStatusBox.style.display = "flex";
             currentRead.style.display = "none";
             currentTwice.style.display = "none";
@@ -119,16 +120,16 @@ app.eachBook.update.edit = function (val) {
                 lendToInput.disabled = false;
                 lendToInput.className = lendToInput.disabled ? "input-init" : "input-edit";
             }
-            lentStatus.onclick = function () {
+            lentStatus.addEventListener("click", function () {
                 lendToInput.disabled = false;
                 lendToInput.className = lendToInput.disabled ? "input-init" : "input-edit";
-            };
-            lentNo.onclick = function () {
+            });
+            lentNo.addEventListener("click", function () {
                 lendToInput.disabled = true;
                 lendToInput.className = lendToInput.disabled ? "input-init" : "input-edit";
                 lendToInput.value = "無";
-            };
-        } else if (save_btn.value === "儲存修改") {
+            });
+        } else if (saveBtn.value === "儲存修改") {
             //show confirm alert 
             app.get(".editConfirmDiv").style.display = "block";
             if (document.body.clientWidth < 980) {
@@ -138,8 +139,8 @@ app.eachBook.update.edit = function (val) {
             let yesEdit = app.get(".editConfirm>div>button:nth-child(1)");
             let noEdit = app.get(".editConfirm>div>button:nth-child(2)");
             yesEdit.addEventListener("click", function () {
-                save_btn.value = "更新資料";
-                save_btn.style.backgroundImage = "url(img/edit.svg)";
+                saveBtn.value = "更新資料";
+                saveBtn.style.backgroundImage = "url(img/edit.svg)";
                 readStatusBox.style.display = "none";
                 currentRead.style.display = "block";
                 currentTwice.style.display = "block";
@@ -173,22 +174,13 @@ app.eachBook.update.edit = function (val) {
                 } else if (val.readStatus == 2) {
                     currentRead.textContent = "已讀";
                 }
+                currentTwice.textContent = (val.twice == true) ? "是" : "否";
+                currentLent.textContent = (val.lend == true) ? "是" : "否";
 
-                if (val.twice == true) {
-                    currentTwice.textContent = "是";
-                } else if (val.twice == false) {
-                    currentTwice.textContent = "否";
-                }
-
-                if (val.lend == true) {
-                    currentLent.textContent = "是";
-                } else if (val.lend == false) {
-                    currentLent.textContent = "否";
-                }
-                //重新傳回資料庫
+                //Update info to database
                 app.dbBookList.set(val, function (error) {
                     if (error) {
-                        console.log("更新書不成功");
+                        console.log(error);
                     } else {
                         console.log("更新書成功");
                         app.get(".editConfirmDiv").style.display = "none";
@@ -200,7 +192,7 @@ app.eachBook.update.edit = function (val) {
                     }
                 });
             });
-            //如果不要更新
+            //dont save edit info
             noEdit.addEventListener("click", function () {
                 app.get(".editConfirmDiv").style.display = "none";
             });
@@ -209,8 +201,8 @@ app.eachBook.update.edit = function (val) {
 };
 
 app.eachBook.update.delete = function () {
-    let delete_btn = app.get("#delete");
-    delete_btn.addEventListener("click", function () {
+    let deleteBtn = app.get("#delete");
+    deleteBtn.addEventListener("click", function () {
         app.get(".deleteDiv").style.display = "block";
         if (document.body.clientWidth < 980) {
             app.get(".deleteDiv").style.height = document.body.clientHeight + "px";
@@ -287,10 +279,10 @@ app.initClient = function () {
             app.getAll("main .remind-or-not .container")[1].style.opacity = "1";
             app.eachBook.googleCal.fillForm();
             let cancel = app.get(".remind-img>img");
-            cancel.onclick = function () {
+            cancel.addEventListener("click", function () {
                 calPage.classList.remove("lightbox");
                 calPage.style.minHeight = 0;
-            };
+            });
         } else {
             console.log("按鈕應該已經被隱藏");
         }
@@ -303,7 +295,7 @@ app.initClient = function () {
         if (isSignedIn) {
             console.log("sign in");
         } else {
-            console.log("未成功 sign in");
+            console.log("didn't sign in");
         }
     }
 };
@@ -332,13 +324,10 @@ app.eachBook.googleCal.fillForm = function () {
         app.remindMin = app.get("#remindBefore").value;
         app.get("#setTime").onchange = function () {
             app.setTime = app.get("#setTime").value;
-            console.log(app.get("#setTime").value.replace(/:/g, ""));
             app.eachBook.googleCal.edit();
         };
         app.get("#setTimeFini").onchange = function () {
             app.setTimeFini = app.get("#setTimeFini").value;
-            console.log(app.setTimeFini);
-            console.log(app.get("#setTimeFini").value.replace(/:/g, ""));
             app.eachBook.googleCal.edit();
         };
         app.get("#remindBefore").onchange = function () {
@@ -359,7 +348,6 @@ app.eachBook.googleCal.fillForm = function () {
                 app.eachBook.googleCal.insertEventNoRemind();
             }
         });
-        // app.get("#addToCalendar").onclick = app.eachBook.googleCal.insertEventNoRemind;
     });
 };
 

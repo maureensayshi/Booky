@@ -25,6 +25,7 @@ let app = {
     bookShelf: {},
     eachBook: { googleCal: {}, },
     member: {},
+    googleLogin: {}
 };
 
 app.checkLogin = function () {
@@ -41,14 +42,15 @@ app.checkLogin = function () {
     });
 };
 
-// for selecting HTML DOM
+
 app.get = function (selector) {
     return document.querySelector(selector);
 };
+
 app.getAll = function (selector) {
     return document.querySelectorAll(selector);
 };
-// for creating HTML Element
+
 app.createElement = function (tagName, class_Name, text_Content, attr, attrText, parentElement) {
     let obj = document.createElement(tagName);
     obj.className = class_Name;
@@ -58,7 +60,6 @@ app.createElement = function (tagName, class_Name, text_Content, attr, attrText,
     return obj;
 };
 
-// menu open and close
 app.menu = function () {
     let menuBtn = app.get(".btn_menu");
     let menu = app.get(".menu");
@@ -193,7 +194,7 @@ app.addBook.getInput = function () {
         app.getAll(".result")[1].innerHTML = "";
 
         let keyWord = app.get("#keyword").value;
-        if (keyWord) { app.addBook.search(keyWord); }
+        if (keyWord) { app.addBook.getResult(keyWord); }
         return false;
     });
 };
@@ -208,7 +209,7 @@ app.addBook.fetchBook = function (searchingType, keyWord) {
     });
 };
 
-app.addBook.search = function (keyWord) {
+app.addBook.getResult = function (keyWord) {
     app.containerNum = 1;
     switch (app.searchText) {
     case "search-title":
@@ -505,11 +506,6 @@ app.googleBooks.addToDB = function (book) {
                 } else {
                     app.visualBook();
                 }
-                // if (document.body.clientWidth > 1024) {
-                //     app.visualBook();
-                // } else {
-                //     app.visualBookMobile();
-                // }
             } else if (app.allocateBS) {
                 app.allocateBS();
             }
