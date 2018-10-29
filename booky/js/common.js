@@ -211,15 +211,15 @@ app.addBook.fetchBook = function (searchingType, keyWord) {
 app.addBook.search = function (keyWord) {
     app.containerNum = 1;
     switch (app.searchText) {
-        case "search-title":
-            app.addBook.fetchBook("intitle", keyWord);
-            break;
-        case "search-isbn":
-            app.addBook.fetchBook("isbn", keyWord);
-            break;
-        case "search-author":
-            app.addBook.fetchBook("inauthor", keyWord);
-            break;
+    case "search-title":
+        app.addBook.fetchBook("intitle", keyWord);
+        break;
+    case "search-isbn":
+        app.addBook.fetchBook("isbn", keyWord);
+        break;
+    case "search-author":
+        app.addBook.fetchBook("inauthor", keyWord);
+        break;
     }
 };
 
@@ -283,7 +283,6 @@ app.scanBook.scan = function () {
                             codeReader.reset();
                             startBtn.textContent = "打開相機";
                             startBtn.value = "start";
-                            console.log(result.text + startBtn.value);
                         }
                     }).catch((err) => {
                         console.error(err);
@@ -292,7 +291,6 @@ app.scanBook.scan = function () {
                         codeReader.reset();
                         startBtn.textContent = "打開相機";
                         startBtn.value = "start";
-                        console.log(startBtn.value);
                     });
                     startBtn.textContent = "重新掃描";
                     console.log(`Started continous decode from camera with id ${firstDeviceId}`);
@@ -327,7 +325,7 @@ app.scanBook.imgScan = function () {
     };
 };
 
-//拍照後搜尋資料庫
+//search google books after user taking photo
 app.scanBook.imgScan.decodeFun = function (ev) {
     const codeReader = new ZXing.BrowserBarcodeReader("video");
     let fileImg = app.get("#img-result>img");
@@ -338,13 +336,7 @@ app.scanBook.imgScan.decodeFun = function (ev) {
         app.getAll(".container-two")[3].classList.add("show-container");
         app.getAll(".container-two h2>span")[3].textContent = "";
         app.getAll(".container-two h2>span")[3].textContent = "";
-        app.googleBooks.fetch("isbn", result.text).then(function (data) {
-            for (let i = 0; i < data.items.length; i++) {
-                app.googleBooks.show(app.googleBooks.getData(data, i));
-            }
-        }).catch(function (error) {
-            app.googleBooks.errorHandler(error);
-        });
+        app.addBook.fetchBook("isbn", result.text);
         uploadBtn.textContent = "重新拍攝";
     }).catch((err) => {
         app.containerNum = 3;
@@ -415,7 +407,6 @@ app.googleBooks.getData = function (data, i) {
         book.isbn = (tmpISBN) ? tmpISBN : "暫無資料";
     } else if (isbn == null) { book.isbn = "暫無資料"; }
 
-    console.log(book);
     return book;
 };
 
@@ -507,11 +498,18 @@ app.googleBooks.addToDB = function (book) {
             if (app.get(".line")) { app.get(".line").textContent = ""; }
             if (app.get(".imgLoad")) { app.get(".imgLoad").textContent = ""; }
             if (app.visualBook || app.visualBookMobile) {
-                if (document.body.clientWidth > 1024) {
-                    app.visualBook();
-                } else {
+                let userAgent = navigator.userAgent;
+                let isSafari = userAgent.indexOf("Safari") > -1 && userAgent.indexOf("Chrome") < 1;
+                if (document.body.clientWidth < 1024 || navigator.userAgent.match("Edge") || isSafari) {
                     app.visualBookMobile();
+                } else {
+                    app.visualBook();
                 }
+                // if (document.body.clientWidth > 1024) {
+                //     app.visualBook();
+                // } else {
+                //     app.visualBookMobile();
+                // }
             } else if (app.allocateBS) {
                 app.allocateBS();
             }
