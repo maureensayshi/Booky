@@ -10,6 +10,7 @@
     <link rel="shortcut icon" href="img/favicon-32.png" type="image/x-icon">
     <link rel="icon" href="img/favicon-32.png" type="image/x-icon">
     <link rel="stylesheet" type="text/css" href="css/index.css" media="all" />
+    <link href="https://unpkg.com/mocha@5.2.0/mocha.css" rel="stylesheet" />
 </head>
 
 <body>
@@ -234,6 +235,7 @@
         <main>
             <!-- key visual -->
             <div class="bg"></div>
+            <div id="mocha" style="width:800px;height: 300px;background-color: white;"></div>
             <div class="view">
                 <div class="key-visualBox">
                     <button id="pre"></button>
@@ -256,6 +258,7 @@
         <img src="img/load.gif" />
     </div>
 </body>
+
 <script src="https://www.gstatic.com/firebasejs/5.5.1/firebase.js"></script>
 <script src="https://www.gstatic.com/firebasejs/5.3.0/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/5.3.0/firebase-auth.js"></script>
@@ -265,5 +268,15 @@
 <script type="text/javascript" src="https://unpkg.com/@zxing/library@dev"></script>
 <script src="js/common.js"></script>
 <script src="js/index.js"></script>
+<!-- mocha -->
+<script src="https://unpkg.com/chai/chai.js"></script>
+<script src="https://unpkg.com/mocha@5.2.0/mocha.js"></script>
+<script>mocha.setup("bdd")</script>
+<script src="../test/commonTest.js"></script>
+<!-- <script src="../test/indexTest.js"></script> -->
+<script>
+    mocha.checkLeaks();
+    mocha.run();
+</script>
 
 </html>

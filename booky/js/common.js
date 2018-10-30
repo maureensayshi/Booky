@@ -1,4 +1,5 @@
 "use strict";
+
 // initialize firebase
 let config = {
     apiKey: "AIzaSyALgpVirl6lyBvOK9W--e5QycFeMFzcPLg",
@@ -162,7 +163,7 @@ app.addBook.Init = function () {
         app.addBook.getInput();
     });
 
-    closeBtn.addEventListener("click", function (e) {
+    closeBtn.addEventListener("click", function () {
         addPage.classList.remove("lightbox");
         app.getAll(".container-two")[1].classList.remove("show-container");
         app.get("#keyword").value = "";
@@ -313,7 +314,7 @@ app.scanBook.scan = function () {
 
 // add book ( mobile )--------------------------------------------------------------------------------------
 app.scanBook.imgScan = function () {
-    function ProcessFile(e) {
+    function ProcessFile() {
         app.containerNum = 3;
         let file = document.getElementById("file").files[0];
         app.get("#img-result>img").src = URL.createObjectURL(file);
@@ -327,7 +328,7 @@ app.scanBook.imgScan = function () {
 };
 
 //search google books after user taking photo
-app.scanBook.imgScan.decodeFun = function (ev) {
+app.scanBook.imgScan.decodeFun = function () {
     const codeReader = new ZXing.BrowserBarcodeReader("video");
     let fileImg = app.get("#img-result>img");
     let uploadBtn = app.get(".shot-list label");
@@ -339,7 +340,7 @@ app.scanBook.imgScan.decodeFun = function (ev) {
         app.getAll(".container-two h2>span")[3].textContent = "";
         app.addBook.fetchBook("isbn", result.text);
         uploadBtn.textContent = "重新拍攝";
-    }).catch((err) => {
+    }).catch(() => {
         app.containerNum = 3;
         app.get(".imgLoad").textContent = "未偵測到條碼";
         app.getAll(".container-two")[3].classList.add("show-container");
@@ -528,4 +529,6 @@ app.closeLoading = function () {
     app.get("#loading").style.display = "none";
 };
 
-
+app.testing = function () {
+    return "hello";
+};
