@@ -131,7 +131,7 @@ describe("# test 3 : check book information format before showing book on page",
         done();
     });
 
-    it("add book by scanning", function (done) {
+    it("add book by scanning or photoing", function (done) {
         app.containerNum = 2;
         app.googleBooks.show(book);
         expect(app.getAll(".container-two h2>span")[app.containerNum].textContent).to.equal("1");

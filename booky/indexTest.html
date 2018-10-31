@@ -235,7 +235,7 @@
         <main>
             <!-- key visual -->
             <div class="bg"></div>
-            <div id="mocha" style="width:800px;height: 300px;background-color: white;"></div>
+            <div id="mocha" style="width:800px;height: 500px;background-color: white;"></div>
             <div class="view">
                 <div class="key-visualBox">
                     <button id="pre"></button>
@@ -274,8 +274,13 @@
 <script>mocha.setup("bdd")</script>
 <script src="../test/commonTest.js"></script>
 <style>
+    #mocha-stats {
+        top: 100px;
+        right: 30%;
+    }
+
     #mocha h1 {
-        margin: 15px;
+        margin: 20px;
     }
 
     #mocha .test h2 {
