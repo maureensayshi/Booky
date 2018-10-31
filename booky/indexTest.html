@@ -273,7 +273,15 @@
 <script src="https://unpkg.com/mocha@5.2.0/mocha.js"></script>
 <script>mocha.setup("bdd")</script>
 <script src="../test/commonTest.js"></script>
-<!-- <script src="../test/indexTest.js"></script> -->
+<style>
+    #mocha h1 {
+        margin: 15px;
+    }
+
+    #mocha .test h2 {
+        margin: 5px;
+    }
+</style>
 <script>
     mocha.checkLeaks();
     mocha.run();

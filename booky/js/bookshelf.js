@@ -75,7 +75,7 @@ app.bookShelf.showBook = function (bookList) {
     }
 };
 
-app.bookShelf.noBookHandler = function (error) {
+app.bookShelf.noBookHandler = function () {
     app.get(".wrapper").textContent = "此書櫃暫無書籍";
     app.get(".wrapper").style.gridTemplateColumns = "repeat(1, 1fr)";
     app.closeLoading();

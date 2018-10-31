@@ -4,12 +4,6 @@ app.init = function () {
     app.showLoading();
     app.checkLoginIndex();
     app.googleLogin.getRedirectResult();
-    app.testing();
-};
-
-
-app.testing = function () {
-    return "hello";
 };
 
 app.checkLoginIndex = function () {

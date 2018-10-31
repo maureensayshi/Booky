@@ -203,6 +203,7 @@ app.addBook.getInput = function () {
 app.addBook.fetchBook = function (searchingType, keyWord) {
     app.googleBooks.fetch(searchingType, keyWord).then(function (data) {
         for (let i = 0; i < data.items.length; i++) {
+            console.log(data);
             app.googleBooks.show(app.googleBooks.getData(data, i));
         }
     }).catch(function (error) {
@@ -393,21 +394,21 @@ app.googleBooks.getData = function (data, i) {
     let book = {
         amount: data.items.length,
         title: data.items[i].volumeInfo.title,
-        author: (authors != null) ? authors.join("、") : "暫無資料",
-        publisher: (publisher != null) ? publisher : "暫無資料",
+        author: (authors) ? authors.join("、") : "暫無資料",
+        publisher: (publisher) ? publisher : "暫無資料",
         isbn: "",
-        coverURL: (cover != null) ? cover.thumbnail : fakeCover,
+        coverURL: (cover) ? cover.thumbnail : fakeCover,
         href: "",
     };
 
-    if (isbn != null) {
+    if (isbn) {
         let tmpISBN;
         for (let i = 0; i < isbn.length; i++) {
-            if (isbn[i].type == "ISBN_13")
+            if (isbn[i].type === "ISBN_13")
                 tmpISBN = isbn[i].identifier;
         }
         book.isbn = (tmpISBN) ? tmpISBN : "暫無資料";
-    } else if (isbn == null) { book.isbn = "暫無資料"; }
+    } else if (!isbn) { book.isbn = "暫無資料"; }
 
     return book;
 };
@@ -415,6 +416,7 @@ app.googleBooks.getData = function (data, i) {
 // Show data from google books API ---------------------------------------------
 app.googleBooks.show = function (book) {
     let i = app.containerNum;
+    console.log(app.containerNum);
     app.getAll(".container-two")[i].classList.add("show-container");
     app.getAll(".container-two")[i].style.paddingBottom = "500px";
     app.getAll(".container-two")[i].scrollIntoView({ block: "start", behavior: "smooth" });
