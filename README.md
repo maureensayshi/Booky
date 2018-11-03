@@ -8,7 +8,7 @@ Booky is a book management website, which can help you to set your reading sched
   * You can record which friend borrowed book from you or record where you store your book.
 * **Combine Reading Schedule with Google Calendar**
   * You can fill the form on Booky, including reading period, daily reminder time. We'll add reading event to your Google Calendar, and remind you to update book information.
-* **Fast and Convinient ways to add books to Booky**
+* **Fast and Convnient ways to add books to Booky**
   * By Desktop or Laptop : You can add your book from Google Books to Booky by scanning ISBN code with front camera, or enter keyword to search by book title, author or ISBN code.
   * By Mobile : You can add by taking photo of ISBN code.
 
