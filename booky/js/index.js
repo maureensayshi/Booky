@@ -2,17 +2,13 @@
 
 app.init = function () {
     app.showLoading();
-    app.checkingIndex();
-    app.getRedirectResult();
-    console.log(window.innerHeight);
+    app.checkLoginIndex();
+    app.googleLogin.getRedirectResult();
 };
 
-app.checkingIndex = function () {
+app.checkLoginIndex = function () {
     firebase.auth().onAuthStateChanged(function (user) {
-        console.log("in app.checklogin .......");
         if (user) {
-            console.log(user);
-            // User is signed in.
             app.uid = user.uid;
             app.email = user.email;
             console.log(app.uid);
@@ -30,13 +26,11 @@ app.checkingIndex = function () {
             app.addBook.Init();
             app.scanBook.Init();
         } else {
-            // User is signed out or haven't sign up.
             app.get(".welcome").style.display = "block";
-            let downArrow = app.get("#down");
-            downArrow.onclick = function () {
-                app.get(".feature").scrollIntoView({ block: "start", behavior: "smooth" });
-            };
             app.get(".real").style.display = "none";
+            app.get("#down").addEventListener("click", function () {
+                app.get(".feature").scrollIntoView({ block: "start", behavior: "smooth" });
+            });
             app.closeLoading();
             app.googleLogin();
         }
@@ -44,51 +38,38 @@ app.checkingIndex = function () {
 };
 
 app.googleLogin = function () {
-    let gButton = app.get("#google");
-    gButton.addEventListener("click", function () {
-        app.showLoading();
-        if (!firebase.auth().currentUser) {
-            let provider = new firebase.auth.GoogleAuthProvider();
-            provider.addScope("https://www.googleapis.com/auth/plus.login,https://www.googleapis.com/auth/calendar.events");
-            //啟動 login 程序   
-            firebase.auth().signInWithRedirect(provider);
-        } else {
-            console.error("sign up or login failed");
-        }
+    app.get("#google").addEventListener("click", function () {
+        app.googleLogin.process();
     });
-    let gButtonTwo = app.get("#googleTwo");
-    gButtonTwo.addEventListener("click", function () {
-        app.showLoading();
-        if (!firebase.auth().currentUser) {
-            let provider = new firebase.auth.GoogleAuthProvider();
-            provider.addScope("https://www.googleapis.com/auth/plus.login,https://www.googleapis.com/auth/calendar.events");
-            //啟動 login 程序   
-            firebase.auth().signInWithRedirect(provider);
-        } else {
-            console.error("sign up or login failed");
-        }
+    app.get("#googleTwo").addEventListener("click", function () {
+        app.googleLogin.process();
     });
-
 };
 
-app.getRedirectResult = function () {
+app.googleLogin.process = function () {
+    app.showLoading();
+    if (!firebase.auth().currentUser) {
+        let provider = new firebase.auth.GoogleAuthProvider();
+        provider.addScope("https://www.googleapis.com/auth/plus.login,https://www.googleapis.com/auth/calendar.events");
+        //啟動 login 程序   
+        firebase.auth().signInWithRedirect(provider);
+    } else {
+        console.error("sign up or login failed");
+    }
+};
+
+app.googleLogin.getRedirectResult = function () {
     firebase.auth().getRedirectResult().then(function (result) {
         console.log(result);
         if (result.user && result.additionalUserInfo.isNewUser) {
-            let uid = result.user.uid;
-            let name = result.user.displayName;
-            let email = result.user.email;
-            let photo = result.user.photoURL;
-            //prepare member data for DB
             let memberData = {
-                uid: uid,
-                name: name,
-                email: email,
-                photo: photo
+                uid: result.user.uid,
+                name: result.user.displayName,
+                email: result.user.email,
+                photo: result.user.photoURL
             };
             //send member data to DB
-            let db = app.database;
-            db.ref("/members/" + uid).set(memberData, function (error) {
+            app.database.ref("/members/" + result.user.uid).set(memberData, function (error) {
                 if (error) {
                     console.log("Error of setting member data.");
                 } else {
@@ -106,33 +87,29 @@ app.getRedirectResult = function () {
 app.visualBook = function () {
     let slideBG = app.get(".sliding-background");
     let box = app.get(".book-list");
-
     let num = 0;
     let colorArr = ["#DCB58C", "#EAA140", "#B9B144"];
-    let db = app.database;
-    let dbBookList = db.ref("/members/" + app.uid + "/bookList/");
-    dbBookList.once("value").then(snapshot => {
+    app.database.ref("/members/" + app.uid + "/bookList/").once("value").then(snapshot => {
         box.innerHTML = "";
-        //如果沒有 book list
+        //if book list is empty
         if (snapshot.val() == null) {
             console.log("no");
             num = 5;
             let slideNone = slideBG.animate([
-                // keyframes
                 { transform: "translate3d(0, 0, 0)" },
                 { transform: "translate3d(-" + (num * 168) + "px, 0, 0)" }
             ], {
-                    duration: (num * 168 * 1000) / 56,
-                    iterations: Infinity
-                });
+                duration: (num * 168 * 1000) / 56,
+                iterations: Infinity
+            });
 
             for (let j = 0; j < 2; j++) {
                 for (let i = 0; i < num; i++) {
                     let sampleBox = app.createElement("div", "sample-book", "", "", "", box);
                     let sampleHref = app.createElement("a", "spanBox", "", "", "", sampleBox);
                     let sampleText = app.createElement("span", "overlay", "", "", "", sampleHref);
-                    let sampleTitle = app.createElement("span", "", "加入書籍", "", "", sampleText);
-                    let sampleAdd = app.createElement("span", "", "ADD", "", "", sampleText);
+                    app.createElement("span", "", "加入書籍", "", "", sampleText);
+                    app.createElement("span", "", "ADD", "", "", sampleText);
                     sampleBox.style.backgroundColor = colorArr[Math.floor(Math.random() * colorArr.length)];
                     sampleBox.onmouseover = function () { slideNone.pause(); };
                     sampleBox.onmouseout = function () { slideNone.play(); };
@@ -141,10 +118,8 @@ app.visualBook = function () {
             app.linkToAddBook();
         } else {
             //如果有 book list
-            console.log(snapshot.val());
             let bookListArrV = Object.values(snapshot.val());
             let bookListArrK = Object.keys(snapshot.val());
-
             let listRead = [];
             let listShow = [];
             let listK = [];
@@ -158,40 +133,34 @@ app.visualBook = function () {
                     num = listShow.length < 5 ? 5 - listShow.length : 0;
                 }
             }
-            console.log(listShow);
-
             //key visual animation
             let slide = slideBG.animate([
-                // keyframes
                 { transform: "translate3d(0, 0, 0)" },
                 { transform: "translate3d(-" + ((listShow.length + num) * 168) + "px, 0, 0)" }
             ], {
-                    // timing options
-                    duration: ((listShow.length + num) * 168 * 1000) / 56,
-                    iterations: Infinity
-                });
+                duration: ((listShow.length + num) * 168 * 1000) / 56,
+                iterations: Infinity
+            });
 
             app.stopAnimation = function () { slide.pause(); };
             app.startAnimation = function () { slide.play(); };
-            //show book list from db
-            //repeat twice
+            //repeat twice to create circle effect
             for (let j = 0; j < 2; j++) {
                 for (let i = 0; i < listShow.length; i++) {
-
                     let bookRead = listShow[i].readStatus == 1 ? "閱讀中" : "未讀";
                     //every book
                     let bookDivHref = app.createElement("a", "", "", "href", "book.html?id=" + listShow[i], box);
                     let bookDiv = app.createElement("div", "book-list-img", "", "", "", bookDivHref);
-                    let bookImg = app.createElement("img", "", "", "src", listShow[i].coverURL, bookDiv);
+                    app.createElement("img", "", "", "src", listShow[i].coverURL, bookDiv);
                     if (listShow[i].coverURL == "./img/fakesample1.svg" ||
                         listShow[i].coverURL == "./img/fakesample2.svg" ||
                         listShow[i].coverURL == "./img/fakesample3.svg") {
-                        let bookTitle = app.createElement("div", "bookTitle", listShow[i].title, "", "", bookDiv);
+                        app.createElement("div", "bookTitle", listShow[i].title, "", "", bookDiv);
                     }
                     let bookHref = app.createElement("a", "spanBox", "", "href", "book.html?id=" + listK[i], bookDiv);
                     let bookText = app.createElement("span", "overlay", "", "", "", bookHref);
-                    let bookReadText = app.createElement("span", "", bookRead, "", "", bookText);
-                    let bookClick = app.createElement("span", "", "View", "", "", bookText);
+                    app.createElement("span", "", bookRead, "", "", bookText);
+                    app.createElement("span", "", "View", "", "", bookText);
                     bookDiv.onmouseover = function () { app.stopAnimation(); };
                     bookDiv.onmouseout = function () { app.startAnimation(); };
                 }
@@ -200,8 +169,8 @@ app.visualBook = function () {
                         let sampleBox = app.createElement("div", "sample-book", "", "", "", box);
                         let sampleHref = app.createElement("a", "spanBox", "", "", "", sampleBox);
                         let sampleText = app.createElement("span", "overlay", "", "", "", sampleHref);
-                        let sampleTitle = app.createElement("span", "", "加入書籍", "", "", sampleText);
-                        let sampleAdd = app.createElement("span", "", "ADD", "", "", sampleText);
+                        app.createElement("span", "", "加入書籍", "", "", sampleText);
+                        app.createElement("span", "", "ADD", "", "", sampleText);
                         sampleBox.style.backgroundColor = colorArr[Math.floor(Math.random() * colorArr.length)];
                         sampleBox.onmouseover = function () { app.stopAnimation(); };
                         sampleBox.onmouseout = function () { app.startAnimation(); };
@@ -220,23 +189,17 @@ app.visualBookMobile = function () {
     let keyVisual = app.get(".real .key-visual");
     keyVisual.classList.add("keyVisualMobile");
     keyVisual.style.width = "auto";
-
     let box = app.get(".book-list");
     box.classList.add("bookListMobile");
-
-    let db = app.database;
-    let dbBookList = db.ref("/members/" + app.uid + "/bookList/");
-    dbBookList.once("value", function (snapshot) {
+    app.database.ref("/members/" + app.uid + "/bookList/").once("value", function (snapshot) {
         box.innerHTML = "";
         if (snapshot.val() == null) {
-            console.log("no book");
             let sampleBox = app.createElement("div", "sample-book", "", "", "", box);
             sampleBox.style.backgroundColor = "#EAA140";
             app.linkToAddBook();
         } else {
             let bookListArrV = Object.values(snapshot.val());
             let bookListArrK = Object.keys(snapshot.val());
-
             let listRead = [];
             let listShow = [];
             let listK = [];
@@ -265,29 +228,23 @@ app.visualBookMobile = function () {
                 }
             }
             window.setTimeout(function () {
-                app.get("#pre").style.display = "block";
+                app.get("#pre").style.display = "none";
                 app.get("#next").style.display = "block";
                 app.visualBookMobile.count = 0;
                 app.visualBookMobile.bookLength = listShow.length;
-                app.get("#pre").style.display = "none";
 
                 let eachBook = app.get(".bookListMobileImg").offsetWidth;
                 app.visualBookMobile.eachBook = eachBook;
-
-                app.get("#pre").onclick = function () {
+                app.get("#pre").addEventListener("click", function () {
                     box.scrollBy(-eachBook, 0);
                     app.visualBookMobile.count -= eachBook;
-                    app.visualBookMobile.update();
-                    console.log("pre");
-                    console.log(eachBook);
-                };
-                app.get("#next").onclick = function () {
+                    app.visualBookMobile.arrow();
+                });
+                app.get("#next").addEventListener("click", function () {
                     box.scrollBy(eachBook, 0);
                     app.visualBookMobile.count += eachBook;
-                    app.visualBookMobile.update();
-                    console.log("next");
-                    console.log(eachBook);
-                };
+                    app.visualBookMobile.arrow();
+                });
             }, 1000);
         }
     }).catch((error) => {
@@ -296,7 +253,7 @@ app.visualBookMobile = function () {
     app.closeLoading();
 };
 
-app.visualBookMobile.update = function () {
+app.visualBookMobile.arrow = function () {
     if (app.visualBookMobile.count < (app.get(".book-list").scrollWidth / app.visualBookMobile.bookLength)) {
         app.get("#pre").style.display = "none";
     } else {
@@ -313,19 +270,18 @@ app.visualBookMobile.update = function () {
 app.linkToAddBook = function () {
     let fakeBookAll = app.getAll(".sample-book");
     let addPage = app.get(".add-shade");
-    let close_add_btn = app.get(".add-img>img");
+    let closeBtn = app.get(".add-img>img");
     for (let i = 0; i < fakeBookAll.length; i++) {
-        fakeBookAll[i].onclick = function (e) {
-            console.log("hi here");
+        fakeBookAll[i].addEventListener("click", function () {
             addPage.classList.add("lightbox");
             app.get(".addShade").style.minHeight = window.innerHeight + "px";
             app.addBook.typeListener();
             app.addBook.getInput();
-        };
-        close_add_btn.onclick = function () {
+        });
+        closeBtn.addEventListener("click", function () {
             addPage.classList.remove("lightbox");
             app.get(".container-two")[1].style.display = "none";
-        };
+        });
     }
 };
 
