@@ -3,13 +3,17 @@
 Booky is a book management website, which can help you to set your reading schedule to Google Calendar and manage information of books.
 
 ## Main Feature
+* **Fast and multiple ways to add books**
+  * User can add books by searching keyword or scanning / taking photos on ISBN code.
 * **Manage Book Status**
-  * You can modify Read / Reading / Unread / Worth Twice Read status of each book you own.
-  * You can record which friend borrowed book from you or record where you store your book.
-* **Combine Reading Schedule with Google Calendar**
-  * You can fill the form on Booky, including reading period, daily reminder time. We'll add reading event to your Google Calendar, and remind you to update book information.
-* **Fast and Convnient ways to add books to Booky**
-  * By Desktop or Laptop : You can add your book from Google Books to Booky by scanning ISBN code with front camera, or enter keyword to search by book title, author or ISBN code.
-  * By Mobile : You can add by taking photo of ISBN code.
+  * User can modify reading and lent status of each book.
+* **Integrated with Google Calendar**
+  * User can select reading period, reminders and set events to Google Calendar.
+
+## Stack and Tools for developing
+* **User Interface:** Designed with Illustrator and Modao.
+* **Library and APIs:** Google Books API, Google Calendar API, ZXing for JS.
+* **Member System and Gmail Login:** Firebase Authentication.
+* **Homepage Animation Feature:** plain JavaScript and CSS.
 
 ### Click and start your Reading Journey with Booky : [Booky Official Website](https://booky-217508.firebaseapp.com/)
