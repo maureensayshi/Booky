@@ -796,18 +796,15 @@ main .view{
 /* footer */
 
 footer .footer{
-    /* display: none; */
     padding: 20px;
     text-align: left;
     font-size: 12px;
     word-spacing: 5px;
-    /* background-color:rgba(235,228,209, .5); */
     color: #333333;
     letter-spacing: 1px;
     position: fixed;
     bottom: 0;
     left: 0;
-    width: 100%;
 }   
 
 /* alert */
