@@ -11,6 +11,7 @@ Booky is a book management website, which can help you to set your reading sched
   * User can select reading period, reminders and set events to Google Calendar.
 
 ## Stack and Tools for developing
+* **Languages:** HTML, CSS, JavaScript
 * **User Interface:** Designed with Illustrator and Modao.
 * **Library and APIs:** Google Books API, Google Calendar API, ZXing for JS.
 * **Member System and Gmail Login:** Firebase Authentication.
