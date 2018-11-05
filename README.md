@@ -29,7 +29,7 @@ Booky is a book management website, which can help you to set your reading sched
 <img width="50%" height="auto" src="https://i.imgur.com/b1ZUp2t.jpg">
 
 * Home Page 
-<img width="50%" height="auto" src="https://i.imgur.com/6PHcYB5.png">
+<img width="50%" height="auto" src="https://i.imgur.com/yOc2U39.gif">
 
 * Add book by scanning ISBN code
 <img width="50%" height="auto" src="https://i.imgur.com/jFuLyZS.gif">
