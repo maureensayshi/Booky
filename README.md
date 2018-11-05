@@ -41,7 +41,7 @@ Booky is a book management website, which can help you to set your reading sched
 <img width="50%" height="auto" src="https://i.imgur.com/UWdrIdM.png">
 
 ## Screen Shots (Mobile)
-* Add book by taking photo
+* Add book by taking photo / Home Page / Add book by entering keyword
 <img align="left" width="20%" height="auto" src="https://i.imgur.com/SkDisBw.gif">
 <img align="left" width="40%" height="auto" src="https://i.imgur.com/2Ew5pQe.jpg">
 
