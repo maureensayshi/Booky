@@ -23,22 +23,22 @@ Booky is a book management website, which can help you to set your reading sched
 
 ## Screen Shots (Desktop)
 * Landing Page
-<img width="50%" height="auto" src="https://i.imgur.com/crqIG8c.png">
+<img width="60%" height="auto" src="https://i.imgur.com/crqIG8c.png">
 
 * Feature Introduction
-<img width="50%" height="auto" src="https://i.imgur.com/b1ZUp2t.jpg">
+<img width="60%" height="auto" src="https://i.imgur.com/b1ZUp2t.jpg">
 
 * Home Page 
-<img width="50%" height="auto" src="https://i.imgur.com/yOc2U39.gif">
+<img width="60%" height="auto" src="https://i.imgur.com/yOc2U39.gif">
 
 * Add book by scanning ISBN code
-<img width="50%" height="auto" src="https://i.imgur.com/jFuLyZS.gif">
+<img width="60%" height="auto" src="https://i.imgur.com/jFuLyZS.gif">
 
 * Menu and Book Shelf Page
-<img width="50%" height="auto" src="https://i.imgur.com/OdVCCVm.png">
+<img width="60%" height="auto" src="https://i.imgur.com/OdVCCVm.png">
 
 * Infomation of each book
-<img width="50%" height="auto" src="https://i.imgur.com/UWdrIdM.png">
+<img width="60%" height="auto" src="https://i.imgur.com/UWdrIdM.png">
 
 ## Screen Shots (Mobile)
 * Add book by taking photo / Home Page / Add book by entering keyword
