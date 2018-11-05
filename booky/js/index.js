@@ -16,9 +16,12 @@ app.checkLoginIndex = function () {
             app.get(".real").style.display = "block";
             let userAgent = navigator.userAgent;
             let isSafari = userAgent.indexOf("Safari") > -1 && userAgent.indexOf("Chrome") < 1;
-            if (document.body.clientWidth < 1024 || navigator.userAgent.match("Edge") || isSafari) {
+            if (document.body.clientWidth < 1024) {
                 app.visualBookMobile();
-            } else {
+            } else if (userAgent.match("Edge") || isSafari) {
+                app.visualBookInstead();
+            }
+            else {
                 app.visualBook();
             }
             app.menu();
@@ -266,6 +269,67 @@ app.visualBookMobile.arrow = function () {
         app.get("#next").style.display = "block";
     }
 };
+
+app.visualBookInstead = function () {
+    console.log("edge");
+
+    let keyVisual = app.get(".real .key-visual");
+    keyVisual.classList.add("keyVisualMobile");
+    keyVisual.style.width = "auto";
+    let box = app.get(".book-list");
+    box.classList.add("bookListMobile");
+    app.database.ref("/members/" + app.uid + "/bookList/").once("value", function (snapshot) {
+        box.innerHTML = "";
+        if (snapshot.val() == null) {
+            for (let i = 0; i < 4; i++) {
+                let sampleBox = app.createElement("div", "sample-book", "", "", "", box);
+                sampleBox.style.backgroundColor = "#EAA140";
+            }
+            app.linkToAddBook();
+        } else {
+            app.get("#pre").style.display = "none";
+            app.get("#next").style.display = "none";
+
+            //如果有 book list
+            let bookListArrV = Object.values(snapshot.val());
+            let bookListArrK = Object.keys(snapshot.val());
+            let listRead = [];
+            let listShow = [];
+            let listK = [];
+            for (let i = 0; i < bookListArrV.length; i++) {
+                if (bookListArrV[i].readStatus == 2) {
+                    listRead.push(bookListArrV[i]);
+                } else if (bookListArrV[i].readStatus != 2) {
+                    listShow.push(bookListArrV[i]);
+                    listK.push(bookListArrK[i]);
+                }
+            }
+            for (let i = 0; i < 4; i++) {
+                let bookRead = listShow[i].readStatus == 1 ? "閱讀中" : "未讀";
+                //every book
+                let bookDivHref = app.createElement("a", "", "", "href", "book.html?id=" + listShow[i], box);
+                let bookDiv = app.createElement("div", "book-list-img", "", "", "", bookDivHref);
+                app.createElement("img", "", "", "src", listShow[i].coverURL, bookDiv);
+                if (listShow[i].coverURL == "./img/fakesample1.svg" ||
+                    listShow[i].coverURL == "./img/fakesample2.svg" ||
+                    listShow[i].coverURL == "./img/fakesample3.svg") {
+                    app.createElement("div", "bookTitle", listShow[i].title, "", "", bookDiv);
+                }
+                let bookHref = app.createElement("a", "spanBox", "", "href", "book.html?id=" + listK[i], bookDiv);
+                let bookText = app.createElement("span", "overlay", "", "", "", bookHref);
+                app.createElement("span", "", bookRead, "", "", bookText);
+                app.createElement("span", "", "View", "", "", bookText);
+                bookDiv.onmouseover = function () { app.stopAnimation(); };
+                bookDiv.onmouseout = function () { app.startAnimation(); };
+            }
+        }
+    }).catch((error) => {
+        console.log(error);
+    });
+    app.closeLoading();
+};
+
+
 
 app.linkToAddBook = function () {
     let fakeBookAll = app.getAll(".sample-book");

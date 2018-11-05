@@ -504,8 +504,10 @@ app.googleBooks.addToDB = function (book) {
             if (app.visualBook || app.visualBookMobile) {
                 let userAgent = navigator.userAgent;
                 let isSafari = userAgent.indexOf("Safari") > -1 && userAgent.indexOf("Chrome") < 1;
-                if (document.body.clientWidth < 1024 || navigator.userAgent.match("Edge") || isSafari) {
+                if (document.body.clientWidth < 1024) {
                     app.visualBookMobile();
+                } else if (userAgent.match("Edge") || isSafari) {
+                    app.visualBookInstead();
                 } else {
                     app.visualBook();
                 }
