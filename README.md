@@ -25,4 +25,5 @@ Booky is a book management website, which can help you to set your reading sched
 <span>&nbsp&nbsp&nbsp</span>
 <img align="left" width="30%" height="auto" src="https://i.imgur.com/UWdrIdM.png">
 
-### Click and start your Reading Journey with Booky : [Booky Official Website](https://booky-217508.firebaseapp.com/)
+
+[Booky Official Website](https://booky-217508.firebaseapp.com/)
