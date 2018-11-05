@@ -18,4 +18,11 @@ Booky is a book management website, which can help you to set your reading sched
 * **Homepage Animation Feature:** plain JavaScript and CSS.
 * **Unit Test:** Mocha, Chai
 
+## Screen Shots
+<img align="left" width="30%" height="auto" src="https://i.imgur.com/6PHcYB5.png">
+<span>&nbsp&nbsp&nbsp</span>
+<img align="left" width="30%" height="auto" src="https://i.imgur.com/OdVCCVm.png">
+<span>&nbsp&nbsp&nbsp</span>
+<img align="left" width="30%" height="auto" src="https://i.imgur.com/UWdrIdM.png">
+
 ### Click and start your Reading Journey with Booky : [Booky Official Website](https://booky-217508.firebaseapp.com/)
