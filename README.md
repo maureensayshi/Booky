@@ -38,7 +38,7 @@ Booky is a book management website, which can help you to set your reading sched
 <img width="50%" height="auto" src="https://i.imgur.com/UWdrIdM.png">
 
 * Scan Book Feature
-<img width="50%" height="auto" src="https://i.imgur.com/b1qHddk.png">
+<img width="50%" height="auto" src="https://i.imgur.com/jFuLyZS.gif">
 
 ## Screen Shots (Mobile)
 <img align="left" width="70%" height="auto" src="https://i.imgur.com/MEEEDgi.jpg">
