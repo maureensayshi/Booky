@@ -24,10 +24,15 @@ Booky is a book management website, which can help you to set your reading sched
 ## Screen Shots (Desktop)
 * Landing Page
 <img width="50%" height="auto" src="https://i.imgur.com/crqIG8c.png">
+* Feature Introduction
 <img width="50%" height="auto" src="https://i.imgur.com/b1ZUp2t.jpg">
+* Home Page 
 <img width="50%" height="auto" src="https://i.imgur.com/6PHcYB5.png">
+* Menu and Book Shelf Page
 <img width="50%" height="auto" src="https://i.imgur.com/OdVCCVm.png">
+* Infomation of each book
 <img width="50%" height="auto" src="https://i.imgur.com/UWdrIdM.png">
+* Scan Book Feature
 <img width="50%" height="auto" src="https://i.imgur.com/b1qHddk.png">
 
 ## Screen Shots (Mobile)
