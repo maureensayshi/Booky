@@ -25,12 +25,12 @@ Booky is a book management website, which can help you to set your reading sched
 <img width="50%" height="auto" src="https://i.imgur.com/crqIG8c.png">
 <img width="50%" height="auto" src="https://i.imgur.com/b1ZUp2t.jpg">
 <img width="50%" height="auto" src="https://i.imgur.com/6PHcYB5.png">
-<img width="52%" height="auto" src="https://i.imgur.com/b1qHddk.png">
 <img width="50%" height="auto" src="https://i.imgur.com/OdVCCVm.png">
 <img width="50%" height="auto" src="https://i.imgur.com/UWdrIdM.png">
+<img width="52%" height="auto" src="https://i.imgur.com/b1qHddk.png">
 
 ## Screen Shots (Mobile)
-<img width="30%" height="auto" src="https://i.imgur.com/Qt9LGsA.png">
-<img width="30%" height="auto" src="https://i.imgur.com/ZjPs0a6.png">
-<img width="30%" height="auto" src="https://i.imgur.com/dkrKrZn.png">
+<img align="left" width="30%" height="auto" src="https://i.imgur.com/Qt9LGsA.png">
+<img align="center" width="30%" height="auto" src="https://i.imgur.com/ZjPs0a6.png">
+<img align="right" width="30%" height="auto" src="https://i.imgur.com/dkrKrZn.png">
 
