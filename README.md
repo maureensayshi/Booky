@@ -21,9 +21,16 @@ Booky is a book management website, which can help you to set your reading sched
 ## View Website
 [Booky Official Website](https://booky-217508.firebaseapp.com/)
 
-## Screen Shots
+## Screen Shots (Desktop)
 <img width="50%" height="auto" src="https://i.imgur.com/crqIG8c.png">
 <img width="50%" height="auto" src="https://i.imgur.com/b1ZUp2t.jpg">
 <img width="50%" height="auto" src="https://i.imgur.com/6PHcYB5.png">
+<img width="50%" height="auto" src="https://i.imgur.com/b1qHddk.png">
 <img width="50%" height="auto" src="https://i.imgur.com/OdVCCVm.png">
 <img width="50%" height="auto" src="https://i.imgur.com/UWdrIdM.png">
+
+## Screen Shots (Mobile)
+<img width="50%" height="auto" src="https://i.imgur.com/Qt9LGsA.png">
+<img width="50%" height="auto" src="https://i.imgur.com/ZjPs0a6.png">
+<img width="50%" height="auto" src="https://i.imgur.com/dkrKrZn.png">
+
