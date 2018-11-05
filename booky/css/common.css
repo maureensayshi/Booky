@@ -707,7 +707,6 @@ header .btn_search:hover::after{
 .result{
     display: flex;
     flex-direction: row;
-    /* justify-content: center; */
     justify-content: flex-start;
     flex-wrap: wrap;
 } 
@@ -722,18 +721,13 @@ header .btn_search:hover::after{
 
 .result>.result-book>.result-book-img{
     flex: none;
-    /* width: 128px;
-    height: 180px; */
     width: 25%;
     margin: 30px 20px;
-    /* margin: 30px 10px 30px 10px; */
     background-color: white;
 }
 
 .result>.result-book>.result-book-info{
-    /* width: 128px; */
     margin: 30px 20px;
-    /* margin: 30px 20px 30px 20px; */
     text-align: left;
 }
 
@@ -1081,8 +1075,6 @@ footer .footer{
 
     .addtab{width: 200px;}
 
-    /* .scan-list .camera{width: 80%;} */
-
     .container-two h2 {
         font-size: 20px;
         text-align: center;
@@ -1129,7 +1121,6 @@ footer .footer{
 
     main .bg{
         background: url("https://i.pinimg.com/564x/a1/b5/62/a1b562f6802d391acfa8b6d1e4a14c13.jpg") no-repeat;
-        /* background-position: 50% 100%; */
         background-size: 120%;
         bottom: 72px;
     }
@@ -1432,8 +1423,6 @@ header .btn_search:hover::after{
 }
 
 main .bg{
-    /* background: url("../img/background.jpg") no-repeat;
-    background-position: 50% 100%; */
     background: url("https://i.pinimg.com/564x/a1/b5/62/a1b562f6802d391acfa8b6d1e4a14c13.jpg") no-repeat center bottom;
     background-size: 100%;
     bottom: 72px;
