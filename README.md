@@ -1,4 +1,3 @@
-![alt text](https://i.imgur.com/dRBL9Nz.png)
 # Booky 小書僮
 Booky is a book management website, which can help you to set your reading schedule to Google Calendar and manage information of books.
 
@@ -9,6 +8,7 @@ Booky is a book management website, which can help you to set your reading sched
   * User can modify reading and lent status of each book.
 * **Integrated with Google Calendar**
   * User can select reading period, reminders and set events to Google Calendar.
+* **Sign Up with Gmail**
 
 ## Stack and Tools for developing
 * **Languages:** HTML, CSS, JavaScript
