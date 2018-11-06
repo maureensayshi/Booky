@@ -180,9 +180,8 @@ app.eachBook.update.edit = function (val) {
                 //Update info to database
                 app.dbBookList.set(val, function (error) {
                     if (error) {
-                        console.log(error);
+                        //console.log(error);
                     } else {
-                        console.log("更新書成功");
                         app.get(".editConfirmDiv").style.display = "none";
                         app.get(".afterEditDiv").style.display = "block";
                         app.get(".afterEditDiv").scrollIntoView({ block: "center", behavior: "smooth" });
@@ -214,7 +213,7 @@ app.eachBook.update.delete = function () {
             //set to database
             app.dbBookList.remove(function (error) {
                 if (error) {
-                    console.log(error);
+                    //console.log(error);
                 } else {
                     app.get(".deleteDiv").style.display = "none";
                     app.get(".afterDeleteDiv").style.display = "block";
@@ -284,7 +283,7 @@ app.initClient = function () {
                 calPage.style.minHeight = 0;
             });
         } else {
-            console.log("按鈕應該已經被隱藏");
+            //console.log("按鈕應該已經被隱藏");
         }
     }
     //SIGN OUT
@@ -293,9 +292,9 @@ app.initClient = function () {
     }
     function updateSigninStatus(isSignedIn) {
         if (isSignedIn) {
-            console.log("sign in");
+            //console.log("sign in");
         } else {
-            console.log("didn't sign in");
+            //console.log("didn't sign in");
         }
     }
 };
@@ -401,10 +400,10 @@ app.eachBook.googleCal.insertEvent = function (event) {
                 let link = event.htmlLink;
                 let db = app.database;
                 let dbBookList = db.ref("/members/" + app.uid + "/bookList/" + app.bookID + "/calLink");
-                console.log(dbBookList);
+                //console.log(dbBookList);
                 dbBookList.set(link, function (error) {
                     if (error) {
-                        console.log("未將活動連結加進 db");
+                        //console.log("未將活動連結加進 db");
                     } else {
                         app.eachBook.googleCal.afterSend(link);
                     }
@@ -440,7 +439,7 @@ app.eachBook.googleCal.insertEventNoRemind = function () {
         let dbBookList = app.database.ref("/members/" + app.uid + "/bookList/" + app.bookID + "/calLink");
         dbBookList.set(link, function (error) {
             if (error) {
-                console.log("未將活動連結加進 db");
+                //console.log("未將活動連結加進 db");
             } else {
                 app.eachBook.googleCal.afterSend(link);
             }
