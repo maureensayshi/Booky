@@ -11,7 +11,6 @@ app.checkLoginIndex = function () {
         if (user) {
             app.uid = user.uid;
             app.email = user.email;
-            console.log(app.uid);
             app.get(".welcome").style.display = "none";
             app.get(".real").style.display = "block";
             let userAgent = navigator.userAgent;
@@ -57,13 +56,12 @@ app.googleLogin.process = function () {
         //啟動 login 程序   
         firebase.auth().signInWithRedirect(provider);
     } else {
-        console.error("sign up or login failed");
+        //console.error("sign up or login failed");
     }
 };
 
 app.googleLogin.getRedirectResult = function () {
     firebase.auth().getRedirectResult().then(function (result) {
-        console.log(result);
         if (result.user && result.additionalUserInfo.isNewUser) {
             let memberData = {
                 uid: result.user.uid,
@@ -73,17 +71,13 @@ app.googleLogin.getRedirectResult = function () {
             };
             //send member data to DB
             app.database.ref("/members/" + result.user.uid).set(memberData, function (error) {
-                if (error) {
-                    console.log("Error of setting member data.");
-                } else {
-                    console.log("Set member data okay.");
-                }
+                //console.log(error);
             }).then(function (res) {
-                console.log(res);
+                // //console.log(res);
             });
         }
     }).catch(function (error) {
-        console.log(error);
+        //console.log(error);
     });
 };
 
@@ -96,7 +90,6 @@ app.visualBook = function () {
         box.innerHTML = "";
         //if book list is empty
         if (snapshot.val() == null) {
-            console.log("no");
             num = 5;
             let slideNone = slideBG.animate([
                 { transform: "translate3d(0, 0, 0)" },
@@ -183,7 +176,7 @@ app.visualBook = function () {
             }
         }
     }).catch((error) => {
-        console.log(error);
+        //console.log(error);
     });
     app.closeLoading();
 };
@@ -251,7 +244,7 @@ app.visualBookMobile = function () {
             }, 1000);
         }
     }).catch((error) => {
-        console.log(error);
+        //console.log(error);
     });
     app.closeLoading();
 };
@@ -271,8 +264,6 @@ app.visualBookMobile.arrow = function () {
 };
 
 app.visualBookInstead = function () {
-    console.log("edge");
-
     let keyVisual = app.get(".real .key-visual");
     keyVisual.classList.add("keyVisualMobile");
     keyVisual.style.width = "auto";
@@ -324,7 +315,7 @@ app.visualBookInstead = function () {
             }
         }
     }).catch((error) => {
-        console.log(error);
+        //console.log(error);
     });
     app.closeLoading();
 };

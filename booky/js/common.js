@@ -32,10 +32,9 @@ let app = {
 app.checkLogin = function () {
     return new Promise((resolve, reject) => {
         firebase.auth().onAuthStateChanged(function (user) {
-            console.log("in app.checklogin .......");
             if (user) {
                 resolve(user.uid);
-                console.log(user.uid);
+                //console.log(user.uid);
             } else {
                 reject(window.location = "/");
             }
@@ -203,7 +202,7 @@ app.addBook.getInput = function () {
 app.addBook.fetchBook = function (searchingType, keyWord) {
     app.googleBooks.fetch(searchingType, keyWord).then(function (data) {
         for (let i = 0; i < data.items.length; i++) {
-            console.log(data);
+            //console.log(data);
             app.googleBooks.show(app.googleBooks.getData(data, i));
         }
     }).catch(function (error) {
@@ -252,7 +251,6 @@ app.scanBook.Init = function () {
 };
 
 const codeReader = new ZXing.BrowserBarcodeReader();
-console.log("ZXing code reader initialized");
 // scan book ( Desktop ) --------------------------------------------------------------------------------------
 app.scanBook.scan = function () {
     let startBtn = app.get("#startButton");
@@ -288,7 +286,7 @@ app.scanBook.scan = function () {
                             startBtn.value = "start";
                         }
                     }).catch((err) => {
-                        console.error(err);
+                        //console.error(err);
                         line.textContent = "查無此書";
                         line.classList.remove("typewriter");
                         codeReader.reset();
@@ -296,7 +294,7 @@ app.scanBook.scan = function () {
                         startBtn.value = "start";
                     });
                     startBtn.textContent = "重新掃描";
-                    console.log(`Started continous decode from camera with id ${firstDeviceId}`);
+                    //console.log(`Started continous decode from camera with id ${firstDeviceId}`);
                 } else if (startBtn.value === "stop") {
                     codeReader.reset();
                     startBtn.textContent = "打開相機";
@@ -309,7 +307,7 @@ app.scanBook.scan = function () {
             });
         })
         .catch((err) => {
-            console.error(err);
+            // console.log(err);
         });
 };
 
@@ -349,7 +347,7 @@ app.scanBook.imgScan.decodeFun = function () {
         app.getAll(".result")[3].textContent = "無搜尋結果，請重新拍攝";
         uploadBtn.textContent = "重新拍攝";
     });
-    console.log(`Started decode for image from ${fileImg.src}`);
+    //console.log(`Started decode for image from ${fileImg.src}`);
 };
 
 //fetch to google books API--------------------------------------------------------------
@@ -379,7 +377,7 @@ app.googleBooks.errorHandler = function (error) {
     app.getAll(".result")[i].textContent = "請用其他關鍵字搜尋";
     app.getAll(".result")[i].style.justifyContent = "center";
     app.getAll(".container-two h2>span")[i].textContent = 0;
-    console.log(error);
+    //console.log(error);
 };
 
 // get data from google books API -------------------------------------------------------
@@ -416,7 +414,7 @@ app.googleBooks.getData = function (data, i) {
 // Show data from google books API ---------------------------------------------
 app.googleBooks.show = function (book) {
     let i = app.containerNum;
-    console.log(app.containerNum);
+    // //console.log(app.containerNum);
     app.getAll(".container-two")[i].classList.add("show-container");
     app.getAll(".container-two")[i].style.paddingBottom = "500px";
     app.getAll(".container-two")[i].scrollIntoView({ block: "start", behavior: "smooth" });
@@ -465,8 +463,7 @@ app.googleBooks.addToDB = function (book) {
     };
     //send book data to DB
     app.database.ref("/members/" + app.uid + "/bookList/").push(newBook, function (error) {
-        if (error) { console.log("Error of setting new book data."); }
-        else { console.log("Set book data okay."); }
+        //console.log(error);
     }).then(function (res) {
         app.res = res;
         let link = res.path.pieces_[3];

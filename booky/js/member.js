@@ -32,7 +32,7 @@ app.googleLogin.logOut = function () {
         firebase.auth().signOut().then(function () {
             window.location = "/";
         }, function (error) {
-            console.log(error);
+            //console.log(error);
         });
     });
 };
