@@ -273,8 +273,13 @@ app.visualBookInstead = function () {
         box.innerHTML = "";
         if (snapshot.val() == null) {
             for (let i = 0; i < 4; i++) {
+                let colorArr = ["#DCB58C", "#EAA140", "#B9B144"];
                 let sampleBox = app.createElement("div", "sample-book", "", "", "", box);
-                sampleBox.style.backgroundColor = "#EAA140";
+                let sampleHref = app.createElement("a", "spanBox", "", "", "", sampleBox);
+                let sampleText = app.createElement("span", "overlay", "", "", "", sampleHref);
+                app.createElement("span", "", "加入書籍", "", "", sampleText);
+                app.createElement("span", "", "ADD", "", "", sampleText);
+                sampleBox.style.backgroundColor = colorArr[Math.floor(Math.random() * colorArr.length)];
             }
             app.linkToAddBook();
         } else {
