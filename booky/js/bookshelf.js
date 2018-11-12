@@ -15,19 +15,15 @@ app.init = function () {
 app.bookShelf.getCategory = function () {
     app.readStatus = window.location.search.split("?status=")[1];
     let bsTitle = app.get(".view>h2");
-    if (app.readStatus == "all") {
-        bsTitle.textContent = "總書櫃  /  ALL";
-    } else if (app.readStatus == 0) {
-        bsTitle.textContent = "未讀 / UNREAD";
-    } else if (app.readStatus == 1) {
-        bsTitle.textContent = "閱讀中 / READING";
-    } else if (app.readStatus == 2) {
-        bsTitle.textContent = "已讀 / READ";
-    } else if (app.readStatus == "twice") {
-        bsTitle.textContent = "值得二讀 / TWICE";
-    } else if (app.readStatus == "lend") {
-        bsTitle.textContent = "出借的書 / LENT";
-    }
+    let titleOptions = {
+        "all": "總書櫃  /  ALL",
+        "0": "未讀 / UNREAD",
+        "1": "閱讀中 / READING",
+        "2": "已讀 / READ",
+        "twice": "值得二讀 / TWICE",
+        "lend": "出借的書 / LENT"
+    };
+    bsTitle.textContent = titleOptions[app.readStatus];
     app.bookShelf.allocateBS();
 };
 
