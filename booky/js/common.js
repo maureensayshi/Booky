@@ -155,11 +155,11 @@ app.addBook.Init = function () {
     let addBtn = app.get("#addbook");
     let addPage = app.get(".add-shade");
     let closeBtn = app.get(".add-img>img");
+    app.addBook.typeListener();
+    app.addBook.getInput();
     addBtn.addEventListener("click", function () {
         addPage.classList.add("lightbox");
         app.get(".addShade").style.minHeight = window.innerHeight + "px";
-        app.addBook.typeListener();
-        app.addBook.getInput();
     });
 
     closeBtn.addEventListener("click", function () {
@@ -187,22 +187,21 @@ app.addBook.typeSelected = function (e) {
 
 app.addBook.getInput = function () {
     let formSearch = app.get("#searchForm");
+
     formSearch.addEventListener("submit", function (e) {
         e.preventDefault();
         app.getAll(".container-two")[1].classList.remove("show-container");
         app.getAll(".result")[1].style.justifyContent = "flex-start";
         app.getAll(".result")[1].innerHTML = "";
-
         let keyWord = app.get("#keyword").value;
         if (keyWord) { app.addBook.getResult(keyWord); }
-        return false;
     });
 };
 
 app.addBook.fetchBook = function (searchingType, keyWord) {
     app.googleBooks.fetch(searchingType, keyWord).then(function (data) {
+        console.log(data);
         for (let i = 0; i < data.items.length; i++) {
-            //console.log(data);
             app.googleBooks.show(app.googleBooks.getData(data, i));
         }
     }).catch(function (error) {
@@ -212,16 +211,18 @@ app.addBook.fetchBook = function (searchingType, keyWord) {
 
 app.addBook.getResult = function (keyWord) {
     app.containerNum = 1;
+    console.log(keyWord);
+
     switch (app.searchText) {
-    case "search-title":
-        app.addBook.fetchBook("intitle", keyWord);
-        break;
-    case "search-isbn":
-        app.addBook.fetchBook("isbn", keyWord);
-        break;
-    case "search-author":
-        app.addBook.fetchBook("inauthor", keyWord);
-        break;
+        case "search-title":
+            app.addBook.fetchBook("intitle", keyWord);
+            break;
+        case "search-isbn":
+            app.addBook.fetchBook("isbn", keyWord);
+            break;
+        case "search-author":
+            app.addBook.fetchBook("inauthor", keyWord);
+            break;
     }
 };
 
@@ -413,6 +414,8 @@ app.googleBooks.getData = function (data, i) {
 
 // Show data from google books API ---------------------------------------------
 app.googleBooks.show = function (book) {
+    console.log(book);
+
     let i = app.containerNum;
     // //console.log(app.containerNum);
     app.getAll(".container-two")[i].classList.add("show-container");
