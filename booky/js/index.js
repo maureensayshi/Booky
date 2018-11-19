@@ -335,8 +335,6 @@ app.linkToAddBook = function () {
         fakeBookAll[i].addEventListener("click", function () {
             addPage.classList.add("lightbox");
             app.get(".addShade").style.minHeight = window.innerHeight + "px";
-            app.addBook.typeListener();
-            app.addBook.getInput();
         });
         closeBtn.addEventListener("click", function () {
             addPage.classList.remove("lightbox");
