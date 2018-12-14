@@ -52,7 +52,7 @@ app.googleLogin.process = function () {
     app.showLoading();
     if (!firebase.auth().currentUser) {
         let provider = new firebase.auth.GoogleAuthProvider();
-        provider.addScope("https://www.googleapis.com/auth/plus.login,https://www.googleapis.com/auth/calendar.events");
+        provider.addScope("https://www.googleapis.com/auth/plus.login");
         //啟動 login 程序   
         firebase.auth().signInWithRedirect(provider);
     } else {
@@ -137,6 +137,7 @@ app.visualBook = function () {
                 duration: ((listShow.length + num) * 168 * 1000) / 56,
                 iterations: Infinity
             });
+
 
             app.stopAnimation = function () { slide.pause(); };
             app.startAnimation = function () { slide.play(); };
