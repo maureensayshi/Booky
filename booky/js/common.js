@@ -109,7 +109,6 @@ app.searchBook.getInput = function () {
         app.searchBook.getResult();
         app.getAll(".container-two")[0].classList.remove("show-container");
         app.getAll(".result")[0].innerHTML = "";
-        return false;
     });
 };
 
@@ -200,7 +199,6 @@ app.addBook.getInput = function () {
 
 app.addBook.fetchBook = function (searchingType, keyWord) {
     app.googleBooks.fetch(searchingType, keyWord).then(function (data) {
-        console.log(data);
         for (let i = 0; i < data.items.length; i++) {
             app.googleBooks.show(app.googleBooks.getData(data, i));
         }
@@ -211,18 +209,16 @@ app.addBook.fetchBook = function (searchingType, keyWord) {
 
 app.addBook.getResult = function (keyWord) {
     app.containerNum = 1;
-    console.log(keyWord);
-
     switch (app.searchText) {
-        case "search-title":
-            app.addBook.fetchBook("intitle", keyWord);
-            break;
-        case "search-isbn":
-            app.addBook.fetchBook("isbn", keyWord);
-            break;
-        case "search-author":
-            app.addBook.fetchBook("inauthor", keyWord);
-            break;
+    case "search-title":
+        app.addBook.fetchBook("intitle", keyWord);
+        break;
+    case "search-isbn":
+        app.addBook.fetchBook("isbn", keyWord);
+        break;
+    case "search-author":
+        app.addBook.fetchBook("inauthor", keyWord);
+        break;
     }
 };
 
@@ -414,8 +410,6 @@ app.googleBooks.getData = function (data, i) {
 
 // Show data from google books API ---------------------------------------------
 app.googleBooks.show = function (book) {
-    console.log(book);
-
     let i = app.containerNum;
     // //console.log(app.containerNum);
     app.getAll(".container-two")[i].classList.add("show-container");
