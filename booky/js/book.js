@@ -73,8 +73,58 @@ app.eachBook.show = function (book) {
         }
     }
     app.closeLoading();
+    app.eachBook.uploadCover(book);
     app.eachBook.update(book);
 };
+
+app.eachBook.uploadCover = function (book){
+  let storageRef = app.storage.ref();
+  // let file;
+  function uploadCover(){
+    let file = app.get("#cover-file").files[0];
+    console.log(typeof file, file);
+    let url = URL.createObjectURL(file)
+    app.get("main .visual-book>img").src=url;
+
+    let metadata = {
+    contentType: 'image/jpeg'
+    };
+
+    let uploadTask = storageRef.child('images/' + file.name).put(file, metadata);
+    uploadTask.on('state_changed', // or 'state_changed'
+    function(snapshot) {
+      // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
+      var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+      console.log('Upload is ' + progress + '% done');
+      switch (snapshot.state) {
+        case 'paused': // or 'paused'
+          console.log('Upload is paused');
+          break;
+        case 'running': // or 'running'
+          console.log('Upload is running');
+          break;
+      }
+    }, function(error) {
+      console.log(error);
+  }, function() {
+    // Upload completed successfully, now we can get the download URL
+    uploadTask.snapshot.ref.getDownloadURL().then(function(downloadURL) {
+      console.log('File available at', downloadURL);
+      console.log(book);
+      book.coverURL = downloadURL;
+      app.dbBookList.set(book, function (error) {
+          if (error) {
+              console.log(error);
+          } else {
+            console.log("update cover url");
+          }
+      });
+    });
+  });
+
+  }
+  app.get("#cover-file").addEventListener("change", uploadCover, false);
+}
 
 app.eachBook.update = function (val) {
     //1.---------------------------------------------------------edit book
@@ -130,7 +180,7 @@ app.eachBook.update.edit = function (val) {
                 lendToInput.value = "無";
             });
         } else if (saveBtn.value === "儲存修改") {
-            //show confirm alert 
+            //show confirm alert
             app.get(".editConfirmDiv").style.display = "block";
             if (document.body.clientWidth < 980) {
                 app.get(".editConfirmDiv").style.height = document.body.clientHeight + "px";
