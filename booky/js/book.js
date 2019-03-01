@@ -79,18 +79,15 @@ app.eachBook.show = function (book) {
 
 app.eachBook.uploadCover = function (book){
   let storageRef = app.storage.ref();
-  // let file;
+
   function uploadCover(){
     let file = app.get("#cover-file").files[0];
-    console.log(typeof file, file);
-    let url = URL.createObjectURL(file)
-    app.get("main .visual-book>img").src=url;
+    app.get("main .visual-book>img").src=URL.createObjectURL(file);
 
-    let metadata = {
+    let uploadTask = storageRef.child('images/' + file.name).put(file, {
     contentType: 'image/jpeg'
-    };
-
-    let uploadTask = storageRef.child('images/' + file.name).put(file, metadata);
+    });
+    
     uploadTask.on('state_changed', // or 'state_changed'
     function(snapshot) {
       // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
