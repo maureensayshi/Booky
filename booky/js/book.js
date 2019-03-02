@@ -77,51 +77,51 @@ app.eachBook.show = function (book) {
     app.eachBook.update(book);
 };
 
-app.eachBook.uploadCover = function (book){
-  let storageRef = app.storage.ref();
+app.eachBook.uploadCover = function (book) {
+    let storageRef = app.storage.ref();
 
-  function uploadCover(){
-    let file = app.get("#cover-file").files[0];
-    app.get("main .visual-book>img").src=URL.createObjectURL(file);
+    function uploadCover() {
+        let file = app.get("#cover-file").files[0];
+        app.get("main .visual-book>img").src = URL.createObjectURL(file);
 
-    let uploadTask = storageRef.child('images/' + file.name).put(file, {
-    contentType: 'image/jpeg'
-    });
-    
-    uploadTask.on('state_changed', // or 'state_changed'
-    function(snapshot) {
-      // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
-      var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-      console.log('Upload is ' + progress + '% done');
-      switch (snapshot.state) {
-        case 'paused': // or 'paused'
-          console.log('Upload is paused');
-          break;
-        case 'running': // or 'running'
-          console.log('Upload is running');
-          break;
-      }
-    }, function(error) {
-      console.log(error);
-  }, function() {
-    // Upload completed successfully, now we can get the download URL
-    uploadTask.snapshot.ref.getDownloadURL().then(function(downloadURL) {
-      console.log('File available at', downloadURL);
-      console.log(book);
-      book.coverURL = downloadURL;
-      app.dbBookList.set(book, function (error) {
-          if (error) {
-              console.log(error);
-          } else {
-            console.log("update cover url");
-          }
-      });
-    });
-  });
+        let uploadTask = storageRef.child("images/" + file.name).put(file, {
+            contentType: "image/jpeg"
+        });
 
-  }
-  app.get("#cover-file").addEventListener("change", uploadCover, false);
-}
+        uploadTask.on("state_changed", // or "state_changed"
+            function (snapshot) {
+                // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
+                var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                console.log("Upload is " + progress + "% done");
+                switch (snapshot.state) {
+                case "paused": // or "paused"
+                    console.log("Upload is paused");
+                    break;
+                case "running": // or "running"
+                    console.log("Upload is running");
+                    break;
+                }
+            }, function (error) {
+                console.log(error);
+            }, function () {
+                // Upload completed successfully, now we can get the download URL
+                uploadTask.snapshot.ref.getDownloadURL().then(function (downloadURL) {
+                    console.log("File available at", downloadURL);
+                    console.log(book);
+                    book.coverURL = downloadURL;
+                    app.dbBookList.set(book, function (error) {
+                        if (error) {
+                            console.log(error);
+                        } else {
+                            console.log("update cover url");
+                        }
+                    });
+                });
+            });
+
+    }
+    app.get("#cover-file").addEventListener("change", uploadCover, false);
+};
 
 app.eachBook.update = function (val) {
     //1.---------------------------------------------------------edit book
@@ -341,7 +341,7 @@ app.initClient = function () {
         if (isSignedIn) {
             //console.log("sign in");
         } else {
-            //console.log("didn't sign in");
+            //console.log("didn"t sign in");
         }
     }
 };
