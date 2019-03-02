@@ -799,7 +799,14 @@ footer .footer{
     position: fixed;
     bottom: 0;
     left: 0;
+   
 }   
+
+.welcome footer .footer{
+    background-color: #ececec;
+    width: 100%;
+    z-index: 100;
+}
 
 /* alert */
 .alertDiv{
@@ -1122,7 +1129,6 @@ footer .footer{
     main .bg{
         background: url("https://i.pinimg.com/564x/a1/b5/62/a1b562f6802d391acfa8b6d1e4a14c13.jpg") no-repeat;
         background-size: 120%;
-        bottom: 72px;
     }
 }
 
@@ -1425,7 +1431,6 @@ header .btn_search:hover::after{
 main .bg{
     background: url("https://i.pinimg.com/564x/a1/b5/62/a1b562f6802d391acfa8b6d1e4a14c13.jpg") no-repeat center bottom;
     background-size: 100%;
-    bottom: 72px;
 }
 
 
