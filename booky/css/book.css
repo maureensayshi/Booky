@@ -22,6 +22,10 @@ main .visual-book{
 
 main .visual-book>img{max-height: 255px;}
 
+main #hide-cover{
+    z-index: 20
+}
+
 main #hide-cover input[type=file] {
     display:none;
     margin:10px;
@@ -842,7 +846,7 @@ input[type=time]::-webkit-outer-spin-button {
     .input-edit{width: 160px;font-size: 14px;}
     main .move-book-detail>div{width:270px;}
     main #author{width: 200px;line-height: 1.5;}
-    main .move-book-detail{font-size: 14px;margin-top: 20px}
+    main .move-book-detail{font-size: 14px;margin-top: 40px}
     main .move-book-detail>div{margin: 15px 20px;flex-direction: row;}
     main .move-book-detail>div:nth-child(1)>span:nth-child(1){width: 80px; margin-right: 0;}
     main .move-book-detail>div:nth-child(2)>span:nth-child(1){width: 80px; margin-right: 0;}

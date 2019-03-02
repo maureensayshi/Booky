@@ -222,6 +222,9 @@ app.visualBookMobile = function () {
                         bookHref.style.width = "45%";
                     }
                     app.createElement("div", "bookTitleMobile", listShow[i].title, "", "", bookHref);
+                } else if (bookListArrV[i].coverURL.indexOf("firebasestorage") > -1) {
+                    bookHref.style.width = document.body.clientWidth > 375 ? "60%" :
+                        "45%";
                 }
             }
             window.setTimeout(function () {
