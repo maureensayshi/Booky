@@ -18,6 +18,7 @@ firebase.initializeApp(config);
 // initialize app structure
 let app = {
     database: firebase.database(),
+    storage: firebase.storage(),
     apiKey: config.apiKey,
     searchBook: {},
     addBook: {},
