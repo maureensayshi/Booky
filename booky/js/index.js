@@ -212,6 +212,8 @@ app.visualBookMobile = function () {
             for (let i = 0; i < listShow.length; i++) {
                 let bookBox = app.createElement("div", "bookListMobileImg", "", "", "", box);
                 let bookHref = app.createElement("a", "bookHref", "", "href", "book.html?id=" + listK[i], bookBox);
+                console.log("url", listShow[i].coverURL);
+
                 app.createElement("img", "", "", "src", listShow[i].coverURL, bookHref);
                 if (bookListArrV[i].coverURL == "./img/fakesample1.svg" ||
                     bookListArrV[i].coverURL == "./img/fakesample2.svg" ||
