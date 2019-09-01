@@ -199,11 +199,11 @@
         <div class="view">
             <div class="visual-book">
                 <img />
-                <div class='upload-book-cover' id="hide-cover">
+                <!-- <div class='upload-book-cover' id="hide-cover">
 
                     <label for="cover-file"><img src='img/upload.svg' />上傳書封</label>
                     <input type="file" id="cover-file" name="file" accept="image/*" capture />
-                </div>
+                </div> -->
             </div>
             <div class="book-detail-wrapper">
                 <div class="book-detail">
@@ -350,8 +350,6 @@
         <img src="img/load.gif" />
     </div>
 </body>
-<script async defer src="https://apis.google.com/js/api.js" onload="this.onload=function(){};app.handleClientLoad()"
-    onreadystatechange="if (this.readyState === 'complete') this.onload()"> </script>
 <script src="https://www.gstatic.com/firebasejs/5.5.1/firebase.js"></script>
 <script src="https://www.gstatic.com/firebasejs/5.3.0/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/5.3.0/firebase-auth.js"></script>
@@ -360,7 +358,8 @@
 <script type="text/javascript" src="https://unpkg.com/@zxing/library@dev"></script>
 <script src="js/common.js"></script>
 <script src="js/book.js"></script>
-
+<script async defer src="https://apis.google.com/js/api.js" onload="this.onload=function(){ app.handleClientLoad() }"
+    onreadystatechange="if (this.readyState === 'complete') this.onload()"> </script>
 <!-- async defer : 先等畫面載完，才非同步處理這份 js-->
 
 </html>

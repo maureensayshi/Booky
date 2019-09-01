@@ -73,41 +73,41 @@ app.eachBook.show = function (book) {
         }
     }
     app.closeLoading();
-    app.eachBook.uploadCover(book);
+    // app.eachBook.uploadCover(book);
     app.eachBook.update(book);
 };
 
-app.eachBook.uploadCover = function (book) {
-    function uploadCover() {
-        let file = app.get("#cover-file").files[0];
-        app.get("main .visual-book>img").src = URL.createObjectURL(file);
+// app.eachBook.uploadCover = function (book) {
+//     function uploadCover() {
+//         let file = app.get("#cover-file").files[0];
+//         app.get("main .visual-book>img").src = URL.createObjectURL(file);
 
-        let uploadTask = app.storage.ref(`${app.uid}/${app.bookID}/`).child("coverURL").put(file);
-        uploadTask.on("state_changed",
-            function (snapshot) {
-                let progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-                console.log("Upload is " + progress + "% done");
-            }, function (error) {
-                console.log(error);
-            }, function () {
-                // Upload completed successfully, now we can get the download URL
-                uploadTask.snapshot.ref.getDownloadURL().then(function (downloadURL) {
-                    console.log("File available at", downloadURL);
-                    book.coverURL = downloadURL;
-                    app.dbBookList.set(book, function (error) {
-                        if (error) {
-                            console.log(error);
-                        } else {
-                            console.log("update with url", book.coverURL);
+//         let uploadTask = app.storage.ref(`${app.uid}/${app.bookID}/`).child("coverURL").put(file);
+//         uploadTask.on("state_changed",
+//             function (snapshot) {
+//                 let progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+//                 console.log("Upload is " + progress + "% done");
+//             }, function (error) {
+//                 console.log(error);
+//             }, function () {
+//                 // Upload completed successfully, now we can get the download URL
+//                 uploadTask.snapshot.ref.getDownloadURL().then(function (downloadURL) {
+//                     console.log("File available at", downloadURL);
+//                     book.coverURL = downloadURL;
+//                     app.dbBookList.set(book, function (error) {
+//                         if (error) {
+//                             console.log(error);
+//                         } else {
+//                             console.log("update with url", book.coverURL);
 
-                        }
-                    });
-                });
-            });
+//                         }
+//                     });
+//                 });
+//             });
 
-    }
-    app.get("#cover-file").addEventListener("change", uploadCover, false);
-};
+//     }
+//     app.get("#cover-file").addEventListener("change", uploadCover, false);
+// };
 
 app.eachBook.update = function (val) {
     //1.---------------------------------------------------------edit book
