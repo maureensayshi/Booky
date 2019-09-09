@@ -1,5 +1,4 @@
 "use strict";
-
 // initialize firebase
 let config = {
     apiKey: "AIzaSyALgpVirl6lyBvOK9W--e5QycFeMFzcPLg",
@@ -16,7 +15,7 @@ let config = {
 
 firebase.initializeApp(config);
 // initialize app structure
-let app = {
+const app = {
     database: firebase.database(),
     storage: firebase.storage(),
     apiKey: config.apiKey,
@@ -531,3 +530,5 @@ app.closeLoading = function () {
 app.testing = function () {
     return "hello";
 };
+
+export default app;

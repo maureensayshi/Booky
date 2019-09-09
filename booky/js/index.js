@@ -1,4 +1,5 @@
 "use strict";
+import app from "./common.js";
 
 app.init = function () {
     app.showLoading();
