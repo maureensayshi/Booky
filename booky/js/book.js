@@ -1,4 +1,5 @@
 "use strict";
+import app from "./common.js";
 
 app.init = function () {
     app.showLoading();
@@ -11,6 +12,7 @@ app.init = function () {
         app.searchBook.Init();
         app.addBook.Init();
         app.scanBook.Init();
+        app.initClient();
     });
 };
 
@@ -271,30 +273,11 @@ app.eachBook.update.delete = function () {
     });
 };
 
-//啟動 GOOGLE CALENDAR 偵測
-app.handleClientLoad = function () { gapi.load("client:auth2", app.initClient); };
-
 app.initClient = function () {
-    app.clientId = "757419169220-9ehr4saki2pbqpp4c2imqa3qd8nbuf0q.apps.googleusercontent.com";
-    app.apiKey = "AIzaSyALgpVirl6lyBvOK9W--e5QycFeMFzcPLg";
-    app.discoveryDoc = ["https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest"];
-    app.scopes = "https://www.googleapis.com/auth/calendar.events";
-
-    gapi.client.init({
-        apiKey: app.apiKey,
-        clientId: app.clientId,
-        discoveryDocs: app.discoveryDoc,
-        scope: app.scopes
-    }).then(function () {
-        // Listen for sign-in state changes.
-        gapi.auth2.getAuthInstance().isSignedIn.listen(updateSigninStatus);
-        // Handle the initial sign-in state.
-        updateSigninStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
-        app.get("#calendar").onclick = handleAuthClick;
-        app.get("#logoutgoogle").onclick = handleSignoutClick;
-    });
+    app.get("#calendar").onclick = handleAuthClick;
+    app.get("#logoutgoogle").onclick = handleSignoutClick;
     //sign in
-    function handleAuthClick(event) {
+    function handleAuthClick() {
         gapi.auth2.getAuthInstance().signIn();
         if (app.calLink == "") {
             let calPage = app.get(".remindShade");
@@ -320,7 +303,7 @@ app.initClient = function () {
         }
     }
     //SIGN OUT
-    function handleSignoutClick(event) {
+    function handleSignoutClick() {
         gapi.auth2.getAuthInstance().signOut();
     }
     function updateSigninStatus(isSignedIn) {

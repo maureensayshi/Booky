@@ -349,18 +349,33 @@
     <div id="loading" class="loading">
         <img src="img/load.gif" />
     </div>
+    <script type="text/javascript">
+        function handleClientLoad() {
+            gapi.load('client:auth2', initClient);
+        }
+
+        function initClient() {
+            gapi.client.init({
+                apiKey: "AIzaSyALgpVirl6lyBvOK9W--e5QycFeMFzcPLg",
+                clientId: "757419169220-9ehr4saki2pbqpp4c2imqa3qd8nbuf0q.apps.googleusercontent.com",
+                discoveryDocs: ["https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest"],
+                scope: "https://www.googleapis.com/auth/calendar.events"
+            }).then(function () {
+            });
+        }
+    </script>
+
+    <script async defer src="https://apis.google.com/js/api.js" onload="this.onload=function(){};handleClientLoad()"
+        onreadystatechange="if (this.readyState === 'complete') this.onload()">
+        </script>
 </body>
-<script async defer src="https://apis.google.com/js/api.js" onload="this.onload=function(){};app.handleClientLoad()"
-    onreadystatechange="if (this.readyState === 'complete') this.onload()"> </script>
-<script src="https://www.gstatic.com/firebasejs/5.5.1/firebase.js"></script>
 <script src="https://www.gstatic.com/firebasejs/5.3.0/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/5.3.0/firebase-auth.js"></script>
 <script src="https://www.gstatic.com/firebasejs/5.8.4/firebase-storage.js"></script>
 <script src="https://www.gstatic.com/firebasejs/5.3.0/firebase-database.js"></script>
 <script type="text/javascript" src="https://unpkg.com/@zxing/library@dev"></script>
-<script src="js/common.js"></script>
-<script src="js/book.js"></script>
-
+<script type="module" src="js/common.js"></script>
+<script type="module" src="js/book.js"></script>
 <!-- async defer : 先等畫面載完，才非同步處理這份 js-->
 
 </html>
