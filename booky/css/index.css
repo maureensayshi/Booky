@@ -48,20 +48,6 @@
    height: auto;
 }
 
-.welcome main .testing-account{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    letter-spacing: 1px;
-    color: #333333;
-    font-size: 14px;
-    margin: 10px;
-}
-
-.welcome main .testing-account>div>p{
-    line-height: 2;
-}
-
 .welcome main .introduce{
     display: flex;
     flex-direction: column;
@@ -520,6 +506,10 @@ main #next{
         display: none;
     }
 
+    .welcome main .introSection {
+        margin-top: 200px;
+    }
+
     .welcome main .signinDiv{
         margin:150px 0 30px 0;
     }
@@ -590,8 +580,8 @@ main #next{
         background-size:20%
     }
 
-    .welcome main .testing-account{
-        margin: 100px 0 0 0;
+    .welcome main .introSection {
+        margin-top: 200px;
     }
 
     .welcome main .signinDiv{
