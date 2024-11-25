@@ -7,7 +7,7 @@
     "@zxing/library": "^0.8.3",
     "eslint": "^5.6.0",
     "expect.js": "^0.3.1",
-    "fullpage.js": "^3.0.3"
+    "fullpage.js": "^4.0.5"
   },
   "devDependencies": {
     "chai": "^4.2.0",
